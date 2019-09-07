@@ -1,0 +1,147 @@
+<section class="login-bg">
+    <div class="auth-block auth-block--reset2" *ngIf="RegSuccess">
+        <span class="auth-block__close"></span>
+
+        <p class="auth-block__title auth-block__title--reset">Ссылка для подтверждения E-mail отправлена на почту</p>
+        <p class="auth-block__text">Пожалуйста, проверьте свой почтовый ящик</p>
+
+        <div class="text-center">
+            <button class="button button--white auth-block__button auth-block__button--reg" routerLink="../login">Войти</button>
+            <!-- <button class="button auth-block__button auth-block__button--reg">Зарегистрироваться</button> -->
+        </div>
+    </div>
+    <div class="auth-block auth-block--reg" *ngIf="!RegSuccess">
+        <span class="auth-block__close" routerLink="../login"></span>
+
+        <p class="auth-block__title auth-block__title--reg">Регистрация</p>
+
+        <!-- Add to any input class "auth-block__input--error" for red border or "auth-block__input--correct" for green border -->
+        <!-- Add to any hint class "auth-block__hint--error" for red text or "auth-block__hint--correct" for green text -->
+
+        <form  [formGroup]="RegForm" (ngSubmit)="Create()">
+
+            <input type="text" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': first_name.invalid && (first_name.dirty || first_name.touched)}"
+                autocomplete="null"
+                name="first_name"
+                formControlName="first_name"
+                placeholder="Ваше имя"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                
+                    <span></span>
+                <ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+                    <span *ngIf="first_name.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="first_name.errors.minlength">Минимальная длина имени 3 символа.</span>
+                    <span *ngIf="first_name.errors.maxlength">Максимальная длина имени 50 символов.</span>
+                </ng-container>
+            </p>
+
+            <input type="text" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': last_name.invalid && (last_name.dirty || last_name.touched)}"
+                autocomplete="null"
+                name="last_name"
+                formControlName="last_name"
+                placeholder="Ваша фамилия"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+                    <span *ngIf="last_name.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="last_name.errors.minlength">Минимальная длина фамилии 3 символа.</span>
+                    <span *ngIf="last_name.errors.maxlength">Максимальная длина фамилии 50 символов.</span>
+                </ng-container>
+            </p>
+
+            <input type="text" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
+                autocomplete="null"
+                formControlName="email"
+                name="email"
+                placeholder="E-mail"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <span></span>
+                <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <span *ngIf="email.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="email.errors.minlength">Минимальная длина фамилии 3 символа.</span>
+                    <span *ngIf="email.errors.maxlength">Максимальная длина фамилии 50 символов.</span>
+                    <span *ngIf="email.errors.ALREADY_TAKEN">E-mail занят.</span>
+                    <span *ngIf="email.errors.INVALID || email.errors.email">Введите корректный E-mail.</span>
+                </ng-container>
+            </p>
+
+            <input type="text" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': phone.invalid && (phone.dirty || phone.touched)}"
+                autocomplete="null"
+                formControlName="phone"
+                name="phone"
+                placeholder="Телефон"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                    <span *ngIf="phone.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="phone.errors.incorrect_value">Введите корректный номер телеофна.</span>
+                    <span *ngIf="phone.errors.INVALID">Введите корректные данные.</span>
+                </ng-container>
+            </p>
+
+            <!-- <input type="text" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': cname.invalid && (cname.dirty || cname.touched)}"
+                autocomplete="null"
+                formControlName="cname"
+                name="cname"
+                placeholder="Название вашей компании"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="cname.invalid && (cname.dirty || cname.touched)">
+                    <span *ngIf="cname.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="cname.errors.minlength">Минимальная длина названия компании 3 символа.</span>
+                    <span *ngIf="cname.errors.maxlength">Максимальная длина названия компании 50 символов.</span>
+                </ng-container>
+            </p> -->
+
+            <input type="password" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': password.invalid && (password.dirty || password.touched)}"
+                autocomplete="null"
+                formControlName="password"
+                name="password"
+                placeholder="Пароль"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <span *ngIf="password.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="password.errors.minlength">Минимальная длина пароля 10 символов.</span>
+                    <span *ngIf="password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
+                </ng-container>
+            </p>
+
+            <input type="password" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)}"
+                autocomplete="null"
+                formControlName="confirm_password"
+                name="confirm_password"
+                placeholder="Подтвердите пароль"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)">
+                    <span *ngIf="confirm_password.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="confirm_password.errors.minlength">Минимальная длина пароля 10 символов.</span>
+                    <span *ngIf="confirm_password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
+                    <span *ngIf="confirm_password.errors.not_match">Пароли не совпадают.</span>
+                </ng-container>
+            </p>
+
+            <div class="text-center">
+                <button class="button auth-block__button" type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+        <p class="auth-block__agree">Нажимая на кнопку, Вы даете согласие на обработку персональных данных и соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+    </div>
+</section>

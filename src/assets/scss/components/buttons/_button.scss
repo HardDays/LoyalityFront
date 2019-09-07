@@ -1,0 +1,30 @@
+@import "../../base/var";
+
+.button {
+  background: $yellow;
+  border-radius: 28px;
+  border: 0;
+  cursor: pointer;
+  font-family: $titleFont;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  text-transform: uppercase;
+  transition: 0.3s;
+  padding: 3px 0 0;
+
+  &:hover {
+    background: #303030;
+    color: #fafafa;
+  }
+
+  &--white {
+    background: white;
+    border: 3px solid $yellow;
+
+    &:hover {
+      background: $yellow;
+      color: black;
+    }
+  }
+}

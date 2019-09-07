@@ -1,0 +1,178 @@
+@import "../../base/var";
+
+.auth-block {
+  background: white;
+  border-radius: 5px;
+  width: 590px;
+  margin: auto;
+  position: relative;
+  padding: 84px 60px 58px;
+
+  &--reset {
+    padding: 56px 60px 40px;
+  }
+
+  &--reset2 {
+    padding: 81px 60px 73px;
+  }
+
+  &--reg {
+    padding: 92px 60px 34px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 34px;
+    right: 34px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+
+    &--big_top {
+      top: 46px;
+    }
+
+    &:before {
+      content: '';
+      background: #4A4A4A;
+      width: 40px;
+      height: 1px;
+      display: block;
+      transform: rotate(-45deg);
+      position: absolute;
+      left: -6px;
+      top: 50%;
+    }
+
+    &:after {
+      content: '';
+      background: #4A4A4A;
+      width: 40px;
+      height: 1px;
+      display: block;
+      transform: rotate(45deg);
+      position: absolute;
+      left: -6px;
+      top: 50%;
+    }
+  }
+
+  &__title {
+    font-family: $titleFont;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 17px;
+    text-align: center;
+    margin-bottom: 48px;
+
+    &--reset {
+      margin-bottom: 31px;
+    }
+
+    &--reg {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__text {
+    text-align: center;
+    font-family: $titleFont;
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  &__input {
+    border: 1px solid #616161;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    font-weight: 300;
+    font-size: 17.3906px;
+    line-height: 17px;
+    padding: 8px 9px 6px;
+    margin-top: 15px;
+
+    @include placeholderColor(rgba(0, 0, 0, 0.5));
+
+    &--error {
+      border-color: red;
+    }
+
+    &--correct {
+      border-color: green;
+    }
+  }
+
+  &__hint {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 5px 10px 0;
+    color: #616161;
+
+    &--error {
+      color: red;
+    }
+
+    &--correct {
+      color: green;
+    }
+  }
+
+  &__forget {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    font-weight: 300;
+    font-size: 10.8467px;
+    line-height: 14px;
+    color: black;
+    display: block;
+    margin: 0 20px;
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  &__choice {
+    display: flex;
+    margin: 20px 0 0;
+  }
+
+  &__button {
+    width: 315px;
+    height: 53px;
+    margin-top: 33px;
+
+    &--reg {
+      &:first-child {
+        margin-top: 24px;
+      }
+      &:last-child {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  &__agree {
+    font-weight: 300;
+    font-size: 10.8467px;
+    line-height: 14px;
+    color: black;
+    margin: 33px 45px 0 0;
+
+    a {
+      text-decoration: underline;
+      color: black;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

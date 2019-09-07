@@ -1,0 +1,30 @@
+@import "../../base/var";
+
+.menu {
+  width: 312px;
+  background: #2E2D2D;
+  flex-shrink: 0;
+  padding-top: 60px;
+
+  &__link {
+    display: block;
+    font-family: $titleFont;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    padding: 14px 15px 15px 52px;
+    position: relative;
+
+    &--active,
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

@@ -1,0 +1,78 @@
+<section class="login-bg">
+    <div class="auth-block">
+        <!-- <span class="auth-block__close auth-block__close--big_top"></span> -->
+
+        <p class="auth-block__title">Вход в систему</p>
+
+        <form  [formGroup]="Form" (ngSubmit)="Login()">
+
+
+            <input type="text" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
+                autocomplete="null"
+                formControlName="email"
+                name="email"
+                placeholder="E-mail"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <span *ngIf="email.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="email.errors.minlength">Минимальная длина фамилии 3 символа.</span>
+                    <span *ngIf="email.errors.maxlength">Максимальная длина фамилии 50 символов.</span>
+                    <span *ngIf="email.errors.ALREADY_TAKEN">E-mail занят.</span>
+                    <span *ngIf="email.errors.INVALID || email.errors.email">Введите корректный E-mail.</span>
+                </ng-container>
+            </p>
+
+            <input type="password" 
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': password.invalid && (password.dirty || password.touched)}"
+                autocomplete="null"
+                formControlName="password"
+                name="password"
+                placeholder="Пароль"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <span *ngIf="password.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="password.errors.minlength">Минимальная длина пароля 10 символов.</span>
+                    <span *ngIf="password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
+                    <span *ngIf="password.errors.wrong">Неправильный E-mail или пароль.</span>
+                </ng-container>
+            </p>
+            <!-- Add class "auth-block__input--error" for red border or "auth-block__input--correct" for green border -->
+            <!-- <input type="text" class="auth-block__input" placeholder="E-mail"> -->
+            <!-- Add class "auth-block__hint--error" for red text or "auth-block__hint--correct" for green text -->
+            <!-- <p class="auth-block__hint auth-block__hint--error"></p> -->
+
+            <!-- Add class "auth-block__input--error" for red border or "auth-block__input--correct" for green border -->
+            <!-- <input type="text" class="auth-block__input" placeholder="Пароль"> -->
+            <!-- Add class "auth-block__hint--error" for red text or "auth-block__hint--correct" for green text -->
+            <!-- <p class="auth-block__hint auth-block__hint--error"></p> -->
+
+            <!-- <div class="auth-block__choice">
+            <label class="radio">
+                <input type="radio" class="radio__input" name="userType">
+                <div class="radio__text">Владелец</div>
+            </label>
+            <label class="radio">
+                <input type="radio" class="radio__input" name="userType">
+                <div class="radio__text">Кассир</div>
+            </label>
+            </div> -->
+
+            <div class="text-center">
+                <button class="button auth-block__button" type="submit">Войти</button>
+            </div>
+        </form>
+        
+
+        <p class="auth-block__forget">
+            <a routerLink="../remind" class="auth-block__link">Забыли пароль?</a>
+            <a routerLink="../signup" class="auth-block__link">Новый пользователь?<br>Зарегистрируйтесь.</a>
+        </p>
+
+        <p class="auth-block__agree">Нажимая на кнопку, Вы даете согласие на обработку персональных данных и соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+    </div>
+</section>

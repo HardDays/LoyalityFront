@@ -1,0 +1,51 @@
+@import "../../base/var";
+
+.checkbox {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 11px;
+
+  &__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin: 10px 0 0 7px;
+
+    &:checked + .checkbox__text:after {
+      opacity: 1;
+    }
+  }
+
+  &__text {
+    position: relative;
+    padding: 0 0 0 26px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 16px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 0;
+      width: 19px;
+      height: 19px;
+      border: 1px solid $yellow;
+      border-radius: 4px;
+      background: #FFF;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 6px;
+      width: 10px;
+      height: 8px;
+      background: url('../img/check.svg') no-repeat center;
+      background-size: cover;
+      opacity: 0;
+      transition: .3s;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import "./var";
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $textFont;
+  color: $textColor;
+}
+
+input, textarea, select, button {
+  outline: none;
+  box-sizing: border-box;
+}
+
+header, footer, p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.text-center {
+  text-align: center;
+}
+
+div, span, p, header, footer, nav {
+  box-sizing: border-box;
+}

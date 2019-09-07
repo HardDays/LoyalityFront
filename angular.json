@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/LoyalityFront",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,9 +27,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/style.min.css",
+              "src/assets/css/select-default-style.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/scripts.js",
+              "src/assets/js/nativejs-select.min.js"
+            ]
           },
           "configurations": {
             "production": {
