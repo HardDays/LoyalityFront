@@ -7,5 +7,6 @@ export class LoginSuccessModel{
         public phone?:string,
         public id?:string,
         public token?:string,
+        public user_type?:string,
     ){}
 }

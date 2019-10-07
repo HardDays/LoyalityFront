@@ -27,4 +27,14 @@
       color: black;
     }
   }
+
+  &--black {
+    background: $textColor;
+    color: white;
+
+    &:hover {
+      background: $yellow;
+      color: black;
+    }
+  }
 }

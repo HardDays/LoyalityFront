@@ -3,6 +3,8 @@ import { Router, NavigationStart } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { Button } from 'protractor';
+import { LoginSuccessModel } from '../core/models/login.success.model';
+import { CompanyModel } from '../core/models/company.model';
 
 
 @Component({
@@ -12,26 +14,64 @@ import { Button } from 'protractor';
 export class SystemComponent implements OnInit
 {
     IsLoggedIn = false;
-
+    Me: LoginSuccessModel = new LoginSuccessModel();
+    Company: CompanyModel = new CompanyModel();
+    Initials = "";
+    Hovered = false;
     constructor(private auth: AuthService)
     {
         this.IsLoggedIn = this.auth.IsLoggedIn;
         this.OnLoginChange();
         this.auth.onAuthChange$.subscribe(
             (val) => {
-                this.IsLoggedIn = val;
                 this.OnLoginChange();
+            }
+        )
+
+        this.auth.onCompanyChange$.subscribe(
+            (val) => {
+                this.Company = this.auth.CompanyData;
             }
         )
     }
 
-    ngOnInit(): void {
-        // throw new Error("Method not implemented.");
+    ngOnInit(): void 
+    {
+        // const profileBlock = document.getElementById('header-profile');
+        // const profileMenu = document.getElementById('header-profile-menu');
+        
+        // if(profileBlock && profileMenu)
+        // {
+        //     profileBlock.onmouseover = function(event) {
+        //         profileMenu.add
+        //         profileMenu.classList += ' page__profile-menu--visible';
+        //     }
+        //     profileBlock.onmouseout = function(event) {
+        //         profileMenu.classList.remove('page__profile-menu--visible');
+        //     }
+        // }
+    }
+
+    ShowMenu()
+    {
+        this.Hovered = true;
+    }
+    HideMenu()
+    {
+        this.Hovered = false;
+    }
+
+    Logout()
+    {
+        this.auth.Logout();
     }
 
     OnLoginChange()
     {
+        this.Me = this.auth.LoginData;
+        this.IsLoggedIn = this.auth.IsLoggedIn;
 
+        this.Initials = (this.Me.last_name ? this.Me.last_name[0].toUpperCase() : '') + (this.Me.first_name ? this.Me.first_name[0].toUpperCase() : ''); 
     }
     
 }

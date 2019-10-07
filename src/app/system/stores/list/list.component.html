@@ -1,0 +1,21 @@
+<div class="page__content">
+
+    <div class="page__top">
+        <h1 class="page__title">Все магазины</h1>
+        <div class="page__search">
+            <input type="text" placeholder="Поиск по магазинам">
+        </div>
+    </div>
+
+    <div class="main-blocks" id="shop-blocks">
+        <div class="main-blocks__item main-blocks__item--create" [routerLink]="['../create']" >
+            <img src="assets/img/plus.png" alt="">
+            <span>Создать новый магазин</span>
+        </div>
+        
+        <div class="main-blocks__item main-blocks__item--shop" *ngFor="let item of Stores">
+            <app-store-list-item-cmp [Item]="item"></app-store-list-item-cmp>            
+        </div>
+    </div>
+
+</div>

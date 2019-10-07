@@ -1,0 +1,34 @@
+<section class="page">
+
+    <!-- MENU -->
+    <nav class="menu">
+        <navigation-cmp></navigation-cmp>
+    </nav>
+    <div class="page__block">
+
+        <!-- HEADER -->
+
+        <div class="page__header">
+            <div class="page__profile" (mouseenter)="Hovered = true" (mouseleave)="Hovered = false" id="header-profile" *ngIf="IsLoggedIn">
+                <div class="page__ava">{{Initials}}</div>
+                <p class="page__name">
+                    {{Me.last_name}} {{Me.first_name}}
+                    <span class="page__company">{{Company.name}}</span>
+                </p>
+                <div class="page__profile-menu" id="header-profile-menu" [ngClass]="{'page__profile-menu--visible': Hovered}">
+                    <a routerLink="settings">Настройки</a>
+                    <a (click)="Logout()">Выйти</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+
+        <section class="page__content-wrap">
+            <router-outlet></router-outlet>
+        </section>
+
+        <!-- FOOTER -->
+        <div class="page__footer"></div>
+    </div>
+</section>

@@ -2,17 +2,19 @@
 
 const profileBlock = document.getElementById('header-profile');
 const profileMenu = document.getElementById('header-profile-menu');
-if(profileBlock)
+
+if(profileBlock && profileMenu)
 {
     profileBlock.onmouseover = function(event) {
         profileMenu.classList += ' page__profile-menu--visible';
     }
-
     profileBlock.onmouseout = function(event) {
         profileMenu.classList.remove('page__profile-menu--visible');
     }
 }
-    
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
 

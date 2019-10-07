@@ -1,0 +1,77 @@
+@import "../../base/var";
+
+.report-make {
+  max-width: 612px;
+  margin: 27px auto 0;
+
+  &--opened {
+    .report-make__top {
+      &:after {
+        transform: scale(1,-1);
+      }
+    }
+
+    .report-make__content {
+      display: block;
+    }
+  }
+
+  &__top {
+    background: white;
+    box-shadow: 0px 2px 12px rgba(117, 117, 117, 0.1);
+    border-radius: 8px;
+    font-family: $titleFont;
+    font-weight: bold;
+    color: $textColor;
+    font-size: 24px;
+    line-height: 22px;
+    padding: 24px 21px;
+    position: relative;
+    cursor: pointer;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 13px;
+      height: 7px;
+      position: absolute;
+      top: 34px;
+      right: 33px;
+      background: url('../img/select.png');
+    }
+  }
+
+  &__content {
+    display: none;
+  }
+
+  &__date-block {
+    display: flex;
+    align-items: center;
+    margin-top: 23px;
+  }
+
+  &__date-label {
+    font-family: $titleFont;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  &__date-input {
+    width: 225px;
+    flex-shrink: 0;
+    background: transparent;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    &:last-child {
+      margin-right: 0;
+      margin-left: 20px;
+    }
+
+    input {
+      background: transparent;
+    }
+  }
+}

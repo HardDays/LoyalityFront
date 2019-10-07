@@ -1,0 +1,156 @@
+@import "../../base/var";
+
+.customer {
+  &__block {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  &__text {
+    font-family: $titleFont;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 5px;
+
+    strong {
+      font-weight: 700;
+    }
+
+    &--big {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+  }
+
+  &__label {
+    color: black;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  &__or {
+    text-align: center;
+    color: black;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    margin: 20px 0;
+  }
+
+  &__input {
+    border: 1px solid #616161;
+    border-radius: 4px;
+    padding: 4px 12px;
+    margin: 20px auto 0;
+    display: block;
+    color: $textColor;
+    font-size: 15px;
+    line-height: 15px;
+    text-align: center;
+
+    &--sum {
+      width: 183px;
+    }
+
+    &--big {
+      width: 335px;
+      text-align: left;
+    }
+
+    &--code {
+      width: 205px;
+    }
+  }
+
+  &__flex {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  &__part {
+    margin-right: 23px;
+
+    &--bottom {
+      margin-top: 25px;
+    }
+  }
+
+  &__date {
+    margin-left: 0;
+    width: 142px;
+
+    &:after {
+      right: 12px;
+    }
+
+    input {
+      width: 100%;
+      padding-right: 40px;
+    }
+  }
+
+  &__screen {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item {
+    width: 277px;
+    height: 156px;
+    border-width: 2px;
+    border-style: dashed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 12px;
+
+    span {
+      font-family: $titleFont;
+      font-weight: bold;
+      font-size: 12.8193px;
+      line-height: 13px;
+      text-transform: uppercase;
+      margin-top: 27px;
+    }
+
+    &--green {
+      color: #3BE300;
+      border-color: #3BE300;
+    }
+
+    &--yellow {
+      color: #2B2A28;
+      border-color: $yellow;
+    }
+  }
+
+  &__created-title {
+    font-family: $titleFont;
+    font-weight: normal;
+    font-size: 24px;
+    color: $yellow;
+    margin-bottom: 30px;
+  }
+
+  &__created-text {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    span {
+      font-weight: normal;
+      font-size: 14px;
+
+      strong {
+        font-weight: bold;
+      }
+    }
+  }
+}

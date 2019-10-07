@@ -10,11 +10,13 @@ import { SystemAccessGuard } from './system.guard';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SystemComponent } from './system.component';
 import { TestComponent } from './test/test.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 @NgModule({
   declarations: [
     SystemComponent,
+    NavigationComponent,
     TestComponent
   ],
   imports: [

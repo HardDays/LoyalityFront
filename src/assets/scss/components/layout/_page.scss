@@ -104,6 +104,10 @@
 
   // content
 
+  &__content-wrap {
+    height: 100%;
+  }
+
   &__content {
     height: 100%;
     padding: 29px 126px 29px 95px;
@@ -149,6 +153,11 @@
       margin: 0 auto;
       width: 612px;
     }
+  }
+
+  &__edit {
+    margin-left: 16px;
+    cursor: pointer;
   }
 
   &__search {
