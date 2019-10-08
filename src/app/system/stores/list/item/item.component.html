@@ -4,62 +4,43 @@
         <p class="main-blocks__title main-blocks__title--shop">{{Item.name}}</p>
 
         <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt="" [routerLink]="['../edit', Item.id]"></span>
-        <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
+        <span class="main-blocks__button main-blocks__button--delete" (click)="DeleteStore()"><img src="assets/img/delete-icon.svg" alt=""></span>
     </div>
 
     <p class="main-blocks__description main-blocks__description--shop">{{Addr}}</p>
 
-    <div class="main-blocks__with-buttons">
+    <ng-container *ngFor="let item of Operators; let i = index">
+        <div class="main-blocks__with-buttons" *ngIf="i < 3">
+            <p class="main-blocks__link main-blocks__link--shop_cashier">{{item.last_name}} {{item.first_name}}</p>
+    
+            <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
+            <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
+        </div>
+    </ng-container>
+    
+    <!-- <div class="main-blocks__with-buttons" >
         <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 1</p>
 
         <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
         <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-    </div>
-    <div class="main-blocks__with-buttons">
-        <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 2</p>
+    </div> -->
 
-        <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
-        <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-    </div>
-    <div class="main-blocks__with-buttons">
-        <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 3</p>
-
-        <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
-        <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-    </div>
-
-    <span class="main-blocks__link main-blocks__link--more"  [ngClass]="{'main-blocks__link--hidden': Expanded}" (click)="ShowMore()">Ещё кассиры</span>
+    <span class="main-blocks__link main-blocks__link--more" *ngIf="Operators.length > 3"  [ngClass]="{'main-blocks__link--hidden': Expanded}" (click)="ShowMore()">Ещё кассиры</span>
 
     <div class="more-cashiers" [ngClass]="{'more-cashiers--visible': Expanded}">
-        <div class="main-blocks__with-buttons">
+        <ng-container *ngFor="let item of Operators; let i = index">
+            <div class="main-blocks__with-buttons" *ngIf="i > 2">
+                <p class="main-blocks__link main-blocks__link--shop_cashier">{{item.last_name}} {{item.first_name}}</p>
+        
+                <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
+                <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
+            </div>
+        </ng-container>
+        <!-- <div class="main-blocks__with-buttons">
             <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 4</p>
 
             <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
             <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-        </div>
-        <div class="main-blocks__with-buttons">
-            <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 5</p>
-
-            <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
-            <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-        </div>
-        <div class="main-blocks__with-buttons">
-            <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 6</p>
-
-            <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
-            <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-        </div>
-        <div class="main-blocks__with-buttons">
-            <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 7</p>
-
-            <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
-            <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-        </div>
-        <div class="main-blocks__with-buttons">
-            <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 8</p>
-
-            <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
-            <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
-        </div>
+        </div> -->
     </div>
 </div>

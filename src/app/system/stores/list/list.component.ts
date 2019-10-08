@@ -14,6 +14,7 @@ import { StoreModel } from '../../../core/models/store.model';
 export class StoreListComponent implements OnInit {
 
 Stores: StoreModel[] = [];
+QueryString = "";
   constructor(
       private auth: AuthService, 
       private router: Router, 
@@ -33,43 +34,11 @@ Stores: StoreModel[] = [];
       this.service.RefreshStores();
   }
 
-  UpdateStores()
+  UpdateStores(q?:string)
   {
-    this.Stores = this.service.GetStores();
+    // console.log(q);
+    const stores: StoreModel[] = this.service.GetStores();
 
-    const mores = document.getElementsByClassName('main-blocks__link--more');
-    const shopBlock = document.getElementById('shop-blocks');
-
-    // setTimeout(
-    //     ()=>{
-    //         for(const i in mores)
-    //         {
-    //             const item = mores[i];
-    //             item.addEventListener('click', function(event) {
-    //                 event.stopPropagation();
-    //                 const itemBlock = this.parentElement.parentElement;
-    //                 console.log(itemBlock);
-    //                 itemBlock.classList.add('main-blocks__item--opened');
-    //                 itemBlock.style.height = itemBlock.offsetHeight + 'px';
-    //                 itemBlock.firstElementChild.classList.add('main-blocks__item-absolute--active');
-    //                 item.classList.add('main-blocks__link--hidden');
-    //                 item.nextElementSibling.classList.add('more-cashiers--visible');
-    //                 shopBlock.classList.add('main-blocks--opened_item');
-    //             });
-    //         }
-    //         document.getElementsByTagName('body')[0].addEventListener('click', function() {
-    //             if (shopBlock) {
-    //                 shopBlock.classList.remove('main-blocks--opened_item');
-    //                 document.getElementsByClassName('more-cashiers--visible')[0].classList.remove('more-cashiers--visible');
-    //                 document.getElementsByClassName('main-blocks__link--hidden')[0].classList.remove('main-blocks__link--hidden');
-    //                 document.getElementsByClassName('main-blocks__item--opened')[0].classList.remove('main-blocks__item--opened');
-    //             }
-    //         });
-    //     }
-    // )
+    this.Stores = q ? stores.filter((obj) => obj.name.indexOf(q) > -1) : stores;
   }
-
-
-
-
 }

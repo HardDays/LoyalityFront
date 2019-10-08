@@ -5,6 +5,8 @@ import { IDictionary } from 'src/app/core/interfaces/dictionary.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StoreModel } from '../../../../core/models/store.model';
+import { StoresService } from '../../stores.service';
+import { OperatorModel } from '../../../../core/models/operator.model';
 
 @Component({
   selector: 'app-store-list-item-cmp',
@@ -16,10 +18,12 @@ export class StoreListItemComponent implements OnInit {
     Errors: IDictionary = {} as IDictionary;
     ErrorMsgs: IDictionary = {} as IDictionary;
 
+    Operators: OperatorModel[] = [];
     Expanded = false;
 
     Addr:string = "";
-    constructor(private _location: Location, private auth: AuthService, private router: Router, private route: ActivatedRoute, private _eref: ElementRef)
+    constructor(private _location: Location, private auth: AuthService, private router: Router, private route: ActivatedRoute, private _eref: ElementRef,
+        private service: StoresService)
     {
 
     }
@@ -34,6 +38,7 @@ export class StoreListItemComponent implements OnInit {
 
     ngOnInit()
     {
+        this.GetOperators();
         let arr = [];
         if(this.Item.country)
         {
@@ -59,5 +64,29 @@ export class StoreListItemComponent implements OnInit {
         this.Expanded = true;
     }
 
+
+    GetOperators()
+    {
+        this.Operators = [];
+        this.service.GetOperators(this.Item.id,
+            (res) => {
+                this.Operators = [];
+                // console.log(res);
+            },
+            (err) => {
+                console.log(err);
+            })
+    }
+
+    DeleteStore()
+    {
+        this.service.DeleteStore(this.Item.id, 
+            (res) => {
+                this.service.RefreshStores();
+            },
+            (err) => {
+
+            })
+    }
 
 }

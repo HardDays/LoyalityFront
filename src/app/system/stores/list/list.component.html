@@ -3,7 +3,7 @@
     <div class="page__top">
         <h1 class="page__title">Все магазины</h1>
         <div class="page__search">
-            <input type="text" placeholder="Поиск по магазинам">
+            <input type="text" [ngModel]="QueryString" (ngModelChange)="UpdateStores($event)" name="search" placeholder="Поиск по магазинам">
         </div>
     </div>
 

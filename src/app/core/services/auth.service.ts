@@ -97,7 +97,6 @@ export class AuthService
         this.http.CommonRequest(
             () => this.http.GetData('/companies', ''),
             (res: CompanyModel) => {
-                console.log(res);
                 this.CompanyData = res;
                 localStorage.setItem(this.company_field ,JSON.stringify(res));
                 this.onCompanyChange$.next(true);

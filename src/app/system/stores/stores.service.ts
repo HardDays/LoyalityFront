@@ -43,4 +43,56 @@ export class StoresService {
     {
         return JSON.parse(JSON.stringify(this.Stores));
     }
+
+    GetStoreById(Id): StoreModel
+    {
+        const store = this.Stores.find((obj) => obj.id == Id);
+
+        return store ? JSON.parse(JSON.stringify(store)) : null;
+    }
+
+    GetOperators(StoreId, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/operators?store_id=' + StoreId, ''),
+            success,
+            fail
+        );
+    }
+
+    CreateStore(Obj, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PostData('/stores', Obj),
+            success,
+            fail
+        );
+    }
+
+    PutStore(Id, Obj, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PutData('/stores/' + Id, Obj),
+            success,
+            fail
+        );
+    }
+
+    GetStore(Id, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/stores/' + Id),
+            success,
+            fail
+        );
+    }
+
+    DeleteStore(Id, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.DeleteData('/stores/' + Id),
+            success,
+            fail
+        );
+    }
 }
