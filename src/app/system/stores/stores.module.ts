@@ -7,22 +7,22 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { MyDatePickerModule } from 'mydatepicker';
 import { StoresComponent } from './stores.component';
-import { StoreListItemComponent } from './list/item/item.component';
 import { StoreListComponent } from './list/list.component';
 import { StoreCreateComponent } from './create/create.component';
 import { StoreEditComponent } from './edit/edit.component';
 import { StoreAccessGuard } from './store.guard';
 import { StoreRoutingModule } from './stores.routing';
 import { StoresService } from './stores.service';
+import { StoreItemDirective } from './list/item/item.directive';
 
 
 @NgModule({
   declarations: [
     StoresComponent,
-    StoreListItemComponent,
     StoreListComponent,
     StoreCreateComponent,
-    StoreEditComponent
+    StoreEditComponent,
+    StoreItemDirective
   ],
   imports: [
     CommonModule,
