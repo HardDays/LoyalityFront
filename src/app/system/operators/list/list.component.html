@@ -1,0 +1,28 @@
+<div class="page__content">
+
+    <div class="page__top">
+        <h1 class="page__title">Кассиры</h1>
+        <div class="page__search">
+            <input type="text" placeholder="Поиск по кассирам">
+        </div>
+    </div>
+
+    <div class="main-blocks">
+        <div class="main-blocks__item main-blocks__item--create" [routerLink]="['../create']">
+            <img src="assets/img/plus.png" alt="">
+            <span>Создать нового кассира</span>
+        </div>
+        <div class="main-blocks__item" *ngFor="let item of Operators">
+            <p class="main-blocks__title main-blocks__title--cashier">{{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</p>
+
+            <p class="main-blocks__description">
+                <!-- Название магазина<br> -->
+                E-mail: {{item.email}}
+            </p>
+
+            <a [routerLink]="['../edit', item.id]" class="main-blocks__link main-blocks__link--yellow main-blocks__link--edit">Редактировать</a>
+            <a (click)="DeleteOperator(item)" class="main-blocks__link main-blocks__link--yellow main-blocks__link--delete main-blocks__link--delete_yellow">Удалить</a>
+        </div>
+    </div>
+
+</div>

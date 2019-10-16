@@ -115,6 +115,25 @@
     &--create {
       padding: 36px 0;
     }
+
+    &--levels {
+      padding: 29px 0;
+
+      .page__top {
+        padding: 0 126px 35px 95px;
+        border-bottom: 1px solid #E3E3E3;
+        flex-direction: column;
+
+        .create-block__edit {
+          width: 380px;
+          margin-top: 25px;
+        }
+
+        .create-block__input {
+          background: transparent;
+        }
+      }
+    }
   }
 
   &__top {
@@ -125,6 +144,27 @@
 
     &--create {
       padding: 0 125px;
+    }
+  }
+
+  &__top-button {
+    background: $yellow;
+    border-radius: 18px;
+    font-family: $textFont;
+    font-weight: bold;
+    font-size: 10px;
+    color: black;
+    text-transform: uppercase;
+    border: 0;
+    width: 190px;
+    height: 32px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-top: 16px;
+
+    &:hover {
+      background: black;
+      color: white;
     }
   }
 

@@ -12,6 +12,14 @@
     }
   }
 
+  &--levels {
+    margin: 35px 126px 0 57px;
+
+    .main-blocks__item {
+      min-height: 156px;
+    }
+  }
+
   &__item {
     margin-left: 38px;
     margin-bottom: 38px;
@@ -24,6 +32,7 @@
     padding: 18px 32px;
     transition: 0.3s;
     position: relative;
+    min-height: 180px;
 
     &--create {
       box-shadow: 0px 2px 12px rgba(117, 117, 117, 0.1);
@@ -48,6 +57,21 @@
     &--shop {
       padding: 0;
     }
+
+    &--opened {
+      .main-blocks__item-absolute {
+        position: absolute;
+        background: white;
+        height: auto;
+        z-index: 10;
+      }
+      .main-blocks__link--more {
+        display: none;
+      }
+      .more-cashiers {
+        display: block;
+      }
+    }
   }
 
   &__item-absolute {
@@ -59,12 +83,12 @@
     box-shadow: 0px 2px 12px rgba(117, 117, 117, 0.1);
     padding: 18px 32px;
 
-    &--active {
+    /*&--active {
       position: absolute;
       background: white;
       height: auto;
       z-index: 10;
-    }
+    }*/
   }
 
   &__with-buttons {
@@ -90,6 +114,14 @@
       margin-bottom: 3px;
       margin-right: auto;
     }
+  }
+
+  &__pre-link {
+    font-family: $titleFont;
+    font-size: 14px;
+    line-height: 16px;
+    color: #616161;
+    margin-bottom: 15px;
   }
 
   &__description {
@@ -168,6 +200,13 @@
       }
     }
 
+    &--edit_black {
+      &:before {
+        height: 16px;
+        background-image: url('../img/edit-icon.svg');
+      }
+    }
+
     &--shop_cashier {
       padding-left: 18px;
       margin-right: auto;
@@ -194,9 +233,9 @@
       }
     }
 
-    &--hidden {
+    /*&--hidden {
       display: none;
-    }
+    }*/
   }
 
   &__button {
@@ -223,7 +262,7 @@
 .more-cashiers {
   display: none;
 
-  &--visible {
+  /*&--visible {
     display: block;
-  }
+  }*/
 }

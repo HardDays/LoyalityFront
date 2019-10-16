@@ -37,19 +37,8 @@ export class SystemComponent implements OnInit
 
     ngOnInit(): void 
     {
-        // const profileBlock = document.getElementById('header-profile');
-        // const profileMenu = document.getElementById('header-profile-menu');
-        
-        // if(profileBlock && profileMenu)
-        // {
-        //     profileBlock.onmouseover = function(event) {
-        //         profileMenu.add
-        //         profileMenu.classList += ' page__profile-menu--visible';
-        //     }
-        //     profileBlock.onmouseout = function(event) {
-        //         profileMenu.classList.remove('page__profile-menu--visible');
-        //     }
-        // }
+        this.OnLoginChange();
+        this.Company = this.auth.CompanyData;
     }
 
     ShowMenu()

@@ -28,7 +28,6 @@ export class AppComponent  implements OnInit{
 
   OnLoginChange()
   {
-    // console.log(this.IsLoggedIn);
     this.router.navigate([this.IsLoggedIn ? 'system' : 'auth']);
   }
 }

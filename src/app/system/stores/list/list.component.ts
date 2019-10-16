@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StoresService } from '../stores.service';
 import { StoreModel } from '../../../core/models/store.model';
+import { OperatorModel } from 'src/app/core/models/operator.model';
 
 @Component({
   selector: 'app-store-list-cmp',
@@ -36,16 +37,21 @@ QueryString = "";
       this.service.RefreshStores((res: StoreModel[]) => {
         for(const item of res)
         {
-          this.Operators[item.id] = [];
-          this.service.GetOperators(item.id,
-            (res) => {
-              this.Operators[item.id] = res;
-            },
-            (err) => {
-                console.log(err);
-            })
+          this.RefreshOperatorsByStoreId(item.id);
         }
       });
+  }
+
+  RefreshOperatorsByStoreId(Id)
+  {
+    this.Operators[Id] = [];
+    this.service.GetOperators(Id,
+      (res) => {
+        this.Operators[Id] = res;
+      },
+      (err) => {
+          console.log(err);
+      })
   }
 
   UpdateStores(q?:string)
@@ -115,6 +121,18 @@ QueryString = "";
     {
       this.Expanded[Item.id] = false;
     }
+  }
+
+  DeleteOperator(Item: OperatorModel)
+  {
+    this.service.DeleteOperator(Item.id, 
+      (res) => {
+          this.RefreshOperatorsByStoreId(Item.store_id);
+      },
+      (err) => {
+
+      }
+    )
   }
   
 }

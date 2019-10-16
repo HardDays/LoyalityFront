@@ -11,7 +11,6 @@ export class AppAccessGuard implements CanActivate
     {}
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
-        // console.log('activate');
         switch(router.routeConfig.path)
         {
             case "auth":{

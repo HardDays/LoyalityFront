@@ -183,32 +183,5 @@ export class SignUpComponent implements OnInit
       }
 
     }
-    // console.log(this.RegForm);
-    // console.log(this.RegForm);
-    // console.log(this.RegForm.value);
-    // console.log(this.RegForm.getRawValue());
-    // this.Form.reset();
-    // console.log("create");
-    // // for(const i in this.Form.controls)
-    // // {
-    // //   // this.Form.get(i).markAsDirty();
-    // //   this.Form.get(i).markAsTouched();
-    // // }
-
-    // // this.RegForm.updateValueAndValidity();
-    // console.log(this.RegForm);
-    // const vals = this.RegForm.getRawValue();
-
-
-
-    //   console.log(vals);
-    // if(this.RegForm.valid)
-    // {
-    //   const vals = this.RegForm.getRawValue();
-
-
-
-    //   console.log(vals);
-    // }
   }
 }

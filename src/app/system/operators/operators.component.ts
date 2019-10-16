@@ -2,11 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-  selector: 'stores-cmp',
-  templateUrl: './stores.component.html'
+  selector: 'operators-cmp',
+  templateUrl: './operators.component.html'
 })
-export class StoresComponent  implements OnInit{
+export class OperatorsComponent  implements OnInit{
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService) {
+       
   }
   ngOnInit(): void 
   {

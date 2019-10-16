@@ -82,7 +82,6 @@ export class LoginComponent implements OnInit {
       const data = this.Form.getRawValue();
       this.auth.Login(data, 
         (val) => {
-          console.log(val);
         },
         (err) => {
           const not_found = [401, 422, 404, 403];

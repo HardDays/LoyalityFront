@@ -95,4 +95,12 @@ export class StoresService {
             fail
         );
     }
+    DeleteOperator(Id, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.DeleteData('/operators/' + Id),
+            success,
+            fail
+        );
+    }
 }

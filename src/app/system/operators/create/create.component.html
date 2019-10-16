@@ -1,0 +1,105 @@
+<div class="page__content page__content--create">
+
+    <div class="page__top page__top--create">
+        <span class="page__back" (click)="GoBack()"><img src="assets/img/back.svg" alt=""></span>
+        <h1 class="page__title page__title--create">Создание нового кассира</h1>
+    </div>
+
+    <div class="create-block">
+        <p class="create-block__label create-block__label--bold">Введите данные кассира</p>
+
+        <form   [formGroup]="Form" (ngSubmit)="Save()">
+            <p class="create-block__label create-block__label--light">Имя</p>
+            <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+            <input type="text" class="create-block__input create-block__input--full"
+                [ngClass]="{'auth-block__input--error': first_name.invalid && (first_name.dirty || first_name.touched)}"
+                autocomplete="null"
+                formControlName="first_name"
+                name="first_name"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+                    <span *ngIf="first_name.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="first_name.errors.minlength">Минимальная длина 3 символа.</span>
+                    <span *ngIf="first_name.errors.maxlength">Максимальная длина 30 символов.</span>
+                </ng-container>
+            </p>
+
+
+            <p class="create-block__label create-block__label--light">Фамилия</p>
+            <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+            <input type="text" class="create-block__input create-block__input--full"
+                [ngClass]="{'auth-block__input--error': last_name.invalid && (last_name.dirty || last_name.touched)}"
+                autocomplete="null"
+                formControlName="last_name"
+                name="last_name"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+                    <span *ngIf="last_name.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="last_name.errors.minlength">Минимальная длина 3 символа.</span>
+                    <span *ngIf="last_name.errors.maxlength">Максимальная длина 30 символов.</span>
+                </ng-container>
+            </p>
+            <p class="create-block__label create-block__label--light">Отчество</p>
+            <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+            <input type="text" class="create-block__input create-block__input--full"
+                [ngClass]="{'auth-block__input--error': second_name.invalid && (second_name.dirty || second_name.touched)}"
+                autocomplete="null"
+                formControlName="second_name"
+                name="second_name"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="second_name.invalid && (second_name.dirty || second_name.touched)">
+                    <span *ngIf="second_name.errors.maxlength">Максимальная длина 30 символов.</span>
+                </ng-container>
+            </p>
+            <p class="create-block__label create-block__label--light">E-mail кассира</p>
+            <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+            <input type="text" class="create-block__input create-block__input--full"
+                [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
+                autocomplete="null"
+                formControlName="email"
+                name="email"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="last_name.invalid && (email.dirty || email.touched)">
+                    <span *ngIf="email.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="email.errors.email">Введите корректный E-mail</span>
+                </ng-container>
+            </p>
+            <p class="create-block__label create-block__label--light">Выбрать магазин</p>
+            <div class="create-block__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
+                <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedStore ? SelectedStore.name: 'Магазин'}}</div>
+                <ul class="create-block__select-list">
+                    <ng-container *ngFor="let item of Stores">
+                        <li (click)="OnSelected(item)">{{item.name}}</li>
+                    </ng-container>
+                </ul>
+            </div>
+            <!-- <div class="create-block__select">
+                <select  data-placeholder="Магазин" class="js-custom_select" formControlName="store_id"
+                name="store_id">
+                <ng-container *ngFor="let item of Stores">
+                    <option [value]="item.id">{{item.name}}</option>
+                </ng-container>
+                </select>
+            </div> -->
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="store_id.invalid && (store_id.dirty || store_id.touched)">
+                    <span *ngIf="store_id.errors.required">Поле обязательно к заполнению.</span>
+                </ng-container>
+            </p>
+    
+            <!-- <label class="checkbox">
+                <input type="checkbox" class="checkbox__input" checked>
+                <div class="checkbox__text">Отправить пароль кассиру на почту</div>
+            </label> -->
+    
+            <div class="text-center">
+                <button type="submit" class="button create-block__button">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+</div>
