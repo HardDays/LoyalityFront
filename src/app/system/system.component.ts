@@ -35,7 +35,7 @@ export class SystemComponent implements OnInit
         )
     }
 
-    ngOnInit(): void 
+    ngOnInit(): void
     {
         this.OnLoginChange();
         this.Company = this.auth.CompanyData;
@@ -60,7 +60,7 @@ export class SystemComponent implements OnInit
         this.Me = this.auth.LoginData;
         this.IsLoggedIn = this.auth.IsLoggedIn;
 
-        this.Initials = (this.Me.last_name ? this.Me.last_name[0].toUpperCase() : '') + (this.Me.first_name ? this.Me.first_name[0].toUpperCase() : ''); 
+        this.Initials = (this.Me.last_name ? this.Me.last_name[0].toUpperCase() : '') + (this.Me.first_name ? this.Me.first_name[0].toUpperCase() : '');
     }
-    
+
 }

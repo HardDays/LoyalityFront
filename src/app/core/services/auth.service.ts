@@ -20,11 +20,11 @@ export class AuthService
     public CompanyData: CompanyModel = new CompanyModel();
     public onCompanyChange$: Subject<boolean> = new Subject<boolean>();
 
-    constructor(public http: HttpService, private router: Router) 
+    constructor(public http: HttpService, private router: Router)
     {
         this.onAuthChange$.subscribe(val => {
             this.IsLoggedIn = val
-            if(this.LoginData.user_type == 'creator')
+            if (this.LoginData.user_type == 'creator')
             {
                 this.GetCompanyInfo();
             }

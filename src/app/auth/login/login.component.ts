@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     // ]),
     "password": new FormControl(this.LoginModel.password, [
       Validators.required,
-      Validators.minLength(10),
+      Validators.minLength(7),
       Validators.maxLength(50)
     ])
   });
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       private router: Router) {
   }
 
-  ngOnInit() 
+  ngOnInit()
   {
   }
 
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
     if(valid)
     {
       const data = this.Form.getRawValue();
-      this.auth.Login(data, 
+      this.auth.Login(data,
         (val) => {
         },
         (err) => {

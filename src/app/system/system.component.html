@@ -1,7 +1,7 @@
 <section class="page">
 
     <!-- MENU -->
-    <nav class="menu">
+    <nav *ngIf="Me.user_type == 'creator' || Me.user_type == 'client'" class="menu">
         <navigation-cmp></navigation-cmp>
     </nav>
     <div class="page__block">

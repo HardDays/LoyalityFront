@@ -11,6 +11,7 @@ const routes: Routes =
       { path: "", pathMatch:"full", redirectTo: "my_stores" },
       { path: 'my_stores', loadChildren: './stores/stores.module#StoresModule', canActivate:[SystemAccessGuard]},
       { path: 'my_cashiers', loadChildren: './operators/operators.module#OperatorsModule', canActivate:[SystemAccessGuard]},
+      { path: 'my_clients', loadChildren: './clients/clients.module#ClientsModule', canActivate:[SystemAccessGuard]},
       // { path: 'test', component: TestComponent },
       { path: '**', component: TestComponent }
     ]
