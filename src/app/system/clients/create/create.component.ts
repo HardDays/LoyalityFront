@@ -64,8 +64,7 @@ export class ClientsCreateComponent implements OnInit {
     return this.Form.get('house');
   }
 
-  constructor(private _location: Location, private auth: AuthService, private router: Router,
-    private service: ClientsService)
+  constructor(private _location: Location)
   {
   }
 
@@ -78,21 +77,4 @@ export class ClientsCreateComponent implements OnInit {
       this._location.back();
   }
 
-  Save()
-  {
-    const valid = this.Form.valid;
-
-    if(valid)
-    {
-      const data = this.Form.getRawValue();
-      this.service.CreateStore(data,(res) => {
-        this.router.navigate(["/system","my_stores"])
-      },
-      (err) => {
-        console.log(err);
-      })
-    }
-
-
-  }
 }

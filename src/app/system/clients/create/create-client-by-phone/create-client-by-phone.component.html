@@ -8,20 +8,22 @@
 
   <div class="create-block customer__block">
       <p class="customer__label">Введите номер телефона покупателя</p>
-      <input type="text" class="customer__input customer__input--big">
-
+      <input type="text" [textMask]="{mask: MaskPhoneRU, showMask: true}" [(ngModel)]="Phone" class="customer__input customer__input--big">
+      <p class="customer__label auth-block__hint auth-block__hint--error" [ngStyle]="{'color': 'red'}">
+          <span *ngIf="ErrorText">{{ErrorText}}</span>
+      </p>
       <div class="text-center">
-          <button class="button create-block__button">Отправить код</button>
+          <button (click)="clickNextStep()" class="button create-block__button">Продолжить</button>
       </div>
   </div>
 
-  <div class="create-block customer__block">
+  <!-- <div class="create-block customer__block">
       <p class="customer__label">Подтвердить код</p>
       <input type="text" class="customer__input customer__input--code">
 
       <div class="text-center">
           <button [routerLink]="['../user']" class="button create-block__button">Подтвердить</button>
       </div>
-  </div>
+  </div> -->
 
 </div>

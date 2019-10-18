@@ -1,3 +1,4 @@
+import { ClientsService } from './../../clients.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -82,7 +83,7 @@ export class CreateClientByUserComponent implements OnInit {
   // Initialized to specific date (09.10.2018).
   public model: any = { date: { year: 2018, month: 10, day: 9 } };
 
-  constructor(private _location: Location) { }
+  constructor(private _location: Location, private service: ClientsService) { }
 
   ngOnInit() {
   }
@@ -104,6 +105,7 @@ export class CreateClientByUserComponent implements OnInit {
     if (valid)
     {
       const data = this.Form.getRawValue();
+      data['phone'] = this.service.Client.phone;
       console.log(`data = `, data);
       // this.service.CreateOperator(data,(res) => {
       //   this.router.navigate(["/system","my_cashiers"])

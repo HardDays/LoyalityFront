@@ -14,4 +14,8 @@ export class ValidatorService
             return null;
         };
     }
+
+    public static MaskPhoneRU() {
+      return ['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/];
+    }
 }
