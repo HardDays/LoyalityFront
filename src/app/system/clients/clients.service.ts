@@ -26,4 +26,12 @@ export class ClientsService {
           fail
       );
     }
+
+    CreateOrder(Obj, success?: (data) => void, fail?: (err) => void) {
+      this.http.CommonRequest(
+          () => this.http.PostData('/orders', Obj),
+          success,
+          fail
+      );
+    }
 }

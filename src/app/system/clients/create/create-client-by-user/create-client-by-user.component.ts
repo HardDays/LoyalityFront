@@ -88,6 +88,8 @@ export class CreateClientByUserComponent implements OnInit {
 
   isShowSuccessModal = false;
 
+  OrderPrice = 0;
+
   constructor(private _location: Location, private service: ClientsService) { }
 
   ngOnInit() {
@@ -110,15 +112,33 @@ export class CreateClientByUserComponent implements OnInit {
     if (valid) {
       const data = this.Form.getRawValue();
       data['phone'] = this.service.Client.phone;
-      console.log(`data = `, data);
-      this.isShowSuccessModal = true;
-      // this.service.CreateClient(data, (res) => {
-      //   console.log(`Success!`, res);
-      // },
-      // (err) => {
-      //   console.log(err);
-      // });
+      this.service.CreateClient(data, (res) => {
+        console.log(`Success!`, res);
+        if (this.OrderPrice) {
+          this.CreateOrder(res['id']);
+        } else {
+          this.isShowSuccessModal = true;
+        }
+      },
+      (err) => {
+        console.log(err);
+      });
     }
+  }
+
+  CreateOrder(user_id: number) {
+    this.service.CreateOrder(
+      {
+        user_id,
+        price: this.OrderPrice,
+        use_points: false
+      }, (res) => {
+      console.log(`Success 2!`, res);
+      this.isShowSuccessModal = true;
+    },
+    (err) => {
+      console.log(err);
+    });
   }
 
 

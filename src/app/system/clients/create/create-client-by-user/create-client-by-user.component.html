@@ -107,7 +107,7 @@
         <div class="customer__flex">
             <div class="customer__part">
                 <p class="create-block__label create-block__label--light">Сумма покупки</p>
-                <input type="text" class="create-block__input create-block__input--full customer__input--sum">
+                <input [(ngModel)]="OrderPrice" [ngModelOptions]="{standalone: true}" type="text" class="create-block__input create-block__input--full customer__input--sum">
             </div>
             <div class="customer__part customer__part--bottom">
                 <label class="checkbox">
@@ -140,7 +140,7 @@
         <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>
 
         <p class="customer__created-text">Покупатель: <span>{{first_name.value}} {{last_name.value}}</span></p>
-        <p class="customer__created-text">Сумма покупки: <span><strong>100 000 ₽</strong></span></p>
-        <p class="customer__created-text">Бонусов начислено: <span><strong>10 000 ₽</strong></span></p>
+        <p class="customer__created-text">Сумма покупки: <span><strong>{{OrderPrice}} ₽</strong></span></p>
+        <p class="customer__created-text">Бонусов начислено: <span><strong>? ₽</strong></span></p>
     </div>
 </div>
