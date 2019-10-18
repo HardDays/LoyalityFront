@@ -8,7 +8,7 @@ import { ClientsService } from '../clients.service';
 
 @Component({
   selector: 'app-client-create-cmp',
-  templateUrl: './../edit/edit.component.html'
+  templateUrl: './create.component.html'
 })
 export class ClientsCreateComponent implements OnInit {
 

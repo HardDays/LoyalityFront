@@ -1,0 +1,88 @@
+<div class="page__content page__content--create">
+
+    <div class="page__top page__top--create">
+        <span class="page__back"><img (click)="GoBack()" src="./../../../../../assets/img/back.svg" alt=""></span>
+        <h1 class="page__title page__title--create">Создание нового покупателя</h1>
+    </div>
+
+    <div class="create-block customer__block">
+        <p class="create-block__label create-block__label--bold">Введите данные покупателя</p>
+
+        <p class="create-block__label create-block__label--light">Имя</p>
+        <input type="text" class="create-block__input create-block__input--full">
+
+        <p class="create-block__label create-block__label--light">Фамилия</p>
+        <input type="text" class="create-block__input create-block__input--full">
+
+        <p class="create-block__label create-block__label--light">Отчество</p>
+        <input type="text" class="create-block__input create-block__input--full">
+
+        <p class="create-block__label create-block__label--light">Номер телефона</p>
+        <input type="text" class="create-block__input create-block__input--full">
+
+        <div class="customer__flex">
+            <div class="customer__part">
+                <p class="create-block__label create-block__label--light">Дата рождения</p>
+                <span class="create-block__date-input customer__date"><input type="text" class="create-block__input create-block__input--date"></span>
+            </div>
+            <div class="customer__part">
+                <p class="create-block__label create-block__label--light">Дата регистрации</p>
+                <span class="create-block__date-input customer__date"><input type="text" class="create-block__input create-block__input--date"></span>
+            </div>
+            <div class="customer__part">
+                <p class="create-block__label create-block__label--light">Пол</p>
+
+                <div class="auth-block__choice">
+                    <label class="radio">
+                        <input type="radio" class="radio__input" name="userType" checked>
+                        <div class="radio__text">Женский</div>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" class="radio__input" name="userType">
+                        <div class="radio__text">Мужской</div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <p class="create-block__label create-block__label--light">Выбрать программу лояльности:</p>
+        <div class="create-block__select">
+            <select data-placeholder="Программа лояльности" class="js-custom_select">
+                <option>Программа лояльности 1</option>
+                <option>Программа лояльности 2</option>
+                <option>Программа лояльности 3</option>
+                <option>Программа лояльности 4</option>
+                <option>Программа лояльности 5</option>
+                <option>Программа лояльности 6</option>
+                <option>Программа лояльности 7</option>
+                <option>Программа лояльности 8</option>
+            </select>
+        </div>
+
+        <div class="customer__flex">
+            <div class="customer__part">
+                <p class="create-block__label create-block__label--light">Сумма покупки</p>
+                <input type="text" class="create-block__input create-block__input--full customer__input--sum">
+            </div>
+            <div class="customer__part customer__part--bottom">
+                <label class="checkbox">
+                    <input type="checkbox" class="checkbox__input" checked>
+                    <div class="checkbox__text">По рекомендации</div>
+                </label>
+            </div>
+        </div>
+
+        <p class="create-block__label create-block__label--light">Номер телефона рекомендовавшего:</p>
+        <input type="text" class="create-block__input create-block__input--full">
+
+        <label class="checkbox">
+            <input type="checkbox" class="checkbox__input" checked>
+            <div class="checkbox__text">Отправить пароль от личного кабинета покупателя СМС-сообщением</div>
+        </label>
+
+        <div class="text-center">
+            <button class="button create-block__button">Сохранить</button>
+        </div>
+    </div>
+
+</div>

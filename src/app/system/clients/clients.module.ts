@@ -13,6 +13,8 @@ import { ClientsEditComponent } from './edit/edit.component';
 import { ClientsAccessGuard } from './clients.guard';
 import { ClientsRoutingModule } from './clients.routing';
 import { ClientsService } from './clients.service';
+import { CreateClientByPhoneComponent } from './create/create-client-by-phone/create-client-by-phone.component';
+import { CreateClientByUserComponent } from './create/create-client-by-user/create-client-by-user.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ClientsService } from './clients.service';
     ClientsComponent,
     ClientsStartComponent,
     ClientsCreateComponent,
-    ClientsEditComponent
+    ClientsEditComponent,
+    CreateClientByPhoneComponent,
+    CreateClientByUserComponent
   ],
   imports: [
     CommonModule,

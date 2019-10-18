@@ -1,13 +1,13 @@
 <section class="page__content-wrap">
   <span class="page__content customer__screen">
-    <div class="customer__item customer__item--green">
+    <div [routerLink]="['../create']" class="customer__item customer__item--green">
         <img src="./../../../../assets/img/plus-green.svg" alt="">
         <span>Создать покупателя</span>
     </div>
 
-    <span class="customer__item customer__item--yellow">
+    <div [routerLink]="['../edit']" class="customer__item customer__item--yellow">
         <img src="./../../../../assets/img/refresh.png" alt="">
         <span>Операции с покупателем</span>
-    </span>
+    </div>
   </span>
 </section>

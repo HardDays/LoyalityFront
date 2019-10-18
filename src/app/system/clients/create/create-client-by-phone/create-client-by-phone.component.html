@@ -1,0 +1,27 @@
+
+  <div class="page__content page__content--create">
+
+  <div class="page__top page__top--create">
+      <span class="page__back"><img (click)="GoBack()" src="./../../../../../assets/img/back.svg" alt=""></span>
+      <h1 class="page__title page__title--create">Создание нового покупателя</h1>
+  </div>
+
+  <div class="create-block customer__block">
+      <p class="customer__label">Введите номер телефона покупателя</p>
+      <input type="text" class="customer__input customer__input--big">
+
+      <div class="text-center">
+          <button class="button create-block__button">Отправить код</button>
+      </div>
+  </div>
+
+  <div class="create-block customer__block">
+      <p class="customer__label">Подтвердить код</p>
+      <input type="text" class="customer__input customer__input--code">
+
+      <div class="text-center">
+          <button [routerLink]="['../user']" class="button create-block__button">Подтвердить</button>
+      </div>
+  </div>
+
+</div>

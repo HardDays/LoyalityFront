@@ -34,12 +34,12 @@ QueryString = "";
 
   ngOnInit()
   {
-      this.service.RefreshStores((res: StoreModel[]) => {
-        for(const item of res)
-        {
-          this.RefreshOperatorsByStoreId(item.id);
-        }
-      });
+      // this.service.RefreshStores((res: StoreModel[]) => {
+      //   for(const item of res)
+      //   {
+      //     this.RefreshOperatorsByStoreId(item.id);
+      //   }
+      // });
   }
 
   RefreshOperatorsByStoreId(Id)
