@@ -34,7 +34,8 @@ import { CreateClientByUserComponent } from './create/create-client-by-user/crea
     RouterModule,
     ClientsRoutingModule,
     ReactiveFormsModule,
-    TextMaskModule
+    TextMaskModule,
+    MyDatePickerModule
   ],
   providers: [ ClientsAccessGuard, ClientsService]
 })

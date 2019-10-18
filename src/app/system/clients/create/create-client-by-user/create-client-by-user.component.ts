@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IMyDpOptions } from 'mydatepicker';
 
 @Component({
   selector: 'app-create-client-by-user',
@@ -10,53 +11,58 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class CreateClientByUserComponent implements OnInit {
 
   Form: FormGroup = new FormGroup({
-    'name': new FormControl('', [
+    'first_name': new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'country': new FormControl('', [
+    'last_name': new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'city': new FormControl('', [
-      Validators.required,
+    'second_name': new FormControl('', [
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'street': new FormControl('', [
-      Validators.required,
+    'card_number': new FormControl('', [
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'house': new FormControl('', [
-      Validators.required,
-      Validators.min(1),
-      Validators.max(9999)
+    'loyalty_program_id': new FormControl('', [
+      // Validators.required
     ]),
-    "store_id": new FormControl('',[
+    'gender': new FormControl('female',[
+      Validators.required
+    ]),
+    'birth_day': new FormControl('',[
       Validators.required
     ])
   });
 
-  get name() {
-    return this.Form.get('name');
+  get first_name() {
+    return this.Form.get('first_name');
   }
-  get country() {
-    return this.Form.get('country');
+  get last_name() {
+    return this.Form.get('last_name');
   }
-  get city() {
-    return this.Form.get('city');
+  get second_name() {
+    return this.Form.get('second_name');
   }
-  get street() {
-    return this.Form.get('street');
+  get card_number() {
+    return this.Form.get('card_number');
   }
-  get house() {
-    return this.Form.get('house');
+  get loyalty_program_id() {
+    return this.Form.get('loyalty_program_id');
+  }
+  get gender() {
+    return this.Form.get('gender');
+  }
+  get birth_day() {
+    return this.Form.get('birth_day');
   }
 
-  SelectedStore = null;
+  SelectedLoyality = null;
   ShowSelect = false;
 
   LoalityProgramm = [
@@ -64,6 +70,17 @@ export class CreateClientByUserComponent implements OnInit {
     {id: 2, name: 'Вторая акция'},
     {id: 3, name: 'Третья акция'}
   ];
+
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+    showClearDateBtn: false,
+    // editableDateField: false,
+    // showSelectorArrow: false
+  };
+
+  // Initialized to specific date (09.10.2018).
+  public model: any = { date: { year: 2018, month: 10, day: 9 } };
 
   constructor(private _location: Location) { }
 
@@ -76,14 +93,33 @@ export class CreateClientByUserComponent implements OnInit {
 
   Save() {
     console.log(`Save Form`);
+
+    for(const i in this.Form.controls)
+    {
+        this.Form.controls[i].markAsDirty();
+        this.Form.controls[i].markAsTouched();
+    }
+    const valid = this.Form.valid;
+
+    if (valid)
+    {
+      const data = this.Form.getRawValue();
+      console.log(`data = `, data);
+      // this.service.CreateOperator(data,(res) => {
+      //   this.router.navigate(["/system","my_cashiers"])
+      // },
+      // (err) => {
+      //   console.log(err);
+      // })
+    }
   }
 
 
 
   OnSelected(item)
   {
-    this.SelectedStore = item;
-    this.Form.controls.store_id.setValue(this.SelectedStore.id);
+    this.SelectedLoyality = item;
+    this.Form.controls.loyalty_program_id.setValue(this.SelectedLoyality.id);
     this.ShowSelect = false;
   }
 
