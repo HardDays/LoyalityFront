@@ -31,13 +31,13 @@ export class CreateClientByPhoneComponent implements OnInit {
   clickNextStep() {
     this.VerifyPhone(
       () => this.SavePhoneAndNavigate(),
-      () => this.ShowErrorPhoneNumber()
+      (err) => this.ShowErrorPhoneNumber(err)
     );
   }
 
-  VerifyPhone(success: () => void, error: () => void) {
+  VerifyPhone(success: () => void, error: (err?) => void) {
     if (this.Phone.indexOf('_') > -1) {
-      this.ShowErrorPhoneNumber('Неккоректный номер телефона!');
+      error('Неккоректный номер телефона!');
     } else {
       this.service.CreateClient(
         {
@@ -54,7 +54,11 @@ export class CreateClientByPhoneComponent implements OnInit {
                 .findIndex(x => x === 'phone') > -1
             ) {
             if (error && typeof(error) === 'function') {
-              error();
+              if (err.json()['phone'][0] === 'ALREADY_TAKEN') {
+                error('Номер телефона уже зарегистрирован!');
+              } else {
+                error();
+              }
             }
           } else if (success && typeof(success) === 'function') {
             success();

@@ -42,6 +42,11 @@
           name="second_name"
           formControlName="second_name"
         >
+        <p class="auth-block__hint auth-block__hint--error">
+            <ng-container *ngIf="second_name.invalid && (second_name.dirty || second_name.touched)">
+                <span *ngIf="second_name.errors['required']">Поле обязательно к заполнению.</span>
+            </ng-container>
+        </p>
 
         <p class="create-block__label create-block__label--light">Номер карты</p>
         <input type="text" class="create-block__input create-block__input--full"
@@ -56,7 +61,7 @@
                 <p class="create-block__label create-block__label--light">Дата рождения</p>
                 <span class="create-block__date-input customer__date"
                   [ngClass]="{'auth-block__input--error': birth_day.invalid && (birth_day.dirty || birth_day.touched)}">
-                  <input type="text" class="create-block__input create-block__input--date"
+                  <input [textMask]="{mask: MaskBirthDay}" type="text" class="create-block__input create-block__input--date"
                     autocomplete="null"
                     name="birth_day"
                     formControlName="birth_day"
@@ -106,14 +111,16 @@
             </div>
             <div class="customer__part customer__part--bottom">
                 <label class="checkbox">
-                    <input type="checkbox" class="checkbox__input" checked>
+                    <input (change)="Recommendation.isTrue = !Recommendation.isTrue" type="checkbox" class="checkbox__input">
                     <div class="checkbox__text">По рекомендации</div>
                 </label>
             </div>
         </div>
 
-        <p class="create-block__label create-block__label--light">Номер телефона рекомендовавшего:</p>
-        <input type="text" class="create-block__input create-block__input--full">
+        <ng-container *ngIf="Recommendation.isTrue">
+          <p class="create-block__label create-block__label--light">Номер телефона рекомендовавшего:</p>
+          <input type="text" class="create-block__input create-block__input--full">
+        </ng-container>
 
         <label class="checkbox">
             <input type="checkbox" class="checkbox__input" checked>
@@ -125,4 +132,15 @@
         </div>
     </form>
 
+</div>
+<div *ngIf="isShowSuccessModal" class="modal modal--visible">
+    <div class="modal__block modal__block--created">
+        <span class="modal__close"><img (click)="isShowSuccessModal = false" src="./../../../../../assets/img/close.svg" alt=""></span>
+
+        <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>
+
+        <p class="customer__created-text">Покупатель: <span>{{first_name.value}} {{last_name.value}}</span></p>
+        <p class="customer__created-text">Сумма покупки: <span><strong>100 000 ₽</strong></span></p>
+        <p class="customer__created-text">Бонусов начислено: <span><strong>10 000 ₽</strong></span></p>
+    </div>
 </div>

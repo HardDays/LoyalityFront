@@ -1,3 +1,4 @@
+import { ValidatorService } from './../../../../core/services/validator.service';
 import { ClientsService } from './../../clients.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -23,6 +24,7 @@ export class CreateClientByUserComponent implements OnInit {
       Validators.maxLength(30)
     ]),
     'second_name': new FormControl('', [
+      Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
@@ -73,15 +75,18 @@ export class CreateClientByUserComponent implements OnInit {
   ];
 
   public myDatePickerOptions: IMyDpOptions = {
-    // other options...
     dateFormat: 'dd.mm.yyyy',
     showClearDateBtn: false,
-    // editableDateField: false,
-    // showSelectorArrow: false
   };
 
-  // Initialized to specific date (09.10.2018).
-  public model: any = { date: { year: 2018, month: 10, day: 9 } };
+  MaskBirthDay = ValidatorService.MaskBirthDay();
+
+  Recommendation = {
+    isTrue: false,
+    phone: ''
+  };
+
+  isShowSuccessModal = false;
 
   constructor(private _location: Location, private service: ClientsService) { }
 
@@ -102,17 +107,17 @@ export class CreateClientByUserComponent implements OnInit {
     }
     const valid = this.Form.valid;
 
-    if (valid)
-    {
+    if (valid) {
       const data = this.Form.getRawValue();
       data['phone'] = this.service.Client.phone;
       console.log(`data = `, data);
-      // this.service.CreateOperator(data,(res) => {
-      //   this.router.navigate(["/system","my_cashiers"])
+      this.isShowSuccessModal = true;
+      // this.service.CreateClient(data, (res) => {
+      //   console.log(`Success!`, res);
       // },
       // (err) => {
       //   console.log(err);
-      // })
+      // });
     }
   }
 
