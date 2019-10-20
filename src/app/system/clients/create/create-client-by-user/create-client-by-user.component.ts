@@ -28,6 +28,10 @@ export class CreateClientByUserComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
+    'email': new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
     'card_number': new FormControl('', [
       Validators.minLength(3),
       Validators.maxLength(30)
@@ -51,6 +55,9 @@ export class CreateClientByUserComponent implements OnInit {
   }
   get second_name() {
     return this.Form.get('second_name');
+  }
+  get email() {
+    return this.Form.get('email');
   }
   get card_number() {
     return this.Form.get('card_number');

@@ -48,6 +48,19 @@
             </ng-container>
         </p>
 
+        <p class="create-block__label create-block__label--light">Электронный адрес</p>
+        <input type="text" class="create-block__input create-block__input--full"
+          [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
+          autocomplete="null"
+          name="email"
+          formControlName="email"
+        >
+        <p class="auth-block__hint auth-block__hint--error">
+            <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+                <span *ngIf="email.errors['required']">Поле обязательно к заполнению.</span>
+            </ng-container>
+        </p>
+
         <p class="create-block__label create-block__label--light">Номер карты</p>
         <input type="text" class="create-block__input create-block__input--full"
           [ngClass]="{'auth-block__input--error': card_number.invalid && (card_number.dirty || card_number.touched)}"
@@ -73,10 +86,10 @@
                     </ng-container>
                 </p>
             </div>
-            <div class="customer__part">
+            <!-- <div class="customer__part">
                 <p class="create-block__label create-block__label--light">Дата регистрации</p>
                 <span class="create-block__date-input customer__date"><input type="text" class="create-block__input create-block__input--date"></span>
-            </div>
+            </div> -->
             <div class="customer__part">
                 <p class="create-block__label create-block__label--light">Пол</p>
 
@@ -122,10 +135,10 @@
           <input type="text" class="create-block__input create-block__input--full">
         </ng-container>
 
-        <label class="checkbox">
+        <!-- <label class="checkbox">
             <input type="checkbox" class="checkbox__input" checked>
             <div class="checkbox__text">Отправить пароль от личного кабинета покупателя СМС-сообщением</div>
-        </label>
+        </label> -->
 
         <div class="text-center">
             <button class="button create-block__button">Сохранить</button>
@@ -138,9 +151,9 @@
         <span class="modal__close"><img (click)="isShowSuccessModal = false" src="./../../../../../assets/img/close.svg" alt=""></span>
 
         <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>
-
-        <p class="customer__created-text">Покупатель: <span>{{first_name.value}} {{last_name.value}}</span></p>
+        <p class="customer__created-text">Пароль от личного кабинета отправлен на e-mail!</p>
+        <!-- <p class="customer__created-text">Покупатель: <span>{{first_name.value}} {{last_name.value}}</span></p>
         <p class="customer__created-text">Сумма покупки: <span><strong>{{OrderPrice}} ₽</strong></span></p>
-        <p class="customer__created-text">Бонусов начислено: <span><strong>? ₽</strong></span></p>
+        <p class="customer__created-text">Бонусов начислено: <span><strong>? ₽</strong></span></p> -->
     </div>
 </div>
