@@ -72,14 +72,12 @@
         <div class="customer__flex">
             <div class="customer__part">
                 <p class="create-block__label create-block__label--light">Дата рождения</p>
-                <span class="create-block__date-input customer__date"
-                  [ngClass]="{'auth-block__input--error': birth_day.invalid && (birth_day.dirty || birth_day.touched)}">
-                  <input [textMask]="{mask: MaskBirthDay}" type="text" class="create-block__input create-block__input--date"
-                    autocomplete="null"
-                    name="birth_day"
-                    formControlName="birth_day"
-                  >
-                </span>
+                <my-date-picker
+                  name="birth_day"
+                  [ngClass]="{'auth-block__input--error': birth_day.invalid && (birth_day.dirty || birth_day.touched)}"
+                  formControlName="birth_day"
+                  [options]="myDatePickerOptions"
+                ></my-date-picker>
                 <p class="auth-block__hint auth-block__hint--error" [ngStyle]="{'width': '142px'}">
                     <ng-container *ngIf="birth_day.invalid && (birth_day.dirty || birth_day.touched)">
                         <span *ngIf="birth_day.errors['required']">Поле обязательно к заполнению.</span>

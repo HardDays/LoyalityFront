@@ -84,6 +84,11 @@ export class CreateClientByUserComponent implements OnInit {
   public myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
     showClearDateBtn: false,
+    showTodayBtn: false,
+    dayLabels: {su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'},
+    monthLabels: { 1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек' },
+    editableDateField: false,
+    openSelectorOnInputClick: true
   };
 
   MaskBirthDay = ValidatorService.MaskBirthDay();
