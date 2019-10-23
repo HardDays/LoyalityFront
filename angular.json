@@ -32,8 +32,6 @@
               "src/assets/css/select-default-style.css"
             ],
             "scripts": [
-              "src/assets/js/scripts.js",
-              "src/assets/js/nativejs-select.min.js"
             ]
           },
           "configurations": {

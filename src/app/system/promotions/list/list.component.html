@@ -1,0 +1,41 @@
+<div class="page__content">
+
+    <div class="page__top">
+        <h1 class="page__title">Акции</h1>
+        <div class="page__search">
+            <input type="text" [ngModel]="QueryString" (ngModelChange)="UpdatePromotions($event)" placeholder="Поиск по акциям">
+        </div>
+    </div>
+
+    <div class="main-blocks">
+        <div class="main-blocks__item main-blocks__item--create" routerLink="../edit/new">
+            <img src="assets/img/plus.png" alt="">
+            <span>Создать новую акцию</span>
+        </div>
+        <div class="main-blocks__item" *ngFor="let item of Promotions">
+            <p class="main-blocks__title">{{item.name}}</p>
+            <a [routerLink]="['/system', 'my_promotions', 'edit', item.id]" routerLinkActive="router-link-active"  class="main-blocks__link main-blocks__link--edit">Редактировать</a>
+        
+            <a (click)="DeletePromotion(item)" class="main-blocks__link main-blocks__link--delete">Удалить</a>
+        </div>
+        <!-- <div class="main-blocks__item">
+            <p class="main-blocks__title">«Название 2»</p>
+
+            <a href="#" class="main-blocks__link main-blocks__link--delete">Удалить</a>
+            <a href="#" class="main-blocks__link main-blocks__link--edit">Редактировать</a>
+        </div>
+        <div class="main-blocks__item">
+            <p class="main-blocks__title">«Название 3»</p>
+
+            <a href="#" class="main-blocks__link main-blocks__link--delete">Удалить</a>
+            <a href="#" class="main-blocks__link main-blocks__link--edit">Редактировать</a>
+        </div>
+        <div class="main-blocks__item">
+            <p class="main-blocks__title">«Название 4»</p>
+
+            <a href="#" class="main-blocks__link main-blocks__link--delete">Удалить</a>
+            <a href="#" class="main-blocks__link main-blocks__link--edit">Редактировать</a>
+        </div> -->
+    </div>
+
+</div>

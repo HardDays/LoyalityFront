@@ -1,0 +1,4 @@
+.main-blocks__link--edit:before {
+    height: 16px;
+    background-image: url(/assets/img/edit-icon.svg);
+}

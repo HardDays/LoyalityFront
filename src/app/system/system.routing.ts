@@ -8,10 +8,11 @@ const routes: Routes =
 [
   {
     path: '', component: SystemComponent, children:[
-      { path: "", pathMatch:"full", redirectTo: "my_stores" },
+      { path: "", pathMatch:"full", redirectTo: "my_promotions" },
       { path: 'my_stores', loadChildren: './stores/stores.module#StoresModule', canActivate:[SystemAccessGuard]},
       { path: 'my_cashiers', loadChildren: './operators/operators.module#OperatorsModule', canActivate:[SystemAccessGuard]},
       { path: 'my_clients', loadChildren: './clients/clients.module#ClientsModule', canActivate:[SystemAccessGuard]},
+      { path: 'my_promotions', loadChildren: './promotions/promotions.module#PromotionsModule', canActivate:[SystemAccessGuard]},
       // { path: 'test', component: TestComponent },
       { path: '**', component: TestComponent }
     ]
