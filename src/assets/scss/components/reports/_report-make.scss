@@ -58,6 +58,14 @@
     line-height: 21px;
   }
 
+  &__label {
+    font-family: $titleFont;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 20px;
+  }
+
   &__date-input {
     width: 225px;
     flex-shrink: 0;
@@ -73,5 +81,170 @@
     input {
       background: transparent;
     }
+  }
+
+  &__selected-values {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 46px;
+    padding: 6px 18px;
+  }
+
+  &__option {
+    font-family: $textFont;
+    font-size: 14px;
+    line-height: 9px;
+    color: $textColor;
+    background: $yellow;
+    border-radius: 28px;
+    padding: 7px 28px 8px 10px;
+    position: relative;
+    margin: 5px 20px 5px -5px;
+  }
+
+  &__option-clear {
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    width: 11px;
+    height: 11px;
+    background: url('../img/option-clear.svg') no-repeat center;
+    background-size: cover;
+    top: 7px;
+    right: 8px;
+  }
+
+  &__block {
+    max-width: 612px;
+    margin: 16px auto 0;
+  }
+
+  &__text {
+    margin: 10px 0 0;
+    font-family: $titleFont;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    color: $yellow;
+  }
+
+  // tables
+
+  &__table {
+    box-shadow: 0px 2px 12px rgba(117, 117, 117, 0.1);
+    margin-top: 17px;
+    background: #e8e8e8;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &--general {
+      .report-make__cell {
+        &:nth-child(1) {
+          width: 70%;
+        }
+        &:nth-child(2) {
+          width: 30%;
+        }
+      }
+    }
+
+    &--customers {
+      .report-make__cell {
+        font-size: 12px;
+        padding: 7px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:nth-child(1) {
+          width: 29%;
+        }
+        &:nth-child(2) {
+          width: 23%;
+        }
+        &:nth-child(3) {
+          width: 17.6%;
+        }
+        &:nth-child(4) {
+          width: 19%;
+        }
+        &:nth-child(5) {
+          width: 11.1%;
+        }
+      }
+    }
+
+    &--purchases {
+      margin: 17px 46px 0;
+
+      .report-make__cell {
+        font-size: 12px;
+        padding: 7px 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        &:nth-child(1) {
+          width: 10.2%;
+        }
+        &:nth-child(2) {
+          width: 8%;
+        }
+        &:nth-child(3) {
+          width: 12.36%;
+        }
+        &:nth-child(4) {
+          width: 7.25%;
+        }
+        &:nth-child(5) {
+          width: 12.36%;
+        }
+        &:nth-child(6) {
+          width: 9.37%;
+        }
+        &:nth-child(7) {
+          width: 15%;
+        }
+        &:nth-child(8) {
+          width: 15%;
+        }
+        &:nth-child(9) {
+          width: 9.63%;
+        }
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+    margin-bottom: 1px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--head {
+      .report-make__cell {
+        font-weight: bold;
+        font-size: 14px;
+        color: white;
+        background: $textColor;
+        text-align: center;
+        padding: 13px 0 12px;
+      }
+    }
+  }
+
+  &__cell {
+    background: white;
+    margin-right: 1px;
+    flex-shrink: 0;
+    font-family: $titleFont;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 7px 14px 7px 15px;
   }
 }

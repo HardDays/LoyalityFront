@@ -322,7 +322,6 @@ div, span, p, header, footer, nav {
   opacity: 0;
   pointer-events: none;
   transition: 0.3s;
-  z-index: 999;
 }
 
 .page__profile-menu--visible {

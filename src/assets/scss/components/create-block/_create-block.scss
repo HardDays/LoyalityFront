@@ -66,6 +66,10 @@
     &--edit {
       padding-right: 50px;
     }
+
+    &--error {
+      border-color: #FF2525;
+    }
   }
 
   &__group {
@@ -187,6 +191,7 @@
     border-radius: 5px;
     border: 1px solid #616161;
     box-shadow: 0px 2px 12px rgba(117, 117, 117, 0.1);
+    overflow: hidden;
 
     &--opened {
       .create-block__select-value {
@@ -225,6 +230,7 @@
     font-size: 16px;
     line-height: 9px;
     color: $yellow;
+    background: white;
   }
 
   &__select-list {
@@ -279,5 +285,20 @@
     position: absolute;
     bottom: 10px;
     right: 22px;
+  }
+
+  &__sms-textarea {
+    background: white;
+    border-radius: 8px;
+    border: 0;
+    resize: none;
+    width: 100%;
+    font-family: $textFont;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 48px 43px 56px 47px;
+    color: $textColor;
+    min-height: 179px;
+    overflow: visible;
   }
 }
