@@ -1,3 +1,7 @@
+import { EditSearchComponent } from './edit/edit-search/edit-search.component';
+import { EditPaidComponent } from './edit/edit-paid/edit-paid.component';
+import { EditLoyalityComponent } from './edit/edit-loyality/edit-loyality.component';
+import { EditClientComponent } from './edit/edit-client/edit-client.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,7 +28,11 @@ import { CreateClientByUserComponent } from './create/create-client-by-user/crea
     ClientsCreateComponent,
     ClientsEditComponent,
     CreateClientByPhoneComponent,
-    CreateClientByUserComponent
+    CreateClientByUserComponent,
+    EditClientComponent,
+    EditLoyalityComponent,
+    EditPaidComponent,
+    EditSearchComponent
   ],
   imports: [
     CommonModule,
