@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { StoreModel } from 'src/app/core/models/store.model';
 import { PromotionsService } from '../promotions.service';
 import { IMyDpOptions, IMyDate } from 'mydatepicker';
+import { PromotionModel } from 'src/app/core/models/promotion.model';
 
 @Component({
   selector: 'app-orimotion-edit-cmp',
@@ -19,85 +20,58 @@ export class PromotionEditComponent implements OnInit {
     Id = '';
 
     ShowSelect = false;
-        myDatePickerOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {
-            su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
-        },
-        monthLabels:{
-            1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
-        },
-        showTodayBtn: false,
-        disableUntil: this.GetDisableUntilData(new Date()),
-        showClearDateBtn: false,
-        height: '28px',
-        openSelectorOnInputClick: true
+    myDatePickerOptions: IMyDpOptions = {
+      // other options...
+      dateFormat: 'dd.mm.yyyy',
+      dayLabels: {
+          su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'
+      },
+      monthLabels:{
+          1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек'
+      },
+      showTodayBtn: false,
+      disableUntil: this.GetDisableUntilData(new Date()),
+      showClearDateBtn: false,
+      height: '28px',
+      openSelectorOnInputClick: true
     };
 
-    FormLevel = new FormGroup({
-        "level_type": new FormControl('one_buy'),
-        "write_off_money": new FormControl(1),
-        "min_price": new FormControl(1),
-        "write_off_points": new FormControl(1),
-        "accrual_rule": new FormControl('no_accrual'),
-        "accrual_percent": new FormControl(null, [
-            // this.accrual_percent()
-        ]),
-        "accrual_money": new FormControl(null),
-        "accrual_points": new FormControl(null),
-        "burning_rule": new FormControl('no_burning'),
-        "burning_days": new FormControl(null),
-        "activation_rule": new FormControl('activation_moment'),
-        "activation_days": new FormControl(null),
-        "write_off_rule": new FormControl('no_write_off'),
-        "write_off_rule_percent": new FormControl(null),
-        "write_off_rule_points": new FormControl(null),
-        "accordance_rule": new FormControl('no_accordance'),
-        "accordance_percent": new FormControl(null),
-        "accordance_points": new FormControl(null),
-        "rounding_rule": new FormControl('no_rounding'),
-        "accrual_on_points": new FormControl(false),
-        "accrual_on_register": new FormControl(false),
-        "accrual_on_first_buy": new FormControl(false),
-        "accrual_on_birthday": new FormControl(false),
-        "register_points": new FormControl(null),
-        "first_buy_points": new FormControl(null),
-        "birthday_points": new FormControl(null)
-    });
-
-    // accrual_percent()
-    // {
-    //     return (control: AbstractControl): {[key: string]: any} | null => {
-    //         if(this.FormLevel && this.FormLevel.controls)
-    //         {
-    //             if(this.FormLevel.controls["accrual_rule"].value == "accrual_percent")
-    //             {
-    //                 const value = Number.parseInt(this.FormLevel.controls["accrual_percent"].value);
-    //                 console.log(value);
-    //                 return value && value >= 1 && value <= 100 ? null : {'wrong': {value: control.value}};
-    //             }
-    //         }
-            
-    //         return null;
-    //     };
-    // }
-
     Form: FormGroup = new FormGroup({
-        "name": new FormControl('',[
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(30)
-        ]),
-        "begin_date": new FormControl('',[
-            Validators.required
-        ]),
-        "end_date": new FormControl('',[
-            Validators.required
-        ])//,
-        // "loyalty_levels": new FormArray([
-        //     this.FormLevel
-        // ])
+      "name": new FormControl('',[
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30)
+      ]),
+      "begin_date": new FormControl('',[
+          Validators.required
+      ]),
+      "end_date": new FormControl('',[
+          Validators.required
+      ]),
+      "accrual_rule": new FormControl('no_accrual'),
+      "accrual_percent": new FormControl(null),
+      "accrual_money": new FormControl(null),
+      "accrual_points": new FormControl(null),
+
+      "burning_rule": new FormControl('no_burning'),
+      "burning_days": new FormControl(null),
+
+      "activation_rule": new FormControl('activation_moment'),
+      "activation_days": new FormControl(null),
+
+      "write_off_rule": new FormControl('no_write_off'),
+      "write_off_rule_percent": new FormControl(null),
+      "write_off_rule_points": new FormControl(null),
+
+      "accordance_rule": new FormControl('no_accordance'),
+      "accordance_percent": new FormControl(null),
+      "accordance_points": new FormControl(null),
+
+      "rounding_rule": new FormControl('no_rounding'),
+
+      "accrual_on_points": new FormControl(false),
+      "write_off_limited": new FormControl(false),
+      "write_off_min_price": new FormControl(null)
     });
 
 
@@ -122,7 +96,7 @@ export class PromotionEditComponent implements OnInit {
       if(this.Id != 'new')
       {
           this.service.GetPromotion(this.Id,
-            (res) => {
+            (res: PromotionModel) => {
                 this.Form.patchValue(res);
                 this.Form.controls.begin_date.setValue({
                     date:this.GetDisableUntilData(new Date(res.begin_date))
@@ -130,33 +104,11 @@ export class PromotionEditComponent implements OnInit {
                 this.Form.controls.end_date.setValue({
                     date:this.GetDisableUntilData(new Date(res.end_date))
                 });
-
-                if(res.loyalty_levels && res.loyalty_levels.length > 0)
-                {
-                    const level = res.loyalty_levels[0];
-                    this.FormLevel.patchValue(level);
-                    
-                }
-                console.log(this.Form.getRawValue());
             },
             (err) => {
                 this.router.navigate(["/system", "my_promotions"]);
             })
       }
-    // const vals = this.service.Get(this.Id);
-
-    // if(!vals || !vals.id || vals.id != this.Id)
-    // {
-    //   this.service.GetOperator(this.Id, 
-    //     (res) => {
-    //       this.InitAll(res);
-    //     },
-    //     err => {
-    //       console.log(err);
-    //     });
-    // }else{
-    //   this.InitAll(vals);
-    // }
   }
 
   InitAll(Val)
@@ -182,38 +134,21 @@ export class PromotionEditComponent implements OnInit {
 
   Save()
   {
-    for(const i in this.Form.controls)
-    {
-        this.Form.controls[i].markAsDirty();
-        this.Form.controls[i].markAsTouched();
-    }
-    for(const i in this.FormLevel.controls)
-    {
-        this.FormLevel.controls[i].markAsDirty();
-        this.FormLevel.controls[i].markAsTouched();
-    }
-    // this.Form.updateValueAndValidity();
-    // this.FormLevel.updateValueAndValidity();
-    console.log(this.FormLevel);
-    // const valid = this.Form.valid;
-    if(this.Form.valid && this.FormLevel.valid)
+    if(this.ValidateForm() && this.Form.valid)
     {
       let data = this.Form.getRawValue();
         data.begin_date = this.IDateToISO(data.begin_date.date);
         data.end_date = this.IDateToISO(data.end_date.date);
 
-        const level = this.FormLevel.getRawValue();
-        data.loyalty_levels = [];
-        let ldata = {};
-        for(const i in level)
+      const error = (err) => { 
+        const body = err.body;
+        for(var i in body)
         {
-            // if(level[i] !== null)
-            // {
-                ldata[i] = level[i];
-            // }
+          this.Form.controls[i].setErrors({
+            "wrong": true
+          });
         }
-        data.loyalty_levels.push(ldata);
-      const error = (err) => { console.log(err)};
+      };
       if(this.Id == 'new')
       {
         this.service.CreatePromotion(data, (res) => {
@@ -225,18 +160,15 @@ export class PromotionEditComponent implements OnInit {
             this.NavigateToPromotions();
         }, error);
       }
-    //   this.service.PutPromotion(this.Id, data,(res) => {
-    //     this.GoBack();
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   })
+    }
+    else{
+      return;
     }
   }
 
   NavigateToPromotions()
   {
-    this.router.navigate(["/system", "my_promotions"]);
+    this.router.navigate(["/system", "my_promotions", "list"]);
   }
 
   GetDisableUntilData(date: Date)
@@ -255,6 +187,100 @@ export class PromotionEditComponent implements OnInit {
   IDateToISO(obj)
   {
       return obj.year + "-" + obj.month + "-" + obj.day;
+  }
+
+  ValidateForm()
+  {
+    return true;
+    const remove_error = (property_name) => {
+      if(this.Form.controls[property_name].hasError('wrong'))
+      {
+        
+        this.Form.controls[property_name].setErrors({
+          'wrong': null
+        });
+        this.Form.controls[property_name].updateValueAndValidity();
+      }
+    }
+
+    for(const i in this.Form.controls)
+    {
+        this.Form.controls[i].markAsDirty();
+        this.Form.controls[i].markAsTouched();
+        remove_error(i);
+    }
+
+    let hasError = false;
+    const data = this.Form.getRawValue();
+
+    const date1 = new Date(this.IDateToISO(data.begin_date.date));
+    const date2 = new Date(this.IDateToISO(data.end_date.date));
+
+
+    if(date1.getTime() > date2.getTime() )
+    {
+      this.Form.controls.end_date.setErrors({
+        'wrong': true
+      });
+      hasError = true;
+    }
+    else{
+      this.Form.controls.end_date.setErrors({
+        'wrong': null
+      });
+    }
+    
+
+    const ferror = (property_name, min, max) => {
+      if(!data[property_name] || data[property_name] < min || data[property_name] > max)
+      {
+        this.Form.controls[property_name].setErrors({
+          'wrong': true
+        });
+        hasError = true;
+      }
+      // else remove_error(property_name)
+    }
+
+    if(data.accrual_rule == "accrual_percent")
+    {
+      ferror("accrual_percent", 1, 100);
+    }
+    else if (data.accrual_rule == "accrual_convert")
+    {
+      ferror("accrual_points", 1, 10000000000);
+      ferror("accrual_money", 1, 10000000000);
+    }
+
+    if(data.burning_rule == "burning_days")
+    {
+      ferror("burning_days", 1, 365);
+    }
+
+    if(data.activation_rule == "activation_days")
+    {
+      ferror("activation_days", 1, 365);
+    }
+
+    if(data.write_off_rule == "write_off_convert")
+    {
+      ferror("write_off_rule_percent", 1, 100);
+      ferror("write_off_rule_points", 1, 10000000000);
+    }
+
+    if(data.accordance_rule == "accordance_convert")
+    {
+      ferror("accordance_percent", 1, 100);
+      ferror("accordance_points", 1, 10000000000);
+    }
+
+    if(data.write_off_limited)
+    {
+      ferror("write_off_min_price", 1, Number.POSITIVE_INFINITY);
+    }
+
+    this.Form.updateValueAndValidity();
+    return !hasError;
   }
 
 

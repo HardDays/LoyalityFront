@@ -40,15 +40,19 @@
                 </div>
                 <div class="create-block__half">
                     До
-                    <span class="create-block__date-input">
+                    <span class="create-block__date-input" >
                         <my-date-picker name="end_date" [options]="myDatePickerOptions" formControlName="end_date"
                         ></my-date-picker>
                     </span>
                 </div>
             </div>
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="Form.controls.end_date.invalid && (Form.controls.end_date.dirty || Form.controls.end_date.touched)">
+                    <span *ngIf="Form.controls.end_date.errors.wrong">Введите корректные данные.</span>
+                </ng-container>
+            </p>
         </div>
 
-        <ng-container [formGroup]="FormLevel">
             <div class="create-block__group">
                     <p class="create-block__label">Правило начисления бонусов</p>
                     <label class="radio radio--create">
@@ -60,7 +64,7 @@
                         <div class="radio__text create-block__radio-with-input">
                             Начислять<span class="create-block__percent-input">
                                 <input type="text"  formControlName="accrual_percent" name="accrual_percent" class="create-block__input create-block__input--small"
-                                [ngClass]="{'create-block__input--error': FormLevel.controls.accrual_percent.invalid && (FormLevel.controls.accrual_percent.dirty || FormLevel.controls.accrual_percent.touched)}"
+                                [ngClass]="{'create-block__input--error': Form.controls.accrual_percent.invalid && (Form.controls.accrual_percent.dirty || Form.controls.accrual_percent.touched)}"
                             >
                             </span>
                             от суммы покупки
@@ -74,11 +78,11 @@
                                 formControlName="accrual_money"  
                                 name="accrual_money" 
                                 class="create-block__input create-block__input--small"
-                                [ngClass]="{'create-block__input--error': FormLevel.controls.accrual_money.invalid && (FormLevel.controls.accrual_money.dirty || FormLevel.controls.accrual_money.touched)}"
+                                [ngClass]="{'create-block__input--error': Form.controls.accrual_money.invalid && (Form.controls.accrual_money.dirty || Form.controls.accrual_money.touched)}"
                             >
                             рублей
                             <input type="text" formControlName="accrual_points" name="accrual_points" class="create-block__input create-block__input--small"
-                                [ngClass]="{'create-block__input--error': FormLevel.controls.accrual_points.invalid && (FormLevel.controls.accrual_points.dirty || FormLevel.controls.accrual_points.touched)}"
+                                [ngClass]="{'create-block__input--error': Form.controls.accrual_points.invalid && (Form.controls.accrual_points.dirty || Form.controls.accrual_points.touched)}"
                             >
                             бонусов
                         </div>
@@ -96,7 +100,7 @@
                         <div class="radio__text create-block__radio-with-input">
                             Сгорают через
                             <input type="text" formControlName="burning_days" name="burning_days" class="create-block__input create-block__input--small"
-                            [ngClass]="{'create-block__input--error': FormLevel.controls.burning_days.invalid && (FormLevel.controls.burning_days.dirty || FormLevel.controls.burning_days.touched)}"
+                            [ngClass]="{'create-block__input--error': Form.controls.burning_days.invalid && (Form.controls.burning_days.dirty || Form.controls.burning_days.touched)}"
                             >
                             дней после начисления
                         </div>
@@ -114,9 +118,35 @@
                         <div class="radio__text create-block__radio-with-input">
                             Через
                             <input type="text" formControlName="activation_days" name="activation_days" class="create-block__input create-block__input--small"
-                            [ngClass]="{'create-block__input--error': FormLevel.controls.activation_days.invalid && (FormLevel.controls.activation_days.dirty || FormLevel.controls.activation_days.touched)}"
+                            [ngClass]="{'create-block__input--error': Form.controls.activation_days.invalid && (Form.controls.activation_days.dirty || Form.controls.activation_days.touched)}"
                             >
                             дней с момента начисления
+                        </div>
+                    </label>
+                </div>
+
+                <div class="create-block__group">
+                    <p class="create-block__label">Правило списания бонусов</p>
+                    <label class="radio radio--create">
+                        <input type="radio" class="radio__input" value='no_write_off' name="write_off_rule" formControlName="write_off_rule">
+                        <div class="radio__text">Не использовать для оплаты покупок</div>
+                    </label>
+                    <label class="radio radio--create">
+                        <input type="radio" class="radio__input" value='write_off_convert' name="write_off_rule" formControlName="write_off_rule">
+                        <div class="radio__text create-block__radio-with-input">
+                            Оплачивать не более
+                            <span class="create-block__percent-input">
+                                <input type="text" formControlName="write_off_rule_percent" name="write_off_rule_percent" class="create-block__input create-block__input--small"
+                                [ngClass]="{'create-block__input--error': Form.controls.write_off_rule_percent.invalid && (Form.controls.write_off_rule_percent.dirty || Form.controls.write_off_rule_percent.touched)}"
+                                >
+                            </span>
+                            
+                            от суммы покупки если на счету не менее
+                            <input type="text" formControlName="write_off_rule_points" name="write_off_rule_points" class="create-block__input create-block__input--small"
+                            [ngClass]="{'create-block__input--error': Form.controls.write_off_rule_points.invalid && (Form.controls.write_off_rule_points.dirty || Form.controls.write_off_rule_points.touched)}"
+                            >
+                            
+                            бонусов
                         </div>
                     </label>
                 </div>
@@ -132,12 +162,12 @@
                         <div class="radio__text create-block__radio-with-input">
                             При накоплении более
                             <input type="text" formControlName="accordance_points" name="accordance_points" class="create-block__input create-block__input--small"
-                            [ngClass]="{'create-block__input--error': FormLevel.controls.accordance_points.invalid && (FormLevel.controls.accordance_points.dirty || FormLevel.controls.accordance_points.touched)}"
+                            [ngClass]="{'create-block__input--error': Form.controls.accordance_points.invalid && (Form.controls.accordance_points.dirty || Form.controls.accordance_points.touched)}"
                             >
                             бонусов предоставить скидку в размере
                             <span class="create-block__percent-input">
                                 <input type="text" formControlName="accordance_percent" name="accordance_percent" class="create-block__input create-block__input--small"
-                                [ngClass]="{'create-block__input--error': FormLevel.controls.accordance_percent.invalid && (FormLevel.controls.accordance_percent.dirty || FormLevel.controls.accordance_percent.touched)}"
+                                [ngClass]="{'create-block__input--error': Form.controls.accordance_percent.invalid && (Form.controls.accordance_percent.dirty || Form.controls.accordance_percent.touched)}"
                             >
                             </span>
                         </div>
@@ -170,8 +200,17 @@
                         <input type="checkbox" class="radio__input" name="accrual_on_points" formControlName="accrual_on_points">
                         <div class="radio__text">Не начислять бонусы, если при оплате производится списание бонусов</div>
                     </label>
+                    <label class="radio radio--create">
+                        <input type="checkbox" class="radio__input" name="write_off_limited" formControlName="write_off_limited">
+                        <div class="radio__text">
+                            Списывать бонусы, если минимальная сумма покупки составляет 
+                            <input type="text" formControlName="write_off_min_price" name="write_off_min_price" class="create-block__input create-block__input--small"
+                            [ngClass]="{'create-block__input--error': Form.controls.write_off_min_price.invalid && (Form.controls.write_off_min_price.dirty || Form.controls.write_off_min_price.touched)}"
+                            >
+                            рублей
+                        </div>
+                    </label>
                 </div>
-        </ng-container>
         
         
 

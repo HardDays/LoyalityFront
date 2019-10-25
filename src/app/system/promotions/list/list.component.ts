@@ -27,7 +27,7 @@ QueryString = "";
     this.service.onPromotionsChange$.subscribe((res) => {
         if(res)
         {
-            console.log(this.service.GetPromotions())
+            // console.log(this.service.GetPromotions())
             this.UpdatePromotions();
         }
     })
