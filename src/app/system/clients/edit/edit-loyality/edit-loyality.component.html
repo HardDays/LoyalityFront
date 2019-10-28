@@ -1,5 +1,23 @@
-<p>
-  edit-loyality works!
-  <button [routerLink]="['../paid']">Next</button>
-  <button [routerLink]="['../client']">Edit user</button>
-</p>
+
+<div class="create-block customer__block">
+    <p class="create-block__label create-block__label--light">Имя покупателя:
+      <span class="customer__name">Иван Иванов</span>
+      <span class="customer__edit"><img [routerLink]="['../client']" src="./../../../../../assets/img/edit-icon.svg" alt=""></span>
+    </p>
+    <p class="customer__label">Введите сумму покупки</p>
+    <input type="text" class="customer__input customer__input--sum">
+
+    <div class="create-block__select create-block__select--opened customer__select">
+        <div class="create-block__select-value">Программа лояльности</div>
+        <ul class="create-block__select-list">
+            <li>Акция 1</li>
+            <li>Акция 2</li>
+            <li>Акция 3</li>
+            <li>Акция 4</li>
+            <li>Акция 5</li>
+        </ul>
+    </div>
+
+    <button [routerLink]="['../paid']" class="button customer__button">Далее</button>
+</div>
+

@@ -9,6 +9,19 @@ export class PromotionsAccessGuard implements CanActivate{
     {}
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
+        let isLoginned = this.auth.IsLoggedIn;
+        let myRole = this.auth.LoginData.user_type;
+
+        if (isLoginned) {
+          if (myRole === 'operator') {
+            this.router.navigate(["/system/my_clients"]);
+            return false;
+          }
+        } else {
+          this.router.navigate(["/auth"]);
+          return false;
+        }
+        return true;
         // if(router.data)
         // {
         //     if(router.data.auth)

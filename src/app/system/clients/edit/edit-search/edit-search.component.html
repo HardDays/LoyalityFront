@@ -1,4 +1,17 @@
-<p>
-  edit-search works!
-  <button [routerLink]="['../loyality']">Next</button>
-</p>
+<div class="create-block customer__block">
+    <p class="create-block__label create-block__label--light">Введите ФИО покупателя</p>
+    <input type="text" class="customer__input customer__input--big">
+
+    <p class="customer__or">Или</p>
+
+    <p class="create-block__label create-block__label--light customer__label">Введите номер телефона покупателя</p>
+    <input type="text" class="customer__input customer__input--big">
+
+    <p class="customer__or">Или</p>
+
+    <p class="create-block__label create-block__label--light">Введите номер карты покупателя</p>
+    <input type="text" class="customer__input customer__input--big">
+
+    <button [routerLink]="['../loyality']" class="button customer__button">Далее</button>
+</div>
+

@@ -1,3 +1,34 @@
-<p>
-  edit-paid works!
-</p>
+<div class="create-block customer__block customer__block--small">
+    <p class="create-block__label create-block__label--light">Имя покупателя:
+      <span class="customer__name">Иван Иванов</span>
+      <span class="customer__edit"><img src="./../../../../../assets/img/edit-icon.svg" alt=""></span>
+    </p>
+    <p class="create-block__label create-block__label--light customer__label">Всего бонусов на счету:
+      <span class="customer__name">20 000</span>
+    </p>
+    <p class="create-block__label create-block__label--light customer__label">Доступные бонусы:
+      <span class="customer__name">5 000</span>
+    </p>
+    <p class="create-block__label create-block__label--light customer__label">Списать бонусов:
+      <input type="text" class="create-block__input create-block__input--small">
+    </p>
+
+    <div class="customer__flex-buttons">
+        <button class="button customer__button">Использовать бонусы</button>
+        <button class="button customer__button button--black">Не использовать<br>бонусы</button>
+    </div>
+</div>
+
+<div *ngIf="isModalOpened" class="modal modal--visible">
+    <div class="modal__block modal__block--customer">
+        <span class="modal__close"><img (click)="isModalOpened = false"  src="./../../../../../assets/img/close.svg" alt=""></span>
+
+        <div class="modal__customer-content">
+            <p class="customer__check-text">Имя покупателя:</p>
+            <p class="customer__check-text">Общая сумма:</p>
+            <p class="customer__check-text">Оплата бонусами:</p>
+            <p class="customer__check-text">ИТОГО к оплате, с учетом бонусов:</p>
+            <p class="customer__check-text">Остаток бонусов:</p>
+        </div>
+    </div>
+</div>

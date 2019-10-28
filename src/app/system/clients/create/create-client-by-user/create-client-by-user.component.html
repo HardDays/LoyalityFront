@@ -144,14 +144,15 @@
     </form>
 
 </div>
-<div *ngIf="isShowSuccessModal" class="modal modal--visible">
-    <div class="modal__block modal__block--created">
-        <span class="modal__close"><img (click)="isShowSuccessModal = false" src="./../../../../../assets/img/close.svg" alt=""></span>
 
-        <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>
-        <p class="customer__created-text">Пароль от личного кабинета отправлен на e-mail!</p>
-        <!-- <p class="customer__created-text">Покупатель: <span>{{first_name.value}} {{last_name.value}}</span></p>
-        <p class="customer__created-text">Сумма покупки: <span><strong>{{OrderPrice}} ₽</strong></span></p>
-        <p class="customer__created-text">Бонусов начислено: <span><strong>? ₽</strong></span></p> -->
-    </div>
+<div *ngIf="isShowSuccessModal" class="modal modal--visible">
+  <div class="modal__block modal__block--customer">
+      <span class="modal__close"><img (click)="isShowSuccessModal = false" src="./../../../../../assets/img/close.svg" alt=""></span>
+
+      <div class="modal__customer-content">
+          <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>
+
+          <p class="customer__created-text">Пароль от личного кабинета<br>отправлен на E-mail!</p>
+      </div>
+  </div>
 </div>
