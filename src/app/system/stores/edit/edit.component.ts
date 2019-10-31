@@ -94,7 +94,6 @@ export class StoreEditComponent implements OnInit {
           this.InitAll(res);
         },
         err => {
-          console.log(err);
         });
     }else{
       this.InitAll(vals);
@@ -126,7 +125,6 @@ export class StoreEditComponent implements OnInit {
         this.router.navigate(["/system","my_stores"])
       },
       (err) => {
-        console.log(err);
       })
     }
 

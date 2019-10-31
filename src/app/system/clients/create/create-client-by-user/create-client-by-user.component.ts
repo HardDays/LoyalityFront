@@ -75,7 +75,6 @@ export class CreateClientByUserComponent implements OnInit {
   }
 
   Save() {
-    console.log(`Save Form`);
   }
 
 

@@ -11,6 +11,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { LoginModule } from './login/login.module';
 import { PasswordModule } from './password/password.module';
 import { SignupModule } from './signup/signup.module';
+import { ConfirmModule } from './confirm/confirm.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SignupModule } from './signup/signup.module';
     AuthRoutingModule,
     LoginModule,
     PasswordModule,
-    SignupModule
+    SignupModule,
+    ConfirmModule
     // HttpClientModule,
   ],
   // exports: [AuthComponent],

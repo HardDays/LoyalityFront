@@ -4,6 +4,11 @@
   &__block {
     padding-left: 45px;
     padding-right: 45px;
+
+    &--small {
+      width: 500px;
+      padding: 30px 38px;
+    }
   }
 
   &__text {
@@ -25,26 +30,30 @@
   }
 
   &__label {
-    color: black;
-    font-size: 16px;
-    font-weight: normal;
-    text-align: center;
+    margin-top: 19px;
+  }
+
+  &__name {
+    padding: 0 10px;
+  }
+
+  &__edit {
+    cursor: pointer;
   }
 
   &__or {
-    text-align: center;
     color: black;
     font-weight: 600;
     font-size: 16px;
     line-height: 16px;
-    margin: 20px 0;
+    margin: 19px 0;
   }
 
   &__input {
     border: 1px solid #616161;
     border-radius: 4px;
     padding: 4px 12px;
-    margin: 20px auto 0;
+    margin: 20px 0 0;
     display: block;
     color: $textColor;
     font-size: 15px;
@@ -63,6 +72,18 @@
     &--code {
       width: 205px;
     }
+  }
+
+  &__flex-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    width: 196px;
+    height: 44px;
+    margin-top: 19px;
+    font-size: 13.4px;
   }
 
   &__flex {
@@ -104,6 +125,7 @@
     height: 156px;
     border-width: 2px;
     border-style: dashed;
+    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -133,24 +155,32 @@
 
   &__created-title {
     font-family: $titleFont;
-    font-weight: normal;
-    font-size: 24px;
+    font-size: 19px;
+    font-weight: 500;
     color: $yellow;
     margin-bottom: 30px;
+    text-align: center;
   }
 
   &__created-text {
     font-weight: 600;
     font-size: 16px;
-    margin-bottom: 10px;
+    text-align: center;
+  }
 
-    span {
-      font-weight: normal;
-      font-size: 14px;
+  &__select {
+    margin-top: 16px;
+  }
 
-      strong {
-        font-weight: bold;
-      }
+  &__check-text {
+    font-family: $textFont;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    margin-top: 19px;
+
+    &:first-child {
+      margin-top: 0;
     }
   }
 }

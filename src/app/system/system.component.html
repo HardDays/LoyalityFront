@@ -13,7 +13,7 @@
                 <div class="page__ava">{{Initials}}</div>
                 <p class="page__name">
                     {{Me.last_name}} {{Me.first_name}}
-                    <span class="page__company">{{Company.name}}</span>
+                    <span class="page__company" *ngIf="Company && Company.name">{{Company.name}}</span>
                 </p>
                 <div class="page__profile-menu" id="header-profile-menu" [ngClass]="{'page__profile-menu--visible': Hovered}">
                     <a routerLink="settings">Настройки</a>

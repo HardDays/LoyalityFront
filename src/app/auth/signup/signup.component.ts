@@ -149,6 +149,7 @@ export class SignUpComponent implements OnInit
       this.auth.CreateCreator(this.FormData,
         (val) => {
           this.RegSuccess = true;
+          this.router.navigate(["/auth","confirm"]);
           // this.company.CreateCompany({name: vals.cname});
         },
         (err) => {

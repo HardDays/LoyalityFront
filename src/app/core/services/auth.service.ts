@@ -20,14 +20,19 @@ export class AuthService
     public CompanyData: CompanyModel = new CompanyModel();
     public onCompanyChange$: Subject<boolean> = new Subject<boolean>();
 
+    public Creator: CreatorModel = new CreatorModel();
+
+
+
     constructor(public http: HttpService, private router: Router)
     {
         this.onAuthChange$.subscribe(val => {
-            this.IsLoggedIn = val
+            this.IsLoggedIn = val;
             if (this.LoginData.user_type == 'creator')
             {
                 this.GetCompanyInfo();
             }
+            
         });
         this.onAuthChange$.next(false);
         this.GetLoginDataFromLocal();
@@ -58,7 +63,8 @@ export class AuthService
         this.http.CommonRequest(
             () => this.http.PostData('/creators', data),
             (res: LoginSuccessModel) => {
-                this.InitSession(res);
+                this.Creator = data;
+                // this.InitSession(res);
                 if(success && typeof success == "function")
                 {
                     success(res);
@@ -97,13 +103,20 @@ export class AuthService
         this.http.CommonRequest(
             () => this.http.GetData('/companies', ''),
             (res: CompanyModel) => {
-                this.CompanyData = res;
-                localStorage.setItem(this.company_field ,JSON.stringify(res));
-                this.onCompanyChange$.next(true);
-                if(success && typeof success == "function")
+                if(res)
                 {
-                    success(res);
+                    this.CompanyData = res;
+                    localStorage.setItem(this.company_field ,JSON.stringify(res));
+                    this.onCompanyChange$.next(true);
+                    if(success && typeof success == "function")
+                    {
+                        success(res);
+                    }
                 }
+                else{
+                    this.router.navigate(["/system", "settings"])
+                }
+                
             },
             (err) => {
                 this.onCompanyChange$.next(false);
@@ -122,5 +135,59 @@ export class AuthService
         {
             this.InitSession(JSON.parse(data));
         }
+    }
+
+    Confirm(data: any,  success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PostData('/auth/confirm', data),
+            (res: LoginSuccessModel) => {
+                this.InitSession(res);
+                if(success && typeof success == "function")
+                {
+                    success(res);
+                }
+            },
+            (err) => {
+                if(fail && typeof fail == "function")
+                {
+                    fail(err);
+                }
+            }
+        );
+    }
+
+    CreateCompany(data: any,  success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PostData('/companies', data),
+            (res: CompanyModel) => {
+                if(res)
+                {
+                    this.CompanyData = res;
+                    localStorage.setItem(this.company_field ,JSON.stringify(res));
+                    this.onCompanyChange$.next(true);
+                    if(success && typeof success == "function")
+                    {
+                        success(res);
+                    }
+                }
+                else{
+                    this.onCompanyChange$.next(false);
+                    if(fail && typeof fail == "function")
+                    {
+                        fail(null);
+                    }
+                }
+                
+            },
+            (err) => {
+                this.onCompanyChange$.next(false);
+                if(fail && typeof fail == "function")
+                {
+                    fail(err);
+                }
+            }
+        );
     }
 }

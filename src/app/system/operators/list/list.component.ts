@@ -39,7 +39,7 @@ QueryString = "";
   {
     const operators: OperatorModel[] = this.service.GetOperators();
 
-    this.Operators = q ? operators.filter((obj) => (obj.first_name + " " + (obj.second_name ? obj.second_name + " " : "") + obj.last_name).indexOf(q) > -1) : operators;
+    this.Operators = q ? operators.filter((obj) => (obj.first_name + " " + (obj.second_name ? obj.second_name + " " : "") + obj.last_name).toLowerCase().indexOf(q) > -1) : operators;
   }
 
   DeleteOperator(Item)

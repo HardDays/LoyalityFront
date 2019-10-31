@@ -50,7 +50,6 @@ QueryString = "";
         this.Operators[Id] = res;
       },
       (err) => {
-          console.log(err);
       })
   }
 
