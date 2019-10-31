@@ -1,5 +1,6 @@
 export class ClientModel{
     constructor(
+        public id?:number,
         public phone?:string,
         public first_name?:string,
         public last_name?:string,

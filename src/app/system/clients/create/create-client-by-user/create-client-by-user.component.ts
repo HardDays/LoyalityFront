@@ -132,6 +132,9 @@ export class CreateClientByUserComponent implements OnInit {
     if (valid) {
       const data = this.Form.getRawValue();
       data['phone'] = this.service.Client.phone;
+
+      data['birth_day'] = data['birth_day']['formatted'];
+
       this.service.CreateClient(data, (res) => {
         console.log(`Success!`, res);
         if (this.OrderPrice) {

@@ -27,6 +27,17 @@ export class ClientsService {
       );
     }
 
+    UpdateClient(Obj, success?: (data) => void, fail?: (err) => void) {
+      if (Obj && Obj['phone']) {
+        Obj['phone'] = (Obj['phone']).replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '');
+      }
+      this.http.CommonRequest(
+          () => this.http.PutData('/clients/' + Obj['id'], Obj),
+          success,
+          fail
+      );
+    }
+
     GetClient(params, success?: (data) => void, fail?: (err) => void)
     {
         let searchString = '';
