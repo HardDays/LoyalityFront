@@ -80,4 +80,5 @@ export class PromotionsService {
             fail
         );
     }
+
 }

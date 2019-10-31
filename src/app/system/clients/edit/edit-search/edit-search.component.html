@@ -1,17 +1,19 @@
 <div class="create-block customer__block">
     <p class="create-block__label create-block__label--light">Введите ФИО покупателя</p>
-    <input type="text" class="customer__input customer__input--big">
+    <input [ngModel]="SearchParams.name" (input)="onEditName($event.target.value)" type="text" class="customer__input customer__input--big">
 
     <p class="customer__or">Или</p>
 
     <p class="create-block__label create-block__label--light customer__label">Введите номер телефона покупателя</p>
-    <input type="text" class="customer__input customer__input--big">
+    <input [ngModel]="SearchParams.phone" [textMask]="{mask: Mask, showMask: true}" (input)="onEditPhone($event.target.value)" type="text" class="customer__input customer__input--big">
 
     <p class="customer__or">Или</p>
 
     <p class="create-block__label create-block__label--light">Введите номер карты покупателя</p>
-    <input type="text" class="customer__input customer__input--big">
+    <input disabled [ngModel]="SearchParams.card" type="text" class="customer__input customer__input--big">
 
-    <button [routerLink]="['../loyality']" class="button customer__button">Далее</button>
+    <p *ngIf="isFoundedMoreThanOne" class="customer__or">Слишком много результатов</p>
+
+    <button [disabled]="!isUserFounded" [routerLink]="['../loyality']" class="button customer__button">Далее</button>
 </div>
 

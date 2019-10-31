@@ -1,4 +1,6 @@
+import { ClientsService } from './../../clients.service';
 import { Component, OnInit } from '@angular/core';
+import { ClientModel } from 'src/app/core/models/client.model';
 
 @Component({
   selector: 'app-edit-client',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditClientComponent implements OnInit {
 
-  constructor() { }
+  Client = new ClientModel();
+  constructor(protected clientsService: ClientsService) { }
 
   ngOnInit() {
+    this.Client = this.clientsService.Client;
+    console.log(this.Client);
   }
 
 }

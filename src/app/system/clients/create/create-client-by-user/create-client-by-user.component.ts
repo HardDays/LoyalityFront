@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IMyDpOptions } from 'mydatepicker';
+import { PromotionsService } from 'src/app/system/promotions/promotions.service';
 
 @Component({
   selector: 'app-create-client-by-user',
@@ -102,9 +103,16 @@ export class CreateClientByUserComponent implements OnInit {
 
   OrderPrice = 0;
 
-  constructor(private _location: Location, private service: ClientsService) { }
+  constructor(private _location: Location,
+   private service: ClientsService,
+   private loyalityService: PromotionsService) { }
 
   ngOnInit() {
+    this.loyalityService.RefreshPromotions(
+      (data) => {
+        console.log(`GetPromotions = `, data);
+      }
+    );
   }
 
   GoBack() {

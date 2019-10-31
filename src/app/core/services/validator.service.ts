@@ -18,6 +18,9 @@ export class ValidatorService
     public static MaskPhoneRU() {
       return ['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/];
     }
+    public static MaskPhoneRUwithout7() {
+      return ['+', /\d/, ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/];
+    }
     public static MaskBirthDay() {
       return [ /\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/];
     }

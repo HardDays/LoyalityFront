@@ -20,6 +20,16 @@ export class ClientsStartComponent implements OnInit {
   ngOnInit(){
   }
 
+  // RefreshOperatorsByStoreId(Id)
+  // {
+  //   this.Operators[Id] = [];
+  //   this.service.GetOperators(Id,
+  //     (res) => {
+  //       this.Operators[Id] = res;
+  //     },
+  //     (err) => {
+  //     })
+  // }
 
 
 
