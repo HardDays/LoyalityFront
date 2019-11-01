@@ -191,7 +191,7 @@ export class PromotionEditComponent implements OnInit {
 
   ValidateForm()
   {
-    return true;
+    // return true;
     const remove_error = (property_name) => {
       if(this.Form.controls[property_name].hasError('wrong'))
       {

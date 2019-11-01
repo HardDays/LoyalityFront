@@ -22,7 +22,6 @@ export class PromotionsService {
         this.http.CommonRequest(
             () => this.http.GetData('/promotions', ''),
             (res: PromotionModel[]) => {
-                // console.log(res);
                 this.Promotions = res;
                 this.onPromotionsChange$.next(true);
                 if(success && typeof success == "function")

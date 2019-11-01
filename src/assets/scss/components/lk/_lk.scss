@@ -99,4 +99,52 @@
     font-size: 12px;
     line-height: 15px;
   }
+
+  &__table {
+    margin: 50px auto 0!important;
+    width: calc(100% - 70px);
+    box-shadow: none!important;
+    border: 1px solid #e8e8e8;
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+
+    .report-make__cell {
+      background: $bodyColor;
+      text-align: center;
+      padding: 18px 0;
+
+      &:nth-child(1) {
+        width: 12.6%;
+      }
+      &:nth-child(2) {
+        width: 16.9%;
+      }
+      &:nth-child(3) {
+        width: 13.3%;
+      }
+      &:nth-child(4) {
+        width: 16%;
+      }
+      &:nth-child(5) {
+        width: 10.2%;
+      }
+      &:nth-child(6) {
+        width: 16%;
+      }
+      &:nth-child(7) {
+        width: 14.4%;
+      }
+    }
+
+    .report-make__row--head {
+      box-shadow: 0px 2px 12px rgba(117, 117, 117, 0.1);
+
+      .report-make__cell {
+        padding: 4px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
 }

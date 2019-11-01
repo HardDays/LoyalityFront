@@ -30,9 +30,11 @@ export class SystemComponent implements OnInit
 
         this.auth.onCompanyChange$.subscribe(
             (val) => {
+                
                 this.Company = this.auth.CompanyData;
             }
         )
+
     }
 
     ngOnInit(): void

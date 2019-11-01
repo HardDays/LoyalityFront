@@ -32,6 +32,19 @@
     &--created {
       padding: 70px;
     }
+
+    &--customer {
+      width: 434px;
+      height: 512px;
+      background: url('../img/customer-modal-bg.png');
+      display: flex;
+      padding: 0 35px;
+
+      .modal__close {
+        top: 40px;
+        right: 21px;
+      }
+    }
   }
 
   &__close {
@@ -39,6 +52,15 @@
     position: absolute;
     top: 19px;
     right: 19px;
+  }
+
+  &__customer-content {
+    border: 1px solid #e3e3e3;
+    border-left: 0;
+    border-right: 0;
+    padding: 60px 0;
+    margin: auto;
+    width: 100%;
   }
 }
 

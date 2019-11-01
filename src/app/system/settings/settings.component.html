@@ -1,0 +1,35 @@
+<div class="page__content page__content--create">
+
+    <div class="page__top page__top--create">
+        <span class="page__back" (click)="GoBack()"><img src="assets/img/back.svg" alt=""></span>
+        <h1 class="page__title page__title--create">Создание компании</h1>
+    </div>
+
+    <div class="create-block">
+        <p class="create-block__label create-block__label--bold">Введите название компании</p>
+
+        <form   [formGroup]="Form" (ngSubmit)="Save()">
+            <!-- <p class="create-block__label create-block__label--light">Имя</p> -->
+            <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+            <input type="text" class="create-block__input create-block__input--full"
+                [ngClass]="{'auth-block__input--error': name.invalid && (name.dirty || name.touched)}"
+                autocomplete="null"
+                formControlName="name"
+                name="name"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="name.invalid && (name.dirty || name.touched)">
+                    <span *ngIf="name.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="name.errors.minlength">Минимальная длина 3 символа.</span>
+                    <span *ngIf="name.errors.maxlength">Максимальная длина 30 символов.</span>
+                </ng-container>
+            </p>
+
+        
+            <div class="text-center">
+                <button type="submit" class="button create-block__button">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+</div>

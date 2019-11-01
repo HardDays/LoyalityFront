@@ -14,6 +14,8 @@ export class StoreAccessGuard implements CanActivate{
       let isLoginned = this.auth.IsLoggedIn;
       let myRole = this.auth.LoginData.user_type;
 
+      // console.log(`Info router: isLoginned = ${isLoginned}, myRole = ${myRole}`);
+
       if (isLoginned) {
         if (myRole === 'operator') {
           this.router.navigate(["/system/my_clients"]);

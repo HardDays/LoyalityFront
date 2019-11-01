@@ -14,25 +14,12 @@ import { OperatorModel } from 'src/app/core/models/operator.model';
 })
 export class ClientsStartComponent implements OnInit {
 
+
   constructor(private auth: AuthService){
   }
 
   ngOnInit(){
   }
-
-  // RefreshOperatorsByStoreId(Id)
-  // {
-  //   this.Operators[Id] = [];
-  //   this.service.GetOperators(Id,
-  //     (res) => {
-  //       this.Operators[Id] = res;
-  //     },
-  //     (err) => {
-  //     })
-  // }
-
-
-
 
 
 

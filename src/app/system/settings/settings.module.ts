@@ -5,20 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
-import { SystemRoutingModule } from './system.routing';
-import { SystemAccessGuard } from './system.guard';
 import { MyDatePickerModule } from 'mydatepicker';
-import { SystemComponent } from './system.component';
-import { TestComponent } from './test/test.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { SettingsModule } from './settings/settings.module';
-
+import { SettingsComponent } from './settings.component';
 
 @NgModule({
   declarations: [
-    SystemComponent,
-    NavigationComponent,
-    TestComponent
+    SettingsComponent
   ],
   imports: [
     CommonModule,
@@ -26,11 +18,10 @@ import { SettingsModule } from './settings/settings.module';
     HttpModule,
     CommonModule,
     RouterModule,
-    SystemRoutingModule,
     ReactiveFormsModule,
-    TextMaskModule,
-    SettingsModule
+    TextMaskModule
   ],
-  providers: [ SystemAccessGuard]
+  exports: [SettingsComponent],
+  providers: [ ]
 })
-export class SystemModule {}
+export class SettingsModule {}

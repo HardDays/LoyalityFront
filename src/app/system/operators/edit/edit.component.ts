@@ -96,7 +96,6 @@ export class OperatorEditComponent implements OnInit {
           this.InitAll(res);
         },
         err => {
-          console.log(err);
         });
     }else{
       this.InitAll(vals);
@@ -148,7 +147,6 @@ export class OperatorEditComponent implements OnInit {
         // this.router.navigate(["/system","my_cashiers"])
       },
       (err) => {
-        console.log(err);
       })
     }
   }

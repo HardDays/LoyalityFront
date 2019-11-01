@@ -97,7 +97,6 @@ export class OperatorCreateComponent implements OnInit {
         this.router.navigate(["/system","my_cashiers"])
       },
       (err) => {
-        console.log(err);
       })
     }
   }

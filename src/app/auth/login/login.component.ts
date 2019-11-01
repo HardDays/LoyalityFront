@@ -84,14 +84,21 @@ export class LoginComponent implements OnInit {
         (val) => {
         },
         (err) => {
-          const not_found = [401, 422, 404, 403];
-          for(const i of not_found)
+
+          if(err.status == 403)
           {
-            if(i == err.status)
+            this.router.navigate(["/auth","confirm"]);
+          }
+          else{
+            const not_found = [401, 422, 404, 403];
+            for(const i of not_found)
             {
-              this.password.setErrors({
-                "wrong": true
-              });
+              if(i == err.status)
+              {
+                this.password.setErrors({
+                  "wrong": true
+                });
+              }
             }
           }
         })

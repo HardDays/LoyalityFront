@@ -89,7 +89,6 @@ export class StoreCreateComponent implements OnInit {
         this.router.navigate(["/system","my_stores"])
       },
       (err) => {
-        console.log(err);
       })
     }
 

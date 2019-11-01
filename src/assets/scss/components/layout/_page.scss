@@ -82,6 +82,7 @@
     opacity: 0;
     pointer-events: none;
     transition: 0.3s;
+    z-index: 100;
 
     &--visible {
       pointer-events: auto;
@@ -201,6 +202,11 @@
       margin: 0 auto;
       width: 612px;
     }
+
+    &--customer_small {
+      width: 500px;
+      margin: 0 auto;
+    }
   }
 
   &__edit {
@@ -247,5 +253,20 @@
     width: 100%;
     height: 61px;
     flex-shrink: 0;
+  }
+
+  &__top-checks {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+
+    .radio__text:before {
+      background: transparent;
+    }
+  }
+
+  &__top-checks-text {
+    font-size: 14px;
+    margin-right: 10px;
   }
 }

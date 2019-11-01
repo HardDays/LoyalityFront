@@ -77,4 +77,18 @@ export class ClientsCreateComponent implements OnInit {
       this._location.back();
   }
 
+  // Save()
+  // {
+  //   const valid = this.Form.valid;
+
+  //   if(valid)
+  //   {
+  //     const data = this.Form.getRawValue();
+  //     this.service.CreateStore(data,(res) => {
+  //       this.router.navigate(["/system","my_stores"])
+  //     },
+  //     (err) => {
+  //     })
+  //   }
+  // }
 }
