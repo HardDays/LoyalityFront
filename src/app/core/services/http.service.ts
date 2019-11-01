@@ -8,8 +8,8 @@ declare var Buffer: any;
 @Injectable()
 export class HttpService {
 
-    serverUrl = 'http://34.90.57.126:3000/api/v1';
-    // serverUrl = 'https://fathomless-earth-40434.herokuapp.com/api/v1';
+    // serverUrl = 'http://34.90.57.126:3000/api/v1';
+    serverUrl = 'https://fathomless-earth-40434.herokuapp.com/api/v1';
     // serverUrl = 'https://venture-box-back-test.herokuapp.com';
 
     public headers: Headers = new Headers([]);
