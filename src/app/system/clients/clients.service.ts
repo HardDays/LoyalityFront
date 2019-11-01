@@ -18,7 +18,7 @@ export class ClientsService {
 
     CreateClient(Obj, success?: (data) => void, fail?: (err) => void) {
       if (Obj && Obj['phone']) {
-        Obj['phone'] = (Obj['phone']).replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '');
+        Obj['phone'] = (Obj['phone']).replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '');
       }
       this.http.CommonRequest(
           () => this.http.PostData('/clients', Obj),
@@ -29,12 +29,33 @@ export class ClientsService {
 
     UpdateClient(Obj, success?: (data) => void, fail?: (err) => void) {
       if (Obj && Obj['phone']) {
-        Obj['phone'] = (Obj['phone']).replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '');
+        Obj['phone'] = (Obj['phone']).replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '');
       }
       this.http.CommonRequest(
           () => this.http.PutData('/clients/' + Obj['id'], Obj),
           success,
           fail
+      );
+    }
+
+    CheckClientByPhone(phone: string, success?: (data) => void, fail?: (err) => void) {
+      phone = phone.replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
+      this.http.CommonRequest(
+        () => this.http.GetData('/clients', 'phone=' + phone),
+        (res: ClientModel[]) => {
+          console.log(res);
+            if(success && typeof success == "function")
+            {
+                let countUsers = res.length;
+                success(countUsers > 0 ? true : false);
+            }
+        },
+        (err) => {
+            if(fail && typeof fail == "function")
+            {
+                fail(err);
+            }
+        }
       );
     }
 
@@ -72,9 +93,18 @@ export class ClientsService {
         );
     }
 
-    CreateOrder(Obj, success?: (data) => void, fail?: (err) => void) {
+    CreateOrderForLoyalty(user_id: number, price: number, write_off_points = false,
+      success?: (data) => void, fail?: (err) => void) {
       this.http.CommonRequest(
-          () => this.http.PostData('/orders', Obj),
+          () => this.http.PostData('/orders/program', {user_id, price, write_off_points}),
+          success,
+          fail
+      );
+    }
+    CreateOrderForPromotion(user_id: number, promotion_id: number, price: number, write_off_points = false,
+      success?: (data) => void, fail?: (err) => void) {
+      this.http.CommonRequest(
+          () => this.http.PostData('/orders/promotion', {user_id, promotion_id, price, write_off_points}),
           success,
           fail
       );

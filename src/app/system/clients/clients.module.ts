@@ -19,6 +19,7 @@ import { ClientsRoutingModule } from './clients.routing';
 import { ClientsService } from './clients.service';
 import { CreateClientByPhoneComponent } from './create/create-client-by-phone/create-client-by-phone.component';
 import { CreateClientByUserComponent } from './create/create-client-by-user/create-client-by-user.component';
+import { PromotionsService } from '../promotions/promotions.service';
 
 
 @NgModule({
@@ -45,6 +46,6 @@ import { CreateClientByUserComponent } from './create/create-client-by-user/crea
     TextMaskModule,
     MyDatePickerModule
   ],
-  providers: [ ClientsAccessGuard, ClientsService]
+  providers: [ ClientsAccessGuard, ClientsService, PromotionsService]
 })
 export class ClientsModule {}

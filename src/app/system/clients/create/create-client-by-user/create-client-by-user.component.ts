@@ -37,9 +37,9 @@ export class CreateClientByUserComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'loyalty_program_id': new FormControl('', [
-      // Validators.required
-    ]),
+    // 'loyalty_program_id': new FormControl('', [
+    //   // Validators.required
+    // ]),
     'gender': new FormControl('female',[
       Validators.required
     ]),
@@ -76,11 +76,7 @@ export class CreateClientByUserComponent implements OnInit {
   SelectedLoyality = null;
   ShowSelect = false;
 
-  LoalityProgramm = [
-    {id: 1, name: 'Первая акция'},
-    {id: 2, name: 'Вторая акция'},
-    {id: 3, name: 'Третья акция'}
-  ];
+  PromotionsProgramm = [];
 
   public myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -110,7 +106,7 @@ export class CreateClientByUserComponent implements OnInit {
   ngOnInit() {
     this.loyalityService.RefreshPromotions(
       (data) => {
-        console.log(`GetPromotions = `, data);
+        this.PromotionsProgramm = data;
       }
     );
   }
@@ -118,7 +114,6 @@ export class CreateClientByUserComponent implements OnInit {
   GoBack() {
       this._location.back();
   }
-
   Save() {
     console.log(`Save Form`);
 
@@ -135,6 +130,7 @@ export class CreateClientByUserComponent implements OnInit {
 
       data['birth_day'] = data['birth_day']['formatted'];
 
+
       this.service.CreateClient(data, (res) => {
         console.log(`Success!`, res);
         if (this.OrderPrice) {
@@ -150,18 +146,32 @@ export class CreateClientByUserComponent implements OnInit {
   }
 
   CreateOrder(user_id: number) {
-    this.service.CreateOrder(
-      {
+    if (this.SelectedLoyality) {
+      this.service.CreateOrderForPromotion(
         user_id,
-        price: this.OrderPrice,
-        use_points: false
-      }, (res) => {
-      console.log(`Success 2!`, res);
-      this.isShowSuccessModal = true;
-    },
-    (err) => {
-      console.log(err);
-    });
+        this.OrderPrice,
+        this.SelectedLoyality.id,
+        false,
+        (res) => {
+          this.isShowSuccessModal = true;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.service.CreateOrderForLoyalty(
+        user_id,
+        this.OrderPrice,
+        false,
+        (res) => {
+          this.isShowSuccessModal = true;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
 
@@ -169,7 +179,7 @@ export class CreateClientByUserComponent implements OnInit {
   OnSelected(item)
   {
     this.SelectedLoyality = item;
-    this.Form.controls.loyalty_program_id.setValue(this.SelectedLoyality.id);
+    // this.Form.controls.loyalty_program_id.setValue(this.SelectedLoyality.id);
     this.ShowSelect = false;
   }
 

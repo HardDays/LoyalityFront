@@ -39,30 +39,23 @@ export class CreateClientByPhoneComponent implements OnInit {
     if (this.Phone.indexOf('_') > -1) {
       error('Неккоректный номер телефона!');
     } else {
-      this.service.CreateClient(
-        {
-          phone: this.Phone
-        },
-        () => {
-          if (success && typeof(success) === 'function') {
-            success();
-          }
-        },
-        (err) => {
-          if (
-              Object.keys(err.json())
-                .findIndex(x => x === 'phone') > -1
-            ) {
-            if (error && typeof(error) === 'function') {
-              if (err.json()['phone'][0] === 'ALREADY_TAKEN') {
+      this.service.CheckClientByPhone(this.Phone,
+        (res: boolean) => {
+            console.log(`res = `, res);
+            if (res) {
+              if (error && typeof(error) === 'function') {
                 error('Номер телефона уже зарегистрирован!');
-              } else {
-                error();
+              }
+            } else {
+              if (success && typeof(success) === 'function') {
+                success();
               }
             }
-          } else if (success && typeof(success) === 'function') {
-            success();
-          }
+        },
+        (err) => {
+            if (error && typeof(error) === 'function') {
+              error();
+            }
         }
       );
     }
