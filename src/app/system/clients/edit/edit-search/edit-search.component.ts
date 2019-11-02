@@ -43,16 +43,7 @@ export class EditSearchComponent implements OnInit {
       this.clientsService.GetClient(
         params,
         (res: ClientModel[]) => {
-          console.log(`res = `, res);
           this.Clients = res;
-          // if (res.length === 1) {
-          //   this.isUserFounded = true;
-          // } else if (res.length > 1) {
-          //   console.log('Больше одного аккаунта!');
-          //   this.isFoundedMoreThanOne = true;
-          // } else {
-          //   console.log('Нет аккаунтов!');
-          // }
         });
     }
   }

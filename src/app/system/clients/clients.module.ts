@@ -21,6 +21,7 @@ import { CreateClientByPhoneComponent } from './create/create-client-by-phone/cr
 import { CreateClientByUserComponent } from './create/create-client-by-user/create-client-by-user.component';
 import { PromotionsService } from '../promotions/promotions.service';
 
+import { PipesModule } from './../../core/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PromotionsService } from '../promotions/promotions.service';
     ClientsRoutingModule,
     ReactiveFormsModule,
     TextMaskModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    PipesModule
   ],
   providers: [ ClientsAccessGuard, ClientsService, PromotionsService]
 })
