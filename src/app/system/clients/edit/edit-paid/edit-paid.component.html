@@ -1,7 +1,7 @@
 <div class="create-block customer__block customer__block--small">
     <p class="create-block__label create-block__label--light">Имя покупателя:
-      <span class="customer__name">Иван Иванов</span>
-      <span class="customer__edit"><img src="./../../../../../assets/img/edit-icon.svg" alt=""></span>
+      <span class="customer__name">{{Client.first_name}} {{Client.last_name}}</span>
+      <span class="customer__edit"><img [routerLink]="['../client']" src="./../../../../../assets/img/edit-icon.svg" alt=""></span>
     </p>
     <p class="create-block__label create-block__label--light customer__label">Всего бонусов на счету:
       <span class="customer__name">20 000</span>

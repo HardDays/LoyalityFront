@@ -12,8 +12,24 @@
     <p class="create-block__label create-block__label--light">Введите номер карты покупателя</p>
     <input disabled [ngModel]="SearchParams.card" type="text" class="customer__input customer__input--big">
 
-    <p *ngIf="isFoundedMoreThanOne" class="customer__or">Слишком много результатов</p>
+    <ng-container *ngIf="Clients.length">
+      <p class="customer__or">Нужно выбрать пользователя</p>
 
-    <button [disabled]="!isUserFounded" [routerLink]="['../loyality']" class="button customer__button">Далее</button>
+      <div class="main-blocks" id="shop-blocks">
+        <div *ngFor="let item of Clients" (click)="SelectUser(item)" class="main-blocks__item main-blocks__item--shop" [ngClass]="{'main-blocks__item--create': item.id == SelectedClient.id}">
+            <div class="main-blocks__item-absolute">
+                <div class="main-blocks__with-buttons">
+                    <p class="main-blocks__title main-blocks__title--shop">{{item.last_name}} {{item.first_name}} {{item.second_name}}</p>
+                </div>
+                <p class="main-blocks__description main-blocks__description--shop">{{item.birth_day}}</p>
+                <p class="main-blocks__description main-blocks__description--shop">{{item.phone}}</p>
+            </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <p *ngIf="!Clients.length" class="customer__or">Нет результатов поиска.</p>
+
+    <button [disabled]="!SelectedClient.id" [routerLink]="['../loyality']" class="button customer__button">Далее</button>
 </div>
 

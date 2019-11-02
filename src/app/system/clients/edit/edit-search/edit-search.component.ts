@@ -15,6 +15,10 @@ export class EditSearchComponent implements OnInit {
     phone: '',
     card: ''
   };
+
+  Clients: ClientModel[] = [];
+  SelectedClient = new ClientModel();
+
   isUserFounded = false;
   isFoundedMoreThanOne = false;
   Mask = ValidatorService.MaskPhoneRUwithout7;
@@ -33,22 +37,22 @@ export class EditSearchComponent implements OnInit {
   }
 
   searchClient() {
-    this.isUserFounded = false;
-    this.isFoundedMoreThanOne = false;
+    this.SelectedClient = new ClientModel();
     const params = this.ConvertToBackType(this.SearchParams);
     if (params.name || params.phone || params.card) {
       this.clientsService.GetClient(
         params,
         (res: ClientModel[]) => {
           console.log(`res = `, res);
-          if (res.length === 1) {
-            this.isUserFounded = true;
-          } else if (res.length > 1) {
-            console.log('Больше одного аккаунта!');
-            this.isFoundedMoreThanOne = true;
-          } else {
-            console.log('Нет аккаунтов!');
-          }
+          this.Clients = res;
+          // if (res.length === 1) {
+          //   this.isUserFounded = true;
+          // } else if (res.length > 1) {
+          //   console.log('Больше одного аккаунта!');
+          //   this.isFoundedMoreThanOne = true;
+          // } else {
+          //   console.log('Нет аккаунтов!');
+          // }
         });
     }
   }
@@ -58,6 +62,11 @@ export class EditSearchComponent implements OnInit {
       params['phone'] = params['phone'].replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
     }
     return params;
+  }
+
+  SelectUser(item) {
+    this.SelectedClient = item;
+    this.clientsService.Client = this.SelectedClient;
   }
 
 }

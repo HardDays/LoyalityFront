@@ -1,4 +1,7 @@
+import { ClientsService } from './../../clients.service';
 import { Component, OnInit } from '@angular/core';
+import { PromotionsService } from 'src/app/system/promotions/promotions.service';
+import { ClientModel } from 'src/app/core/models/client.model';
 
 @Component({
   selector: 'app-edit-paid',
@@ -7,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPaidComponent implements OnInit {
 
-  isModalOpened = true;
-  constructor() { }
+  Client = new ClientModel();
+
+  isModalOpened = false;
+
+  constructor(
+    protected clientsService: ClientsService,
+    private loyalityService: PromotionsService) { }
 
   ngOnInit() {
+    this.Client = this.clientsService.Client;
+
+    console.log(this.clientsService.newOrder);
   }
 
 }

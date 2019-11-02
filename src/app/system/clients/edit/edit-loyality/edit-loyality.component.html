@@ -5,19 +5,18 @@
       <span class="customer__edit"><img [routerLink]="['../client']" src="./../../../../../assets/img/edit-icon.svg" alt=""></span>
     </p>
     <p class="customer__label">Введите сумму покупки</p>
-    <input type="text" class="customer__input customer__input--sum">
+    <input type="text" [ngModel]="Price" (ngModelChange)="onPriceChanged($event)" class="customer__input customer__input--sum">
 
-    <div class="create-block__select create-block__select--opened customer__select">
-        <div class="create-block__select-value">Программа лояльности</div>
-        <ul class="create-block__select-list">
-            <li>Акция 1</li>
-            <li>Акция 2</li>
-            <li>Акция 3</li>
-            <li>Акция 4</li>
-            <li>Акция 5</li>
-        </ul>
+    <div class="create-block__select customer__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
+      <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedLoyality ? SelectedLoyality.name: 'Программа лояльности'}}</div>
+      <ul class="create-block__select-list">
+          <li (click)="OnSelected(null)">Программа лояльности</li>
+          <ng-container *ngFor="let item of PromotionsProgramm">
+              <li (click)="OnSelected(item)">{{item.name}}</li>
+          </ng-container>
+      </ul>
     </div>
 
-    <button [routerLink]="['../paid']" class="button customer__button">Далее</button>
+    <button [disabled]="isNextDisabled" [routerLink]="['../paid']" class="button customer__button">Далее</button>
 </div>
 

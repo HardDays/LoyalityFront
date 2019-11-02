@@ -15,8 +15,6 @@ export class EditClientComponent implements OnInit {
 
   Client = new ClientModel();
 
-
-
   Form: FormGroup = new FormGroup({
     'first_name': new FormControl('', [
       Validators.required,
@@ -33,16 +31,9 @@ export class EditClientComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'email': new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]),
     'card_number': new FormControl('', [
       Validators.minLength(3),
       Validators.maxLength(30)
-    ]),
-    'loyalty_program_id': new FormControl('', [
-      // Validators.required
     ]),
     'gender': new FormControl('female',[
       Validators.required
@@ -61,14 +52,8 @@ export class EditClientComponent implements OnInit {
   get second_name() {
     return this.Form.get('second_name');
   }
-  get email() {
-    return this.Form.get('email');
-  }
   get card_number() {
     return this.Form.get('card_number');
-  }
-  get loyalty_program_id() {
-    return this.Form.get('loyalty_program_id');
   }
   get gender() {
     return this.Form.get('gender');
@@ -88,7 +73,6 @@ export class EditClientComponent implements OnInit {
   };
 
   MaskBirthDay = ValidatorService.MaskBirthDay();
-
 
   constructor(protected clientsService: ClientsService, private _location: Location) { }
 
@@ -112,6 +96,7 @@ export class EditClientComponent implements OnInit {
   }
 
   Save() {
+    console.log(`Save1`);
     for(const i in this.Form.controls)
     {
         this.Form.controls[i].markAsDirty();
@@ -119,7 +104,9 @@ export class EditClientComponent implements OnInit {
     }
     const valid = this.Form.valid;
 
+    console.log(`Save2`);
     if (valid) {
+      console.log(`Save3`);
       const data = this.Form.getRawValue();
       data['phone'] = this.clientsService.Client.phone;
       data['id'] = this.clientsService.Client.id;

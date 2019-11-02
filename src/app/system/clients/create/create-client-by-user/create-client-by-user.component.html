@@ -148,7 +148,7 @@
 
 <div *ngIf="isShowSuccessModal" class="modal modal--visible">
   <div class="modal__block modal__block--customer">
-      <span class="modal__close"><img (click)="isShowSuccessModal = false" src="./../../../../../assets/img/close.svg" alt=""></span>
+      <span class="modal__close"><img (click)="onCloseSuccessModal()" src="./../../../../../assets/img/close.svg" alt=""></span>
 
       <div class="modal__customer-content">
           <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ValidatorService } from './../../../../core/services/validator.service';
 import { ClientsService } from './../../clients.service';
 import { Component, OnInit } from '@angular/core';
@@ -99,9 +100,11 @@ export class CreateClientByUserComponent implements OnInit {
 
   OrderPrice = 0;
 
-  constructor(private _location: Location,
-   private service: ClientsService,
-   private loyalityService: PromotionsService) { }
+  constructor(
+    private _location: Location,
+    private router: Router,
+    private service: ClientsService,
+    private loyalityService: PromotionsService) { }
 
   ngOnInit() {
     this.loyalityService.RefreshPromotions(
@@ -149,9 +152,9 @@ export class CreateClientByUserComponent implements OnInit {
     if (this.SelectedLoyality) {
       this.service.CreateOrderForPromotion(
         user_id,
+        +this.SelectedLoyality.id,
         this.OrderPrice,
-        this.SelectedLoyality.id,
-        false,
+        0,
         (res) => {
           this.isShowSuccessModal = true;
         },
@@ -163,7 +166,7 @@ export class CreateClientByUserComponent implements OnInit {
       this.service.CreateOrderForLoyalty(
         user_id,
         this.OrderPrice,
-        false,
+        0,
         (res) => {
           this.isShowSuccessModal = true;
         },
@@ -181,6 +184,11 @@ export class CreateClientByUserComponent implements OnInit {
     this.SelectedLoyality = item;
     // this.Form.controls.loyalty_program_id.setValue(this.SelectedLoyality.id);
     this.ShowSelect = false;
+  }
+
+  onCloseSuccessModal() {
+    this.isShowSuccessModal = false;
+    this.router.navigate(['/system', 'my_clients', 'start']);
   }
 
 }
