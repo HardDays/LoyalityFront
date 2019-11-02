@@ -96,17 +96,13 @@ export class EditClientComponent implements OnInit {
   }
 
   Save() {
-    console.log(`Save1`);
     for(const i in this.Form.controls)
     {
         this.Form.controls[i].markAsDirty();
         this.Form.controls[i].markAsTouched();
     }
     const valid = this.Form.valid;
-
-    console.log(`Save2`);
     if (valid) {
-      console.log(`Save3`);
       const data = this.Form.getRawValue();
       data['phone'] = this.clientsService.Client.phone;
       data['id'] = this.clientsService.Client.id;

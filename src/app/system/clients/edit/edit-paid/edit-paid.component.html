@@ -4,18 +4,19 @@
       <span class="customer__edit"><img [routerLink]="['../client']" src="./../../../../../assets/img/edit-icon.svg" alt=""></span>
     </p>
     <p class="create-block__label create-block__label--light customer__label">Всего бонусов на счету:
-      <span class="customer__name">20 000</span>
+      <span class="customer__name">{{Bonuses.All}}</span>
     </p>
     <p class="create-block__label create-block__label--light customer__label">Доступные бонусы:
-      <span class="customer__name">5 000</span>
+      <span class="customer__name">{{Bonuses.Available}}</span>
     </p>
     <p class="create-block__label create-block__label--light customer__label">Списать бонусов:
-      <input type="text" class="create-block__input create-block__input--small">
+      <input type="text" [ngModel]="WrireBonuses" (ngModelChange)="onWriteBonusesChange($event)" class="create-block__input create-block__input--small">
     </p>
+    <p class="create-block__label bonus-error-text" *ngIf="hasErrorBonuses">Указанная сумма превышает доступную!</p>
 
     <div class="customer__flex-buttons">
-        <button class="button customer__button">Использовать бонусы</button>
-        <button class="button customer__button button--black">Не использовать<br>бонусы</button>
+        <button (click)="onClickWriteBonuses()"  class="button customer__button">Использовать бонусы</button>
+        <button (click)="onClickNotWriteBonuses()" class="button customer__button button--black">Не использовать<br>бонусы</button>
     </div>
 </div>
 
@@ -24,11 +25,11 @@
         <span class="modal__close"><img (click)="isModalOpened = false"  src="./../../../../../assets/img/close.svg" alt=""></span>
 
         <div class="modal__customer-content">
-            <p class="customer__check-text">Имя покупателя:</p>
-            <p class="customer__check-text">Общая сумма:</p>
-            <p class="customer__check-text">Оплата бонусами:</p>
-            <p class="customer__check-text">ИТОГО к оплате, с учетом бонусов:</p>
-            <p class="customer__check-text">Остаток бонусов:</p>
+            <p class="customer__check-text">Имя покупателя: {{Client.first_name}} {{Client.last_name}}</p>
+            <p class="customer__check-text">Общая сумма: {{Order.price}}</p>
+            <p class="customer__check-text">Оплата бонусами: {{WrireBonuses}}</p>
+            <p class="customer__check-text">ИТОГО к оплате, с учетом бонусов: {{Order.price - WrireBonuses}}</p>
+            <p class="customer__check-text">Остаток бонусов: {{Bonuses.All - WrireBonuses}}</p>
         </div>
     </div>
 </div>
