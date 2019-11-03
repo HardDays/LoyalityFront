@@ -65,23 +65,17 @@ export class ClientsService {
 
     GetClient(params, success?: (data) => void, fail?: (err) => void) {
         let searchString = '';
-        if (params['name']) {
-          searchString += 'name=' + params['name'];
-        }
-        if (params['phone']) {
-          if (searchString) {
-            searchString += '&';
+        const arrParams = [];
+        for (const key of Object.keys(params)) {
+          if (params[key]) {
+            searchString += arrParams.push(key + '=' + params[key]);
           }
-          searchString = 'phone=' + params['phone'];
         }
+        searchString = arrParams.join('&');
+        console.log(params, searchString);
         this.http.CommonRequest(
             () => this.http.GetData('/clients', searchString),
             (res: ClientModel[]) => {
-                // if (res.length === 1) {
-                //   this.Client = res[0];
-                // } else {
-                //   this.Client = new ClientModel();
-                // }
                 if (success && typeof success == 'function') {
                     success(res);
                 }
@@ -95,8 +89,7 @@ export class ClientsService {
     }
 
     CreateOrderForLoyalty(user_id: number, price: number, write_off_points = 0,
-      success?: (data) => void, fail?: (err) => void)
-    {
+      success?: (data) => void, fail?: (err) => void) {
       price = price * 100;
       const params = {user_id, price, write_off_points};
       if (write_off_points === 0) {
@@ -110,8 +103,7 @@ export class ClientsService {
     }
 
     CreateOrderForPromotion(user_id: number, promotion_id: number, price: number, write_off_points = 0,
-      success?: (data) => void, fail?: (err) => void)
-    {
+      success?: (data) => void, fail?: (err) => void) {
       price = price * 100;
       const params = {user_id, promotion_id, price, write_off_points};
       if (write_off_points === 0) {

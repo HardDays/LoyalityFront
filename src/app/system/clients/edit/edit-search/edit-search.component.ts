@@ -13,7 +13,7 @@ export class EditSearchComponent implements OnInit {
   SearchParams = {
     name: '',
     phone: '',
-    card: ''
+    card_number: ''
   };
 
   Clients: ClientModel[] = [];
@@ -35,11 +35,15 @@ export class EditSearchComponent implements OnInit {
     this.SearchParams.phone = s;
     this.searchClient();
   }
+  onEditCard(s: string) {
+    this.SearchParams.card_number = s;
+    this.searchClient();
+  }
 
   searchClient() {
     this.SelectedClient = new ClientModel();
     const params = this.ConvertToBackType(this.SearchParams);
-    if (params.name || params.phone || params.card) {
+    if (params.name || params.phone || params.card_number) {
       this.clientsService.GetClient(
         params,
         (res: ClientModel[]) => {
@@ -51,6 +55,9 @@ export class EditSearchComponent implements OnInit {
   ConvertToBackType(params) {
     if (params['phone']) {
       params['phone'] = params['phone'].replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
+    }
+    if (params['name']) {
+      params['name'] = params['name'].toLowerCase();
     }
     return params;
   }

@@ -1,7 +1,9 @@
+import { LoyaltyProgramsService } from './../../../promotions/loyalty.service';
 import { ClientsService } from './../../clients.service';
 import { Component, OnInit } from '@angular/core';
 import { PromotionsService } from 'src/app/system/promotions/promotions.service';
 import { ClientModel } from 'src/app/core/models/client.model';
+import { PromotionModel } from 'src/app/core/models/promotion.model';
 
 @Component({
   selector: 'app-edit-paid',
@@ -14,21 +16,81 @@ export class EditPaidComponent implements OnInit {
   Order = this.clientsService.newOrder;
 
   Bonuses = {
-    All: 100,
-    Available: 20
+    All: 10000,
+    Available: 0
   };
   WrireBonuses = 0;
   hasErrorBonuses = false;
 
   isModalOpened = false;
 
+
   constructor(
     protected clientsService: ClientsService,
-    private loyalityService: PromotionsService) { }
+    private promotionsService: PromotionsService,
+    private loyaltyService: LoyaltyProgramsService) { }
 
   ngOnInit() {
     console.log(`Client = `, this.Client);
     console.log(`Order = `, this.Order);
+
+    // this.Bonuses.All = this.Client.points;
+
+    if (!this.Order.promotion_id) {
+      this.getLoyalty();
+    } else {
+      this.getPromotion();
+    }
+  }
+
+  getLoyalty() {
+    this.loyaltyService.GetLoyalty(this.Client.loyalty_program_id,
+      (data) => {
+        console.log(`data = `, data);
+        const curLoyalty = data['loyalty_levels'][0];
+        this.getAvailableBonus(
+          curLoyalty.write_off_rule,
+          curLoyalty.write_off_limited,
+          curLoyalty.write_off_min_price,
+          curLoyalty.write_off_rule_points,
+          curLoyalty.write_off_rule_percent
+        );
+      }
+    );
+  }
+
+  getPromotion() {
+    const promotion: PromotionModel = this.promotionsService.GetPromotions().find(x => x.id === this.Order.promotion_id);
+    console.log(promotion);
+    this.getAvailableBonus(
+      promotion.write_off_rule,
+      promotion.write_off_limited,
+      promotion.write_off_min_price,
+      promotion.write_off_rule_points,
+      promotion.write_off_rule_percent
+    );
+  }
+
+  getAvailableBonus(write_off_rule, write_off_limited, write_off_min_price, write_off_rule_points, write_off_rule_percent) {
+    this.Bonuses.Available = 0;
+    if (write_off_rule === 'write_off_convert') {
+      if (write_off_limited)  {
+        if (this.Order.price < write_off_min_price) {
+          return;
+        }
+      }
+      if (this.Bonuses.All < write_off_rule_points) {
+        return;
+      }
+
+      let maxWriteOff = (this.Order.price * write_off_rule_percent) / 100;
+
+      if (maxWriteOff > this.Bonuses.All) {
+        maxWriteOff = this.Bonuses.All;
+      }
+
+      this.Bonuses.Available = maxWriteOff;
+    }
   }
 
   onWriteBonusesChange(val: number) {

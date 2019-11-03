@@ -1,3 +1,4 @@
+import { LoyaltyProgramsService } from './../promotions/loyalty.service';
 import { EditSearchComponent } from './edit/edit-search/edit-search.component';
 import { EditPaidComponent } from './edit/edit-paid/edit-paid.component';
 import { EditLoyalityComponent } from './edit/edit-loyality/edit-loyality.component';
@@ -48,6 +49,6 @@ import { PipesModule } from './../../core/pipes/pipes.module';
     MyDatePickerModule,
     PipesModule
   ],
-  providers: [ ClientsAccessGuard, ClientsService, PromotionsService]
+  providers: [ ClientsAccessGuard, ClientsService, PromotionsService, LoyaltyProgramsService]
 })
 export class ClientsModule {}

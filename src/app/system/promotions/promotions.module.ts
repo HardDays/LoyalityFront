@@ -1,3 +1,4 @@
+import { LoyaltyProgramsService } from './loyalty.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,6 +31,6 @@ import { PromotionsService } from './promotions.service';
     TextMaskModule,
     MyDatePickerModule
   ],
-  providers: [ PromotionsAccessGuard, PromotionsService]
+  providers: [ PromotionsAccessGuard, PromotionsService, LoyaltyProgramsService]
 })
 export class PromotionsModule {}
