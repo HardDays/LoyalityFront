@@ -18,6 +18,7 @@ export class SystemComponent implements OnInit
     Company: CompanyModel = new CompanyModel();
     Initials = "";
     Hovered = false;
+    UserTypeText = "";
     constructor(private auth: AuthService)
     {
         this.IsLoggedIn = this.auth.IsLoggedIn;
@@ -30,7 +31,7 @@ export class SystemComponent implements OnInit
 
         this.auth.onCompanyChange$.subscribe(
             (val) => {
-                
+
                 this.Company = this.auth.CompanyData;
             }
         )
@@ -63,6 +64,16 @@ export class SystemComponent implements OnInit
         this.IsLoggedIn = this.auth.IsLoggedIn;
 
         this.Initials = (this.Me.last_name ? this.Me.last_name[0].toUpperCase() : '') + (this.Me.first_name ? this.Me.first_name[0].toUpperCase() : '');
+
+        this.GetUserTypeText();
     }
+
+    GetUserTypeText() {
+      this.UserTypeText = "";
+      if(this.Me.user_type === "operator") {
+        this.UserTypeText = "Кассир";
+      }
+    }
+
 
 }

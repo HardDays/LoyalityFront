@@ -16,7 +16,7 @@ export class EditPaidComponent implements OnInit {
   Order = this.clientsService.newOrder;
 
   Bonuses = {
-    All: 10000,
+    All: 0,
     Available: 0
   };
   WrireBonuses = 0;
@@ -34,7 +34,7 @@ export class EditPaidComponent implements OnInit {
     console.log(`Client = `, this.Client);
     console.log(`Order = `, this.Order);
 
-    // this.Bonuses.All = this.Client.points;
+    this.Bonuses.All = this.Client.points ? this.Client.points : 1200;
 
     if (!this.Order.promotion_id) {
       this.getLoyalty();
@@ -47,7 +47,13 @@ export class EditPaidComponent implements OnInit {
     this.loyaltyService.GetLoyalty(this.Client.loyalty_program_id,
       (data) => {
         console.log(`data = `, data);
-        const curLoyalty = data['loyalty_levels'][0];
+        const curLoyaltysFilter = data['loyalty_levels'].filter(x => x.min_price <= this.Order.price);
+        const curLoyaltysSort = curLoyaltysFilter.sort(
+          (a, b) => {
+            return  b.min_price - a.min_price;
+          }
+        );
+        const curLoyalty = curLoyaltysSort[0];
         this.getAvailableBonus(
           curLoyalty.write_off_rule,
           curLoyalty.write_off_limited,
@@ -72,6 +78,7 @@ export class EditPaidComponent implements OnInit {
   }
 
   getAvailableBonus(write_off_rule, write_off_limited, write_off_min_price, write_off_rule_points, write_off_rule_percent) {
+    console.log(write_off_rule, write_off_limited, write_off_min_price, write_off_rule_points, write_off_rule_percent);
     this.Bonuses.Available = 0;
     if (write_off_rule === 'write_off_convert') {
       if (write_off_limited)  {

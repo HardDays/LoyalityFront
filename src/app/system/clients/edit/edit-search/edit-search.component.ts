@@ -25,6 +25,12 @@ export class EditSearchComponent implements OnInit {
   constructor(protected clientsService: ClientsService) { }
 
   ngOnInit() {
+    this.clientsService.Client = new ClientModel();
+    this.clientsService.newOrder = {
+      promotion_id: 0,
+      price: 0,
+      write_off: 0
+    };
   }
 
   onEditName(s: string) {
