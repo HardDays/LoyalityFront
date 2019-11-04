@@ -63,6 +63,23 @@ export class ClientsService {
       );
     }
 
+    CheckClientPhone(phone: string, success?: (data) => void, fail?: (err) => void) {
+      phone = phone.replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
+      this.http.CommonRequest(
+        () => this.http.GetData('/clients/phone', 'phone=' + phone),
+        (res) => {
+            if (success && typeof success == 'function') {
+                success(res['status']);
+            }
+        },
+        (err) => {
+            if (fail && typeof fail == 'function') {
+                fail(err);
+            }
+        }
+      );
+    }
+
     GetClient(params, success?: (data) => void, fail?: (err) => void) {
         let searchString = '';
         const arrParams = [];

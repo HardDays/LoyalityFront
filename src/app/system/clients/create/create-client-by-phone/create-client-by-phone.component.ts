@@ -39,9 +39,8 @@ export class CreateClientByPhoneComponent implements OnInit {
     if (this.Phone.indexOf('_') > -1) {
       error('Неккоректный номер телефона!');
     } else {
-      this.service.CheckClientByPhone(this.Phone,
+      this.service.CheckClientPhone(this.Phone,
         (res: boolean) => {
-            console.log(`res = `, res);
             if (res) {
               if (error && typeof(error) === 'function') {
                 error('Номер телефона уже зарегистрирован!');
@@ -60,6 +59,7 @@ export class CreateClientByPhoneComponent implements OnInit {
       );
     }
   }
+
 
 
   SavePhoneAndNavigate() {

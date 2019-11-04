@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { PromotionsService } from 'src/app/system/promotions/promotions.service';
 import { ClientModel } from 'src/app/core/models/client.model';
 import { PromotionModel } from 'src/app/core/models/promotion.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-paid',
@@ -28,13 +29,14 @@ export class EditPaidComponent implements OnInit {
   constructor(
     protected clientsService: ClientsService,
     private promotionsService: PromotionsService,
-    private loyaltyService: LoyaltyProgramsService) { }
+    private loyaltyService: LoyaltyProgramsService,
+    private router: Router) { }
 
   ngOnInit() {
     console.log(`Client = `, this.Client);
     console.log(`Order = `, this.Order);
 
-    this.Bonuses.All = this.Client.points ? this.Client.points : 1200;
+    this.Bonuses.All = this.Client.points;
 
     if (!this.Order.promotion_id) {
       this.getLoyalty();
@@ -119,6 +121,7 @@ export class EditPaidComponent implements OnInit {
   }
 
   onClickNotWriteBonuses() {
+    this.WrireBonuses = 0;
     this.Order.write_off = 0;
     this.CreateOrder();
   }
@@ -151,5 +154,11 @@ export class EditPaidComponent implements OnInit {
       );
     }
   }
+
+  closeSuccessModal() {
+    this.isModalOpened = false;
+    this.router.navigate(['/system', 'my_clients', 'start']);
+  }
+
 
 }
