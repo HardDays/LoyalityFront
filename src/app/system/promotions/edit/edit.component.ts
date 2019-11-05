@@ -148,6 +148,8 @@ export class PromotionEditComponent implements OnInit {
             "wrong": true
           });
         }
+        window.scrollTo(0,0);
+        // console.log(window);
       };
       if(this.Id == 'new')
       {
@@ -217,6 +219,7 @@ export class PromotionEditComponent implements OnInit {
     const date2 = new Date(this.IDateToISO(data.end_date.date));
 
 
+    let scrollTo = 0;
     if(date1.getTime() > date2.getTime() )
     {
       this.Form.controls.end_date.setErrors({
@@ -280,6 +283,8 @@ export class PromotionEditComponent implements OnInit {
     }
 
     this.Form.updateValueAndValidity();
+    if(hasError)
+      window.scrollTo(0,scrollTo);
     return !hasError;
   }
 

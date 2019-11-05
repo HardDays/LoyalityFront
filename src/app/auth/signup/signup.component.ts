@@ -134,8 +134,8 @@ export class SignUpComponent implements OnInit
   Create()
   {
     this.RegForm.updateValueAndValidity();
-    // const valid = this.RegForm.valid;
-    const valid = true;
+    const valid = this.RegForm.valid;
+    // const valid = true;
     if(valid)
     {
       const vals = this.RegForm.getRawValue();
