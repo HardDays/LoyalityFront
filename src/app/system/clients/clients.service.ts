@@ -132,4 +132,22 @@ export class ClientsService {
           fail
       );
     }
+
+    GetLoyaltyPoints(user_id: number, price: number, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/orders/loyalty_program/points', `user_id=${user_id}&price=${price}`),
+            success,
+            fail
+        );
+    }
+
+    GetPromotionPoints(user_id: number, price: number, promotion_id: number, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/orders/promotion/points', `promotion_id=${promotion_id}&user_id=${user_id}&price=${price}`),
+            success,
+            fail
+        );
+    }
 }

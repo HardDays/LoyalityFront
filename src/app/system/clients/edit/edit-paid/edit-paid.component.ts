@@ -56,12 +56,20 @@ export class EditPaidComponent implements OnInit {
           }
         );
         const curLoyalty = curLoyaltysSort[0];
-        this.getAvailableBonus(
-          curLoyalty.write_off_rule,
-          curLoyalty.write_off_limited,
-          curLoyalty.write_off_min_price,
-          curLoyalty.write_off_rule_points,
-          curLoyalty.write_off_rule_percent
+        // this.getAvailableBonus(
+        //   curLoyalty.write_off_rule,
+        //   curLoyalty.write_off_limited,
+        //   curLoyalty.write_off_min_price,
+        //   curLoyalty.write_off_rule_points,
+        //   curLoyalty.write_off_rule_percent
+        // );
+        this.clientsService.GetLoyaltyPoints(
+          this.Client.id,
+          this.Order.price,
+          (maxBonuses) => {
+            // console.log(`maxBonuses = `, maxBonuses);
+            this.Bonuses.All = maxBonuses['points'];
+          }
         );
       }
     );
@@ -70,16 +78,25 @@ export class EditPaidComponent implements OnInit {
   getPromotion() {
     const promotion: PromotionModel = this.promotionsService.GetPromotions().find(x => x.id === this.Order.promotion_id);
     console.log(promotion);
-    this.getAvailableBonus(
-      promotion.write_off_rule,
-      promotion.write_off_limited,
-      promotion.write_off_min_price,
-      promotion.write_off_rule_points,
-      promotion.write_off_rule_percent
+    // this.getAvailableBonus(
+    //   promotion.write_off_rule,
+    //   promotion.write_off_limited,
+    //   promotion.write_off_min_price,
+    //   promotion.write_off_rule_points,
+    //   promotion.write_off_rule_percent
+    // );
+    this.clientsService.GetPromotionPoints(
+      this.Client.id,
+      this.Order.price,
+      this.Order.promotion_id,
+      (maxBonuses) => {
+        // console.log(`maxBonuses = `, maxBonuses);
+        this.Bonuses.All = maxBonuses['points'];
+      }
     );
   }
 
-  getAvailableBonus(write_off_rule, write_off_limited, write_off_min_price, write_off_rule_points, write_off_rule_percent) {
+  getLocalAvailableBonus(write_off_rule, write_off_limited, write_off_min_price, write_off_rule_points, write_off_rule_percent) {
     console.log(write_off_rule, write_off_limited, write_off_min_price, write_off_rule_points, write_off_rule_percent);
     this.Bonuses.Available = 0;
     if (write_off_rule === 'write_off_convert') {
