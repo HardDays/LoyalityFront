@@ -35,14 +35,18 @@ export class EditSearchComponent implements OnInit {
 
   onEditName(s: string) {
     this.SearchParams.name = s;
-    this.searchClient();
+    // this.searchClient();
   }
   onEditPhone(s: string) {
     this.SearchParams.phone = s;
-    this.searchClient();
+    // this.searchClient();
   }
   onEditCard(s: string) {
     this.SearchParams.card_number = s;
+    // this.searchClient();
+  }
+
+  onSearchClientButtonClick() {
     this.searchClient();
   }
 

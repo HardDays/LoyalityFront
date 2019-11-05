@@ -27,7 +27,6 @@ export class EditClientComponent implements OnInit {
       Validators.maxLength(30)
     ]),
     'second_name': new FormControl('', [
-      Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
@@ -63,7 +62,7 @@ export class EditClientComponent implements OnInit {
   }
 
   public myDatePickerOptions: IMyDpOptions = {
-    dateFormat: 'dd.mm.yyyy',
+    dateFormat: 'yyyy-mm-dd',
     showClearDateBtn: false,
     showTodayBtn: false,
     dayLabels: {su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'},

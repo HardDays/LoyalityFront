@@ -33,11 +33,6 @@
             autocomplete="null"
             name="second_name"
             formControlName="second_name">
-    <p class="auth-block__hint auth-block__hint--error">
-        <ng-container *ngIf="second_name.invalid && (second_name.dirty || second_name.touched)">
-            <span *ngIf="second_name.errors['required']">Поле обязательно к заполнению.</span>
-        </ng-container>
-    </p>
 
     <p class="create-block__label create-block__label--light">Номер карты</p>
     <input type="text" class="create-block__input create-block__input--full"

@@ -12,9 +12,10 @@
     <p class="create-block__label create-block__label--light">Введите номер карты покупателя</p>
     <input [ngModel]="SearchParams.card_number" (input)="onEditCard($event.target.value)" type="text" class="customer__input customer__input--big">
 
+    <button (click)="onSearchClientButtonClick()" class="button customer__button">Поиск</button>
+
     <ng-container *ngIf="Clients.length">
       <p class="customer__or">Нужно выбрать пользователя</p>
-
       <div class="main-blocks" id="shop-blocks">
         <div *ngFor="let item of Clients" (click)="SelectUser(item)" class="main-blocks__item main-blocks__item--shop" [ngClass]="{'main-blocks__item--create': item.id == SelectedClient.id}">
             <div class="main-blocks__item-absolute">
@@ -27,7 +28,6 @@
         </div>
       </div>
     </ng-container>
-
     <p *ngIf="!Clients.length" class="customer__or">Нет результатов поиска.</p>
 
     <button [disabled]="!SelectedClient.id" [routerLink]="['../loyality']" class="button customer__button">Далее</button>
