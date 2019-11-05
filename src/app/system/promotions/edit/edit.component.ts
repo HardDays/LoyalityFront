@@ -134,7 +134,8 @@ export class PromotionEditComponent implements OnInit {
 
   Save()
   {
-    if(this.ValidateForm() && this.Form.valid)
+    const validate = this.ValidateForm();
+    if(validate && this.Form.valid)
     {
       let data = this.Form.getRawValue();
         data.begin_date = this.IDateToISO(data.begin_date.date);
@@ -149,7 +150,6 @@ export class PromotionEditComponent implements OnInit {
           });
         }
         window.scrollTo(0,0);
-        // console.log(window);
       };
       if(this.Id == 'new')
       {
@@ -215,23 +215,39 @@ export class PromotionEditComponent implements OnInit {
     let hasError = false;
     const data = this.Form.getRawValue();
 
-    const date1 = new Date(this.IDateToISO(data.begin_date.date));
-    const date2 = new Date(this.IDateToISO(data.end_date.date));
 
-
-    let scrollTo = 0;
-    if(date1.getTime() > date2.getTime() )
+    
+    if(!data.begin_date.date || !data.end_date.date)
     {
       this.Form.controls.end_date.setErrors({
         'wrong': true
       });
       hasError = true;
+      
     }
     else{
-      this.Form.controls.end_date.setErrors({
-        'wrong': null
-      });
+      const date1 = new Date(this.IDateToISO(data.begin_date.date));
+      const date2 = new Date(this.IDateToISO(data.end_date.date));
+      if(date1.getTime() > date2.getTime() )
+      {
+        this.Form.controls.end_date.setErrors({
+          'wrong': true
+        });
+        hasError = true;
+      }
+      else{
+        this.Form.controls.end_date.setErrors({
+          'wrong': null
+        });
+      }
     }
+
+    this.Form.controls.end_date.updateValueAndValidity();
+    
+
+
+    let scrollTo = 0;
+    
     
 
     const ferror = (property_name, min, max) => {
@@ -285,6 +301,7 @@ export class PromotionEditComponent implements OnInit {
     this.Form.updateValueAndValidity();
     if(hasError)
       window.scrollTo(0,scrollTo);
+
     return !hasError;
   }
 

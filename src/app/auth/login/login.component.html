@@ -36,7 +36,7 @@
             <p class="auth-block__hint auth-block__hint--error">
                 <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
                     <span *ngIf="password.errors.required">Поле обязательно к заполнению.</span>
-                    <span *ngIf="password.errors.minlength">Минимальная длина пароля 10 символов.</span>
+                    <span *ngIf="password.errors.minlength">Минимальная длина пароля 7 символов.</span>
                     <span *ngIf="password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
                     <span *ngIf="password.errors.wrong">Неправильный E-mail или пароль.</span>
                 </ng-container>
