@@ -80,4 +80,13 @@ export class PromotionsService {
         );
     }
 
+    GetPromotionPoints(user_id: number, price: number, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData('/orders/loyalty_program/points', `user_id=${user_id}&price=${price}`),
+            success,
+            fail
+        );
+    }
+
 }
