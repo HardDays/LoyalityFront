@@ -8,7 +8,7 @@
     </div>
 
     <div class="main-blocks">
-        <div class="main-blocks__item main-blocks__item--create" [routerLink]="['../create']">
+        <div class="main-blocks__item main-blocks__item--create" [routerLink]="['/system','my_cashiers', 'create']">
             <img src="assets/img/plus.png" alt="">
             <span>Создать нового кассира</span>
         </div>
@@ -18,11 +18,16 @@
             <p class="main-blocks__description">
                 <!-- Название магазина<br> -->
                 E-mail: {{item.email}}
+                <ng-container *ngIf="item.operator_status == 'deleted'">
+                    <br><span style="color: red">Удален</span>
+                </ng-container>
             </p>
 
-            <a [routerLink]="['../edit', item.id]" class="main-blocks__link main-blocks__link--yellow main-blocks__link--edit">Редактировать</a>
-            <a (click)="DeleteOperator(item)" class="main-blocks__link main-blocks__link--yellow main-blocks__link--delete main-blocks__link--delete_yellow">Удалить</a>
-        </div>
+            <a [routerLink]="['/system','my_cashiers', 'edit', item.id]" class="main-blocks__link main-blocks__link--yellow main-blocks__link--edit">Редактировать</a>
+            <ng-container *ngIf="item.operator_status != 'deleted'">
+                <a (click)="DeleteOperator(item)" class="main-blocks__link main-blocks__link--yellow main-blocks__link--delete main-blocks__link--delete_yellow">Удалить</a>
+            </ng-container>
+            </div>
     </div>
 
 </div>

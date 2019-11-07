@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
+import { StoresComponent } from './stores.component';
 import { StoreAccessGuard } from './store.guard';
-import { StoreListComponent } from './list/list.component';
-import { StoreEditComponent } from './edit/edit.component';
-import { StoreCreateComponent } from './create/create.component';
 
-const routes: Routes = [
-    { path: '', redirectTo: 'list', pathMatch: 'full'},
-    { path: 'list', component: StoreListComponent, canActivate:[StoreAccessGuard]},
-    { path: 'edit/:id', component: StoreEditComponent,canActivate:[StoreAccessGuard]},
-    {
-        path: 'create', component: StoreCreateComponent,canActivate:[StoreAccessGuard]
-    }
+const routes: Routes =
+[
+  {
+    path: '', component: StoresComponent, children:[
+      { path: '', redirectTo: 'list', pathMatch: 'full', canActivate:[StoreAccessGuard]},
+      { path: 'list', loadChildren: 'src/app/system/stores/list/list.module#StoresListModule', canActivate:[StoreAccessGuard]},
+      { path: 'edit', loadChildren: 'src/app/system/stores/edit/edit.module#StoreEditModule',canActivate:[StoreAccessGuard]},
+      {
+        path: 'create', loadChildren: 'src/app/system/stores/create/create.module#StoreCreateModule',canActivate:[StoreAccessGuard]
+      }
+    ]
+  }
 ];
 
 @NgModule({

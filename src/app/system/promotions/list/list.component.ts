@@ -40,8 +40,8 @@ QueryString = "";
   UpdatePromotions(q?:string)
   {
     const promotions: PromotionModel[] = this.service.GetPromotions();
-
-    this.Promotions = q ? promotions.filter((obj) => obj.name.indexOf(q) >=0 ) : promotions;
+    const _q = q ? q.toLowerCase() : "";
+    this.Promotions = q ? promotions.filter((obj) => obj.name.toLowerCase().indexOf(_q) >=0 ) : promotions;
   }
 
   DeletePromotion(Item)

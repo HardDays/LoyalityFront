@@ -5,12 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { PromotionsListComponent } from './list/list.component';
 import { PromotionEditComponent } from './edit/edit.component';
 import { PromotionsAccessGuard } from './promotions.guard';
+import { PromotionsComponent } from './promotions.component';
 
-const routes: Routes = [
-    // { path: '', redirectTo: 'edit/2', pathMatch: 'full'},
-    { path: '', redirectTo: 'list', pathMatch: 'full'},
-    { path: 'list', component: PromotionsListComponent, canActivate:[PromotionsAccessGuard]},
-    { path: 'edit/:id', component: PromotionEditComponent,canActivate:[PromotionsAccessGuard]}
+
+const routes: Routes =
+[
+  {
+    path: '', component: PromotionsComponent, children:[
+      { path: '', redirectTo: 'list', pathMatch: 'full', canActivate:[PromotionsAccessGuard]},
+      { path: 'list', loadChildren: 'src/app/system/promotions/list/list.module#PromotionsListModule', canActivate:[PromotionsAccessGuard]},
+      { path: 'edit', loadChildren: 'src/app/system/promotions/edit/edit.module#PromotionEditModule',canActivate:[PromotionsAccessGuard]}
+    ]
+  }
 ];
 
 @NgModule({

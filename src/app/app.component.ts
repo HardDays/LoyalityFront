@@ -13,11 +13,11 @@ export class AppComponent  implements OnInit{
 
   constructor(private auth: AuthService, private cdr: ChangeDetectorRef, private router: Router) {
     this.IsLoggedIn = this.auth.IsLoggedIn;
-    this.OnLoginChange();
+    // this.OnLoginChange();
     this.auth.onAuthChange$.subscribe(
         (val) => {
             this.IsLoggedIn = val;
-            this.OnLoginChange();
+            // this.OnLoginChange();
         }
     )
   }
@@ -26,8 +26,8 @@ export class AppComponent  implements OnInit{
   }
 
 
-  OnLoginChange()
-  {
-    this.router.navigate([this.IsLoggedIn ? 'system' : 'auth']);
-  }
+  // OnLoginChange()
+  // {
+  //   this.router.navigate([this.IsLoggedIn ? 'system' : 'auth']);
+  // }
 }

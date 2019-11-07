@@ -9,6 +9,7 @@ export class OperatorModel{
         public second_name?: string,
         public last_name?: string,
         public phone?: string,
+        public operator_status?: string,
         public gender?: string,
         public birth_day?: string,
         public store_id?: number,

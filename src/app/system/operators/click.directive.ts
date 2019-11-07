@@ -1,4 +1,4 @@
-import {Directive, HostListener, OnInit, Output, EventEmitter, ElementRef} from '@angular/core';
+import {Directive, HostListener, OnInit, Output, EventEmitter, ElementRef, NgModule} from '@angular/core';
 
 @Directive({
     selector: '[clickDirective]'
@@ -24,3 +24,17 @@ export class ClickDirective implements OnInit{
     }
      
 }
+
+@NgModule({
+    declarations: [
+        ClickDirective
+    ],
+    imports: [
+      
+    ],
+    exports:[
+        ClickDirective
+    ],
+    providers: [ ]
+  })
+  export class ClickDirectiveModule {}

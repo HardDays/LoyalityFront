@@ -1,19 +1,16 @@
-import { TextMaskModule } from 'angular2-text-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { StoresComponent } from './stores.component';
-import { StoreAccessGuard } from './store.guard';
-import { StoreRoutingModule } from './stores.routing';
-import { StoresService } from './stores.service';
-
+import { OperatorCreateRoutingModule } from './create.routing';
+import { OperatorCreateComponent } from './create.component';
+import { ClickDirectiveModule } from '../click.directive';
 
 @NgModule({
   declarations: [
-    StoresComponent
+    OperatorCreateComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +18,10 @@ import { StoresService } from './stores.service';
     HttpModule,
     CommonModule,
     RouterModule,
-    StoreRoutingModule,
     ReactiveFormsModule,
-    TextMaskModule
+    OperatorCreateRoutingModule,
+    ClickDirectiveModule
   ],
-  providers: [ StoreAccessGuard, StoresService]
+  providers: [ ]
 })
-export class StoresModule {}
+export class OperatorCreateModule {}
