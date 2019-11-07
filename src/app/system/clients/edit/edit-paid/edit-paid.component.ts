@@ -68,7 +68,7 @@ export class EditPaidComponent implements OnInit {
           this.Order.price,
           (maxBonuses) => {
             // console.log(`maxBonuses = `, maxBonuses);
-            this.Bonuses.All = maxBonuses['points'];
+            this.Bonuses.Available = maxBonuses['points'];
           }
         );
       }
@@ -91,7 +91,7 @@ export class EditPaidComponent implements OnInit {
       this.Order.promotion_id,
       (maxBonuses) => {
         // console.log(`maxBonuses = `, maxBonuses);
-        this.Bonuses.All = maxBonuses['points'];
+        this.Bonuses.Available = maxBonuses['points'];
       }
     );
   }
@@ -105,14 +105,14 @@ export class EditPaidComponent implements OnInit {
           return;
         }
       }
-      if (this.Bonuses.All < write_off_rule_points) {
+      if (this.Bonuses.Available < write_off_rule_points) {
         return;
       }
 
       let maxWriteOff = (this.Order.price * write_off_rule_percent) / 100;
 
-      if (maxWriteOff > this.Bonuses.All) {
-        maxWriteOff = this.Bonuses.All;
+      if (maxWriteOff > this.Bonuses.Available) {
+        maxWriteOff = this.Bonuses.Available;
       }
 
       this.Bonuses.Available = maxWriteOff;
