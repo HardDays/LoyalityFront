@@ -46,33 +46,33 @@ export class EditPaidComponent implements OnInit {
   }
 
   getLoyalty() {
-    this.loyaltyService.GetLoyalty(this.Client.loyalty_program_id,
-      (data) => {
-        console.log(`data = `, data);
-        const curLoyaltysFilter = data['loyalty_levels'].filter(x => x.min_price <= this.Order.price);
-        const curLoyaltysSort = curLoyaltysFilter.sort(
-          (a, b) => {
-            return  b.min_price - a.min_price;
-          }
-        );
-        const curLoyalty = curLoyaltysSort[0];
-        // this.getAvailableBonus(
-        //   curLoyalty.write_off_rule,
-        //   curLoyalty.write_off_limited,
-        //   curLoyalty.write_off_min_price,
-        //   curLoyalty.write_off_rule_points,
-        //   curLoyalty.write_off_rule_percent
-        // );
+    // this.loyaltyService.GetLoyalty(this.Client.loyalty_program_id,
+    //   (data) => {
+    //     console.log(`data = `, data);
+    //     const curLoyaltysFilter = data['loyalty_levels'].filter(x => x.min_price <= this.Order.price);
+    //     const curLoyaltysSort = curLoyaltysFilter.sort(
+    //       (a, b) => {
+    //         return  b.min_price - a.min_price;
+    //       }
+    //     );
+    //     const curLoyalty = curLoyaltysSort[0];
+    //     // this.getAvailableBonus(
+    //     //   curLoyalty.write_off_rule,
+    //     //   curLoyalty.write_off_limited,
+    //     //   curLoyalty.write_off_min_price,
+    //     //   curLoyalty.write_off_rule_points,
+    //     //   curLoyalty.write_off_rule_percent
+    //     // );
         this.clientsService.GetLoyaltyPoints(
           this.Client.id,
-          this.Order.price,
+          +this.Order.price,
           (maxBonuses) => {
             // console.log(`maxBonuses = `, maxBonuses);
-            this.Bonuses.Available = maxBonuses['points'];
+            this.Bonuses.Available = (+maxBonuses['points']) / 100;
           }
         );
-      }
-    );
+    //   }
+    // );
   }
 
   getPromotion() {
@@ -87,11 +87,11 @@ export class EditPaidComponent implements OnInit {
     // );
     this.clientsService.GetPromotionPoints(
       this.Client.id,
-      this.Order.price,
+      +this.Order.price,
       this.Order.promotion_id,
       (maxBonuses) => {
         // console.log(`maxBonuses = `, maxBonuses);
-        this.Bonuses.Available = maxBonuses['points'];
+        this.Bonuses.Available = (+maxBonuses['points']) / 100;
       }
     );
   }
