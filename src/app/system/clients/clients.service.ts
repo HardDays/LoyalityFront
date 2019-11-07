@@ -109,6 +109,7 @@ export class ClientsService {
       success?: (data) => void, fail?: (err) => void) {
       price = price * 100;
       const params = {user_id, price, write_off_points};
+      write_off_points = write_off_points * 100;
       if (write_off_points === 0) {
         delete params['write_off_points'];
       }
@@ -122,6 +123,7 @@ export class ClientsService {
     CreateOrderForPromotion(user_id: number, promotion_id: number, price: number, write_off_points = 0,
       success?: (data) => void, fail?: (err) => void) {
       price = price * 100;
+      write_off_points = write_off_points * 100;
       const params = {user_id, promotion_id, price, write_off_points};
       if (write_off_points === 0) {
         delete params['write_off_points'];

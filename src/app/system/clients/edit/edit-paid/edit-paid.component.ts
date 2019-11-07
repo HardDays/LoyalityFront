@@ -68,7 +68,7 @@ export class EditPaidComponent implements OnInit {
           this.Order.price,
           (maxBonuses) => {
             // console.log(`maxBonuses = `, maxBonuses);
-            this.Bonuses.Available = maxBonuses['points'];
+            this.Bonuses.Available = (+maxBonuses['points']) / 100;
           }
         );
       }
@@ -91,7 +91,7 @@ export class EditPaidComponent implements OnInit {
       this.Order.promotion_id,
       (maxBonuses) => {
         // console.log(`maxBonuses = `, maxBonuses);
-        this.Bonuses.Available = maxBonuses['points'];
+        this.Bonuses.Available = (+maxBonuses['points']) / 100;
       }
     );
   }
