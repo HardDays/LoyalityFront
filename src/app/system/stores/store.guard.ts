@@ -21,6 +21,10 @@ export class StoreAccessGuard implements CanActivate{
           this.router.navigate(["/system/my_clients"]);
           return false;
         }
+        else if (myRole === 'client') {
+          this.router.navigate(["/system/client_profile"]);
+          return false;
+        }
       } else {
         this.router.navigate(["/auth"]);
         return false;

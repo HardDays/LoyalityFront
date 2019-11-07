@@ -14,6 +14,8 @@ const routes: Routes =
       { path: 'my_cashiers', loadChildren: './operators/operators.module#OperatorsModule', canActivate:[SystemAccessGuard]},
       { path: 'my_clients', loadChildren: './clients/clients.module#ClientsModule', canActivate:[SystemAccessGuard]},
       { path: 'my_promotions', loadChildren: './promotions/promotions.module#PromotionsModule', canActivate:[SystemAccessGuard]},
+      { path: 'client_profile', loadChildren: './client-profile/client-profile.module#ClientProfileModule',
+              canActivate: [SystemAccessGuard]},
       { path: 'settings', component: SettingsComponent, canActivate:[SystemAccessGuard]},
       // { path: 'test', component: TestComponent },
       { path: '**', component: TestComponent }

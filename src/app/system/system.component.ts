@@ -73,6 +73,9 @@ export class SystemComponent implements OnInit
       if(this.Me.user_type === "operator") {
         this.UserTypeText = "Кассир";
       }
+      else if(this.Me.user_type === "client") {
+        this.UserTypeText = "Покупатель";
+      }
     }
 
 
