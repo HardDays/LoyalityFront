@@ -151,7 +151,7 @@ export class CreateClientByUserComponent implements OnInit {
       this.service.CreateOrderForPromotion(
         user_id,
         +this.SelectedLoyality.id,
-        this.OrderPrice,
+        +this.OrderPrice,
         0,
         (res) => {
           this.isShowSuccessModal = true;
@@ -163,7 +163,7 @@ export class CreateClientByUserComponent implements OnInit {
     } else {
       this.service.CreateOrderForLoyalty(
         user_id,
-        this.OrderPrice,
+        +this.OrderPrice,
         0,
         (res) => {
           this.isShowSuccessModal = true;

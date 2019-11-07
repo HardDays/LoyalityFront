@@ -148,8 +148,8 @@ export class EditPaidComponent implements OnInit {
       this.clientsService.CreateOrderForPromotion(
         this.Client.id,
         this.Order.promotion_id,
-        this.Order.price,
-        this.Order.write_off,
+        +this.Order.price,
+        +this.Order.write_off,
         (res) => {
           this.isModalOpened = true;
         },
@@ -160,8 +160,8 @@ export class EditPaidComponent implements OnInit {
     } else {
       this.clientsService.CreateOrderForLoyalty(
         this.Client.id,
-        this.Order.price,
-        this.Order.write_off,
+        +this.Order.price,
+        +this.Order.write_off,
         (res) => {
           this.isModalOpened = true;
         },
