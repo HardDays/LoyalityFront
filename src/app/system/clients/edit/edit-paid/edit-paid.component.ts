@@ -36,7 +36,7 @@ export class EditPaidComponent implements OnInit {
     console.log(`Client = `, this.Client);
     console.log(`Order = `, this.Order);
 
-    this.Bonuses.All = this.Client.points;
+    this.Bonuses.All = (+this.Client.points) / 100;
 
     if (!this.Order.promotion_id) {
       this.getLoyalty();
@@ -68,7 +68,7 @@ export class EditPaidComponent implements OnInit {
           this.Order.price,
           (maxBonuses) => {
             // console.log(`maxBonuses = `, maxBonuses);
-            this.Bonuses.Available = (+maxBonuses['points']) / 100;
+            this.Bonuses.Available = maxBonuses['points'];
           }
         );
       }
@@ -91,7 +91,7 @@ export class EditPaidComponent implements OnInit {
       this.Order.promotion_id,
       (maxBonuses) => {
         // console.log(`maxBonuses = `, maxBonuses);
-        this.Bonuses.Available = (+maxBonuses['points']) / 100;
+        this.Bonuses.Available = maxBonuses['points'];
       }
     );
   }
