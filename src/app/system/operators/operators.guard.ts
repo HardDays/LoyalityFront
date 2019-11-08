@@ -10,6 +10,25 @@ export class OperatorsAccessGuard implements CanActivate{
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
         console.log(router.routeConfig.path);
+        let isLoginned = this.auth.IsLoggedIn;
+        let myRole = this.auth.LoginData.user_type;
+
+        // console.log(`Info router: isLoginned = ${isLoginned}, myRole = ${myRole}`);
+
+        if (isLoginned) {
+          if (myRole === 'operator') {
+            this.router.navigate(["/system/my_clients"]);
+            return false;
+          }
+          else if (myRole === 'client') {
+            this.router.navigate(["/system/client_profile"]);
+            return false;
+          }
+        } else {
+          this.router.navigate(["/auth"]);
+          return false;
+        }
+        return true;
         // if(router.data)
         // {
         //     if(router.data.auth)

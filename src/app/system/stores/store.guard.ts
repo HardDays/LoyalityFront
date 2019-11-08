@@ -10,7 +10,7 @@ export class StoreAccessGuard implements CanActivate{
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
 
-      console.log(router.routeConfig.path);
+      // console.log(router.routeConfig.path);
       let isLoginned = this.auth.IsLoggedIn;
       let myRole = this.auth.LoginData.user_type;
 
