@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientProfileService } from '../client-profile.service';
 
 @Component({
   selector: 'app-client-bonuses',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientBonusesComponent implements OnInit {
 
-  constructor() { }
+  Client = this.profileService.ClientProfile;
+  Bonuses = [];
+
+  Today = new Date();
+
+  constructor(private profileService: ClientProfileService) { }
 
   ngOnInit() {
+    this.GetBonuses();
+    console.log(this.Client);
+  }
+
+  GetBonuses() {
+    this.profileService.GetClientOrders(
+      (res) => {
+        this.Bonuses = res;
+        console.log(`Bonuses = `, this.Bonuses);
+      },
+      (err) => {
+
+      }
+    );
   }
 
 }

@@ -95,8 +95,8 @@ export class AuthService
         localStorage.setItem(this.login_field ,JSON.stringify(data));
         this.http.BaseInitByToken(data.token);
         this.LoginData = data;
-        // TODO: DELETE THIS LINE
-        this.LoginData.user_type = 'client';
+        // TODO: DELETE THIS LINE or LOGIN AS CLIENT
+        // this.LoginData.user_type = 'client';
         this.onAuthChange$.next(true);
     }
 

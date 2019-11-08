@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
+import { ClientProfileService } from './client-profile.service';
 
 @Component({
   selector: 'client-profile-cmp',

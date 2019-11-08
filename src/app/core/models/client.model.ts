@@ -9,6 +9,8 @@ export class ClientModel{
         public birth_day?:string,
         public loyalty_program_id?:number,
         public card_number?:string,
-        public points?: number
+        public points?: number,
+        public recommendator_phone?: string,
+        public email?: string
     ){}
 }
