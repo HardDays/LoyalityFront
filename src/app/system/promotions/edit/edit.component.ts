@@ -97,7 +97,25 @@ export class PromotionEditComponent implements OnInit {
       {
           this.service.GetPromotion(this.Id,
             (res: PromotionModel) => {
-                this.Form.patchValue(res);
+                let data = res;
+
+                if(data.accrual_money)
+                  data.accrual_money = Math.round(data.accrual_money / 100);
+
+                if(data.accrual_points)
+                  data.accrual_points = Math.round(data.accrual_points / 100);
+
+                if(data.write_off_rule_points)
+                  data.write_off_rule_points = Math.round(data.write_off_rule_points / 100);
+          
+
+                if(data.accordance_points)
+                  data.accordance_points = Math.round(data.accordance_points / 100);
+          
+                if(data.write_off_min_price)
+                  data.write_off_min_price = Math.round(data.write_off_min_price / 100);
+
+                this.Form.patchValue(data);
                 this.Form.controls.begin_date.setValue({
                     date:this.GetDisableUntilData(new Date(res.begin_date))
                 });
@@ -138,8 +156,24 @@ export class PromotionEditComponent implements OnInit {
     if(validate && this.Form.valid)
     {
       let data = this.Form.getRawValue();
-        data.begin_date = this.IDateToISO(data.begin_date.date);
-        data.end_date = this.IDateToISO(data.end_date.date);
+      data.begin_date = this.IDateToISO(data.begin_date.date);
+      data.end_date = this.IDateToISO(data.end_date.date);
+
+      if(data.accrual_money)
+        data.accrual_money = data.accrual_money * 100;
+
+      if(data.accrual_points)
+        data.accrual_points = data.accrual_points * 100;
+
+      if(data.write_off_rule_points)
+        data.write_off_rule_points = data.write_off_rule_points * 100;
+
+      if(data.accordance_points)
+        data.accordance_points = data.accordance_points * 100;
+
+      if(data.write_off_min_price)
+        data.write_off_min_price = data.write_off_min_price * 100;
+
 
       const error = (err) => { 
         const body = err.body;
@@ -154,16 +188,17 @@ export class PromotionEditComponent implements OnInit {
       if(this.Id == 'new')
       {
         this.service.CreatePromotion(data, (res) => {
-            this.NavigateToPromotions();
+          this.NavigateToPromotions();
         }, error);
       }
       else{
         this.service.PutPromotion(this.Id, data, (res) => {
-            this.NavigateToPromotions();
+          this.NavigateToPromotions();
         }, error);
       }
     }
-    else{
+    else
+    {
       return;
     }
   }
@@ -210,6 +245,7 @@ export class PromotionEditComponent implements OnInit {
         this.Form.controls[i].markAsDirty();
         this.Form.controls[i].markAsTouched();
         remove_error(i);
+        this.Form.controls[i].updateValueAndValidity();
     }
 
     let hasError = false;
@@ -235,20 +271,9 @@ export class PromotionEditComponent implements OnInit {
         });
         hasError = true;
       }
-      else{
-        this.Form.controls.end_date.setErrors({
-          'wrong': null
-        });
-      }
+      
     }
-
-    this.Form.controls.end_date.updateValueAndValidity();
-    
-
-
     let scrollTo = 0;
-    
-    
 
     const ferror = (property_name, min, max) => {
       if(!data[property_name] || data[property_name] < min || data[property_name] > max)
@@ -258,7 +283,6 @@ export class PromotionEditComponent implements OnInit {
         });
         hasError = true;
       }
-      // else remove_error(property_name)
     }
 
     if(data.accrual_rule == "accrual_percent")

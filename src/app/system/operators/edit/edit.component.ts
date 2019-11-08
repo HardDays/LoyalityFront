@@ -66,6 +66,7 @@ export class OperatorEditComponent implements OnInit {
   constructor(private _location: Location, private auth: AuthService, private router: Router, private route: ActivatedRoute,
     private service: OperatorsService)
   {
+    // console.log("EDIT COMPONENT");
     this.route.params.subscribe(params=> {
       if(params && params['id'])
       {
@@ -87,19 +88,20 @@ export class OperatorEditComponent implements OnInit {
 
   UpdateVals()
   {
-    const vals = this.service.GetOperatorById(this.Id);
+    // const vals = this.service.GetOperatorById(this.Id);
 
-    if(!vals || !vals.id || vals.id != this.Id)
-    {
+    // if(!vals || !vals.id || vals.id != this.Id)
+    // {
       this.service.GetOperator(this.Id, 
         (res) => {
           this.InitAll(res);
         },
         err => {
+          this.router.navigate(["/system"]);
         });
-    }else{
-      this.InitAll(vals);
-    }
+    // }else{
+    //   this.InitAll(vals);
+    // }
   }
 
   InitAll(Val)

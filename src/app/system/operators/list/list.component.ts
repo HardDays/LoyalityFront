@@ -38,18 +38,20 @@ QueryString = "";
   UpdateOperators(q?:string)
   {
     const operators: OperatorModel[] = this.service.GetOperators();
-
-    this.Operators = q ? operators.filter((obj) => (obj.first_name + " " + (obj.second_name ? obj.second_name + " " : "") + obj.last_name).toLowerCase().indexOf(q) > -1) : operators;
+    const _q = q ? q.toLowerCase() : "";
+    this.Operators = q ? operators.filter((obj) => (obj.first_name + " " + (obj.second_name ? obj.second_name + " " : "") + obj.last_name).toLowerCase().indexOf(_q) > -1) : operators;
   }
 
   DeleteOperator(Item)
   {
+    console.log(Item);
       this.service.DeleteOperator(Item.id, 
           (res) => {
+            console.log(res);
               this.service.RefreshOperators();
           },
           (err) => {
-
+            console.log(err);
           })
   }
 }

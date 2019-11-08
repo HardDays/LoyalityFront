@@ -56,8 +56,8 @@ QueryString = "";
   UpdateStores(q?:string)
   {
     const stores: StoreModel[] = this.service.GetStores();
-
-    this.Stores = q ? stores.filter((obj) => obj.name.indexOf(q) > -1) : stores;
+    const _q = q? q.toLowerCase() : "";
+    this.Stores = q ? stores.filter((obj) => obj.name.toLowerCase().indexOf(_q) > -1) : stores;
     for(let item of this.Stores)
     {
       this.Expanded[item.id] = false;

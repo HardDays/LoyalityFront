@@ -16,9 +16,7 @@ import { PromotionsService } from './promotions.service';
 
 @NgModule({
   declarations: [
-      PromotionsComponent,
-      PromotionsListComponent,
-      PromotionEditComponent
+      PromotionsComponent
   ],
   imports: [
     CommonModule,

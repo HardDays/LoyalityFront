@@ -1,19 +1,15 @@
-import { TextMaskModule } from 'angular2-text-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { StoresComponent } from './stores.component';
-import { StoreAccessGuard } from './store.guard';
-import { StoreRoutingModule } from './stores.routing';
-import { StoresService } from './stores.service';
-
+import { OperatorsListComponent } from './list.component';
+import { OperatorsListRoutingModule } from './list.routing';
 
 @NgModule({
   declarations: [
-    StoresComponent
+    OperatorsListComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +17,9 @@ import { StoresService } from './stores.service';
     HttpModule,
     CommonModule,
     RouterModule,
-    StoreRoutingModule,
     ReactiveFormsModule,
-    TextMaskModule
+    OperatorsListRoutingModule
   ],
-  providers: [ StoreAccessGuard, StoresService]
+  providers: [ ]
 })
-export class StoresModule {}
+export class OperatorsListModule {}

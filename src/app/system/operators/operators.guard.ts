@@ -9,6 +9,7 @@ export class OperatorsAccessGuard implements CanActivate{
     {}
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
+        console.log(router.routeConfig.path);
         // if(router.data)
         // {
         //     if(router.data.auth)

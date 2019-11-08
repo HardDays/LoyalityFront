@@ -107,4 +107,10 @@ export class OperatorCreateComponent implements OnInit {
     this.Form.controls.store_id.setValue(this.SelectedStore.id);
     this.ShowSelect = false;
   }
+
+  HideSelect($event)
+  {
+    if(this.ShowSelect)
+      this.ShowSelect = false;
+  }
 }

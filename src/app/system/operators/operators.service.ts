@@ -43,7 +43,7 @@ export class OperatorsService {
         );
     }
 
-    GetOperators()
+    GetOperators(): OperatorModel[]
     {
         return JSON.parse(JSON.stringify(this.Operators));
     }

@@ -49,6 +49,7 @@
             <p class="auth-block__hint auth-block__hint--error">
                 <ng-container *ngIf="Form.controls.end_date.invalid && (Form.controls.end_date.dirty || Form.controls.end_date.touched)">
                     <span *ngIf="Form.controls.end_date.errors.wrong">Введите корректные данные.</span>
+                    <span *ngIf="Form.controls.end_date.errors.required">Введите корректные данные.</span>
                 </ng-container>
             </p>
         </div>

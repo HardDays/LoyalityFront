@@ -63,13 +63,13 @@
                 name="email"
             >
             <p class="auth-block__hint auth-block__hint--error">
-                <ng-container *ngIf="last_name.invalid && (email.dirty || email.touched)">
+                <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
                     <span *ngIf="email.errors.required">Поле обязательно к заполнению.</span>
                     <span *ngIf="email.errors.email">Введите корректный E-mail</span>
                 </ng-container>
             </p>
             <p class="create-block__label create-block__label--light">Выбрать магазин</p>
-            <div class="create-block__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
+            <div clickDirective  (clickOutside)="HideSelect($event)" class="create-block__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
                 <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedStore ? SelectedStore.name: 'Магазин'}}</div>
                 <ul class="create-block__select-list">
                     <ng-container *ngFor="let item of Stores">

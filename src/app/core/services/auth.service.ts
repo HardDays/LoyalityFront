@@ -48,6 +48,7 @@ export class AuthService
                 {
                     success(res);
                 }
+                // this.router.navigate(["/"]);
             },
             (err) => {
                 if(fail && typeof fail == "function")
@@ -88,6 +89,8 @@ export class AuthService
         this.http.DeleteAuthToken();
         this.onAuthChange$.next(false);
         this.onCompanyChange$.next(false);
+
+        this.router.navigate(["/auth"]);
     }
 
     InitSession(data:LoginSuccessModel)

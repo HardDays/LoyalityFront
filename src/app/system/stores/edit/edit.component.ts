@@ -116,6 +116,14 @@ export class StoreEditComponent implements OnInit {
 
   Save()
   {
+    this.Form.updateValueAndValidity();
+    for(const i in this.Form.controls)
+    {
+      this.Form.get(i).updateValueAndValidity();
+      this.Form.get(i).markAsDirty();
+      this.Form.get(i).markAsTouched();
+    }
+    
     const valid = this.Form.valid;
 
     if(valid)
