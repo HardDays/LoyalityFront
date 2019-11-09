@@ -1,0 +1,36 @@
+
+            <section class="page__content-wrap">
+              <div class="page__content page__content--create">
+
+              <div class="create-block lk">
+                  <p class="create-block__label create-block__label--bold lk__title">Мои бонусы</p>
+
+                  <p class="lk__text">Программа лояльности: <strong>TODO ТУТ НАЗВАНИЕ ЛОЯЛЬНОСТИ</strong></p>
+                  <p class="lk__text">Активные бонусы на {{Today | date: 'dd.MM.yyyy'}}: <strong>{{Client.points}}</strong></p>
+              </div>
+
+              <div class="report-make__table lk__table">
+                  <div class="report-make__row report-make__row--head">
+                      <div class="report-make__cell">Дата покупки</div>
+                      <div class="report-make__cell">Название магазина</div>
+                      <div class="report-make__cell">Общая сумма</div>
+                      <div class="report-make__cell">Программа лояльности/Акция</div>
+                      <div class="report-make__cell">Оплата бонусами</div>
+                      <div class="report-make__cell">ИТОГО к оплате с учетом бонусов</div>
+                      <div class="report-make__cell">Остаток бонусов</div>
+                  </div>
+                  <div *ngFor="let item of Bonuses; let i = index" class="report-make__row">
+                      <div class="report-make__cell">{{item['created_at'] | date: 'dd.MM.yyyy'}}</div>
+                      <div class="report-make__cell">{{item['store']['name']}}</div>
+                      <div class="report-make__cell">{{(+item['price'])/100}} ₽</div>
+                      <div *ngIf="item['promotion']&&item['promotion']['name']" class="report-make__cell">{{item['promotion']['name']}}</div>
+                      <div *ngIf="!item['promotion_id'] || !item['promotion']" class="report-make__cell">Программа лояльности</div>
+                      <div class="report-make__cell">{{item['write_off_points']?(+item['write_off_points'])/100:'-'}}</div>
+                      <div class="report-make__cell">{{+(item['price']-item['write_off_points'])/100}} ₽</div>
+                      <div class="report-make__cell">TO DO</div>
+                  </div>
+              </div>
+
+              </div>
+          </section>
+

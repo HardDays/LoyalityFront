@@ -132,6 +132,10 @@ export class CreateClientByUserComponent implements OnInit {
 
       data['birth_day'] = data['birth_day']['formatted'];
 
+      if (this.Recommendation.isTrue && this.Recommendation.phone) {
+        data['recommendator_phone'] = this.Recommendation.phone;
+      }
+
       this.service.CreateClient(data, (res) => {
         console.log(`Success!`, res);
         if (this.OrderPrice) {

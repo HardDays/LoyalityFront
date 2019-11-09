@@ -32,7 +32,7 @@ export class AuthService
             {
                 this.GetCompanyInfo();
             }
-            
+
         });
         this.onAuthChange$.next(false);
         this.GetLoginDataFromLocal();
@@ -98,6 +98,8 @@ export class AuthService
         localStorage.setItem(this.login_field ,JSON.stringify(data));
         this.http.BaseInitByToken(data.token);
         this.LoginData = data;
+        // TODO: DELETE THIS LINE or LOGIN AS CLIENT
+        // this.LoginData.user_type = 'client';
         this.onAuthChange$.next(true);
     }
 
@@ -119,7 +121,7 @@ export class AuthService
                 else{
                     this.router.navigate(["/system", "settings"])
                 }
-                
+
             },
             (err) => {
                 this.onCompanyChange$.next(false);
@@ -182,7 +184,7 @@ export class AuthService
                         fail(null);
                     }
                 }
-                
+
             },
             (err) => {
                 this.onCompanyChange$.next(false);

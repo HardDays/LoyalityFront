@@ -10,7 +10,7 @@ export class StoreAccessGuard implements CanActivate{
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
 
-      console.log(router.routeConfig.path);
+      // console.log(router.routeConfig.path);
       let isLoginned = this.auth.IsLoggedIn;
       let myRole = this.auth.LoginData.user_type;
 
@@ -19,6 +19,10 @@ export class StoreAccessGuard implements CanActivate{
       if (isLoginned) {
         if (myRole === 'operator') {
           this.router.navigate(["/system/my_clients"]);
+          return false;
+        }
+        else if (myRole === 'client') {
+          this.router.navigate(["/system/client_profile"]);
           return false;
         }
       } else {
