@@ -1,0 +1,13 @@
+<div class="page__content page__content--create">
+    <div class="page__top page__top--create">
+        <span class="page__back"><img (click)="GoBack()" src="./../../../../../assets/img/back.svg" alt=""></span>
+    </div>
+    <div class="create-block customer__block">
+        <p class="create-block__label create-block__label--light">Подтвердить код ({{Phone|phoneShow}})</p>
+        <input [(ngModel)]="Code" type="text" class="customer__input customer__input--code">
+
+        <p class="auth-block__hint auth-block__hint--error" *ngIf="hasError">Ошибка</p>
+        <button (click)="ConfirmCode()" class="button customer__button">Подтвердить</button>
+
+    </div>
+</div>

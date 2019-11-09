@@ -1,0 +1,45 @@
+<div class="page__content page__content--create">
+    <div class="page__top page__top--create">
+        <span class="page__back"><img (click)="GoBack()" src="./../../../../../assets/img/back.svg" alt=""></span>
+    </div>
+<div class="create-block customer__block">
+
+
+
+
+<p class="create-block__label create-block__label--light">Выбрать программу лояльности:</p>
+
+<div class="create-block__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
+    <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedLoyality ? SelectedLoyality.name: 'Программа лояльности'}}</div>
+    <ul class="create-block__select-list">
+        <li (click)="OnSelected(null)">Программа лояльности</li>
+        <ng-container *ngFor="let item of PromotionsProgramm">
+            <li (click)="OnSelected(item)">{{item.name}}</li>
+        </ng-container>
+    </ul>
+</div>
+
+<div class="customer__flex">
+    <div class="customer__part">
+        <p class="create-block__label create-block__label--light">Сумма покупки</p>
+        <input [(ngModel)]="OrderPrice" [ngModelOptions]="{standalone: true}" type="text" class="create-block__input create-block__input--full customer__input--sum">
+    </div>
+</div>
+
+<div class="text-center">
+    <button [disabled]="!OrderPrice" (click)="clickBuy()" class="button create-block__button">Совершить покупку</button>
+</div>
+
+</div>
+</div>
+
+<div *ngIf="isShowSuccessModal" class="modal modal--visible">
+
+    <div class="modal__block modal__block--customer">
+        <span class="modal__close"><img (click)="onCloseSuccessModal()" src="./../../../../../assets/img/close.svg" alt=""></span>
+
+        <div class="modal__customer-content">
+            <p class="customer__created-title">Покупка выполнена!</p>
+        </div>
+    </div>
+    </div>

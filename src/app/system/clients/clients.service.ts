@@ -1,11 +1,12 @@
-
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/core/services/http.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { StoreModel } from '../../core/models/store.model';
 import { ClientModel } from 'src/app/core/models/client.model';
-
+import { AbstractControl, AsyncValidatorFn, FormControl } from '@angular/forms';
+import {switchMap, map} from 'rxjs/operators';
+// import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ClientsService {
@@ -114,7 +115,7 @@ export class ClientsService {
         delete params['write_off_points'];
       }
       this.http.CommonRequest(
-          () => this.http.PostData('/orders/program', params),
+          () => this.http.PostData('/orders/loyalty_program', params),
           success,
           fail
       );
@@ -152,4 +153,22 @@ export class ClientsService {
             fail
         );
     }
+
+
+    searchPhone(phone: string) {
+      phone = phone.replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
+      return this.http.GetData('/clients/phone', 'phone=' + phone);
+    }
+
+    createValidatorPhone() {
+      return (control: AbstractControl) => {
+        return this.searchPhone(control.value).pipe(map(res => {
+          if (control.value.indexOf('_') > -1) {
+              return { 'incorrect': true };
+            }
+          return res.json()['status'] ? { 'used': true } : null ;
+        }));
+      };
+    }
+
 }

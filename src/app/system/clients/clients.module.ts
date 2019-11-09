@@ -1,3 +1,4 @@
+import { CreateClientProfileComponent } from './create/create-client-profile/create-client-profile.component';
 import { LoyaltyProgramsService } from './../promotions/loyalty.service';
 import { EditSearchComponent } from './edit/edit-search/edit-search.component';
 import { EditPaidComponent } from './edit/edit-paid/edit-paid.component';
@@ -23,6 +24,8 @@ import { CreateClientByUserComponent } from './create/create-client-by-user/crea
 import { PromotionsService } from '../promotions/promotions.service';
 
 import { PipesModule } from './../../core/pipes/pipes.module';
+import { CreateClientConfirmPhoneComponent } from './create/create-client-confirm-phone/create-client-confirm-phone.component';
+import { CreateClientFirstBuyComponent } from './create/create-client-first-buy/create-client-first-buy.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { PipesModule } from './../../core/pipes/pipes.module';
     EditClientComponent,
     EditLoyalityComponent,
     EditPaidComponent,
-    EditSearchComponent
+    EditSearchComponent,
+    CreateClientProfileComponent,
+    CreateClientConfirmPhoneComponent,
+    CreateClientFirstBuyComponent
   ],
   imports: [
     CommonModule,

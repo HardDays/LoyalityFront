@@ -12,15 +12,19 @@ import { CreateClientByPhoneComponent } from './create/create-client-by-phone/cr
 import { CreateClientByUserComponent } from './create/create-client-by-user/create-client-by-user.component';
 import { EditLoyalityComponent } from './edit/edit-loyality/edit-loyality.component';
 import { EditPaidComponent } from './edit/edit-paid/edit-paid.component';
+import { CreateClientProfileComponent } from './create/create-client-profile/create-client-profile.component';
+import { CreateClientConfirmPhoneComponent } from './create/create-client-confirm-phone/create-client-confirm-phone.component';
+import { CreateClientFirstBuyComponent } from './create/create-client-first-buy/create-client-first-buy.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'start', pathMatch: 'full'},
     { path: 'start', component: ClientsStartComponent, canActivate: [ClientsAccessGuard]},
     { path: 'create', component: ClientsCreateComponent, canActivate: [ClientsAccessGuard],
       children: [
-        { path: '', redirectTo: 'phone'},
-        { path: 'phone', component: CreateClientByPhoneComponent, canActivate: [ClientsAccessGuard]},
-        { path: 'user', component: CreateClientByUserComponent, canActivate: [ClientsAccessGuard]}
+        { path: '', redirectTo: 'profile'},
+        { path: 'profile', component: CreateClientProfileComponent, canActivate: [ClientsAccessGuard]},
+        { path: 'confirm', component: CreateClientConfirmPhoneComponent, canActivate: [ClientsAccessGuard]},
+        { path: 'buy', component: CreateClientFirstBuyComponent, canActivate: [ClientsAccessGuard]}
       ]
     },
     { path: 'edit', component: ClientsEditComponent, canActivate: [ClientsAccessGuard],
