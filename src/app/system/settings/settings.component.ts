@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, HostListener } from '@angular/core';
+import {Location} from '@angular/common';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { IDictionary, IStringToAny } from 'src/app/core/interfaces/dictionary.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginSuccessModel } from '../../core/models/login.success.model';
 
 @Component({
   selector: 'app-settings-cmp',
@@ -10,50 +12,197 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
 
-  Form: FormGroup = new FormGroup({
-    "name": new FormControl('',[
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(30)
-    ])
-  });
+    Me = new LoginSuccessModel();
 
-  get name()
-  {
-    return this.Form.get('name');
-  }
+    GeneralFormError = false;
+    GeneralFormSuccess = false;
+    GeneralForm: FormGroup = new FormGroup({
+        "first_name": new FormControl("", [
+            Validators.required,
+            Validators.maxLength(50),
+            Validators.minLength(3)
+        ]),
+        "last_name": new FormControl("", [
+            Validators.required,
+            Validators.maxLength(50),
+            Validators.minLength(3)
+        ]),
+        "company_name": new FormControl("", [
+            Validators.required,
+            Validators.maxLength(50),
+            Validators.minLength(3)
+        ])
+    });
 
-  constructor(private _location: Location, private auth: AuthService, private router: Router)
-  {
-  }
+    EmailFormError = false;
+    EmailFormSuccess = false;
+    EmailForm: FormGroup = new FormGroup({
+        "current_email": new FormControl("", [
+            Validators.required,
+            Validators.email
+        ]),
+        "email": new FormControl("",[
+            Validators.required,
+            Validators.email,
+            this.MatchEmails()
+        ])
+    });
 
-  ngOnInit()
-  {
-  }
 
-  GoBack()
-  {
-      this._location.back();
-  }
-
-  Save()
-  {
-      for(const i in this.Form.controls)
-      {
-          this.Form.controls[i].markAsDirty();
-          this.Form.controls[i].markAsTouched();
-      }
-    const valid = this.Form.valid;
-
-    if(valid)
+    PasswordFormError = false;
+    PasswordFormSuccess = false;
+    PasswordForm: FormGroup = new FormGroup({
+        "current_password": new FormControl("",[
+            Validators.required,
+            Validators.minLength(7),
+            Validators.maxLength(50)
+        ]),
+        "password": new FormControl("",[
+            Validators.required,
+            Validators.minLength(7),
+            Validators.maxLength(50)
+        ]),
+        "password_confirmation": new FormControl("",[
+            Validators.required,
+            Validators.minLength(7),
+            Validators.maxLength(50),
+            this.MatchPasswords()
+        ])
+    });
+    constructor(
+        private auth: AuthService, 
+        private router: Router, 
+        private route: ActivatedRoute)
     {
-      const data = this.Form.getRawValue();
-      this.auth.CreateCompany(data,(res) => {
-        this.router.navigate(["/system"])
-      },
-      (err) => {
-      })
+        this.auth.onAuthChange$.subscribe((res) => {
+            if(res)
+            {
+                this.UpdateFormVals();
+            }
+        });
     }
-  }
 
+    ngOnInit()
+    {
+        this.UpdateFormVals();
+    }
+
+    UpdateFormVals()
+    {
+        this.Me = this.auth.LoginData;
+        this.UpdateEmailForm();
+        this.UpdatePasswordForm();
+        this.UpdateGeneralForm();
+    }
+
+    UpdateEmailForm()
+    {
+        this.EmailForm.reset();
+        this.EmailForm.get('current_email').setValue(this.Me.email);
+    }
+
+    UpdatePasswordForm()
+    {
+        this.PasswordForm.reset();
+    }
+
+    UpdateGeneralForm()
+    {
+        this.GeneralForm.reset();
+
+        this.GeneralForm.get('first_name').setValue(this.Me.first_name);
+        this.GeneralForm.get('last_name').setValue(this.Me.last_name);
+        this.GeneralForm.get('company_name').setValue(this.auth.CompanyData.name);
+    }
+
+    MatchPasswords()
+    {
+        return (control: AbstractControl): {[key: string]: any} | null => {
+            if(this.PasswordForm && this.PasswordForm.controls)
+            {
+                const values = this.PasswordForm.getRawValue();
+                const forbidden = values.password != values.password_confirmation;
+                return forbidden ?  {'not_match': {value: control.value}} : null;
+            }
+            return null;
+        };
+    }
+
+    MatchEmails()
+    {
+        return (control: AbstractControl): {[key: string]: any} | null => {
+            if(this.Me && this.Me.email)
+            {
+                const old_mail = this.Me.email;
+                if(control.value == old_mail)
+                {
+                    return {'incorrect_new_email': true};
+                }
+            }
+            return null;
+        };
+    }
+
+    UpdatePassword()
+    {
+        for(const i in this.PasswordForm.controls)
+        {
+            this.PasswordForm.get(i).markAsTouched();
+            this.PasswordForm.get(i).markAsDirty();
+        }
+        this.PasswordForm.updateValueAndValidity();
+        this.PasswordFormError = this.PasswordForm.invalid;
+
+        if(this.PasswordFormError)
+            return;
+
+        // ON SUCCESS BLOCK
+        this.PasswordFormSuccess = true;
+        this.UpdatePasswordForm();
+        setTimeout(()=> {
+            this.PasswordFormSuccess = false;
+        }, 3000);
+    }
+
+    UpdateEmail()
+    {
+        for(const i in this.EmailForm.controls)
+        {
+            this.EmailForm.get(i).markAsTouched();
+            this.EmailForm.get(i).markAsDirty();
+        }
+        this.EmailForm.updateValueAndValidity();
+        this.EmailFormError = this.EmailForm.invalid;
+
+        if(this.EmailFormError)
+            return;
+
+        // ON SUCCESS BLOCK
+        this.EmailFormSuccess = true;
+        this.UpdateEmailForm();
+        setTimeout(()=> {
+            this.EmailFormSuccess = false;
+        }, 3000);
+    }
+
+    UpdateGeneral()
+    {
+        for(const i in this.GeneralForm.controls)
+        {
+            this.GeneralForm.get(i).markAsTouched();
+            this.GeneralForm.get(i).markAsDirty();
+        }
+        this.GeneralForm.updateValueAndValidity();
+        this.GeneralFormError = this.GeneralForm.invalid;
+
+        if(this.GeneralFormError)
+            return;
+
+        // ON SUCCESS BLOCK
+        this.GeneralFormSuccess = true;
+        this.UpdateGeneralForm();
+        setTimeout(()=> {
+            this.GeneralFormSuccess = false;
+        }, 3000);
+    }
 }
