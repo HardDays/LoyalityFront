@@ -9,7 +9,7 @@ export enum MenuUrls
 {
     my_stores = 'my_stores',
     my_promotions = 'my_promotions',
-    my_reports = 'my_reports',
+    my_reports = 'reports',
     my_cashiers = 'my_cashiers',
     sms_sending = 'sms_sending',
     rates = 'rates',

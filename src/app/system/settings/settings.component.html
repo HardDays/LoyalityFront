@@ -108,7 +108,8 @@
                     <ng-container *ngIf="EmailForm.controls.email.invalid && (EmailForm.controls.email.dirty || EmailForm.controls.email.touched)">
                         <span *ngIf="EmailForm.controls.email.errors.required">Поле обязательно к заполнению.</span>
                         <span *ngIf="EmailForm.controls.email.errors.email">Введите корректный E-mail.</span>
-                        <span *ngIf="EmailForm.controls.email.errors.wrong">Неправильный E-mail.</span>
+                        <span *ngIf="EmailForm.controls.email.errors.invalid">Неправильный E-mail.</span>
+                        <span *ngIf="EmailForm.controls.email.errors.already_taken">E-mail занят.</span>
                         <span *ngIf="EmailForm.controls.email.errors.incorrect_new_email">Новый E-mail совпадает с текущим.</span>
                     </ng-container>
                 </p>

@@ -80,6 +80,12 @@ export class SettingsComponent implements OnInit {
                 this.UpdateFormVals();
             }
         });
+
+        this.auth.onCompanyChange$.subscribe((res) => {
+            if(res) {
+                this.GeneralForm.get('company_name').setValue(this.auth.CompanyData.name);
+            }
+        })
     }
 
     ngOnInit()
@@ -108,7 +114,7 @@ export class SettingsComponent implements OnInit {
 
     UpdateGeneralForm()
     {
-        this.GeneralForm.reset();
+        // this.GeneralForm.reset();
 
         this.GeneralForm.get('first_name').setValue(this.Me.first_name);
         this.GeneralForm.get('last_name').setValue(this.Me.last_name);
@@ -156,12 +162,24 @@ export class SettingsComponent implements OnInit {
         if(this.PasswordFormError)
             return;
 
-        // ON SUCCESS BLOCK
-        this.PasswordFormSuccess = true;
-        this.UpdatePasswordForm();
-        setTimeout(()=> {
-            this.PasswordFormSuccess = false;
-        }, 3000);
+        const data = this.PasswordForm.getRawValue();
+        this.auth.UpdateProfile(data, 
+            (res) => {
+                this.PasswordFormSuccess = true;
+                this.UpdatePasswordForm();
+                setTimeout(()=> {
+                    this.PasswordFormSuccess = false;
+                }, 3000);
+            },
+            (err) => {
+                if(err.status == 403)
+                {
+                    this.PasswordForm.get('current_password').setErrors({'wrong': true});
+                    this.PasswordFormError = true;
+                }
+            }
+        )
+        
     }
 
     UpdateEmail()
@@ -177,12 +195,35 @@ export class SettingsComponent implements OnInit {
         if(this.EmailFormError)
             return;
 
+        const data = this.EmailForm.getRawValue();
+        this.auth.UpdateProfile(data, 
+            (res) => {
+                this.EmailFormSuccess = true;
+                this.UpdateEmailForm();
+                setTimeout(()=> {
+                    this.EmailFormSuccess = false;
+                }, 3000);
+            },
+            (err) => {
+                if(err.status == 422)
+                {
+                    const body = err.body;
+                    for(var i in body)
+                    {
+                        if(this.EmailForm.get(i))
+                        {
+                            let err = {};
+                            err[body[i][0].toLowerCase()] = true;
+                            this.EmailForm.get(i).setErrors(err);
+                        }
+                    }
+                    this.EmailFormError = true;
+                }
+            }
+        )
+
         // ON SUCCESS BLOCK
-        this.EmailFormSuccess = true;
-        this.UpdateEmailForm();
-        setTimeout(()=> {
-            this.EmailFormSuccess = false;
-        }, 3000);
+        
     }
 
     UpdateGeneral()
@@ -198,11 +239,22 @@ export class SettingsComponent implements OnInit {
         if(this.GeneralFormError)
             return;
 
-        // ON SUCCESS BLOCK
-        this.GeneralFormSuccess = true;
-        this.UpdateGeneralForm();
-        setTimeout(()=> {
-            this.GeneralFormSuccess = false;
-        }, 3000);
+        const data = this.GeneralForm.getRawValue();
+        this.auth.UpdateProfile(data, 
+            (res) => {
+                this.auth.UpdateCompany({name : data.company_name},
+                    (res) => {
+                        this.GeneralFormSuccess = true;
+                        this.UpdateGeneralForm();
+                        setTimeout(()=> {
+                            this.GeneralFormSuccess = false;
+                        }, 3000);
+                    },
+                    (err) => {}
+                );
+            },
+            (err) => {}
+        )
+        
     }
 }

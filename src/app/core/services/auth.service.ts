@@ -195,4 +195,78 @@ export class AuthService
             }
         );
     }
+
+    UpdateCompany(data: any, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PutData('/companies', data),
+            (res: CompanyModel) => {
+                if(res)
+                {
+                    this.CompanyData = res;
+                    localStorage.setItem(this.company_field ,JSON.stringify(res));
+                    this.onCompanyChange$.next(true);
+                    if(success && typeof success == "function")
+                    {
+                        success(res);
+                    }
+                }
+                else{
+                    this.onCompanyChange$.next(false);
+                    if(fail && typeof fail == "function")
+                    {
+                        fail(null);
+                    }
+                }
+
+            },
+            (err) => {
+                this.onCompanyChange$.next(false);
+                if(fail && typeof fail == "function")
+                {
+                    fail(err);
+                }
+            }
+        );
+    }
+
+    UpdateProfile(data: any,  success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PutData('/creators/profile', data),
+            (res: any) => {
+                if(res)
+                {
+                    for(const i in res)
+                    {
+                        if(res[i])
+                        {
+                            this.LoginData[i] = res[i];
+                        }
+
+                        this.InitSession(this.LoginData);
+                    }
+                    if(success && typeof success == "function")
+                    {
+                        success(res);
+                    }
+                }
+                else{
+                    this.onAuthChange$.next(false);
+                    if(fail && typeof fail == "function")
+                    {
+                        fail(null);
+                    }
+                }
+
+            },
+            (err) => {
+                this.onAuthChange$.next(false);
+                if(fail && typeof fail == "function")
+                {
+                    fail(err);
+                }
+            }
+        );
+    }
 }

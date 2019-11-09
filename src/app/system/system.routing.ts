@@ -17,8 +17,8 @@ const routes: Routes =
       { path: 'my_loyalty_program', loadChildren: './loyalty/loyalty.module#LoyaltyModule', canActivate:[SystemAccessGuard]},
       { path: 'client_profile', loadChildren: './client-profile/client-profile.module#ClientProfileModule',canActivate: [SystemAccessGuard]},
       { path: 'settings', loadChildren: './settings/settings.module#SettingsModule',canActivate: [SystemAccessGuard]},
+      { path: 'reports', loadChildren: './reports/reports.module#ReportsModule',canActivate: [SystemAccessGuard]},
       { path: 'company', component: CompanyComponent, canActivate:[SystemAccessGuard]},
-      // { path: 'test', component: TestComponent },
       { path: '**', component: TestComponent }
     ]
   }

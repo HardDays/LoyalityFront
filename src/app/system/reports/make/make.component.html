@@ -1,0 +1,7 @@
+<div class="page__content">
+
+    <!-- Add class "report-make--opened" to the opened block like below -->
+    <ng-container *ngFor="let item of MakeReports">
+        <app-make-general-report-cmp [State]="item" (OnChangeState)="ChangeReportState($event)"></app-make-general-report-cmp>
+    </ng-container>
+</div>

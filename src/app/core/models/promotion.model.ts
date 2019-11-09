@@ -1,5 +1,6 @@
 export class PromotionModel{
     constructor(
+        public id?:number,
         public name?: string,
         public begin_date?: string,
         public end_date?: string,
