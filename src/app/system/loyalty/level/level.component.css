@@ -1,0 +1,19 @@
+.create-block__date-input:after {
+    /* content: ''; */
+    display: none;
+    /* position: absolute; */
+    /* top: 5px; */
+    /* right: 17px; */
+    /* width: 14px; */
+    /* height: 16px; */
+    /* background: url(date.svg) no-repeat center; */
+    /* background-size: cover; */
+}
+.create-block__date-input {
+    /* display: block; */
+    /* position: relative; */
+    border: 0px;
+    /* border-radius: 4px; */
+    /* margin-left: 6px; */
+    /* width: 100%; */
+}

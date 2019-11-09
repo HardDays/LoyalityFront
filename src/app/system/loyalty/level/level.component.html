@@ -2,12 +2,12 @@
 
     <div class="page__top page__top--create">
         <span class="page__back"><img src="assets/img/back.svg" alt="" (click)="GoBack()"></span>
-        <h1 class="page__title page__title--create">{{Id == 'new' ? 'Создание' : 'Редактирование'}} акции</h1>
+        <h1 class="page__title page__title--create">{{Id == 'new' ? 'Создание' : 'Редактирование'}} уровня</h1>
     </div>
 
     <div class="create-block">
         <form [formGroup]="Form" (ngSubmit)="Save()">
-        <p class="create-block__label">Название акции</p>
+        <p class="create-block__label">Название уровня</p>
         <!-- <input type="text" class="create-block__input create-block__input--full"> -->
         <input type="text" class="create-block__input create-block__input--full"
             [ngClass]="{'create-block__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"

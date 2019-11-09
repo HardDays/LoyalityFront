@@ -10,7 +10,8 @@ import { LoyaltyService } from '../loyalty.service';
 
 @Component({
   selector: 'app-loyalty-level-cmp',
-  templateUrl: './level.component.html'
+  templateUrl: './level.component.html',
+  styleUrls: ['./level.component.css']
 })
 export class LoyaltyLevelComponent implements OnInit {
 
@@ -93,7 +94,7 @@ export class LoyaltyLevelComponent implements OnInit {
   {
       if(this.Id != 'new')
       {
-          this.service.GetPromotion(this.Id,
+          this.service.GetLevel(this.Id,
             (res: PromotionModel) => {
                 let data = res;
 

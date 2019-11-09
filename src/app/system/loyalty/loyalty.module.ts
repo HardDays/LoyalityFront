@@ -29,4 +29,4 @@ import { LoyaltyService } from './loyalty.service';
   ],
   providers: [ LoyaltyAccessGuard, LoyaltyService]
 })
-export class PromotionsModule {}
+export class LoyaltyModule {}

@@ -15,6 +15,10 @@
   pointer-events: none;
   transition: 0.3s;
 
+  &--full {
+    top: 0;
+  }
+
   &--visible {
     pointer-events: auto;
     opacity: 1;
@@ -45,6 +49,17 @@
         right: 21px;
       }
     }
+
+    &--delete {
+      overflow: hidden;
+      width: 569px;
+      padding: 76px 68px 58px;
+
+      .modal__close {
+        top: 26px;
+        right: 31px;
+      }
+    }
   }
 
   &__close {
@@ -61,6 +76,23 @@
     padding: 60px 0;
     margin: auto;
     width: 100%;
+  }
+
+  &__delete-text {
+    font-family: $titleFont;
+    font-size: 24px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 9px 0;
+  }
+
+  &__delete-button {
+    width: 190px;
+    height: 32px;
+    font-size: 10px;
   }
 }
 
