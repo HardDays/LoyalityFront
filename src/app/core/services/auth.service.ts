@@ -119,7 +119,7 @@ export class AuthService
                     }
                 }
                 else{
-                    this.router.navigate(["/system", "settings"])
+                    this.router.navigate(["/system", "company"])
                 }
 
             },

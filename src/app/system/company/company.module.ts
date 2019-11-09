@@ -1,15 +1,16 @@
+import { TextMaskModule } from 'angular2-text-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { SettingsRoutingModule } from './settings.routing';
-import { SettingsComponent } from './settings.component';
+import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
+import { MyDatePickerModule } from 'mydatepicker';
+import { CompanyComponent } from './company.component';
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    CompanyComponent
   ],
   imports: [
     CommonModule,
@@ -18,8 +19,9 @@ import { SettingsComponent } from './settings.component';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    SettingsRoutingModule
+    TextMaskModule
   ],
+  exports: [CompanyComponent],
   providers: [ ]
 })
-export class SettingsModule {}
+export class CompanyModule {}

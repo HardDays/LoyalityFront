@@ -11,7 +11,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { SystemComponent } from './system.component';
 import { TestComponent } from './test/test.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { SettingsModule } from './settings/settings.module';
+import { CompanyModule } from './company/company.module';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { SettingsModule } from './settings/settings.module';
     SystemRoutingModule,
     ReactiveFormsModule,
     TextMaskModule,
-    SettingsModule
+    CompanyModule
   ],
   providers: [ SystemAccessGuard]
 })

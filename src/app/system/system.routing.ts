@@ -3,7 +3,7 @@ import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { SystemComponent } from './system.component';
 import { TestComponent } from './test/test.component';
 import { SystemAccessGuard } from './system.guard';
-import { SettingsComponent } from './settings/settings.component';
+import { CompanyComponent } from './company/company.component';
 
 const routes: Routes =
 [
@@ -16,7 +16,8 @@ const routes: Routes =
       { path: 'my_promotions', loadChildren: './promotions/promotions.module#PromotionsModule', canActivate:[SystemAccessGuard]},
       { path: 'my_loyalty_program', loadChildren: './loyalty/loyalty.module#LoyaltyModule', canActivate:[SystemAccessGuard]},
       { path: 'client_profile', loadChildren: './client-profile/client-profile.module#ClientProfileModule',canActivate: [SystemAccessGuard]},
-      { path: 'settings', component: SettingsComponent, canActivate:[SystemAccessGuard]},
+      { path: 'settings', loadChildren: './settings/settings.module#SettingsModule',canActivate: [SystemAccessGuard]},
+      { path: 'company', component: CompanyComponent, canActivate:[SystemAccessGuard]},
       // { path: 'test', component: TestComponent },
       { path: '**', component: TestComponent }
     ]
