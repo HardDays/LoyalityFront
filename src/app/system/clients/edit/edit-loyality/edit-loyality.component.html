@@ -12,7 +12,13 @@
       <ul class="create-block__select-list">
           <li (click)="OnSelected(null)">Программа лояльности</li>
           <ng-container *ngFor="let item of PromotionsProgramm">
-              <li (click)="OnSelected(item)">{{item.name}}</li>
+              <li
+                (click)="OnSelected(item)"
+                class="promotion-item"
+                [ngClass]="{'disabled': !item.enable}"
+              >
+                {{item.name}} ({{item.begin_date | date: 'yyyy.MM.dd'}} - {{item.end_date | date: 'yyyy.MM.dd'}})
+              </li>
           </ng-container>
       </ul>
     </div>

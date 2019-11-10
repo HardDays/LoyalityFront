@@ -120,7 +120,8 @@ export class CreateClientProfileComponent implements OnInit {
   }
 
   GoBack() {
-      this._location.back();
+      // this._location.back();
+      this.router.navigate(['/system', 'my_clients']);
   }
   Save() {
     for(const i in this.Form.controls)
@@ -140,7 +141,7 @@ export class CreateClientProfileComponent implements OnInit {
       if (this.Recommendation.isTrue && this.Recommendation.phone) {
         data['recommendator_phone'] = this.Recommendation.phone;
       }
-
+      console.log(`Recomendation = `, this.Recommendation);
       console.log(`data = `, data);
 
       this.service.CreateClient(data, (res) => {
@@ -167,7 +168,7 @@ export class CreateClientProfileComponent implements OnInit {
   }
 
   NavigateToCreateUser() {
-    this.router.navigate(['/system', 'my_clients', 'create', 'user']);
+    this.router.navigate(['/system', 'my_clients']);
   }
 
   ShowErrorPhoneNumber(err?: string) {

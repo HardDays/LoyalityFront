@@ -29,6 +29,15 @@ export class EditLoyalityComponent implements OnInit {
     this.loyalityService.RefreshPromotions(
       (data) => {
         this.PromotionsProgramm = data;
+        const today = new Date();
+        for (let item of this.PromotionsProgramm) {
+          const begin = new Date(item.begin_date);
+          const end = new Date(item.end_date);
+          item.enable = (today >= begin) && (today <= end) ? true : false;
+          // console.log(`:: `, today, item.begin_date, today >= item.begin_date,  '  -   ', item.end_date, today < item.end_date);
+          console.log(today, begin, end, item.enable);
+        }
+        console.log(this.PromotionsProgramm);
         this.SelectedLoyality = this.PromotionsProgramm.find(x => x.id === this.clientsService.newOrder.promotion_id);
       }
     );
@@ -37,14 +46,16 @@ export class EditLoyalityComponent implements OnInit {
   }
 
   OnSelected(item) {
-    this.SelectedLoyality = item;
-    console.log(item);
-    if (item) {
-      this.clientsService.newOrder.promotion_id = this.SelectedLoyality.id;
-    } else {
-      this.clientsService.newOrder.promotion_id = 0;
+    if (!item || item.enable) {
+      this.SelectedLoyality = item;
+      console.log(item);
+      if (item) {
+        this.clientsService.newOrder.promotion_id = this.SelectedLoyality.id;
+      } else {
+        this.clientsService.newOrder.promotion_id = 0;
+      }
+      this.ShowSelect = false;
     }
-    this.ShowSelect = false;
   }
 
   onPriceChanged(val) {

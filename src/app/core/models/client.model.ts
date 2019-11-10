@@ -11,6 +11,7 @@ export class ClientModel{
         public card_number?:string,
         public points?: number,
         public recommendator_phone?: string,
-        public email?: string
+        public email?: string,
+        public loyalty_program?: any
     ){}
 }

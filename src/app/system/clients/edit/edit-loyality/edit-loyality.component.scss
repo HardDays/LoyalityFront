@@ -1,0 +1,7 @@
+.promotion-item {
+  cursor: pointer;
+  &.disabled{
+    cursor: not-allowed;
+    background: silver;
+  }
+}

@@ -5,11 +5,6 @@
       <h1 class="page__title page__title--create">Создание нового покупателя</h1>
   </div>
 
-  <div class="create-block customer__block">
-
-
-  </div>
-
 
   <form [formGroup]="Form" (ngSubmit)="Save()" class="create-block customer__block">
       <p class="create-block__label create-block__label--bold">Введите данные покупателя</p>
@@ -128,7 +123,7 @@
 
       <ng-container *ngIf="Recommendation.isTrue">
         <p class="create-block__label create-block__label--light">Номер телефона рекомендовавшего:</p>
-        <input type="text" class="create-block__input create-block__input--full">
+        <input [(ngModel)]="Recommendation.phone" [ngModelOptions]="{standalone: true}" name="recommendation_phone" type="text" class="create-block__input create-block__input--full">
       </ng-container>
 
       <!-- <label class="checkbox">
