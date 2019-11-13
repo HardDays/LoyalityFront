@@ -6,7 +6,7 @@
                   <p class="create-block__label create-block__label--bold lk__title">Мои бонусы</p>
 
                   <p *ngIf="Client.loyalty_program?.name" class="lk__text">Программа лояльности: <strong>{{Client.loyalty_program.name}}</strong></p>
-                  <p class="lk__text">Активные бонусы на {{Today | date: 'dd.MM.yyyy'}}: <strong>{{Client.points}}</strong></p>
+                  <p class="lk__text">Активные бонусы на {{Today | date: 'dd.MM.yyyy'}}: <strong>{{Client.points / 100}}</strong></p>
               </div>
 
               <div class="report-make__table lk__table">

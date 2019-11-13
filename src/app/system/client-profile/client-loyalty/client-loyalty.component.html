@@ -5,8 +5,8 @@
               <div class="create-block lk">
                   <p class="create-block__label create-block__label--bold lk__title">Программа лояльности</p>
 
-                  <p class="lk__text lk__text--small_margin"><strong>Ваша программа лояльности:</strong> Название 1</p>
-                  <p class="lk__text lk__text--small_margin"><strong>Активные бонусы на 01.01.2019:</strong> 5000</p>
+                  <p class="lk__text lk__text--small_margin"><strong>Ваша программа лояльности:</strong> {{LoyaltyProgram.name}}</p>
+                  <p class="lk__text lk__text--small_margin"><strong>Активные бонусы на {{Today | date: 'dd.MM.yyyy'}}:</strong> {{Client.points / 100}}</p>
                   <p class="lk__text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
                   <p class="lk__text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
                   <p class="lk__text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
