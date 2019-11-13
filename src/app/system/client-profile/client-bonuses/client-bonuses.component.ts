@@ -17,7 +17,7 @@ export class ClientBonusesComponent implements OnInit {
 
   ngOnInit() {
     this.GetBonuses();
-    console.log(this.Client);
+    this.GetProfile();
   }
 
   GetBonuses() {
@@ -30,6 +30,20 @@ export class ClientBonusesComponent implements OnInit {
 
       }
     );
+  }
+
+  GetProfile() {
+    if (!this.profileService.ClientProfile.id) {
+      this.profileService.GetClientProfile(
+        (res) => {
+          this.profileService.ClientProfile = res;
+          this.Client = this.profileService.ClientProfile;
+        }
+      );
+    } else {
+      this.Client = this.profileService.ClientProfile;
+    }
+
   }
 
 }

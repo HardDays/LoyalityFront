@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClientsService } from './../../clients.service';
@@ -61,6 +62,8 @@ export class EditClientComponent implements OnInit {
     return this.Form.get('birth_day');
   }
 
+  Points = 0;
+
   public myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy-mm-dd',
     showClearDateBtn: false,
@@ -73,14 +76,19 @@ export class EditClientComponent implements OnInit {
 
   MaskBirthDay = ValidatorService.MaskBirthDay();
 
-  constructor(protected clientsService: ClientsService, private _location: Location) { }
+  constructor(protected clientsService: ClientsService, private _location: Location, private router: Router) { }
 
   ngOnInit() {
     this.Client = this.clientsService.Client;
+    if (!this.Client || !this.Client.id) {
+      this.router.navigate(['/system', 'my_clients', 'edit', 'search']);
+    }
     this.Form.patchValue(this.Client);
     this.Form.controls.birth_day.setValue({
       date: this.GetDisableUntilData(new Date(this.Client.birth_day))
     });
+    console.log(this.Client);
+    this.Points = this.Client.points;
   }
 
   GetDisableUntilData(date: Date)
@@ -108,7 +116,9 @@ export class EditClientComponent implements OnInit {
       data['birth_day'] = data['birth_day']['formatted'];
 
       this.clientsService.UpdateClient(data, (res) => {
+        console.log(res);
         this.clientsService.Client = res;
+        this.clientsService.Client.points = this.Points;
         this._location.back();
       },
       (err) => {

@@ -33,6 +33,10 @@ export class EditPaidComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+
+    if (!this.Client || !this.Client.id) {
+      this.router.navigate(['/system', 'my_clients', 'edit', 'search']);
+    }
     console.log(`Client = `, this.Client);
     console.log(`Order = `, this.Order);
 
@@ -120,6 +124,9 @@ export class EditPaidComponent implements OnInit {
   }
 
   onWriteBonusesChange(val: number) {
+    if (+val != val) return;
+    if (val < 0) return;
+
     if (val > this.Bonuses.Available) {
       this.hasErrorBonuses = true;
       return;
@@ -151,6 +158,7 @@ export class EditPaidComponent implements OnInit {
         +this.Order.price,
         +this.Order.write_off,
         (res) => {
+          this.checkNewUserInfo();
           this.isModalOpened = true;
         },
         (err) => {
@@ -163,6 +171,7 @@ export class EditPaidComponent implements OnInit {
         +this.Order.price,
         +this.Order.write_off,
         (res) => {
+          this.checkNewUserInfo();
           this.isModalOpened = true;
         },
         (err) => {
@@ -170,6 +179,10 @@ export class EditPaidComponent implements OnInit {
         }
       );
     }
+  }
+
+  checkNewUserInfo () {
+    // this.clientsService.GetClient();
   }
 
   closeSuccessModal() {

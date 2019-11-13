@@ -123,7 +123,11 @@
 
       <ng-container *ngIf="Recommendation.isTrue">
         <p class="create-block__label create-block__label--light">Номер телефона рекомендовавшего:</p>
-        <input [(ngModel)]="Recommendation.phone" [ngModelOptions]="{standalone: true}" name="recommendation_phone" type="text" class="create-block__input create-block__input--full">
+        <input [(ngModel)]="Recommendation.phone" (input)="changeRecommendationPhone($event.target.value)" [textMask]="{mask: MaskPhoneRU, showMask: true}" [ngModelOptions]="{standalone: true}" name="recommendation_phone" type="text" class="create-block__input create-block__input--full">
+        <p class="auth-block__hint auth-block__hint--error">
+          <span *ngIf="Recommendation.isPhoneCurrect" [ngStyle]="{'color': 'green'}">Номер телефона доступен</span>
+          <span *ngIf="!Recommendation.isPhoneCurrect">Номер телефона недоступен</span>
+        </p>
       </ng-container>
 
       <!-- <label class="checkbox">
@@ -132,6 +136,7 @@
       </label> -->
 
       <div class="text-center">
+          <p></p>
           <button class="button create-block__button">Сохранить</button>
       </div>
   </form>
@@ -150,3 +155,14 @@
     </div>
 </div>
 </div>
+
+<div *ngIf="ModalErrorLoyalty" class="modal modal--visible">
+
+    <div class="modal__block modal__block--customer">
+        <span class="modal__close"><img [routerLink]="['/system', 'my_clients']" src="./../../../../../assets/img/close.svg" alt=""></span>
+
+        <div class="modal__customer-content">
+            <p class="customer__created-text">Отсутствует программа лояльности! Обратитесь к администратору.</p>
+        </div>
+    </div>
+    </div>

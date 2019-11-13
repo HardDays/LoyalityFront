@@ -1,3 +1,8 @@
 .create-block__label.bonus-error-text {
   color: red;
 }
+
+.customer__button:disabled,
+.customer__button[disabled]{
+  cursor: not-allowed;
+}

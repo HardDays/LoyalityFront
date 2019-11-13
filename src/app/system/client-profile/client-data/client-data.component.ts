@@ -1,3 +1,4 @@
+import { AuthService } from './../../../core/services/auth.service';
 import { IMyDpOptions } from 'mydatepicker';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ClientProfileService } from './../client-profile.service';
@@ -87,10 +88,17 @@ export class ClientDataComponent implements OnInit {
 
   MaskBirthDay = ValidatorService.MaskBirthDay();
 
-
-  constructor(private profileService: ClientProfileService) { }
+  constructor(private profileService: ClientProfileService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.onAuthChange$.subscribe(
+      (res) => {
+        if (res) {
+          this.profileService.ClientProfile = new ClientModel();
+          this.GetProfile();
+        }
+      }
+    );
     this.GetProfile();
   }
 

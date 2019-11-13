@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from '../../clients.service';
 import { ClientModel } from 'src/app/core/models/client.model';
@@ -22,10 +23,14 @@ export class EditLoyalityComponent implements OnInit {
 
   constructor(
     protected clientsService: ClientsService,
-    private loyalityService: PromotionsService) { }
+    private loyalityService: PromotionsService,
+    private router: Router) { }
 
   ngOnInit() {
     this.Client = this.clientsService.Client;
+    if (!this.Client || !this.Client.id) {
+      this.router.navigate(['/system', 'my_clients', 'edit', 'search']);
+    }
     this.loyalityService.RefreshPromotions(
       (data) => {
         this.PromotionsProgramm = data;

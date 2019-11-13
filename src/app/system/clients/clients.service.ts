@@ -27,6 +27,9 @@ export class ClientsService {
       if (Obj && Obj['phone']) {
         Obj['phone'] = (Obj['phone']).replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '');
       }
+      if (Obj && Obj['recommendator_phone']) {
+        Obj['recommendator_phone'] = (Obj['recommendator_phone']).replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '');
+      }
       this.http.CommonRequest(
           () => this.http.PostData('/clients', Obj),
           success,

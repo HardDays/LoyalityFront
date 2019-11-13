@@ -99,7 +99,8 @@ export class CreateClientProfileComponent implements OnInit {
 
   Recommendation = {
     isTrue: false,
-    phone: ''
+    phone: '',
+    isPhoneCurrect: false
   };
 
   isShowSuccessModal = false;
@@ -109,6 +110,8 @@ export class CreateClientProfileComponent implements OnInit {
   ErrorText = '';
 
   MaskPhoneRU = ValidatorService.MaskPhoneRU();
+
+  ModalErrorLoyalty = false;
 
   constructor(
     private _location: Location,
@@ -138,7 +141,7 @@ export class CreateClientProfileComponent implements OnInit {
 
       data['birth_day'] = data['birth_day']['formatted'];
 
-      if (this.Recommendation.isTrue && this.Recommendation.phone) {
+      if (this.Recommendation.isTrue && this.Recommendation.isPhoneCurrect && this.Recommendation.phone) {
         data['recommendator_phone'] = this.Recommendation.phone;
       }
       console.log(`Recomendation = `, this.Recommendation);
@@ -151,7 +154,10 @@ export class CreateClientProfileComponent implements OnInit {
         // this.router.navigate(['/system', 'my_clients', 'create', 'confirm']);
       },
       (err) => {
-        console.log(err);
+        const error = err.json();
+        if (error['loyalty_program'] && error['loyalty_program'].findIndex(x => x == 'must exist') > -1) {
+          this.ModalErrorLoyalty = true;
+        }
       });
     }
     // this.service.Client.phone = '79992132131';
@@ -177,6 +183,21 @@ export class CreateClientProfileComponent implements OnInit {
     } else {
       this.ErrorText = 'Возникла ошибка!';
     }
+  }
+
+  changeRecommendationPhone(phone: string) {
+    this.Recommendation.isPhoneCurrect = false;
+    if (phone.indexOf('_') > -1) {
+      return;
+    }
+    this.service.searchPhone(phone)
+      .subscribe(
+        (res) => {
+          if (res.json()['status'] === true) {
+            this.Recommendation.isPhoneCurrect = true;
+          }
+        }
+      );
   }
 
 }
