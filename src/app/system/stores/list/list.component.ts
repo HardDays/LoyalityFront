@@ -18,6 +18,11 @@ Stores: StoreModel[] = [];
 Operators = {} as IStringToAny;
 Expanded = {} as IStringToAny;
 QueryString = "";
+ShowModalStore = false;
+ShowModalOperator = false;
+DeleteResult = '';
+OperatorDelete = new OperatorModel();
+StoreDelete = new StoreModel();
   constructor(
       private auth: AuthService, 
       private router: Router, 
@@ -88,12 +93,14 @@ QueryString = "";
 
   DeleteStore(Item)
   {
+    this.ShowModalStore = false;
       this.service.DeleteStore(Item.id, 
           (res) => {
               this.service.RefreshStores();
+              this.DeleteResult = "Магазин «" + this.StoreDelete.name +"» успешно удален!";
           },
           (err) => {
-
+            this.DeleteResult = "Не получилось удалить магазин «" + this.StoreDelete.name +"»!";
           })
   }
 
@@ -124,14 +131,34 @@ QueryString = "";
 
   DeleteOperator(Item: OperatorModel)
   {
-    this.service.DeleteOperator(Item.id, 
+    this.ShowModalOperator = false;
+    this.service.PutOperator(Item.id,{store_id: 0}, 
       (res) => {
           this.RefreshOperatorsByStoreId(Item.store_id);
+          this.DeleteResult = "Оператор «"+ 
+          this.OperatorDelete.first_name + " " + 
+          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+          this.OperatorDelete.last_name + "» успешно удален!"
       },
       (err) => {
-
+        this.DeleteResult = "Не получилось удалить оператора «"+ 
+        this.OperatorDelete.first_name + " " + 
+        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+        this.OperatorDelete.last_name + "»!";
       }
     )
+  }
+
+  DeleteStoreQA(item: StoreModel)
+  {
+    this.ShowModalStore = true;
+    this.StoreDelete = item;
+  }
+
+  DeleteOperatorQA(item: OperatorModel)
+  {
+    this.ShowModalOperator = true;
+    this.OperatorDelete = item;
   }
   
 }

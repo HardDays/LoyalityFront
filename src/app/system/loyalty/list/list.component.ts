@@ -20,15 +20,6 @@ export class LoyaltyListComponent implements OnInit {
     Loyalty : LoyaltyModel = new LoyaltyModel();
     LevelForDelete: LoyaltyLevelModel = new LoyaltyLevelModel();
 
-    Form: FormGroup = new FormGroup({
-        "name": new FormControl('',[
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(30)
-        ]),
-        "sum_type": new FormControl('one_buy')
-    });
-
   constructor(
       private auth: AuthService, 
       private router: Router, 
@@ -51,9 +42,11 @@ export class LoyaltyListComponent implements OnInit {
   UpdateData()
   {
     const loyalty = this.service.GetLoyalty();
-    this.Levels = loyalty.loyalty_levels;
-    this.Loyalty = loyalty;
-    this.Form.patchValue(this.Loyalty);
+    if(loyalty)
+    {
+      this.Levels = loyalty.loyalty_levels;
+      this.Loyalty = loyalty;
+    }
   }
 
   DeleteLevel()
@@ -67,27 +60,6 @@ export class LoyaltyListComponent implements OnInit {
 
         }
     )
-  }
-
-  Save()
-  {
-      for(const i in this.Form.controls)
-      {
-          this.Form.get(i).markAsDirty();
-          this.Form.get(i).markAsTouched();
-        //   this.Form.updateValueAndValidity();
-      }
-      this.Form.updateValueAndValidity();
-      if(this.Form.valid)
-      {
-          this.service.SaveLoyalty(this.Form.getRawValue(),
-          (res) => {
-              this.ProgramSaved = true;
-          },
-          err => {
-              console.log(err);
-          })
-      }
   }
 
   CreateNewLevel()

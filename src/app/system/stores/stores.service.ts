@@ -103,4 +103,13 @@ export class StoresService {
             fail
         );
     }
+
+    PutOperator(Id, Obj, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PutData('/operators/' + Id, Obj),
+            success,
+            fail
+        );
+    }
 }

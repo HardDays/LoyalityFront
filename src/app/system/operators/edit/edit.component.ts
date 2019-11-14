@@ -34,13 +34,15 @@ export class OperatorEditComponent implements OnInit {
       Validators.maxLength(30)
     ]),
     "store_id": new FormControl('',[
-      Validators.required
+      // Validators.required
     ]),
     "email": new FormControl('',[
       Validators.required,
       Validators.email
     ])
   });
+  SaveSuccess: boolean = false;
+  GetDataError = false;
 
   get first_name()
   {
@@ -82,6 +84,7 @@ export class OperatorEditComponent implements OnInit {
 
   ngOnInit()
   {
+    this.service.RefreshStores();
     this.Stores = this.service.GetStores();
     this.InitStore();
   }
@@ -97,7 +100,15 @@ export class OperatorEditComponent implements OnInit {
           this.InitAll(res);
         },
         err => {
-          this.router.navigate(["/system"]);
+          if(err.status == 404)
+          {
+            this.GetDataError = true;
+          }
+          else{
+            this.GoBack();
+          }
+          // console.log(err);
+          // this.router.navigate(["/system"]);
         });
     // }else{
     //   this.InitAll(vals);
@@ -138,6 +149,7 @@ export class OperatorEditComponent implements OnInit {
     {
         this.Form.controls[i].markAsDirty();
         this.Form.controls[i].markAsTouched();
+        this.Form.controls[i].updateValueAndValidity();
     }
     const valid = this.Form.valid;
 
@@ -145,12 +157,39 @@ export class OperatorEditComponent implements OnInit {
     {
       const data = this.Form.getRawValue();
       this.service.PutOperator(this.Id, data,(res) => {
-        this.GoBack();
+        this.SaveSuccess = true;
         // this.router.navigate(["/system","my_cashiers"])
       },
       (err) => {
+        if(err.status == 422)
+        {
+          const body = JSON.parse(err._body);
+          for(const i in body)
+          {
+            if(this.Form.get(i))
+            {
+              let err = {};
+              err[body[i][0]] = true;
+
+              this.Form.get(i).setErrors(err);
+            }
+          }
+        }
       })
     }
+  }
+
+  SuccessClicked()
+  {
+    this.SaveSuccess = false;
+    this.GoBack();
+    // this.router.navigate(["/system","my_cashiers"])
+  }
+
+  ErrorClicked()
+  {
+    this.GetDataError = false;
+    this.GoBack();
   }
 
   OnSelected(item:StoreModel)

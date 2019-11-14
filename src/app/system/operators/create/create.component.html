@@ -66,6 +66,7 @@
                 <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
                     <span *ngIf="email.errors.required">Поле обязательно к заполнению.</span>
                     <span *ngIf="email.errors.email">Введите корректный E-mail</span>
+                    <span *ngIf="email.errors.ALREADY_TAKEN">E-mail занят</span>
                 </ng-container>
             </p>
             <p class="create-block__label create-block__label--light">Выбрать магазин</p>
@@ -103,3 +104,17 @@
     </div>
 
 </div>
+<div class="modal modal--full " [ngClass]="{'modal--visible': SaveSuccess}">
+    <div class="modal__block modal__block--delete">
+        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="SuccessClicked()"></span>
+
+        <p class="modal__delete-text">Кассир сохранён</p>
+
+        <div class="modal__buttons">
+            <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
+            <button style="margin: auto" class="button modal__delete-button" (click)="SuccessClicked()">ОК</button>
+        </div>
+    </div>
+</div>
+
+

@@ -67,7 +67,13 @@ export class HttpService {
                     if(fail && typeof fail == "function")
                     {
                         let errObj = error;
-                        errObj.body = this.validResp(error)?error.json():""
+                        try{
+                            errObj.body = this.validResp(error)?error.json():""
+                        }
+                        catch(e)
+                        {
+                            error.body = {};
+                        }
                         fail(errObj);
                     }
                 }

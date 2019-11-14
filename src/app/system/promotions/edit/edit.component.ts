@@ -20,6 +20,7 @@ export class PromotionEditComponent implements OnInit {
     Id = '';
 
     ShowSelect = false;
+    SaveSuccess = false;
     myDatePickerOptions: IMyDpOptions = {
       // other options...
       dateFormat: 'dd.mm.yyyy',
@@ -188,12 +189,14 @@ export class PromotionEditComponent implements OnInit {
       if(this.Id == 'new')
       {
         this.service.CreatePromotion(data, (res) => {
-          this.NavigateToPromotions();
+          this.SaveSuccess = true;
+          // this.NavigateToPromotions();
         }, error);
       }
       else{
         this.service.PutPromotion(this.Id, data, (res) => {
-          this.NavigateToPromotions();
+          this.SaveSuccess = true;
+          // this.NavigateToPromotions();
         }, error);
       }
     }
@@ -205,6 +208,7 @@ export class PromotionEditComponent implements OnInit {
 
   NavigateToPromotions()
   {
+    this.SaveSuccess = false;
     this.router.navigate(["/system", "my_promotions", "list"]);
   }
 

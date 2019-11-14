@@ -60,6 +60,17 @@
         right: 31px;
       }
     }
+
+    &--create {
+      overflow: hidden;
+      width: 590px;
+      padding: 76px 30px;
+
+      .modal__close {
+        top: 26px;
+        right: 31px;
+      }
+    }
   }
 
   &__close {
@@ -93,6 +104,23 @@
     width: 190px;
     height: 32px;
     font-size: 10px;
+  }
+
+  // create
+
+  &__create-title {
+    text-align: center;
+    font-family: $titleFont;
+    font-size: 24px;
+    margin-bottom: 27px;
+  }
+
+  &__create-text {
+    font-family: $textFont;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 23px;
+    text-align: center;
   }
 }
 

@@ -20,7 +20,9 @@ export class LoyaltyService {
     public onPromotionsChange$: Subject<boolean> = new Subject<boolean>();
 
     constructor(private http: HttpService, private auth:AuthService)
-    {}
+    {
+        this.RefreshLoyalty();
+    }
 
 
     RefreshLoyalty(success?: (data) => void, fail?: (err) => void)
@@ -106,19 +108,21 @@ export class LoyaltyService {
         );
     }
 
-    CreatePromotion(Obj, success?: (data) => void, fail?: (err) => void)
+    CreateLevel(Obj: LoyaltyLevelModel, success?: (data) => void, fail?: (err) => void)
     {
+        Obj.loyalty_program_id = this.LoyaltyProgram.id;
         this.http.CommonRequest(
-            () => this.http.PostData('/promotions', Obj),
+            () => this.http.PostData('/loyalty_levels', Obj),
             success,
             fail
         );
     }
 
-    PutPromotion(Id, Obj, success?: (data) => void, fail?: (err) => void)
+    PutLevel(Id, Obj, success?: (data) => void, fail?: (err) => void)
     {
+        Obj.loyalty_program_id = this.LoyaltyProgram.id;
         this.http.CommonRequest(
-            () => this.http.PutData('/promotions/' + Id, Obj),
+            () => this.http.PutData('/loyalty_levels/' + Id, Obj),
             success,
             fail
         );

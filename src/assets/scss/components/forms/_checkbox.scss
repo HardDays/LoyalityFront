@@ -23,6 +23,10 @@
     font-size: 14px;
     line-height: 16px;
 
+    &--big_left {
+      padding-left: 30px;
+    }
+
     &:before {
       content: '';
       position: absolute;
