@@ -89,7 +89,7 @@ export class LoyaltyEditComponent implements OnInit {
   {
     if(this.Loyalty.accrual_on_register && this.Loyalty.register_points)
     {
-        this.Loyalty.register_points = Math.round(this.Loyalty.register_points / 10);
+        this.Loyalty.register_points = Math.round(this.Loyalty.register_points / 100);
     }
     else{
         this.Loyalty.register_points = null;
@@ -97,7 +97,7 @@ export class LoyaltyEditComponent implements OnInit {
 
     if(this.Loyalty.accrual_on_first_buy && this.Loyalty.first_buy_points)
     {
-        this.Loyalty.first_buy_points = Math.round(this.Loyalty.first_buy_points / 10);
+        this.Loyalty.first_buy_points = Math.round(this.Loyalty.first_buy_points / 100);
     }
     else{
         this.Loyalty.first_buy_points = null;
@@ -105,7 +105,7 @@ export class LoyaltyEditComponent implements OnInit {
 
     if(this.Loyalty.write_off_limited && this.Loyalty.write_off_min_price)
     {
-        this.Loyalty.write_off_min_price = Math.round(this.Loyalty.write_off_min_price / 10);
+        this.Loyalty.write_off_min_price = Math.round(this.Loyalty.write_off_min_price / 100);
     }
     else{
         this.Loyalty.write_off_min_price = null;
@@ -114,10 +114,10 @@ export class LoyaltyEditComponent implements OnInit {
     if(this.Loyalty.accrual_on_recommend)
     {
         if(this.Loyalty.recommend_recommendator_points)
-            this.Loyalty.recommend_recommendator_points = Math.round(this.Loyalty.recommend_recommendator_points / 10);
+            this.Loyalty.recommend_recommendator_points = Math.round(this.Loyalty.recommend_recommendator_points / 100);
 
         if(this.Loyalty.recommend_registered_points)
-            this.Loyalty.recommend_registered_points = Math.round(this.Loyalty.recommend_registered_points / 10);
+            this.Loyalty.recommend_registered_points = Math.round(this.Loyalty.recommend_registered_points / 100);
     }
     else{
         this.Loyalty.recommend_recommendator_points = null;
@@ -141,23 +141,23 @@ export class LoyaltyEditComponent implements OnInit {
 
         if(data.accrual_on_register)
         {
-            data.register_points *= 10;
+            data.register_points *= 100;
         }
 
         if(data.accrual_on_first_buy)
         {
-            data.first_buy_points *= 10;
+            data.first_buy_points *= 100;
         }
 
         if(data.write_off_limited)
         {
-            data.write_off_min_price *= 10;
+            data.write_off_min_price *= 100;
         }
 
         if(data.accrual_on_recommend)
         {
-            data.recommend_recommendator_points *= 10;
-            data.recommend_registered_points *= 10;
+            data.recommend_recommendator_points *= 100;
+            data.recommend_registered_points *= 100;
         }
         this.service.SaveLoyalty(data, 
         (res) => {
