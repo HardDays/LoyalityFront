@@ -12,7 +12,7 @@ import { StoreModel } from '../../../core/models/store.model';
   templateUrl: './create.component.html'
 })
 export class OperatorCreateComponent implements OnInit {
-
+  SaveSuccess = false;
   Mode = 'create';
   isLoading = false;
     Stores: StoreModel[] = []; 
@@ -34,7 +34,7 @@ export class OperatorCreateComponent implements OnInit {
       Validators.maxLength(30)
     ]),
     "store_id": new FormControl('',[
-      Validators.required
+      // Validators.required
     ]),
     "email": new FormControl('',[
       Validators.required,
@@ -73,7 +73,8 @@ export class OperatorCreateComponent implements OnInit {
 
   ngOnInit()
   {
-    this.Stores = this.service.GetStores();
+    this.service.RefreshStores();
+    // this.Stores = this.service.GetStores();
   }
 
   GoBack()
@@ -83,23 +84,45 @@ export class OperatorCreateComponent implements OnInit {
 
   Save()
   {
-      for(const i in this.Form.controls)
-      {
-          this.Form.controls[i].markAsDirty();
-          this.Form.controls[i].markAsTouched();
-      }
+    for(const i in this.Form.controls)
+    {
+        this.Form.controls[i].markAsDirty();
+        this.Form.controls[i].markAsTouched();
+        this.Form.controls[i].updateValueAndValidity();
+    }
     const valid = this.Form.valid;
 
     if(valid)
     {
       const data = this.Form.getRawValue();
       this.service.CreateOperator(data,(res) => {
-        this.router.navigate(["/system","my_cashiers"])
+        this.SaveSuccess = true;
+        
       },
       (err) => {
+        if(err.status == 422)
+        {
+          const body = JSON.parse(err._body);
+          for(const i in body)
+          {
+            if(this.Form.get(i))
+            {
+              let err = {};
+              err[body[i][0]] = true;
+
+              this.Form.get(i).setErrors(err);
+            }
+          }
+        }
       })
     }
   }
+  SuccessClicked()
+  {
+    this.SaveSuccess = false;
+    this.router.navigate(["/system","my_cashiers"])
+  }
+
 
   OnSelected(item:StoreModel)
   {

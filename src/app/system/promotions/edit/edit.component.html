@@ -222,3 +222,16 @@
     </div>
 
 </div>
+
+<div class="modal modal--full " [ngClass]="{'modal--visible': SaveSuccess}">
+    <div class="modal__block modal__block--delete">
+        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="NavigateToPromotions()"></span>
+
+        <p class="modal__delete-text">Акция успешно сохранена!</p>
+
+        <div class="modal__buttons">
+            <!-- <button class="button button--black modal__delete-button" (click)="DeleteOperator(OperatorDelete)">Удалить</button> -->
+            <button style="margin: auto"  class="button modal__delete-button" (click)="NavigateToPromotions()">Ок</button>
+        </div>
+    </div>
+</div>

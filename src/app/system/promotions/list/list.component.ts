@@ -17,6 +17,9 @@ import { PromotionModel } from 'src/app/core/models/promotion.model';
 export class PromotionsListComponent implements OnInit {
 
 Promotions: PromotionModel[] = [];
+PromotionDelete: PromotionModel = new PromotionModel();
+ShowModal = false;
+DeleteResult = "";
 QueryString = "";
   constructor(
       private auth: AuthService, 
@@ -44,14 +47,22 @@ QueryString = "";
     this.Promotions = q ? promotions.filter((obj) => obj.name.toLowerCase().indexOf(_q) >=0 ) : promotions;
   }
 
-  DeletePromotion(Item)
+  DeletePromotion(Item: PromotionModel)
   {
+    this.ShowModal = false;
       this.service.DeletePromotion(Item.id, 
           (res) => {
+            this.DeleteResult = "Акция  «" + Item.name + "» успешно удалена!"; 
               this.service.RefreshPromotions();
           },
           (err) => {
-
+            this.DeleteResult = "Не получилось удалить акцию  «" + Item.name + "»!"; 
           })
+  }
+
+  DeletePromotionQA(Item: PromotionModel)
+  {
+    this.PromotionDelete = Item;
+    this.ShowModal = true;
   }
 }

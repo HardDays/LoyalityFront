@@ -3,37 +3,12 @@
 
         <div class="page__top">
             <h1 class="page__title">Уровни</h1>
-            <form [formGroup]="Form" (ngSubmit)="Save()">
-                <div class="create-block__edit">
-                    <p class="create-block__label">Название программы лояльности</p>
-                    <input type="text" class="create-block__input create-block__input--full"
-                        [ngClass]="{'create-block__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"
-                        autocomplete="null"
-                        formControlName="name"
-                        placeholder="Введите название программы лояльности"
-                        name="name"
-                    >
-                    <p class="auth-block__hint auth-block__hint--error">
-                        <ng-container *ngIf="Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)">
-                            <span *ngIf="Form.controls.name.errors.required">Поле обязательно к заполнению.</span>
-                            <span *ngIf="Form.controls.name.errors.minlength">Минимальная длина 3 символа.</span>
-                            <span *ngIf="Form.controls.name.errors.maxlength">Максимальная длина 30 символов.</span>
-                        </ng-container>
-                    </p>
-                </div>
-                <div class="page__top-checks">
-                    <span class="page__top-checks-text">Правило активации уровней:</span>
-                    <label class="radio">
-                        <input type="radio" class="radio__input"  value='one_buy' name="sum_type" formControlName="sum_type">
-                        <div class="radio__text">Разовая покупка</div>
-                    </label>
-                    <label class="radio">
-                        <input type="radio" class="radio__input"  value='sum_buy' name="sum_type" formControlName="sum_type">
-                        <div class="radio__text">Общая сумма покупок</div>
-                    </label>
-                </div>
-                <button class="page__top-button" type="submit">Сохранить</button>
-            </form>
+            <p [routerLink]="['/system','my_loyalty_program','edit']" class="create-block__label lk__title lk__title--programm" [ngStyle]="{'color':Loyalty.id ? 'inherit' : 'red'}">
+                {{Loyalty.id ? 'Программа лояльности: ' + Loyalty.name : 'Программа лояльности не существует'}}&nbsp;&nbsp;
+                <span class="main-blocks__button">
+                    <img src="assets/img/edit-icon.svg" alt="">
+                </span>
+            </p>
         </div>
     
         <div class="main-blocks main-blocks--levels" >
@@ -67,24 +42,11 @@
     </div>
 </div>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': ProgramSaved}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ProgramSaved = false"></span>
-
-        <p class="modal__delete-text">Программа лояльности сохранена</p>
-
-        <div class="modal__buttons">
-            <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
-            <button style="margin: auto" class="button modal__delete-button" (click)="ProgramSaved = false">ОК</button>
-        </div>
-    </div>
-</div>
-
 <div class="modal modal--full " [ngClass]="{'modal--visible': ProgramDoesNotExists}">
     <div class="modal__block modal__block--delete">
         <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ProgramDoesNotExists = false"></span>
 
-        <p class="modal__delete-text">Создайте программу лояльности!</p>
+        <p class="modal__delete-text">Сначала создайте программу лояльности</p>
 
         <div class="modal__buttons">
             <!-- <button class="button button--black modal__delete-button">Удалить</button> -->

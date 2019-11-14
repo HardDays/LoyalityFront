@@ -100,3 +100,28 @@
     </div>
 
 </div>
+<div class="modal modal--full " [ngClass]="{'modal--visible': SaveSuccess}">
+    <div class="modal__block modal__block--delete">
+        <!-- <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ProgramSaved = false"></span> -->
+
+        <p class="modal__delete-text">Кассир сохранён</p>
+
+        <div class="modal__buttons">
+            <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
+            <button style="margin: auto" class="button modal__delete-button" (click)="SuccessClicked()">ОК</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal--full " [ngClass]="{'modal--visible': GetDataError}">
+    <div class="modal__block modal__block--delete">
+        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ErrorClicked()"></span>
+
+        <p class="modal__delete-text">Не удается найти кассира</p>
+
+        <div class="modal__buttons">
+            <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
+            <button style="margin: auto" class="button modal__delete-button" (click)="ErrorClicked()">ОК</button>
+        </div>
+    </div>
+</div>

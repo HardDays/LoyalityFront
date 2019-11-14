@@ -1,0 +1,77 @@
+@import "../../base/var";
+
+$max: 14;
+$size: 166px;
+$fill: $yellow;
+$angle: 360/$max;
+
+.preloader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.3s;
+
+  &--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__svg {
+    height: $size;
+    width: $size;
+  }
+
+  &__circles {
+    fill: $fill;
+  }
+
+  &__circle {
+    transform-origin: $size/2 $size/2;
+    animation: 1.2s linear infinite;
+    animation-name: opacity;
+
+    @for $item from 1 through $max {
+      &:nth-child(#{$max}n + #{$item}){
+        transform: rotate(#{-$angle*$item}deg) translate(10px, 10px) scale(.85);
+        animation-delay: -#{$item/10}s;
+
+        .preloader__inner-circle {
+          animation-delay: -#{$item/10}s;
+        }
+      }
+    }
+  }
+
+  &__inner-circle {
+    transform-origin: 15px 15px;
+    animation: 1.2s linear infinite;
+    animation-name: transform;
+  }
+}
+
+@keyframes opacity {
+  0% {
+    fill-opacity: 1;
+  }
+  100% {
+    fill-opacity: 0.3;
+  }
+}
+
+@keyframes transform {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.07);
+  }
+}

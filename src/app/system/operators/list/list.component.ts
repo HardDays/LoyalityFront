@@ -15,7 +15,10 @@ import { OperatorModel } from '../../../core/models/operator.model';
 export class OperatorsListComponent implements OnInit {
 
 Operators: OperatorModel[] = [];
+ShowModal = false;
+OperatorDelete: OperatorModel = new OperatorModel();
 QueryString = "";
+DeleteResult = '';
   constructor(
       private auth: AuthService, 
       private router: Router, 
@@ -42,16 +45,45 @@ QueryString = "";
     this.Operators = q ? operators.filter((obj) => (obj.first_name + " " + (obj.second_name ? obj.second_name + " " : "") + obj.last_name).toLowerCase().indexOf(_q) > -1) : operators;
   }
 
-  DeleteOperator(Item)
+  DeleteOperator(Item: OperatorModel)
   {
-    console.log(Item);
-      this.service.DeleteOperator(Item.id, 
-          (res) => {
-            console.log(res);
-              this.service.RefreshOperators();
-          },
-          (err) => {
-            console.log(err);
-          })
+    this.ShowModal = false;
+    this.service.PutOperator(Item.id,{operator_status: "deleted"},
+      (res) => {
+        console.log(res);
+        this.DeleteResult = "Оператор «"+ 
+        this.OperatorDelete.first_name + " " + 
+        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+        this.OperatorDelete.last_name + "» успешно удален!"
+        this.service.RefreshOperators();
+    },
+    (err) => {
+      // console.log(err);
+        this.DeleteResult = "Не получилось удалить оператора «"+ 
+          this.OperatorDelete.first_name + " " + 
+          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+          this.OperatorDelete.last_name + "»!";
+    })
+    // this.service.DeleteOperator(Item.id, 
+    //   (res) => {
+    //       this.DeleteResult = "Оператор «"+ 
+    //       this.OperatorDelete.first_name + " " + 
+    //       (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+    //       this.OperatorDelete.last_name + "» успешно удален!"
+    //       this.service.RefreshOperators();
+    //   },
+    //   (err) => {
+    //     // console.log(err);
+    //       this.DeleteResult = "Не получилось удалить оператора «"+ 
+    //         this.OperatorDelete.first_name + " " + 
+    //         (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+    //         this.OperatorDelete.last_name + "»!";
+    //   })
+  }
+
+  DeleteQA(Item: OperatorModel)
+  {
+    this.OperatorDelete = Item;
+    this.ShowModal = true;
   }
 }
