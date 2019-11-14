@@ -17,6 +17,7 @@ export class OperatorCreateComponent implements OnInit {
   isLoading = false;
     Stores: StoreModel[] = []; 
     SelectedStore: StoreModel = null;
+    NoStore: StoreModel = new StoreModel();
 
     ShowSelect = false;
   Form: FormGroup = new FormGroup({
@@ -66,6 +67,8 @@ export class OperatorCreateComponent implements OnInit {
   constructor(private _location: Location, private auth: AuthService, private router: Router,
     private service: OperatorsService)
   {
+    this.NoStore.name = "Нет магазина";
+    this.SelectedStore = this.NoStore;
       this.service.onStoresChange$.subscribe((val) => {
         this.Stores = this.service.GetStores();
       });
