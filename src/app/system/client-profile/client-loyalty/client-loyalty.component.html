@@ -7,16 +7,26 @@
 
                   <p class="lk__text lk__text--small_margin"><strong>Ваша программа лояльности:</strong> {{LoyaltyProgram.name}}</p>
                   <p class="lk__text lk__text--small_margin"><strong>Активные бонусы на {{Today | date: 'dd.MM.yyyy'}}:</strong> {{Client.points / 100}}</p>
-                  <p class="lk__text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                  <p class="lk__text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                  <p class="lk__text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-
+                  <p *ngIf="LoyaltyProgram.accrual_on_recommend" class="lk__text">Условия акции приведи друга: {{LoyaltyProgram.recommend_recommendator_points}}</p>
+                  <!-- <p class="lk__text">Условия акции в честь дня рождения: </p> -->
+                  <p *ngIf="LoyaltyProgram.write_off_min_price" class="lk__text">Минимальная сумма покупки для списания бонусов: {{LoyaltyProgram.write_off_min_price}}</p>
+                  
                   <div class="lk__card">
-                      <p class="lk__shop">Название магазина</p>
-                      <p class="lk__programm">Название программы лояльности</p>
-                      <p class="lk__conditions">Условия программы лояльности Условия программы лояльности Условия программы лояльности Условия программы лояльности Условия программы лояльности Условия</p>
-                      <p class="lk__num">1234 5678 9123 4567</p>
+                      <p class="lk__programm">{{LoyaltyProgram.name}}</p>
+                      <p class="lk__conditions"></p>
+                      <p class="lk__num">{{Client.card_number}}</p>
                   </div>
+
+                  <!-- TODO -->
+                  <!-- Необходимо получать информацию о всех уровнях программы лояльности :
+                    Название
+                    Условия активации уровня
+                    Правило начисления
+                    Правило активации бонусов
+                    Правило сгорания
+                    Правило списания
+                    Правило предоставления скидки -->
+
               </div>
 
           </div>

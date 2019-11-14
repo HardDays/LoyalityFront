@@ -14,11 +14,15 @@ import { OperatorModel } from 'src/app/core/models/operator.model';
 })
 export class ClientsStartComponent implements OnInit {
 
+  HasStore = false;
 
   constructor(private auth: AuthService){
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    if (this.auth.LoginData['store_id']) {
+      this.HasStore = true;
+    }
   }
 
 

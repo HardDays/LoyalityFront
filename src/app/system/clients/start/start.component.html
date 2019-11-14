@@ -9,5 +9,9 @@
         <img src="./../../../../assets/img/refresh.png" alt="">
         <span>Операции с покупателем</span>
     </div>
+
   </span>
+  <p *ngIf="!HasStore" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #000; color: white; padding: 20px 30px;"
+  >У Вас не указан магазин, к которому Вы относитесь. Обратитесь к администратору.</p>
+
 </section>
