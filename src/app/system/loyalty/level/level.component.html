@@ -13,7 +13,7 @@
             [ngClass]="{'create-block__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"
             autocomplete="null"
             formControlName="name"
-            placeholder="Введите название акции"
+            placeholder="Введите название уровня"
             name="name"
         >
         <p class="auth-block__hint auth-block__hint--error">
@@ -181,7 +181,7 @@
     <div class="modal__block modal__block--delete">
         <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="GoBack()"></span>
 
-        <p class="modal__delete-text">Программа лояльности сохранена</p>
+        <p class="modal__delete-text">Уровень сохранен</p>
 
         <div class="modal__buttons">
             <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
