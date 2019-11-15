@@ -112,6 +112,7 @@ export class CreateClientProfileComponent implements OnInit {
   MaskPhoneRU = ValidatorService.MaskPhoneRU();
 
   ModalErrorLoyalty = false;
+  SaveError = '';
 
   constructor(
     private _location: Location,
@@ -155,8 +156,14 @@ export class CreateClientProfileComponent implements OnInit {
       },
       (err) => {
         const error = err.json();
-        if (error['loyalty_program'] && error['loyalty_program'].findIndex(x => x == 'must exist') > -1) {
+        if (error['loyalty_program'] && error['loyalty_program'].findIndex(x => x === 'must exist') > -1) {
           this.ModalErrorLoyalty = true;
+        }
+        if (error['email'] && error['email'].findIndex(x => x === 'ALREADY_TAKEN') > -1 ) {
+          this.SaveError = 'Email занят!';
+        }
+        else if (error['phone'] && error['phone'].findIndex(x => x === 'INVALID') > -1 ) {
+          this.SaveError = 'Номер телефона невалидный!';
         }
       });
     }

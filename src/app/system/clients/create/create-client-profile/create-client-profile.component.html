@@ -135,10 +135,16 @@
           <div class="checkbox__text">Отправить пароль от личного кабинета покупателя СМС-сообщением</div>
       </label> -->
 
+      <p *ngIf="SaveError" class="customer__label auth-block__hint auth-block__hint--error" [ngStyle]="{'color': 'red'}">
+        <span>{{SaveError}}</span>
+      </p>
+
       <div class="text-center">
           <p></p>
           <button class="button create-block__button">Сохранить</button>
       </div>
+
+
   </form>
 
 </div>
