@@ -51,9 +51,10 @@ export class LoyaltyListComponent implements OnInit {
 
   DeleteLevel()
   {
-    this.service.DeleteLevel(this.LevelForDelete, 
+    this.ShowModal = false;
+    this.service.DeleteLevel(this.LevelForDelete.id, 
         (res) => {
-            // this.DeleteSuccess = true;
+            this.DeleteSuccess = true;
             this.service.RefreshLoyalty();
         },
         (err) => {

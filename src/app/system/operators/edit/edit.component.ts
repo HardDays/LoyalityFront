@@ -18,6 +18,8 @@ export class OperatorEditComponent implements OnInit {
   SelectedStore: StoreModel = null;
   Id = 0;
 
+  NoStore: StoreModel = new StoreModel();
+
   ShowSelect = false;
   Form: FormGroup = new FormGroup({
     "first_name": new FormControl('',[
@@ -69,6 +71,7 @@ export class OperatorEditComponent implements OnInit {
     private service: OperatorsService)
   {
     // console.log("EDIT COMPONENT");
+    this.NoStore.name = "Нет магазина";
     this.route.params.subscribe(params=> {
       if(params && params['id'])
       {
@@ -134,6 +137,9 @@ export class OperatorEditComponent implements OnInit {
   InitStore()
   {
     this.SelectedStore = this.Stores.find(obj => obj.id == this.Form.controls.store_id.value);
+
+    if(!this.SelectedStore)
+      this.SelectedStore = this.NoStore;
 
     // this.Form.controls.store_id.setValue(this.SelectedStore ? this.SelectedStore.id : 0);
   }

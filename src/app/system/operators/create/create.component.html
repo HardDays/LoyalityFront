@@ -73,6 +73,7 @@
             <div clickDirective  (clickOutside)="HideSelect($event)" class="create-block__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
                 <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedStore ? SelectedStore.name: 'Магазин'}}</div>
                 <ul class="create-block__select-list">
+                    <li (click)="OnSelected(NoStore)">{{NoStore.name}}</li>
                     <ng-container *ngFor="let item of Stores">
                         <li (click)="OnSelected(item)">{{item.name}}</li>
                     </ng-container>
@@ -86,11 +87,11 @@
                 </ng-container>
                 </select>
             </div> -->
-            <p class="auth-block__hint auth-block__hint--error">
+            <!-- <p class="auth-block__hint auth-block__hint--error">
                 <ng-container *ngIf="store_id.invalid && (store_id.dirty || store_id.touched)">
                     <span *ngIf="store_id.errors.required">Поле обязательно к заполнению.</span>
                 </ng-container>
-            </p>
+            </p> -->
     
             <!-- <label class="checkbox">
                 <input type="checkbox" class="checkbox__input" checked>
@@ -109,7 +110,7 @@
         <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="SuccessClicked()"></span>
 
         <p class="modal__delete-text">Кассир сохранён</p>
-
+        <p class="modal__delete-text">Пароль для входа в личный кабинет отправлен на электронный адрес кассира</p>
         <div class="modal__buttons">
             <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
             <button style="margin: auto" class="button modal__delete-button" (click)="SuccessClicked()">ОК</button>
