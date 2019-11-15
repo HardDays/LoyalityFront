@@ -7,10 +7,33 @@
 
                   <p class="lk__text lk__text--small_margin"><strong>Ваша программа лояльности:</strong> {{LoyaltyProgram.name}}</p>
                   <p class="lk__text lk__text--small_margin"><strong>Активные бонусы на {{Today | date: 'dd.MM.yyyy'}}:</strong> {{Client.points / 100}}</p>
-                  <p *ngIf="LoyaltyProgram['accrual_on_recommend']" class="lk__text">Условия акции приведи друга: {{LoyaltyProgram.recommend_recommendator_points}}</p>
+                  <p *ngIf="LoyaltyProgram['accrual_on_recommend']" class="lk__text">Условия акции приведи друга: {{LoyaltyProgram['recommend_recommendator_points']}}</p>
                   <!-- <p class="lk__text">Условия акции в честь дня рождения: </p> -->
-                  <p *ngIf="LoyaltyProgram['write_off_min_price']" class="lk__text">Минимальная сумма покупки для списания бонусов: {{LoyaltyProgram.write_off_min_price}}</p>
-                  
+                  <p *ngIf="LoyaltyProgram['write_off_min_price']" class="lk__text">Минимальная сумма покупки для списания бонусов: {{LoyaltyProgram['write_off_min_price']}}</p>
+
+
+                  <hr>
+
+                  <ng-container *ngFor="let item of LoyaltyProgram['loyalty_levels']">
+                    <p class="lk__text lk__text--small_margin">Название уровня: {{item.name}}</p>
+                    <p class="lk__text lk__text--small_margin">Условия активации уровня: {{item.min_price/100}}</p>
+                    <p class="lk__text lk__text--small_margin">Правило активации бонусов: <span *ngIf="item.activation_rule=='activation_moment'">С момента начисления</span><span *ngIf="item.activation_rule=='activation_days'">{{item.activation_days}}</span></p>
+
+                    <p class="lk__text lk__text--small_margin">Правило начисления бонусов: <span *ngIf="item.accrual_rule=='no_accrual'">Не начисляются</span><span *ngIf="item.accrual_rule=='accrual_percent'">Начислять {{item.accrual_percent}}%  от суммы покупки</span></p>
+
+                    <p class="lk__text lk__text--small_margin">Правило сгорания бонусов: <span *ngIf="item.burning_rule=='no_burning'">Не сгорают</span><span *ngIf="item.burning_rule=='burning_days'">Сгорают через {{item.burning_days}} дней после начисления</span></p>
+
+                    <p class="lk__text lk__text--small_margin">Правило списания бонусов: <span *ngIf="item.write_off_rule=='no_write_off'">Не использовать для оплаты покупок</span><span *ngIf="item.write_off_rule=='write_off_convert'">Оплачивать не более {{item.write_off_rule_percent}}% от суммы покупки если на счету не менее {{item.write_off_rule_points}} бонусов</span></p>
+
+                    <p class="lk__text lk__text--small_margin">Правило предоставления скидки: <span *ngIf="item.accordance_rule=='no_accordance'">Не предоставляется</span><span *ngIf="item.accordance_rule=='accordance_convert'">При накоплении более {{item.accordance_points}}бонусов предоставить скидку в размере {{item.accordance_percent}}%</span></p>
+
+
+
+                    <br>
+                  </ng-container>
+
+
+
                   <div class="lk__card">
                       <p class="lk__programm">{{LoyaltyProgram.name}}</p>
                       <p class="lk__conditions"></p>
@@ -19,12 +42,12 @@
 
                   <!-- TODO -->
                   <!-- Необходимо получать информацию о всех уровнях программы лояльности :
-                    Название
-                    Условия активации уровня
-                    Правило начисления
-                    Правило активации бонусов
-                    Правило сгорания
-                    Правило списания
+                      Название
+                      Условия активации уровня
+                      Правило начисления
+                      Правило активации бонусов
+                      Правило сгорания
+                      Правило списания
                     Правило предоставления скидки -->
 
               </div>
