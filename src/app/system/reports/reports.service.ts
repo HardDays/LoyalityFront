@@ -6,18 +6,19 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { PromotionModel } from '../../core/models/promotion.model';
 import { StoreModel } from '../../core/models/store.model';
 import { OperatorModel } from 'src/app/core/models/operator.model';
+import { LoyaltyModel } from 'src/app/core/models/loyalty.model';
 
 
 @Injectable()
 export class ReportsService {
 
-    private Promotions: PromotionModel[] = [];
+    private Promotions: any[] = [];
     public onPromotionsChange$: Subject<boolean> = new Subject<boolean>();
 
-    private Stores: StoreModel[] = [];
+    private Stores: any[] = [];
     public onStoresChange$: Subject<boolean> = new Subject<boolean>();
 
-    Operators: OperatorModel[] = [];
+    Operators: any[] = [];
     public onOperatorsChange$: Subject<boolean> = new Subject<boolean>();
 
     constructor(private http: HttpService, private auth:AuthService)
@@ -29,12 +30,63 @@ export class ReportsService {
         this.http.CommonRequest(
             () => this.http.GetData('/promotions', ''),
             (res: PromotionModel[]) => {
-                this.Promotions = res;
-                this.onPromotionsChange$.next(true);
-                if(success && typeof success == "function")
+                for(const item of res)
                 {
-                    success(res);
+                    
+                    let model = {
+                        id: item.id,
+                        name: item.name,
+                        loyalty: 0
+                    };
+
+                    const index = this.Promotions.findIndex(obj => obj.id == model.id && obj.loyalty == 0);
+
+                    if(index < 0)
+                    {
+                        this.Promotions.push(model);
+                    }
+                    else
+                    {
+                        this.Promotions[index] = model;
+                    }
                 }
+                this.http.CommonRequest(
+                    () => this.http.GetData('/loyalty_programs', ''),
+                    (res: LoyaltyModel) => {
+                        if(res)
+                        {
+                            let model = {
+                                id: res.id,
+                                name: res.name,
+                                loyalty: 1
+                            };
+        
+                            const index = this.Promotions.findIndex(obj => obj.id == model.id && obj.loyalty == 1);
+        
+                            if(index < 0)
+                            {
+                                this.Promotions.push(model);
+                            }
+                            else
+                            {
+                                this.Promotions[index] = model;
+                            }
+                        }
+                        this.onPromotionsChange$.next(true);
+                        if(success && typeof success == "function")
+                        {
+                            success(res);
+                        }
+                    },
+                    (err) => {
+                        this.onPromotionsChange$.next(false);
+                        if(fail && typeof fail == "function")
+                        {
+                            fail(err);
+                        }
+                    }
+                );
+                
             },
             (err) => {
                 this.onPromotionsChange$.next(false);
@@ -46,7 +98,7 @@ export class ReportsService {
         );
     }
 
-    GetPromotions(): PromotionModel[]
+    GetPromotions(): any[]
     {
         return JSON.parse(JSON.stringify(this.Promotions));
     }
@@ -104,5 +156,36 @@ export class ReportsService {
     GetOperators(): OperatorModel[]
     {
         return JSON.parse(JSON.stringify(this.Operators));
+    }
+
+    GetReport(type: string, data: any, success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.GetData("/reports/" + type, this.ParseObjectToQueryString(data)),
+            success,
+            fail
+        );
+    }
+
+    ParseObjectToQueryString(params)
+    {
+        const options = new URLSearchParams();
+        // tslint:disable-next-line: forin
+        for (const key in params) {
+            const prop: any = params[key];
+            if (prop) {
+                if ( prop instanceof Array) {
+                    for (const i in prop) {
+                        if (prop[i]) {
+                            options.append(key, prop[i]);
+                        }
+                    }
+                } else {
+                    options.set(key, params[key]);
+                }
+            }
+        }
+        // console.log(options.toString());
+        return options.toString();
     }
 }

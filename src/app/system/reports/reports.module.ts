@@ -10,6 +10,8 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { ReportsComponent } from './reports.component';
 import { ReportsRoutingModule } from './reports.routing';
 import { ReportsService } from './reports.service';
+// import {Location} from '@angular/common';
+import { ReportsAccessGuard } from './reports.guard';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { ReportsService } from './reports.service';
     TextMaskModule,
     MyDatePickerModule
   ],
-  providers: [ ReportsService ]
+  providers: [ ReportsService, ReportsAccessGuard ],
+  // bootstrap: [ Location ]
 })
 export class ReportsModule {}

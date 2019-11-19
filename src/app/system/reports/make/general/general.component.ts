@@ -10,6 +10,7 @@ import { PromotionsAccessGuard } from '../../../promotions/promotions.guard';
 import { StoreModel } from '../../../../core/models/store.model';
 import { OperatorModel } from '../../../../core/models/operator.model';
 import { IMyDpOptions } from 'mydatepicker';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class MakeGeneralReportComponent implements OnInit
     @Input() State: MakeReportStateModel = new MakeReportStateModel();
 
     @Output() OnChangeState = new EventEmitter<MakeReportStateModel>();
+
+
 
     myDatePickerOptions: IMyDpOptions = {
         // other options...
@@ -39,6 +42,15 @@ export class MakeGeneralReportComponent implements OnInit
         openSelectorOnInputClick: true
       };
 
+    MakeParams = {
+        begin_date: "",
+        end_date: "",
+        stores: [],
+        loyalty_programs: [],
+        promotions: [],
+        operators:[]
+    };
+
     NameDics = {
         general: "Общий отчет",
         orders: "Отчёт о покупках",
@@ -46,14 +58,19 @@ export class MakeGeneralReportComponent implements OnInit
         sms: "СМС-отчет"
     };
 
+    Form: FormGroup = new FormGroup({
+        "begin_date": new FormControl('',[]),
+        "end_date": new FormControl('',[])
+      });
+
     SelectsOpened = {
         promotions : false,
         stores: false,
         operators: false
     };
 
-    Promotions: PromotionModel[] = [];
-    SelectedPromotions: PromotionModel[] = [];
+    Promotions: any[] = [];
+    SelectedPromotions: any[] = [];
 
     Stores: StoreModel[] = [];
     SelectedStores: StoreModel[] = [];
@@ -61,7 +78,7 @@ export class MakeGeneralReportComponent implements OnInit
     Operators: OperatorModel[] = [];
     SelectedOperators: OperatorModel[] = [];
 
-    constructor(private auth: AuthService, private service: ReportsService)
+    constructor(private auth: AuthService, private service: ReportsService, private router: Router)
     {  
         this.service.onOperatorsChange$.subscribe(Val => {
             if(Val)
@@ -82,6 +99,9 @@ export class MakeGeneralReportComponent implements OnInit
 
     ngOnInit(): void
     {
+        this.UpdateOperators();
+        this.UpdatePromotions();
+        this.UpdateStores();
     }
 
     OnHeaderClick()
@@ -93,7 +113,6 @@ export class MakeGeneralReportComponent implements OnInit
     UpdateOperators()
     {
         this.Operators = this.service.GetOperators();
-        console.log(this.Operators);
     }
 
     SelectOperator(item: OperatorModel)
@@ -155,7 +174,100 @@ export class MakeGeneralReportComponent implements OnInit
 
     OnClickSelect($event: string)
     {
-        console.log($event);
+    }
+
+    Save()
+    {
+        const remove_error = (property_name) => {
+            if(this.Form.controls[property_name].hasError('wrong'))
+            {
+                this.Form.controls[property_name].setErrors({
+                    'wrong': null
+                });
+                this.Form.controls[property_name].updateValueAndValidity();
+            }
+        }
+    
+        for(const i in this.Form.controls)
+        {
+            this.Form.controls[i].markAsDirty();
+            this.Form.controls[i].markAsTouched();
+            remove_error(i);
+            this.Form.controls[i].updateValueAndValidity();
+        }
+    
+        let hasError = false;
+        const data = this.Form.getRawValue();
+    
+        if(data.begin_date.epoc && data.end_date.epoc)
+        {
+            if(data.begin_date.epoc > data.end_date.epoc)
+            {
+                this.Form.controls.end_date.setErrors({
+                'wrong': true
+                });
+                hasError = true;
+            }
+        }
+        this.Form.updateValueAndValidity();
+        if(hasError)
+        {
+            return;
+        }
+
+        this.MakeParams.begin_date = data.begin_date && data.begin_date.formatted ? data.begin_date.formatted : "";
+        this.MakeParams.end_date = data.end_date && data.end_date.formatted ? data.end_date.formatted : "";
+
+        this.MakeParams.stores = [];
+        for(const item of this.SelectedStores)
+        {
+            this.MakeParams.stores.push(item.id);
+        }
+
+        this.MakeParams.operators = [];
+        for(const item of this.SelectedOperators)
+        {
+            this.MakeParams.operators.push(item.id);
+        }
+
+
+        this.MakeParams.promotions = [];
+        this.MakeParams.loyalty_programs = [];
+
+        for(const item of this.SelectedPromotions)
+        {
+            if(item.loyalty)
+            {
+                this.MakeParams.loyalty_programs.push(item.id);
+            }
+            else
+            {
+                this.MakeParams.promotions.push(item.id);
+            }
+        }
+        let params = {};
+        for(const i in this.MakeParams)
+        {
+            if(this.MakeParams[i] instanceof Array)
+            {
+                if(this.MakeParams[i].length > 0)
+                {
+                    params[i] = this.MakeParams[i];
+                }
+            }
+            else
+            {
+                if(this.MakeParams[i])
+                {
+                    params[i] = this.MakeParams[i];
+                }
+            }
+        }
+        // console.log(this.MakeParams, params);
+
+        this.router.navigate(["system", "reports", "get", this.State.type], {queryParams: params})
+        // console.log(this.MakeParams);
+        // console.log(this.State);
     }
 
 }
