@@ -145,6 +145,7 @@ export class ReportComponent implements OnInit
 
     ngOnInit(): void
     {
+        console.log(this.Type);
         this.GetReport();
         this.UpdatePromotionsString();
         this.UpdateStoresString();
@@ -185,7 +186,7 @@ export class ReportComponent implements OnInit
         if(this.Type == "general" || this.Type == "sms")
         {
             let result: any = data;
-            if(this.Type = "general")
+            if(this.Type == "general")
             {
                 result.accrued_points /= 100;
                 result.average_price /= 100;

@@ -19,8 +19,8 @@
         <p class="report-make__label report-make__label--small_margin">Программа лояльности/Акции: {{PromotionsString}}</p>
     </div>
 
-        <div class="report-make__table report-make__table--general"
-            [ngStyle]="{'margin': Type=='orders' ? '17px 46px 0' : 'auto'}"
+        <div class="report-make__table"
+            [ngStyle]="{'margin': Type=='orders' ? '17px 46px 0' : 'auto', 'width': Type=='orders' ? 'auto' : '739px'}"
             [ngClass]="{'report-make__table--general': Type=='general' || Type=='sms', 'report-make__table--customers': Type=='clients', 'report-make__table--purchases':Type=='orders'}"
         >
             <div class="report-make__row report-make__row--head">
@@ -54,7 +54,7 @@
             </ng-container>
             <ng-container *ngIf="Type=='clients'">
                 <div class="report-make__row" *ngFor="let item of ArrayData; let i = index">
-                    <div class="report-make__cell">{{i + 1}} {{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</div>
+                    <div class="report-make__cell" style="justify-content: start">{{i + 1}} {{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</div>
                     <div class="report-make__cell">{{item.phone}}</div>
                     <div class="report-make__cell">{{item.card_number}}</div>
                     <div class="report-make__cell"><ng-container *ngIf="item.birth_day">{{item.birth_day | date: 'd.MM.yyyy'}}</ng-container></div>
