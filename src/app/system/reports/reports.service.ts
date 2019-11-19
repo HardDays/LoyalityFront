@@ -177,7 +177,7 @@ export class ReportsService {
                 if ( prop instanceof Array) {
                     for (const i in prop) {
                         if (prop[i]) {
-                            options.append(key, prop[i]);
+                            options.append(key + "[]", prop[i]);
                         }
                     }
                 } else {

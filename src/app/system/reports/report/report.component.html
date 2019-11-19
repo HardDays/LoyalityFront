@@ -47,7 +47,7 @@
                 </ng-container>
             </div>
             <ng-container *ngIf="Type=='general' || Type=='sms'">
-                <div class="report-make__row" *ngFor="let item of ReportFields[Type];">
+                <div class="report-make__row" *ngFor="let item of ReportFields[Type]">
                     <div class="report-make__cell">{{ReportsFieldsLabels[Type][item]}}</div>
                     <div class="report-make__cell">{{TableData[item]}}</div>
                 </div>
@@ -63,7 +63,7 @@
             </ng-container>
             <ng-container *ngIf="Type=='orders'">
                 <div class="report-make__row" *ngFor="let item of ArrayData; let i = index">
-                    <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.date + '%'}"><ng-container *ngIf="item.date">{{item.date | date: 'd.MM.yyyy'}}</ng-container></div>
+                    <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.date + '%'}">{{item.date}}</div>
                     <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.normal_price + '%'}">{{item.normal_price}}</div>
                     <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.write_off_points + '%'}">{{item.write_off_points}}</div>
                     <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.final_price + '%'}">{{item.final_price}}</div>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="text-center">
-            <button class="button create-block__button">Скачать ОТЧЁТ в .exl</button>
+            <button class="button create-block__button" (click)="Download()">Скачать ОТЧЁТ в .exl</button>
         </div>
     </div>
 

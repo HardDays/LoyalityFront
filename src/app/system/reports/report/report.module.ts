@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -22,6 +22,6 @@ import { ReportRoutingModule } from './report.routing';
     ReportRoutingModule,
     MyDatePickerModule
   ],
-  providers: [ ]
+  providers: [ DatePipe ]
 })
 export class ReportModule {}
