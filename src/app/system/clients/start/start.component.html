@@ -1,5 +1,5 @@
 <section class="page__content-wrap">
-  <span class="page__content customer__screen">
+  <span *ngIf="!IsDeletedUser" class="page__content customer__screen">
     <div [routerLink]="['../create']" class="customer__item customer__item--green">
         <img src="./../../../../assets/img/plus-green.svg" alt="">
         <span>Создать покупателя</span>
@@ -13,5 +13,9 @@
   </span>
   <p *ngIf="!HasStore" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #000; color: white; padding: 20px 30px;"
   >У Вас не указан магазин, к которому Вы относитесь. Обратитесь к администратору.</p>
+
+  <p *ngIf="IsDeletedUser" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #000; color: white; padding: 20px 30px;"
+  >Вы не имеете права доступа. Обратитесь к администратору.</p>
+  
 
 </section>

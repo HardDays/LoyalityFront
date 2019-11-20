@@ -9,6 +9,7 @@ export class LoginSuccessModel{
         public token?:string,
         public user_type?:string,
         public birth_day?: string,
-        public company_id?: string
+        public company_id?: string,
+        public user_types?:string[],
     ){}
 }

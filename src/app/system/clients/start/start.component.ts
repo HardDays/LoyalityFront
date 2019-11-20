@@ -16,12 +16,23 @@ export class ClientsStartComponent implements OnInit {
 
   HasStore = false;
 
+  IsDeletedUser = false;
+
   constructor(private auth: AuthService){
   }
 
   ngOnInit() {
     if (this.auth.LoginData['store_id']) {
       this.HasStore = true;
+    }
+
+    console.log(this.auth.LoginData);
+    this.CheckOperatorType();
+  }
+
+  CheckOperatorType() {
+    if (this.auth.LoginData.user_types.findIndex(x => x === 'operator') === -1) {
+      this.IsDeletedUser = true;
     }
   }
 

@@ -26,6 +26,7 @@ import { PromotionsService } from '../promotions/promotions.service';
 import { PipesModule } from './../../core/pipes/pipes.module';
 import { CreateClientConfirmPhoneComponent } from './create/create-client-confirm-phone/create-client-confirm-phone.component';
 import { CreateClientFirstBuyComponent } from './create/create-client-first-buy/create-client-first-buy.component';
+import { LoyaltyService } from '../loyalty/loyalty.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,6 @@ import { CreateClientFirstBuyComponent } from './create/create-client-first-buy/
     MyDatePickerModule,
     PipesModule
   ],
-  providers: [ ClientsAccessGuard, ClientsService, PromotionsService, LoyaltyProgramsService]
+  providers: [ ClientsAccessGuard, ClientsService, PromotionsService, LoyaltyProgramsService, LoyaltyService]
 })
 export class ClientsModule {}

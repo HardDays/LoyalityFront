@@ -24,6 +24,7 @@ export class CreateClientConfirmPhoneComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.GetCurrentLoyalty();
     this.Phone = this.clientService.Client.phone;
     if (!this.Phone) {
       this.router.navigate(['/system', 'my_clients', 'create']);
@@ -43,7 +44,7 @@ export class CreateClientConfirmPhoneComponent implements OnInit {
       },
       (err) => {
         this.hasError = true;
-        this.router.navigate(['/system', 'my_clients', 'create', 'buy']);
+        // this.router.navigate(['/system', 'my_clients', 'create', 'buy']);
       }
     );
   }
@@ -58,6 +59,10 @@ export class CreateClientConfirmPhoneComponent implements OnInit {
       this.clientService.Client.loyalty_program_id,
       (res) => {
         console.log(`res loyalty = `, res);
+
+        if (res && res['sms_on_register'] === false) {
+          this.router.navigate(['/system', 'my_clients', 'create', 'buy']);
+        }
       }
     );
   }
