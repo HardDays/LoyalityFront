@@ -22,6 +22,10 @@ export class ClientsStartComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!this.auth.LoginData.id) {
+      this.auth.Logout();
+      return;
+    }
     if (this.auth.LoginData['store_id']) {
       this.HasStore = true;
     }
@@ -31,7 +35,7 @@ export class ClientsStartComponent implements OnInit {
   }
 
   CheckOperatorType() {
-    if (this.auth.LoginData.user_types.findIndex(x => x === 'operator') === -1) {
+    if (this.auth.LoginData && this.auth.LoginData.user_types && this.auth.LoginData.user_types.findIndex(x => x === 'operator') === -1) {
       this.IsDeletedUser = true;
     }
   }

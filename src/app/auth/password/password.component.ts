@@ -27,12 +27,21 @@ export class PasswordComponent implements OnInit
   {
     return this.Form.get('email');
   }
+
   ResetPw()
   {
     const valid = this.Form.valid;
     if(valid)
     {
-      this.IsSendSuccess = true;
+      this.auth.RequestPassword(
+        this.Form.getRawValue()['email'],
+        (res) => {
+          this.IsSendSuccess = true;
+        }, 
+        (err) => {
+          this.IsSendSuccess = true;
+        }
+      )
     }
   }
 }

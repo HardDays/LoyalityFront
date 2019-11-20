@@ -269,4 +269,25 @@ export class AuthService
             }
         );
     }
+
+    RequestPassword(email: string, success?: (data) => void, fail?: (err) => void) {
+        this.http.CommonRequest(
+            () => this.http.PostData('/auth/password/request', {email}),
+            (res) => {
+                if(res)
+                {
+                    if(success && typeof success == "function")
+                    {
+                        success(res);
+                    }
+                }
+            },
+            (err) => {
+                if(fail && typeof fail == "function")
+                {
+                    fail(err);
+                }
+            }
+        );
+    }
 }
