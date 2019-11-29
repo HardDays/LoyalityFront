@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientsService } from '../../clients.service';
 import { ClientModel } from 'src/app/core/models/client.model';
 import { PromotionsService } from 'src/app/system/promotions/promotions.service';
+import { LoyaltyService } from 'src/app/system/loyalty/loyalty.service';
 
 @Component({
   selector: 'app-edit-loyality',
@@ -21,9 +22,12 @@ export class EditLoyalityComponent implements OnInit {
 
   isNextDisabled = true;
 
+  ProgrammLoyaltyName = 'Программа лояльности';
+
   constructor(
     protected clientsService: ClientsService,
     private loyalityService: PromotionsService,
+    private ls: LoyaltyService,
     private router: Router) { }
 
   ngOnInit() {
@@ -48,6 +52,12 @@ export class EditLoyalityComponent implements OnInit {
     );
     this.Price = this.clientsService.newOrder.price;
     this.checkIsNextDisabled();
+
+    this.ls.RefreshLoyalty(
+      (res) => {
+        this.ProgrammLoyaltyName = res['name'];
+      }
+    );
   }
 
   OnSelected(item) {

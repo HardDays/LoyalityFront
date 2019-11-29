@@ -10,9 +10,9 @@
 <p class="create-block__label create-block__label--light">Выбрать программу лояльности:</p>
 
 <div class="create-block__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
-    <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedLoyality ? SelectedLoyality.name: 'Программа лояльности'}}</div>
+    <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedLoyality ? SelectedLoyality.name: ProgrammLoyaltyName}}</div>
     <ul class="create-block__select-list">
-        <li (click)="OnSelected(null)">Программа лояльности</li>
+        <li (click)="OnSelected(null)">{{ProgrammLoyaltyName}}</li>
         <ng-container *ngFor="let item of PromotionsProgramm">
             <li (click)="OnSelected(item)"
               class="promotion-item"

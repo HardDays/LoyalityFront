@@ -1,3 +1,4 @@
+import { LoyaltyService } from './../../../loyalty/loyalty.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PromotionsService } from 'src/app/system/promotions/promotions.service';
@@ -22,8 +23,11 @@ export class CreateClientFirstBuyComponent implements OnInit {
 
   CurrentClient = this.service.Client;
 
+  ProgrammLoyaltyName = 'Программа лояльности';
+
   constructor(private loyalityService: PromotionsService,
     private service: ClientsService,
+    private ls: LoyaltyService,
     private _location: Location,
     private router: Router) { }
 
@@ -43,6 +47,12 @@ export class CreateClientFirstBuyComponent implements OnInit {
           console.log(today, begin, end, item.enable);
         }
         console.log(this.PromotionsProgramm);
+      }
+    );
+
+    this.ls.RefreshLoyalty(
+      (res) => {
+        this.ProgrammLoyaltyName = res['name'];
       }
     );
 

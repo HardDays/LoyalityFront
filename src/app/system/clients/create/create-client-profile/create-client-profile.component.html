@@ -24,19 +24,6 @@
           <span *ngIf="ErrorText">{{ErrorText}}</span>
       </p>
 
-      <p class="create-block__label create-block__label--light">Имя</p>
-      <input type="text" class="create-block__input create-block__input--full"
-        [ngClass]="{'auth-block__input--error': first_name.invalid && (first_name.dirty || first_name.touched)}"
-        autocomplete="null"
-        name="first_name"
-        formControlName="first_name"
-      >
-      <p class="auth-block__hint auth-block__hint--error">
-          <ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
-              <span *ngIf="first_name.errors['required']">Поле обязательно к заполнению.</span>
-          </ng-container>
-      </p>
-
       <p class="create-block__label create-block__label--light">Фамилия</p>
       <input type="text" class="create-block__input create-block__input--full"
         [ngClass]="{'auth-block__input--error': last_name.invalid && (last_name.dirty || last_name.touched)}"
@@ -47,6 +34,19 @@
       <p class="auth-block__hint auth-block__hint--error">
           <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
               <span *ngIf="last_name.errors['required']">Поле обязательно к заполнению.</span>
+          </ng-container>
+      </p>
+
+      <p class="create-block__label create-block__label--light">Имя</p>
+      <input type="text" class="create-block__input create-block__input--full"
+        [ngClass]="{'auth-block__input--error': first_name.invalid && (first_name.dirty || first_name.touched)}"
+        autocomplete="null"
+        name="first_name"
+        formControlName="first_name"
+      >
+      <p class="auth-block__hint auth-block__hint--error">
+          <ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+              <span *ngIf="first_name.errors['required']">Поле обязательно к заполнению.</span>
           </ng-container>
       </p>
 
