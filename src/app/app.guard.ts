@@ -16,10 +16,17 @@ export class AppAccessGuard implements CanActivate
             case "auth":{
                return this.SystemNavigate();
             }
-            default:{
-                return true;
+            case "system":{
+                if(!this.auth.IsLoggedIn)
+                {
+                    this.router.navigate(["/auth"]);
+                    return false;
+                }
             }
+
+            
         }
+        return true;
     }
 
     SystemNavigate()

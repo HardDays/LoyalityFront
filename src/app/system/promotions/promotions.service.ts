@@ -31,10 +31,7 @@ export class PromotionsService {
             },
             (err) => {
                 this.onPromotionsChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail);
             }
         );
     }
@@ -49,7 +46,7 @@ export class PromotionsService {
         this.http.CommonRequest(
             () => this.http.GetData('/promotions/' + Id, ''),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -58,7 +55,7 @@ export class PromotionsService {
         this.http.CommonRequest(
             () => this.http.DeleteData('/promotions/' + Id),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -67,7 +64,7 @@ export class PromotionsService {
         this.http.CommonRequest(
             () => this.http.PostData('/promotions', Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -76,7 +73,7 @@ export class PromotionsService {
         this.http.CommonRequest(
             () => this.http.PutData('/promotions/' + Id, Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 

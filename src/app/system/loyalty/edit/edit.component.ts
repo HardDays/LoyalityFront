@@ -219,23 +219,23 @@ export class LoyaltyEditComponent implements OnInit {
 
     if(data.accrual_on_register)
     {
-        ferror("register_points", 1, 100000000);
+        ferror("register_points", 0, 100000000);
     }
 
     if(data.accrual_on_first_buy)
     {
-        ferror("first_buy_points", 1, 100000000);
+        ferror("first_buy_points", 0, 100000000);
     }
 
     if(data.write_off_limited)
     {
-        ferror("write_off_min_price", 1, 100000000);
+        ferror("write_off_min_price", 0, 100000000);
     }
 
     if(data.accrual_on_recommend)
     {
-        ferror("recommend_recommendator_points", 1, 100000000);
-        ferror("recommend_registered_points", 1, 100000000);
+        ferror("recommend_recommendator_points", 0, 100000000);
+        ferror("recommend_registered_points", 0, 100000000);
     }
 
     if(data.sms_on_burning)

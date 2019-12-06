@@ -31,10 +31,7 @@ export class StoresService {
             },
             (err) => {
                 this.onStoresChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail);
             }
         );
     }
@@ -56,7 +53,7 @@ export class StoresService {
         this.http.CommonRequest(
             () => this.http.GetData('/operators?store_id=' + StoreId, ''),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -65,7 +62,7 @@ export class StoresService {
         this.http.CommonRequest(
             () => this.http.PostData('/stores', Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -74,7 +71,7 @@ export class StoresService {
         this.http.CommonRequest(
             () => this.http.PutData('/stores/' + Id, Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -83,7 +80,7 @@ export class StoresService {
         this.http.CommonRequest(
             () => this.http.GetData('/stores/' + Id),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -92,7 +89,7 @@ export class StoresService {
         this.http.CommonRequest(
             () => this.http.DeleteData('/stores/' + Id),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
     DeleteOperator(Id, success?: (data) => void, fail?: (err) => void)
@@ -100,7 +97,7 @@ export class StoresService {
         this.http.CommonRequest(
             () => this.http.DeleteData('/operators/' + Id),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -109,7 +106,7 @@ export class StoresService {
         this.http.CommonRequest(
             () => this.http.PutData('/operators/' + Id, Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 }

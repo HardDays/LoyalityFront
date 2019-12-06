@@ -19,7 +19,7 @@ export class LoyaltyProgramsService {
         this.http.CommonRequest(
             () => this.http.GetData('/loyalty_programs/' + Id, ''),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 

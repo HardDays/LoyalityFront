@@ -125,10 +125,7 @@ export class AuthService
             },
             (err) => {
                 this.onCompanyChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.ErrorHandler(err, fail);
             }
         );
     }
@@ -153,12 +150,7 @@ export class AuthService
                     success(res);
                 }
             },
-            (err) => {
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
-            }
+            (err) => this.ErrorHandler(err, fail)
         );
     }
 
@@ -179,19 +171,13 @@ export class AuthService
                 }
                 else{
                     this.onCompanyChange$.next(false);
-                    if(fail && typeof fail == "function")
-                    {
-                        fail(null);
-                    }
+                    this.ErrorHandler(null, fail);
                 }
 
             },
             (err) => {
                 this.onCompanyChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.ErrorHandler(err, fail);
             }
         );
     }
@@ -222,10 +208,7 @@ export class AuthService
             },
             (err) => {
                 this.onCompanyChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.ErrorHandler(err, fail);
             }
         );
     }
@@ -260,13 +243,7 @@ export class AuthService
                 }
 
             },
-            (err) => {
-                this.onAuthChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
-            }
+            (err) => this.ErrorHandler(err, fail)
         );
     }
 
@@ -282,12 +259,23 @@ export class AuthService
                     }
                 }
             },
-            (err) => {
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
-            }
+            (err) => this.ErrorHandler(err, fail)
         );
+    }
+
+    ErrorHandler(error, fail?: (err) => void)
+    {
+        // console.log(error);
+        if(error.status == 401)
+        {
+            this.Logout();
+            return;
+        }
+
+
+        if(fail && typeof fail == "function")
+        {
+            fail(error);
+        }
     }
 }

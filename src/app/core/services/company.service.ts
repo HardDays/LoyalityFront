@@ -5,12 +5,13 @@ import { LoginModel } from '../models/login.model';
 import { HttpService } from './http.service';
 import { LoginSuccessModel } from '../models/login.success.model';
 import { CreatorModel } from '../models/creator.model';
+import { AuthService } from './auth.service';
 
 
 @Injectable()
 export class CompanyService
 {
-    constructor(public http: HttpService, private router: Router) 
+    constructor(public http: HttpService, private router: Router, private auth: AuthService) 
     {
     }
 
@@ -25,10 +26,7 @@ export class CompanyService
                 }
             },
             (err) => {
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail);
             }
         );
     }

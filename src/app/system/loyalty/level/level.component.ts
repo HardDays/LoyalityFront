@@ -31,7 +31,7 @@ export class LoyaltyLevelComponent implements OnInit {
       ]),
       "min_price": new FormControl("",[
         Validators.required,
-        Validators.min(1),
+        Validators.min(0),
         Validators.max(100000000)
       ]),
 
@@ -258,18 +258,18 @@ export class LoyaltyLevelComponent implements OnInit {
 
     if(data.accrual_rule == "accrual_percent")
     {
-      ferror("accrual_percent", 1, 100);
+      ferror("accrual_percent", 0, 100);
     }
     else if (data.accrual_rule == "accrual_convert")
     {
-      ferror("accrual_points", 1, 100000000);
-      ferror("accrual_money", 1, 100000000);
+      ferror("accrual_points", 0, 100000000);
+      ferror("accrual_money", 0, 100000000);
     }
 
     if(data.write_off_rule == "write_off_convert")
     {
-      ferror("write_off_rule_percent", 1, 100);
-      ferror("write_off_rule_points", 1, 100000000);
+      ferror("write_off_rule_percent", 0, 100);
+      ferror("write_off_rule_points", 0, 100000000);
     }
 
     if(data.burning_rule == "burning_days")
@@ -284,8 +284,8 @@ export class LoyaltyLevelComponent implements OnInit {
 
     if(data.accordance_rule == "accordance_convert")
     {
-      ferror("accordance_percent", 1, 100);
-      ferror("accordance_points", 1, 100000000);
+      ferror("accordance_percent", 0, 100);
+      ferror("accordance_points", 0, 100000000);
     }
 
     this.Form.updateValueAndValidity();

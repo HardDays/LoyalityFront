@@ -80,20 +80,14 @@ export class ReportsService {
                     },
                     (err) => {
                         this.onPromotionsChange$.next(false);
-                        if(fail && typeof fail == "function")
-                        {
-                            fail(err);
-                        }
+                        this.auth.ErrorHandler(err, fail);
                     }
                 );
                 
             },
             (err) => {
                 this.onPromotionsChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail);
             }
         );
     }
@@ -118,10 +112,7 @@ export class ReportsService {
             },
             (err) => {
                 this.onStoresChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail);
             }
         );
     }
@@ -146,10 +137,7 @@ export class ReportsService {
             },
             (err) => {
                 this.onOperatorsChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail);
             }
         );
     }
@@ -163,7 +151,9 @@ export class ReportsService {
         this.http.CommonRequest(
             () => this.http.GetData("/reports/" + type, this.ParseObjectToQueryString(data)),
             success,
-            fail
+            err => {
+                this.auth.ErrorHandler(err, fail);
+            }
         );
     }
 

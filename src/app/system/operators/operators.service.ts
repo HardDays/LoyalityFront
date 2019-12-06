@@ -35,10 +35,7 @@ export class OperatorsService {
             },
             (err) => {
                 this.onOperatorsChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail);
             }
         );
     }
@@ -52,7 +49,7 @@ export class OperatorsService {
         this.http.CommonRequest(
             () => this.http.DeleteData('/operators/' + Id),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -61,7 +58,7 @@ export class OperatorsService {
         this.http.CommonRequest(
             () => this.http.PostData('/operators', Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -70,7 +67,7 @@ export class OperatorsService {
         this.http.CommonRequest(
             () => this.http.PutData('/operators/' + Id, Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -88,10 +85,7 @@ export class OperatorsService {
             },
             (err) => {
                 this.onStoresChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail)
             }
         );
     }
@@ -106,7 +100,7 @@ export class OperatorsService {
         this.http.CommonRequest(
             () => this.http.GetData('/operators/' + Id, ''),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -129,7 +123,7 @@ export class OperatorsService {
         this.http.CommonRequest(
             () => this.http.GetData('/stores/' + Id),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 }

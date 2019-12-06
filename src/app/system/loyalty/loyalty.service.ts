@@ -43,10 +43,7 @@ export class LoyaltyService {
             },
             (err) => {
                 this.onLoyaltyChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail)
             }
         )
     }
@@ -77,10 +74,7 @@ export class LoyaltyService {
             },
             (err) => {
                 this.onLoyaltyChange$.next(false);
-                if(fail && typeof fail == "function")
-                {
-                    fail(err);
-                }
+                this.auth.ErrorHandler(err, fail)
             }
         );
     }
@@ -95,7 +89,7 @@ export class LoyaltyService {
         this.http.CommonRequest(
             () => this.http.GetData('/loyalty_levels/' + Id, ''),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -104,7 +98,7 @@ export class LoyaltyService {
         this.http.CommonRequest(
             () => this.http.DeleteData('/loyalty_levels/' + Id),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -114,7 +108,7 @@ export class LoyaltyService {
         this.http.CommonRequest(
             () => this.http.PostData('/loyalty_levels', Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
@@ -124,7 +118,7 @@ export class LoyaltyService {
         this.http.CommonRequest(
             () => this.http.PutData('/loyalty_levels/' + Id, Obj),
             success,
-            fail
+            err => this.auth.ErrorHandler(err, fail)
         );
     }
 
