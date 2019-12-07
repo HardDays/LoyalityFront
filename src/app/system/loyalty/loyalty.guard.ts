@@ -9,6 +9,18 @@ export class LoyaltyAccessGuard implements CanActivate{
     {}
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
+
+      let myRole = this.auth.LoginData.user_type;
+
+
+        if (myRole === 'operator') {
+          this.router.navigate(["/system/my_clients"]);
+          return false;
+        }
+        else if (myRole === 'client') {
+          this.router.navigate(["/system/client_profile"]);
+          return false;
+        }
     //     let isLoginned = this.auth.IsLoggedIn;
     //     let myRole = this.auth.LoginData.user_type;
 
