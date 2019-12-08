@@ -160,10 +160,12 @@ export class CreateClientProfileComponent implements OnInit {
           this.ModalErrorLoyalty = true;
         }
         if (error['email'] && error['email'].findIndex(x => x === 'ALREADY_TAKEN') > -1 ) {
-          this.SaveError = 'Email занят!';
+          // this.SaveError = 'Email занят!';
+          this.email.setErrors({'incorrect': true});
         }
         else if (error['phone'] && error['phone'].findIndex(x => x === 'INVALID') > -1 ) {
-          this.SaveError = 'Номер телефона невалидный!';
+          // this.SaveError = 'Номер телефона невалидный!';
+          this.phone.setErrors({'incorrect': true});
         }
       });
     }

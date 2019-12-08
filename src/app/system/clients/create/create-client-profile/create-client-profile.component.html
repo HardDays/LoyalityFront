@@ -69,6 +69,7 @@
           <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
               <span *ngIf="email.errors['required']">Поле обязательно к заполнению.</span>
               <span *ngIf="email.errors['email']">Неверный формат.</span>
+              <span *ngIf="email.errors['incorrect']">Email занят.</span>
           </ng-container>
       </p>
 
