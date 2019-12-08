@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginModel } from '../models/login.model';
 import { HttpService } from './http.service';
@@ -19,6 +19,8 @@ export class AuthService
     public LoginData: LoginSuccessModel = new LoginSuccessModel();
     public CompanyData: CompanyModel = new CompanyModel();
     public onCompanyChange$: Subject<boolean> = new Subject<boolean>();
+
+    public onLoading: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
     public Creator: CreatorModel = new CreatorModel();
 
@@ -40,6 +42,7 @@ export class AuthService
 
     Login(data: LoginModel,  success?: (data) => void, fail?: (err) => void)
     {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/auth/login', data),
             (res: LoginSuccessModel) => {
@@ -48,6 +51,7 @@ export class AuthService
                 {
                     success(res);
                 }
+                this.onLoading.next(false);
                 // this.router.navigate(["/"]);
             },
             (err) => {
@@ -55,12 +59,14 @@ export class AuthService
                 {
                     fail(err);
                 }
+                this.onLoading.next(false);
             }
         );
     }
 
     CreateCreator(data: CreatorModel,  success?: (data) => void, fail?: (err) => void)
     {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/creators', data),
             (res: LoginSuccessModel) => {
@@ -70,12 +76,14 @@ export class AuthService
                 {
                     success(res);
                 }
+                this.onLoading.next(false);
             },
             (err) => {
                 if(fail && typeof fail == "function")
                 {
                     fail(err);
                 }
+                this.onLoading.next(false);
             }
         );
     }
@@ -105,6 +113,7 @@ export class AuthService
 
     GetCompanyInfo(success?: (data) => void, fail?: (err) => void)
     {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.GetData('/companies', ''),
             (res: CompanyModel) => {
@@ -121,11 +130,13 @@ export class AuthService
                 else{
                     this.router.navigate(["/system", "company"])
                 }
+                this.onLoading.next(false);
 
             },
             (err) => {
                 this.onCompanyChange$.next(false);
                 this.ErrorHandler(err, fail);
+                this.onLoading.next(false);
             }
         );
     }
@@ -141,6 +152,7 @@ export class AuthService
 
     Confirm(data: any,  success?: (data) => void, fail?: (err) => void)
     {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/auth/confirm', data),
             (res: LoginSuccessModel) => {
@@ -149,13 +161,18 @@ export class AuthService
                 {
                     success(res);
                 }
+                this.onLoading.next(false);
             },
-            (err) => this.ErrorHandler(err, fail)
+            (err) => {
+                this.ErrorHandler(err, fail)
+                this.onLoading.next(false);
+            }
         );
     }
 
     CreateCompany(data: any,  success?: (data) => void, fail?: (err) => void)
     {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/companies', data),
             (res: CompanyModel) => {
@@ -168,22 +185,26 @@ export class AuthService
                     {
                         success(res);
                     }
+                    
                 }
                 else{
                     this.onCompanyChange$.next(false);
                     this.ErrorHandler(null, fail);
                 }
+                this.onLoading.next(false);
 
             },
             (err) => {
                 this.onCompanyChange$.next(false);
                 this.ErrorHandler(err, fail);
+                this.onLoading.next(false);
             }
         );
     }
 
     UpdateCompany(data: any, success?: (data) => void, fail?: (err) => void)
     {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PutData('/companies', data),
             (res: CompanyModel) => {
@@ -204,17 +225,20 @@ export class AuthService
                         fail(null);
                     }
                 }
+                this.onLoading.next(false);
 
             },
             (err) => {
                 this.onCompanyChange$.next(false);
                 this.ErrorHandler(err, fail);
+                this.onLoading.next(false);
             }
         );
     }
 
     UpdateProfile(data: any,  success?: (data) => void, fail?: (err) => void)
     {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PutData('/creators/profile', data),
             (res: any) => {
@@ -241,13 +265,18 @@ export class AuthService
                         fail(null);
                     }
                 }
+                this.onLoading.next(false);
 
             },
-            (err) => this.ErrorHandler(err, fail)
+            (err) => {
+                this.ErrorHandler(err, fail)
+                this.onLoading.next(false);
+            }
         );
     }
 
     RequestPassword(email: string, success?: (data) => void, fail?: (err) => void) {
+        this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/auth/password/request', {email}),
             (res) => {
@@ -258,8 +287,12 @@ export class AuthService
                         success(res);
                     }
                 }
+                this.onLoading.next(false);
             },
-            (err) => this.ErrorHandler(err, fail)
+            (err) => {
+                this.ErrorHandler(err, fail);
+                this.onLoading.next(false);
+            }
         );
     }
 

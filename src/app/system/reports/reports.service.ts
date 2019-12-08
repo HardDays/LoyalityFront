@@ -148,11 +148,19 @@ export class ReportsService {
 
     GetReport(type: string, data: any, success?: (data) => void, fail?: (err) => void)
     {
+        this.auth.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.GetData("/reports/" + type, this.ParseObjectToQueryString(data)),
-            success,
+            res => {
+                if(success && typeof success == "function")
+                {
+                    success(res);
+                }
+                this.auth.onLoading.next(false);
+            },
             err => {
                 this.auth.ErrorHandler(err, fail);
+                this.auth.onLoading.next(false);
             }
         );
     }

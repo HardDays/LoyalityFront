@@ -23,6 +23,7 @@ export class OperatorsService {
 
     RefreshOperators(success?: (data) => void, fail?: (err) => void)
     {
+        this.auth.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.GetData('/operators', ''),
             (res: OperatorModel[]) => {
@@ -32,10 +33,12 @@ export class OperatorsService {
                 {
                     success(res);
                 }
+                this.auth.onLoading.next(false);
             },
             (err) => {
                 this.onOperatorsChange$.next(false);
                 this.auth.ErrorHandler(err, fail);
+                this.auth.onLoading.next(false);
             }
         );
     }

@@ -27,7 +27,7 @@ export class LoyaltyService {
 
     RefreshLoyalty(success?: (data) => void, fail?: (err) => void)
     {
-        // this.LoyaltyLevels = []
+        this.auth.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.GetData('/loyalty_programs', ''),
             (res: LoyaltyModel) => {
@@ -40,10 +40,12 @@ export class LoyaltyService {
                 {
                     success(res);
                 }
+                this.auth.onLoading.next(false);
             },
             (err) => {
                 this.onLoyaltyChange$.next(false);
                 this.auth.ErrorHandler(err, fail)
+                this.auth.onLoading.next(false);
             }
         )
     }

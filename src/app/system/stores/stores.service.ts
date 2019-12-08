@@ -19,6 +19,7 @@ export class StoresService {
 
     RefreshStores(success?: (data) => void, fail?: (err) => void)
     {
+        this.auth.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.GetData('/stores', ''),
             (res: StoreModel[]) => {
@@ -28,10 +29,13 @@ export class StoresService {
                 {
                     success(res);
                 }
+                this.auth.onLoading.next(false);
+
             },
             (err) => {
                 this.onStoresChange$.next(false);
                 this.auth.ErrorHandler(err, fail);
+                this.auth.onLoading.next(false);
             }
         );
     }
