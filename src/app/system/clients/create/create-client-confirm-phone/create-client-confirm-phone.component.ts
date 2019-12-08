@@ -34,7 +34,7 @@ export class CreateClientConfirmPhoneComponent implements OnInit {
 
   ConfirmCode() {
     this.hasError = false;
-    this.authService.Confirm(
+    this.authService.ConfirmWithoutLogin(
       {
         phone: this.Phone,
         code: this.Code

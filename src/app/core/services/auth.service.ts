@@ -154,6 +154,20 @@ export class AuthService
         );
     }
 
+    ConfirmWithoutLogin(data: any,  success?: (data) => void, fail?: (err) => void)
+    {
+        this.http.CommonRequest(
+            () => this.http.PostData('/auth/confirm', data),
+            (res: LoginSuccessModel) => {
+                if(success && typeof success == "function")
+                {
+                    success(res);
+                }
+            },
+            (err) => this.ErrorHandler(err, fail)
+        );
+    }
+
     CreateCompany(data: any,  success?: (data) => void, fail?: (err) => void)
     {
         this.http.CommonRequest(
