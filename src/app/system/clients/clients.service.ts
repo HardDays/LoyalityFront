@@ -165,13 +165,22 @@ export class ClientsService {
 
     createValidatorPhone() {
       return (control: AbstractControl) => {
-        return this.searchPhone(control.value).pipe(map(res => {
-          if (control.value.indexOf('_') > -1) {
-              return { 'incorrect': true };
-            }
-          return res.json()['status'] ? { 'used': true } : null ;
-        }));
-      };
+        if (control.value.indexOf('_') < 16 && control.value.indexOf('_') > -1) {
+          return new Promise((resolve, reject)=>{
+            resolve(
+             { 'incorrect': true }
+            )
+          })
+        }
+        else {
+          return this.searchPhone(control.value).pipe(map(res => {
+            if (control.value.indexOf('_') > -1) {
+                return { 'incorrect': true };
+              }
+            return res.json()['status'] ? { 'used': true } : null ;
+          }));
+        }
+      }
     }
 
 }
