@@ -214,14 +214,13 @@ export class PromotionEditComponent implements OnInit {
 
   GetDisableUntilData(date: Date)
   {
-      const str = date.toISOString();
-
-      const arr = str.split("T")[0].split("-");
+    const number = date.getTime() - 1000*60*60*24;
+    const newDate = new Date(number);
 
       return {
-        year: Number.parseInt(arr[0]),
-        month: Number.parseInt(arr[1]),
-        day: Number.parseInt(arr[2])
+        year: newDate.getFullYear(),
+        month: newDate.getMonth() + 1,
+        day: newDate.getDate()
       };
   }
 
