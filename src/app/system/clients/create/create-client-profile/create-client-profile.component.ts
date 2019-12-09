@@ -37,7 +37,7 @@ export class CreateClientProfileComponent implements OnInit {
       Validators.maxLength(30)
     ]),
     'email': new FormControl('', [
-      Validators.required,
+      // Validators.required,
       Validators.email
     ]),
     'card_number': new FormControl('', [
@@ -127,6 +127,7 @@ export class CreateClientProfileComponent implements OnInit {
       // this._location.back();
       this.router.navigate(['/system', 'my_clients']);
   }
+
   Save() {
     for(const i in this.Form.controls)
     {
