@@ -12,15 +12,24 @@ export class LoyaltyAccessGuard implements CanActivate{
 
       let myRole = this.auth.LoginData.user_type;
 
+      // TODO - если нет роли - не давать войти.
+      // один из сценариев возникнуть, если кассира заблочить - юзер есть, типа нет
+      // это костыль, но без него пускает на страницу лояльности, будто ты владелец
 
-        if (myRole === 'operator') {
-          this.router.navigate(["/system/my_clients"]);
-          return false;
-        }
-        else if (myRole === 'client') {
-          this.router.navigate(["/system/client_profile"]);
-          return false;
-        }
+      if (!myRole) {
+        this.auth.Logout();
+        return false;
+      }
+
+
+      if (myRole === 'operator') {
+        this.router.navigate(["/system/my_clients"]);
+        return false;
+      }
+      else if (myRole === 'client') {
+        this.router.navigate(["/system/client_profile"]);
+        return false;
+      }
     //     let isLoginned = this.auth.IsLoggedIn;
     //     let myRole = this.auth.LoginData.user_type;
 
