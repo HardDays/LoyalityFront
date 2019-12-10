@@ -180,6 +180,12 @@ export class ReportComponent implements OnInit
                 }
             }
         }
+
+        if(params["end_date"])
+        {
+            params["end_date"] = this.ConvertDate(params["end_date"]);
+        }
+
         this.service.GetReport(this.Type, params, 
             (res) => {
                 this.ParseData(res);
@@ -466,6 +472,18 @@ export class ReportComponent implements OnInit
             str += line + '\r\n';
         }
         return str;
+    }
+
+    ConvertDate(date: string)
+    {
+        const split = date.split(".");
+        let number = (new Date(Number.parseInt(split[2]), Number.parseInt(split[1]) - 1, Number.parseInt(split[0])));
+
+        const offset = number.getTimezoneOffset();
+
+        const time = number.getTime() + 1000*60*(60*24 - offset) - 1;
+
+        return new Date(time).toISOString();
     }
 
 
