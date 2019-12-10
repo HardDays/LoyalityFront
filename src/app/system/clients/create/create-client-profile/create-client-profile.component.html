@@ -1,5 +1,7 @@
 <div class="page__content page__content--create">
 
+  <app-client-preloader *ngIf="IsLoading" [IsLoading]="IsLoading"></app-client-preloader>
+
   <div class="page__top page__top--create">
       <span class="page__back"><img (click)="GoBack()" src="./../../../../../assets/img/back.svg" alt=""></span>
       <h1 class="page__title page__title--create">Создание нового покупателя</h1>

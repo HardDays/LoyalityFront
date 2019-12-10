@@ -27,6 +27,7 @@ import { PipesModule } from './../../core/pipes/pipes.module';
 import { CreateClientConfirmPhoneComponent } from './create/create-client-confirm-phone/create-client-confirm-phone.component';
 import { CreateClientFirstBuyComponent } from './create/create-client-first-buy/create-client-first-buy.component';
 import { LoyaltyService } from '../loyalty/loyalty.service';
+import { ClientPreloaderComponent } from './client-preloader/client-preloader.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { LoyaltyService } from '../loyalty/loyalty.service';
     EditSearchComponent,
     CreateClientProfileComponent,
     CreateClientConfirmPhoneComponent,
-    CreateClientFirstBuyComponent
+    CreateClientFirstBuyComponent,
+    ClientPreloaderComponent
   ],
   imports: [
     CommonModule,

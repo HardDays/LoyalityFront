@@ -114,6 +114,8 @@ export class CreateClientProfileComponent implements OnInit {
   ModalErrorLoyalty = false;
   SaveError = '';
 
+  IsLoading = false;
+
   constructor(
     private _location: Location,
     private router: Router,
@@ -129,6 +131,8 @@ export class CreateClientProfileComponent implements OnInit {
   }
 
   Save() {
+    this.IsLoading = true;
+
     for(const i in this.Form.controls)
     {
         this.Form.controls[i].markAsDirty();
@@ -152,10 +156,13 @@ export class CreateClientProfileComponent implements OnInit {
       this.service.CreateClient(data, (res) => {
         console.log(`Success!`, res);
         this.service.Client = res;
+        this.IsLoading = false;
         this.isShowSuccessModal = true;
+
         // this.router.navigate(['/system', 'my_clients', 'create', 'confirm']);
       },
       (err) => {
+        this.IsLoading = false;
         const error = err.json();
         if (error['loyalty_program'] && error['loyalty_program'].findIndex(x => x === 'must exist') > -1) {
           this.ModalErrorLoyalty = true;
@@ -169,6 +176,8 @@ export class CreateClientProfileComponent implements OnInit {
           this.phone.setErrors({'incorrect': true});
         }
       });
+    } else {
+      this.IsLoading = false;
     }
     // this.service.Client.phone = '79992132131';
     // this.isShowSuccessModal = true;

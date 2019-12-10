@@ -25,6 +25,8 @@ export class CreateClientFirstBuyComponent implements OnInit {
 
   ProgrammLoyaltyName = 'Программа лояльности';
 
+  IsLoading = false;
+
   constructor(private loyalityService: PromotionsService,
     private service: ClientsService,
     private ls: LoyaltyService,
@@ -64,6 +66,7 @@ export class CreateClientFirstBuyComponent implements OnInit {
   }
 
   CreateOrder(user_id: number) {
+    this.IsLoading = true;
     if (this.SelectedLoyality) {
       this.service.CreateOrderForPromotion(
         user_id,
@@ -71,9 +74,11 @@ export class CreateClientFirstBuyComponent implements OnInit {
         +this.OrderPrice,
         0,
         (res) => {
+          this.IsLoading = false;
           this.isShowSuccessModal = true;
         },
         (err) => {
+          this.IsLoading = false;
           console.log(err);
         }
       );
@@ -83,9 +88,11 @@ export class CreateClientFirstBuyComponent implements OnInit {
         +this.OrderPrice,
         0,
         (res) => {
+          this.IsLoading = false;
           this.isShowSuccessModal = true;
         },
         (err) => {
+          this.IsLoading = false;
           console.log(err);
         }
       );

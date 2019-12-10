@@ -25,6 +25,8 @@ export class EditPaidComponent implements OnInit {
 
   isModalOpened = false;
 
+  IsLoading = false;
+
 
   constructor(
     protected clientsService: ClientsService,
@@ -151,6 +153,7 @@ export class EditPaidComponent implements OnInit {
   }
 
   CreateOrder() {
+    this.IsLoading = true;
     if (this.Order.promotion_id) {
       this.clientsService.CreateOrderForPromotion(
         this.Client.id,
@@ -159,9 +162,11 @@ export class EditPaidComponent implements OnInit {
         +this.Order.write_off,
         (res) => {
           this.checkNewUserInfo();
+          this.IsLoading = false;
           this.isModalOpened = true;
         },
         (err) => {
+          this.IsLoading = false;
           console.log(err);
         }
       );
@@ -171,10 +176,12 @@ export class EditPaidComponent implements OnInit {
         +this.Order.price,
         +this.Order.write_off,
         (res) => {
+          this.IsLoading = false;
           this.checkNewUserInfo();
           this.isModalOpened = true;
         },
         (err) => {
+          this.IsLoading = false;
           console.log(err);
         }
       );
