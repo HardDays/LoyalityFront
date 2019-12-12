@@ -9,6 +9,21 @@
         <p class="create-block__label create-block__label--bold">Введите данные кассира</p>
 
         <form   [formGroup]="Form" (ngSubmit)="Save()">
+            <p class="create-block__label create-block__label--light">Фамилия</p>
+            <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+            <input type="text" class="create-block__input create-block__input--full"
+                [ngClass]="{'auth-block__input--error': last_name.invalid && (last_name.dirty || last_name.touched)}"
+                autocomplete="null"
+                formControlName="last_name"
+                name="last_name"
+            >
+            <p class="auth-block__hint auth-block__hint--error">
+                <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+                    <span *ngIf="last_name.errors.required">Поле обязательно к заполнению.</span>
+                    <span *ngIf="last_name.errors.minlength">Минимальная длина 3 символа.</span>
+                    <span *ngIf="last_name.errors.maxlength">Максимальная длина 30 символов.</span>
+                </ng-container>
+            </p>
             <p class="create-block__label create-block__label--light">Имя</p>
             <!-- <input type="text" class="create-block__input create-block__input--full"> -->
             <input type="text" class="create-block__input create-block__input--full"
@@ -26,21 +41,7 @@
             </p>
 
 
-            <p class="create-block__label create-block__label--light">Фамилия</p>
-            <!-- <input type="text" class="create-block__input create-block__input--full"> -->
-            <input type="text" class="create-block__input create-block__input--full"
-                [ngClass]="{'auth-block__input--error': last_name.invalid && (last_name.dirty || last_name.touched)}"
-                autocomplete="null"
-                formControlName="last_name"
-                name="last_name"
-            >
-            <p class="auth-block__hint auth-block__hint--error">
-                <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
-                    <span *ngIf="last_name.errors.required">Поле обязательно к заполнению.</span>
-                    <span *ngIf="last_name.errors.minlength">Минимальная длина 3 символа.</span>
-                    <span *ngIf="last_name.errors.maxlength">Максимальная длина 30 символов.</span>
-                </ng-container>
-            </p>
+            
             <p class="create-block__label create-block__label--light">Отчество</p>
             <!-- <input type="text" class="create-block__input create-block__input--full"> -->
             <input type="text" class="create-block__input create-block__input--full"
