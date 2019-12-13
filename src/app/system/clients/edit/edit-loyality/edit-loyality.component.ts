@@ -75,6 +75,8 @@ export class EditLoyalityComponent implements OnInit {
 
   onPriceChanged(val) {
     this.Price = +val;
+    if (!this.Price) this.Price = 0;
+    console.log(this.Price);
     this.clientsService.newOrder.price = this.Price;
     this.checkIsNextDisabled();
   }

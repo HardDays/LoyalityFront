@@ -126,8 +126,8 @@ export class EditPaidComponent implements OnInit {
   }
 
   onWriteBonusesChange(val: number) {
-    if (+val != val) return;
-    if (val < 0) return;
+    if (+val != val) {this.WrireBonuses = 0; return;}
+    if (val < 0) {this.WrireBonuses = 0; return;}
 
     if (val > this.Bonuses.Available) {
       this.hasErrorBonuses = true;
