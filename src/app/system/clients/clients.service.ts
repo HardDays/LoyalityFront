@@ -112,8 +112,8 @@ export class ClientsService {
     CreateOrderForLoyalty(user_id: number, price: number, write_off_points = 0,
       success?: (data) => void, fail?: (err) => void) {
       price = price * 100;
-      const params = {user_id, price, write_off_points};
       write_off_points = write_off_points * 100;
+      const params = {user_id, price, write_off_points};
       if (write_off_points === 0) {
         delete params['write_off_points'];
       }
