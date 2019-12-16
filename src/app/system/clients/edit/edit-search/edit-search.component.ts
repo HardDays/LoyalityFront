@@ -22,6 +22,9 @@ export class EditSearchComponent implements OnInit {
   isUserFounded = false;
   isFoundedMoreThanOne = false;
   Mask = ValidatorService.MaskPhoneRUwithout7;
+
+  isSearching = false;
+
   constructor(protected clientsService: ClientsService) { }
 
   ngOnInit() {
@@ -53,12 +56,19 @@ export class EditSearchComponent implements OnInit {
   searchClient() {
     this.SelectedClient = new ClientModel();
     const params = this.ConvertToBackType(this.SearchParams);
+    this.isSearching = true;
     if (params.name || params.phone || params.card_number) {
       this.clientsService.GetClient(
         params,
         (res: ClientModel[]) => {
           this.Clients = res;
+          this.isSearching = false;
+        },
+        (err) => {
+          this.isSearching = false;
         });
+    } else {
+      this.isSearching = false;
     }
   }
 
