@@ -89,12 +89,12 @@ export class NavigationComponent implements OnInit {
                 label : "Кассиры",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
-            {
-                url : MenuUrls.sms_sending,
-                image : "assets/img/menu5.svg",
-                label : "СМС-рассылки",
-                visible: this.IsLoggedIn && this.Me.user_type === 'creator'
-            },
+            // {
+            //     url : MenuUrls.sms_sending,
+            //     image : "assets/img/menu5.svg",
+            //     label : "СМС-рассылки",
+            //     visible: this.IsLoggedIn && this.Me.user_type === 'creator'
+            // },
             {
                 url : MenuUrls.rates,
                 image : "assets/img/menu6.svg",
