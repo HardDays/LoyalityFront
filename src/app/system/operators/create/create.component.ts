@@ -97,10 +97,11 @@ export class OperatorCreateComponent implements OnInit {
 
     if(valid)
     {
+      this.auth.onLoading.next(true);
       const data = this.Form.getRawValue();
       this.service.CreateOperator(data,(res) => {
+        this.auth.onLoading.next(false);
         this.SaveSuccess = true;
-        
       },
       (err) => {
         if(err.status == 422)
@@ -117,6 +118,7 @@ export class OperatorCreateComponent implements OnInit {
             }
           }
         }
+        this.auth.onLoading.next(false);
       })
     }
   }

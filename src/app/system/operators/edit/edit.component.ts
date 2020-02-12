@@ -161,8 +161,10 @@ export class OperatorEditComponent implements OnInit {
 
     if(valid)
     {
+      this.auth.onLoading.next(true);
       const data = this.Form.getRawValue();
       this.service.PutOperator(this.Id, data,(res) => {
+        this.auth.onLoading.next(false);
         this.SaveSuccess = true;
         // this.router.navigate(["/system","my_cashiers"])
       },
@@ -181,6 +183,7 @@ export class OperatorEditComponent implements OnInit {
             }
           }
         }
+        this.auth.onLoading.next(false);
       })
     }
   }
