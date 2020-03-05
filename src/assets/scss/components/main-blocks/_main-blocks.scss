@@ -162,6 +162,10 @@
       color: $yellow;
     }
 
+    &--left {
+      padding: 0;
+    }
+
     &--delete {
       &:before {
         top: -4px;

@@ -16,14 +16,16 @@ export enum MenuUrls
     my_loyalty_program = 'my_loyalty_program',
     my_profile_data = 'client_profile/data',
     my_profile_bonuses = 'client_profile/bonuses',
-    my_profile_loyalty = 'client_profile/loyalty'
+    my_profile_loyalty = 'client_profile/loyalty',
+    bonus_management = 'bonus_management/overview'
 }
 
 @Component({
-  selector: 'navigation-cmp',
-  templateUrl: './navigation.component.html'
+    selector: 'navigation-cmp',
+    templateUrl: './navigation.component.html'
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit
+{
     IsLoggedIn: boolean = false;
     CurrentPage = "";
     MenuItems: IMenuItem[] = [];
@@ -31,12 +33,13 @@ export class NavigationComponent implements OnInit {
     constructor(private router: Router, private auth: AuthService, private sanitizer: DomSanitizer)
     {
         // this.UpdateCredentialsAndMenu();
-        this.router.events.subscribe((event) =>{
-            if(event instanceof NavigationEnd)
+        this.router.events.subscribe((event) =>
+        {
+            if (event instanceof NavigationEnd)
             {
-                for(const item of this.MenuItems)
+                for (const item of this.MenuItems)
                 {
-                    if(event.url.indexOf(item.url) > -1)
+                    if (event.url.indexOf(item.url) > -1)
                     {
                         this.CurrentPage = item.url;
                     }
@@ -44,7 +47,8 @@ export class NavigationComponent implements OnInit {
             }
         });
         this.auth.onAuthChange$.subscribe(
-            (val) => {
+            (val) =>
+            {
                 this.UpdateCredentialsAndMenu();
             }
         );
@@ -66,27 +70,27 @@ export class NavigationComponent implements OnInit {
     {
         this.MenuItems = [
             {
-                url : MenuUrls.my_promotions,
-                image : "assets/img/menu1.svg",
-                label : "Акции",
+                url: MenuUrls.my_promotions,
+                image: "assets/img/menu1.svg",
+                label: "Акции",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
             {
-                url : MenuUrls.my_reports,
-                image : "assets/img/menu2.svg",
-                label : "Отчеты",
+                url: MenuUrls.my_reports,
+                image: "assets/img/menu2.svg",
+                label: "Отчеты",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
             {
-                url : MenuUrls.my_stores,
-                image : "assets/img/menu3.svg",
-                label : "Мои магазины",
+                url: MenuUrls.my_stores,
+                image: "assets/img/menu3.svg",
+                label: "Мои магазины",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
             {
-                url : MenuUrls.my_cashiers,
-                image : "assets/img/menu4.svg",
-                label : "Кассиры",
+                url: MenuUrls.my_cashiers,
+                image: "assets/img/menu4.svg",
+                label: "Кассиры",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
             // {
@@ -96,33 +100,39 @@ export class NavigationComponent implements OnInit {
             //     visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             // },
             {
-                url : MenuUrls.rates,
-                image : "assets/img/menu6.svg",
-                label : "Тарифы",
+                url: MenuUrls.rates,
+                image: "assets/img/menu6.svg",
+                label: "Тарифы",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
             {
-                url : MenuUrls.my_loyalty_program,
-                image : "assets/img/menu7.svg",
-                label : "Программа лояльности",
+                url: MenuUrls.my_loyalty_program,
+                image: "assets/img/menu7.svg",
+                label: "Программа лояльности",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
             {
-                url : MenuUrls.my_profile_data,
-                image : "assets/img/menu-lk1.svg",
-                label : "Мои данные",
+                url: MenuUrls.bonus_management,
+                image: "assets/img/menu-bonuses.svg",
+                label: "Начисление и списание бонусов",
+                visible: this.IsLoggedIn && this.Me.user_type === 'creator'
+            },
+            {
+                url: MenuUrls.my_profile_data,
+                image: "assets/img/menu-lk1.svg",
+                label: "Мои данные",
                 visible: this.IsLoggedIn && this.Me.user_type === 'client'
             },
             {
-                url : MenuUrls.my_profile_bonuses,
-                image : "assets/img/menu-lk2.svg",
-                label : "Мои бонусы",
+                url: MenuUrls.my_profile_bonuses,
+                image: "assets/img/menu-lk2.svg",
+                label: "Мои бонусы",
                 visible: this.IsLoggedIn && this.Me.user_type === 'client'
             },
             {
-                url : MenuUrls.my_profile_loyalty,
-                image : "assets/img/menu-lk3.svg",
-                label : "Программа лояльности",
+                url: MenuUrls.my_profile_loyalty,
+                image: "assets/img/menu-lk3.svg",
+                label: "Программа лояльности",
                 visible: this.IsLoggedIn && this.Me.user_type === 'client'
             }
         ];

@@ -1,25 +1,29 @@
 import { Injectable } from '@angular/core';
-import {Http, RequestOptions} from '@angular/http';
-import {Response, Headers, URLSearchParams} from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
+import { Response, Headers, URLSearchParams } from '@angular/http';
 import { TokenModel } from '../models/token.model';
 import { Observable } from 'rxjs';
 
 declare var Buffer: any;
 @Injectable()
-export class HttpService {
+export class HttpService
+{
 
-    // serverUrl = 'http://34.90.57.126:3000/api/v1';
-    serverUrl = 'https://fathomless-earth-40434.herokuapp.com/api/v1';
+    serverUrl = 'http://34.90.57.126:3001/api/v1';
+    // serverUrl = 'https://fathomless-earth-40434.herokuapp.com/api/v1';
 
     public headers: Headers = new Headers([]);
-    constructor(private http: Http) {
+    constructor(private http: Http)
+    {
         this.BaseHeadersInit();
     }
 
     BaseInitByToken(data: string)
     {
-        if (data) {
-            if (this.headers.has('Authorization')) {
+        if (data)
+        {
+            if (this.headers.has('Authorization'))
+            {
                 this.headers.delete('Authorization');
             }
             this.headers.append('Authorization', data);
@@ -43,13 +47,14 @@ export class HttpService {
     }
 
 
-    validResp(resp){
+    validResp(resp)
+    {
         let body = resp._body;
-        if(body==" ")return false;
+        if (body == " ") return false;
         return true;
     }
 
-    CommonRequest(fun:()=>Observable<Response>, success?: (data) => void, fail?: (err) => void)
+    CommonRequest(fun: () => Observable<Response>, success?: (data) => void, fail?: (err) => void)
     {
         this.BaseHeadersInit();
 
@@ -57,20 +62,21 @@ export class HttpService {
             .subscribe(
                 (resp: Response) =>
                 {
-                    if(success && typeof success == "function")
+                    if (success && typeof success == "function")
                     {
-                        success(this.validResp(resp)?resp.json():"");
+                        success(this.validResp(resp) ? resp.json() : "");
                     }
                 },
                 (error) =>
                 {
-                    if(fail && typeof fail == "function")
+                    if (fail && typeof fail == "function")
                     {
                         let errObj = error;
-                        try{
-                            errObj.body = this.validResp(error)?error.json():""
+                        try
+                        {
+                            errObj.body = this.validResp(error) ? error.json() : ""
                         }
-                        catch(e)
+                        catch (e)
                         {
                             error.body = {};
                         }
@@ -87,12 +93,12 @@ export class HttpService {
 
     GetData(method: string, params?: any)
     {
-        return this.http.get(this.serverUrl + method + '?' + params, {headers: this.headers});
+        return this.http.get(this.serverUrl + method + `${params ? `?${params}` : ''}`, { headers: this.headers });
     }
 
     DeleteData(method: string)
     {
-        return this.http.delete(this.serverUrl + method, {headers: this.headers});
+        return this.http.delete(this.serverUrl + method, { headers: this.headers });
     }
 
     DeleteDataWithBody(method: string, body: any)
@@ -100,27 +106,27 @@ export class HttpService {
         return this.http.delete(this.serverUrl + method, new RequestOptions({
             headers: this.headers,
             body: body
-          }));
+        }));
     }
 
-    DeleteDataWithParam(method: string, param:any)
+    DeleteDataWithParam(method: string, param: any)
     {
-        return this.http.delete(this.serverUrl + method + '?' + param, {headers: this.headers});
+        return this.http.delete(this.serverUrl + method + '?' + param, { headers: this.headers });
     }
 
     PostData(method: string, data: any)
     {
-        return this.http.post(this.serverUrl + method, data, {headers: this.headers});
+        return this.http.post(this.serverUrl + method, data, { headers: this.headers });
     }
 
     PatchData(method: string, data: any)
     {
-        return this.http.patch(this.serverUrl + method, data, {headers: this.headers});
+        return this.http.patch(this.serverUrl + method, data, { headers: this.headers });
     }
 
     PutData(method: string, data: any)
     {
-        return this.http.put(this.serverUrl + method, data, {headers: this.headers});
+        return this.http.put(this.serverUrl + method, data, { headers: this.headers });
     }
 
     GetDataFromOtherUrl(url: string)

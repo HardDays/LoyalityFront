@@ -11,8 +11,8 @@ import { CompanyModel } from '../models/company.model';
 @Injectable()
 export class AuthService
 {
-    protected login_field:string = "login_field";
-    protected company_field:string = "company_field";
+    protected login_field: string = "login_field";
+    protected company_field: string = "company_field";
 
     public onAuthChange$: Subject<boolean> = new Subject<boolean>();
     public IsLoggedIn: boolean = false;
@@ -28,7 +28,8 @@ export class AuthService
 
     constructor(public http: HttpService, private router: Router)
     {
-        this.onAuthChange$.subscribe(val => {
+        this.onAuthChange$.subscribe(val =>
+        {
             this.IsLoggedIn = val;
             if (this.LoginData.user_type == 'creator')
             {
@@ -40,22 +41,24 @@ export class AuthService
         this.GetLoginDataFromLocal();
     }
 
-    Login(data: LoginModel,  success?: (data) => void, fail?: (err) => void)
+    Login(data: LoginModel, success?: (data) => void, fail?: (err) => void)
     {
         this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/auth/login', data),
-            (res: LoginSuccessModel) => {
+            (res: LoginSuccessModel) =>
+            {
                 this.InitSession(res);
-                if(success && typeof success == "function")
+                if (success && typeof success == "function")
                 {
                     success(res);
                 }
                 this.onLoading.next(false);
                 // this.router.navigate(["/"]);
             },
-            (err) => {
-                if(fail && typeof fail == "function")
+            (err) =>
+            {
+                if (fail && typeof fail == "function")
                 {
                     fail(err);
                 }
@@ -64,22 +67,24 @@ export class AuthService
         );
     }
 
-    CreateCreator(data: CreatorModel,  success?: (data) => void, fail?: (err) => void)
+    CreateCreator(data: CreatorModel, success?: (data) => void, fail?: (err) => void)
     {
         this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/creators', data),
-            (res: LoginSuccessModel) => {
+            (res: LoginSuccessModel) =>
+            {
                 this.Creator = data;
                 // this.InitSession(res);
-                if(success && typeof success == "function")
+                if (success && typeof success == "function")
                 {
                     success(res);
                 }
                 this.onLoading.next(false);
             },
-            (err) => {
-                if(fail && typeof fail == "function")
+            (err) =>
+            {
+                if (fail && typeof fail == "function")
                 {
                     fail(err);
                 }
@@ -101,13 +106,13 @@ export class AuthService
         this.router.navigate(["/auth"]);
     }
 
-    InitSession(data:LoginSuccessModel)
+    InitSession(data: LoginSuccessModel)
     {
-        localStorage.setItem(this.login_field ,JSON.stringify(data));
+        localStorage.setItem(this.login_field, JSON.stringify(data));
         this.http.BaseInitByToken(data.token);
         this.LoginData = data;
         // TODO: DELETE THIS LINE or LOGIN AS CLIENT
-        // this.LoginData.user_type = 'client';
+        this.LoginData.user_type = 'creator';
         this.onAuthChange$.next(true);
     }
 
@@ -116,24 +121,27 @@ export class AuthService
         this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.GetData('/companies', ''),
-            (res: CompanyModel) => {
-                if(res)
+            (res: CompanyModel) =>
+            {
+                if (res)
                 {
                     this.CompanyData = res;
-                    localStorage.setItem(this.company_field ,JSON.stringify(res));
+                    localStorage.setItem(this.company_field, JSON.stringify(res));
                     this.onCompanyChange$.next(true);
-                    if(success && typeof success == "function")
+                    if (success && typeof success == "function")
                     {
                         success(res);
                     }
                 }
-                else{
+                else
+                {
                     this.router.navigate(["/system", "company"])
                 }
                 this.onLoading.next(false);
 
             },
-            (err) => {
+            (err) =>
+            {
                 this.onCompanyChange$.next(false);
                 this.ErrorHandler(err, fail);
                 this.onLoading.next(false);
@@ -144,38 +152,41 @@ export class AuthService
     GetLoginDataFromLocal()
     {
         const data = localStorage.getItem(this.login_field);
-        if(data)
+        if (data)
         {
             this.InitSession(JSON.parse(data));
         }
     }
 
-    Confirm(data: any,  success?: (data) => void, fail?: (err) => void)
+    Confirm(data: any, success?: (data) => void, fail?: (err) => void)
     {
         this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/auth/confirm', data),
-            (res: LoginSuccessModel) => {
+            (res: LoginSuccessModel) =>
+            {
                 this.InitSession(res);
-                if(success && typeof success == "function")
+                if (success && typeof success == "function")
                 {
                     success(res);
                 }
                 this.onLoading.next(false);
             },
-            (err) => {
+            (err) =>
+            {
                 this.ErrorHandler(err, fail)
                 this.onLoading.next(false);
             }
         );
     }
 
-    ConfirmWithoutLogin(data: any,  success?: (data) => void, fail?: (err) => void)
+    ConfirmWithoutLogin(data: any, success?: (data) => void, fail?: (err) => void)
     {
         this.http.CommonRequest(
             () => this.http.PostData('/auth/confirm', data),
-            (res: LoginSuccessModel) => {
-                if(success && typeof success == "function")
+            (res: LoginSuccessModel) =>
+            {
+                if (success && typeof success == "function")
                 {
                     success(res);
                 }
@@ -184,31 +195,34 @@ export class AuthService
         );
     }
 
-    CreateCompany(data: any,  success?: (data) => void, fail?: (err) => void)
+    CreateCompany(data: any, success?: (data) => void, fail?: (err) => void)
     {
         this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PostData('/companies', data),
-            (res: CompanyModel) => {
-                if(res)
+            (res: CompanyModel) =>
+            {
+                if (res)
                 {
                     this.CompanyData = res;
-                    localStorage.setItem(this.company_field ,JSON.stringify(res));
+                    localStorage.setItem(this.company_field, JSON.stringify(res));
                     this.onCompanyChange$.next(true);
-                    if(success && typeof success == "function")
+                    if (success && typeof success == "function")
                     {
                         success(res);
                     }
-                    
+
                 }
-                else{
+                else
+                {
                     this.onCompanyChange$.next(false);
                     this.ErrorHandler(null, fail);
                 }
                 this.onLoading.next(false);
 
             },
-            (err) => {
+            (err) =>
+            {
                 this.onCompanyChange$.next(false);
                 this.ErrorHandler(err, fail);
                 this.onLoading.next(false);
@@ -221,20 +235,22 @@ export class AuthService
         this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PutData('/companies', data),
-            (res: CompanyModel) => {
-                if(res)
+            (res: CompanyModel) =>
+            {
+                if (res)
                 {
                     this.CompanyData = res;
-                    localStorage.setItem(this.company_field ,JSON.stringify(res));
+                    localStorage.setItem(this.company_field, JSON.stringify(res));
                     this.onCompanyChange$.next(true);
-                    if(success && typeof success == "function")
+                    if (success && typeof success == "function")
                     {
                         success(res);
                     }
                 }
-                else{
+                else
+                {
                     this.onCompanyChange$.next(false);
-                    if(fail && typeof fail == "function")
+                    if (fail && typeof fail == "function")
                     {
                         fail(null);
                     }
@@ -242,7 +258,8 @@ export class AuthService
                 this.onLoading.next(false);
 
             },
-            (err) => {
+            (err) =>
+            {
                 this.onCompanyChange$.next(false);
                 this.ErrorHandler(err, fail);
                 this.onLoading.next(false);
@@ -250,31 +267,33 @@ export class AuthService
         );
     }
 
-    UpdateProfile(data: any,  success?: (data) => void, fail?: (err) => void)
+    UpdateProfile(data: any, success?: (data) => void, fail?: (err) => void)
     {
         this.onLoading.next(true);
         this.http.CommonRequest(
             () => this.http.PutData('/creators/profile', data),
-            (res: any) => {
-                if(res)
+            (res: any) =>
+            {
+                if (res)
                 {
-                    for(const i in res)
+                    for (const i in res)
                     {
-                        if(res[i])
+                        if (res[i])
                         {
                             this.LoginData[i] = res[i];
                         }
 
                         this.InitSession(this.LoginData);
                     }
-                    if(success && typeof success == "function")
+                    if (success && typeof success == "function")
                     {
                         success(res);
                     }
                 }
-                else{
+                else
+                {
                     this.onAuthChange$.next(false);
-                    if(fail && typeof fail == "function")
+                    if (fail && typeof fail == "function")
                     {
                         fail(null);
                     }
@@ -282,28 +301,32 @@ export class AuthService
                 this.onLoading.next(false);
 
             },
-            (err) => {
+            (err) =>
+            {
                 this.ErrorHandler(err, fail)
                 this.onLoading.next(false);
             }
         );
     }
 
-    RequestPassword(email: string, success?: (data) => void, fail?: (err) => void) {
+    RequestPassword(email: string, success?: (data) => void, fail?: (err) => void)
+    {
         this.onLoading.next(true);
         this.http.CommonRequest(
-            () => this.http.PostData('/auth/password/request', {email}),
-            (res) => {
-                if(res)
+            () => this.http.PostData('/auth/password/request', { email }),
+            (res) =>
+            {
+                if (res)
                 {
-                    if(success && typeof success == "function")
+                    if (success && typeof success == "function")
                     {
                         success(res);
                     }
                 }
                 this.onLoading.next(false);
             },
-            (err) => {
+            (err) =>
+            {
                 this.ErrorHandler(err, fail);
                 this.onLoading.next(false);
             }
@@ -313,14 +336,14 @@ export class AuthService
     ErrorHandler(error, fail?: (err) => void)
     {
         // console.log(error);
-        if(error.status == 401)
+        if (error.status == 401)
         {
             this.Logout();
             return;
         }
 
 
-        if(fail && typeof fail == "function")
+        if (fail && typeof fail == "function")
         {
             fail(error);
         }
