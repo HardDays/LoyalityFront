@@ -17,7 +17,8 @@ export enum MenuUrls
     my_profile_data = 'client_profile/data',
     my_profile_bonuses = 'client_profile/bonuses',
     my_profile_loyalty = 'client_profile/loyalty',
-    bonus_management = 'bonus_management/overview'
+    bonus_management = 'bonus_management',
+    social_media = 'social_media'
 }
 
 @Component({
@@ -115,6 +116,12 @@ export class NavigationComponent implements OnInit
                 url: MenuUrls.bonus_management,
                 image: "assets/img/menu-bonuses.svg",
                 label: "Начисление и списание бонусов",
+                visible: this.IsLoggedIn && this.Me.user_type === 'creator'
+            },
+            {
+                url: MenuUrls.social_media,
+                image: "assets/img/menu9.svg",
+                label: "Социальные сети",
                 visible: this.IsLoggedIn && this.Me.user_type === 'creator'
             },
             {

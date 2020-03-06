@@ -19,6 +19,7 @@ const routes: Routes =
         { path: 'settings', loadChildren: './settings/settings.module#SettingsModule', canActivate: [SystemAccessGuard] },
         { path: 'reports', loadChildren: './reports/reports.module#ReportsModule', canActivate: [SystemAccessGuard] },
         { path: 'bonus_management', loadChildren: './bonus-management/bonus-management.module#BonusManagementModule', canActivate: [SystemAccessGuard] },
+        { path: 'social_media', loadChildren: './social-media/social-media.module#SocialMediaModule', canActivate: [SystemAccessGuard] },
         { path: 'company', component: CompanyComponent, canActivate: [SystemAccessGuard] },
         { path: '**', component: TestComponent }
       ]
