@@ -9,108 +9,96 @@ import { StoreModel } from '../../core/models/store.model';
 @Injectable()
 export class StoresService {
 
-    Stores: StoreModel[] = [];
-    public onStoresChange$: Subject<boolean> = new Subject<boolean>();
+  Stores: StoreModel[] = [];
+  public onStoresChange$: Subject<boolean> = new Subject<boolean>();
 
-    constructor(private http: HttpService, private auth:AuthService)
-    {
-        
-    }
+  constructor(private http: HttpService, private auth: AuthService) {
 
-    RefreshStores(success?: (data) => void, fail?: (err) => void)
-    {
-        this.auth.onLoading.next(true);
-        this.http.CommonRequest(
-            () => this.http.GetData('/stores', ''),
-            (res: StoreModel[]) => {
-                this.Stores = res;
-                this.onStoresChange$.next(true);
-                if(success && typeof success == "function")
-                {
-                    success(res);
-                }
-                this.auth.onLoading.next(false);
+  }
 
-            },
-            (err) => {
-                this.onStoresChange$.next(false);
-                this.auth.ErrorHandler(err, fail);
-                this.auth.onLoading.next(false);
-            }
-        );
-    }
+  RefreshStores(success?: (data) => void, fail?: (err) => void) {
+    this.auth.onLoading.next(true);
+    this.http.CommonRequest(
+      () => this.http.GetData('/stores', `company_id=${this.auth.LoginData.company_id}`),
+      (res: StoreModel[]) => {
+        this.Stores = res;
+        this.onStoresChange$.next(true);
+        if (success && typeof success == "function") {
+          success(res);
+        }
+        this.auth.onLoading.next(false);
 
-    GetStores()
-    {
-        return JSON.parse(JSON.stringify(this.Stores));
-    }
+      },
+      (err) => {
+        this.onStoresChange$.next(false);
+        this.auth.ErrorHandler(err, fail);
+        this.auth.onLoading.next(false);
+      }
+    );
+  }
 
-    GetStoreById(Id): StoreModel
-    {
-        const store = this.Stores.find((obj) => obj.id == Id);
+  GetStores() {
+    return JSON.parse(JSON.stringify(this.Stores));
+  }
 
-        return store ? JSON.parse(JSON.stringify(store)) : null;
-    }
+  GetStoreById(Id): StoreModel {
+    const store = this.Stores.find((obj) => obj.id == Id);
 
-    GetOperators(StoreId, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.GetData('/operators?store_id=' + StoreId, ''),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+    return store ? JSON.parse(JSON.stringify(store)) : null;
+  }
 
-    CreateStore(Obj, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PostData('/stores', Obj),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  GetOperators(StoreId, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.GetData(`/operators?store_id=${StoreId}&company_id=${this.auth.LoginData.company_id}`, ''),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
-    PutStore(Id, Obj, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PutData('/stores/' + Id, Obj),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  CreateStore(Obj, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.PostData('/stores', Obj),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
-    GetStore(Id, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.GetData('/stores/' + Id),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  PutStore(Id, Obj, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.PutData('/stores/' + Id, Obj),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
-    DeleteStore(Id, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.DeleteData('/stores/' + Id),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
-    DeleteOperator(Id, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.DeleteData('/operators/' + Id),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  GetStore(Id, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.GetData('/stores/' + Id),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
-    PutOperator(Id, Obj, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PutData('/operators/' + Id, Obj),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  DeleteStore(Id, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.DeleteData('/stores/' + Id),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
+  DeleteOperator(Id, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.DeleteData('/operators/' + Id),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
+
+  PutOperator(Id, Obj, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.PutData('/operators/' + Id, Obj),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 }

@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './company-selector.component.html',
   styleUrls: []
 })
-export class CompanySelectorComponent implements OnInit
-{
+export class CompanySelectorComponent implements OnInit {
 
   private Companies: CompanyModel[] = [];
 
@@ -20,34 +19,29 @@ export class CompanySelectorComponent implements OnInit
     companyId: ['', [Validators.required]]
   })
 
-  ngOnInit()
-  {
+  ngOnInit() {
     const { client, operator, creator } = this.auth.LoginData;
 
-    if (client.length > 0)
-    {
-      this.auth.LoginData.user_type = "";
+    if (client.length > 0) {
+      this.auth.LoginData.user_type = "client";
       this.Companies = client.map(c => c.company);
       return;
     }
 
-    if (operator.length > 0)
-    {
+    if (operator.length > 0) {
       this.auth.LoginData.user_type = "operator";
       this.Companies = operator.map(c => c.company);
       return;
     }
 
-    if (creator.length > 0)
-    {
+    if (creator.length > 0) {
       this.auth.LoginData.user_type = "creator";
       this.Companies = creator.map(c => c.company);
       return;
     }
   }
 
-  SelectCompany()
-  {
+  SelectCompany() {
 
     if (!this.companySelectorForm.valid) return false;
 

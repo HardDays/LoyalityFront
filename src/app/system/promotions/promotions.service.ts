@@ -11,73 +11,65 @@ import { PromotionModel } from '../../core/models/promotion.model';
 @Injectable()
 export class PromotionsService {
 
-    Promotions: PromotionModel[] = [];
-    public onPromotionsChange$: Subject<boolean> = new Subject<boolean>();
+  Promotions: PromotionModel[] = [];
+  public onPromotionsChange$: Subject<boolean> = new Subject<boolean>();
 
-    constructor(private http: HttpService, private auth:AuthService)
-    {}
+  constructor(private http: HttpService, private auth: AuthService) { }
 
-    RefreshPromotions(success?: (data) => void, fail?: (err) => void)
-    {
-        this.auth.onLoading.next(true);
-        this.http.CommonRequest(
-            () => this.http.GetData('/promotions', ''),
-            (res: PromotionModel[]) => {
-                this.Promotions = res;
-                this.onPromotionsChange$.next(true);
-                if(success && typeof success == "function")
-                {
-                    success(res);
-                }
-                this.auth.onLoading.next(false);
-            },
-            (err) => {
-                this.onPromotionsChange$.next(false);
-                this.auth.ErrorHandler(err, fail);
-                this.auth.onLoading.next(false);
-            }
-        );
-    }
+  RefreshPromotions(success?: (data) => void, fail?: (err) => void) {
+    this.auth.onLoading.next(true);
+    this.http.CommonRequest(
+      () => this.http.GetData('/promotions', `company_id=${this.auth.LoginData.company_id}`),
+      (res: PromotionModel[]) => {
+        this.Promotions = res;
+        this.onPromotionsChange$.next(true);
+        if (success && typeof success == "function") {
+          success(res);
+        }
+        this.auth.onLoading.next(false);
+      },
+      (err) => {
+        this.onPromotionsChange$.next(false);
+        this.auth.ErrorHandler(err, fail);
+        this.auth.onLoading.next(false);
+      }
+    );
+  }
 
-    GetPromotions()
-    {
-        return JSON.parse(JSON.stringify(this.Promotions));
-    }
+  GetPromotions() {
+    return JSON.parse(JSON.stringify(this.Promotions));
+  }
 
-    GetPromotion(Id, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.GetData('/promotions/' + Id, ''),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  GetPromotion(Id, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.GetData('/promotions/' + Id, ''),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
-    DeletePromotion(Id, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.DeleteData('/promotions/' + Id),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  DeletePromotion(Id, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.DeleteData('/promotions/' + Id),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
-    CreatePromotion(Obj, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PostData('/promotions', Obj),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  CreatePromotion(Obj, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.PostData('/promotions', Obj),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
-    PutPromotion(Id, Obj, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PutData('/promotions/' + Id, Obj),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  PutPromotion(Id, Obj, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.PutData('/promotions/' + Id, Obj),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
 }

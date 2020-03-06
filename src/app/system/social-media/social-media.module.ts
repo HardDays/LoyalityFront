@@ -7,9 +7,10 @@ import { SocialMediaVkComponent } from './social-media-vk/social-media-vk.compon
 import { SocialMediaTelegramComponent } from './social-media-telegram/social-media-telegram.component';
 import { SocialMediaOverviewComponent } from './social-media-overview/social-media-overview.component';
 import { SocialMediaAccessGuard } from './social-media.guard';
+import { SocialMediaComponent } from './social-media.component';
 
 @NgModule({
-  declarations: [SocialMediaVkComponent, SocialMediaTelegramComponent, SocialMediaOverviewComponent],
+  declarations: [SocialMediaComponent, SocialMediaVkComponent, SocialMediaTelegramComponent, SocialMediaOverviewComponent],
   imports: [
     CommonModule,
     SocialMediaRoutingModule,

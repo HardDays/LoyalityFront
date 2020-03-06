@@ -8,10 +8,11 @@ import { BonusManagementAccessGuard } from './bonus-management.guard';
 import { BonusOverviewComponent } from './bonus-overview/bonus-overview.component'
 import { BonusManagementService } from './bonus-management.service';
 import { BonusChargeComponent } from './bonus-charge/bonus-charge.component'
+import { BonusManagementComponent } from './bonus-management.component';
 
 
 @NgModule({
-  declarations: [BonusOverviewComponent, BonusChargeComponent],
+  declarations: [BonusManagementComponent, BonusOverviewComponent, BonusChargeComponent],
   imports: [
     CommonModule,
     HttpModule,
