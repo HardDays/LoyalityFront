@@ -102,7 +102,6 @@ export class AuthService
         this.http.DeleteAuthToken();
         this.onAuthChange$.next(false);
         this.onCompanyChange$.next(false);
-
         this.router.navigate(["/auth"]);
     }
 
@@ -111,8 +110,9 @@ export class AuthService
         localStorage.setItem(this.login_field, JSON.stringify(data));
         this.http.BaseInitByToken(data.token);
         this.LoginData = data;
+        // console.log(data)
         // TODO: DELETE THIS LINE or LOGIN AS CLIENT
-        this.LoginData.user_type = 'creator';
+        // this.LoginData.user_type = 'creator';
         this.onAuthChange$.next(true);
     }
 

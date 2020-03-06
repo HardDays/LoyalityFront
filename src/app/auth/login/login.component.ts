@@ -9,14 +9,15 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit
+{
 
   LoginModel: LoginModel = new LoginModel();
-  PasswordError:string = "";
-  EmailError:string = "";
+  PasswordError: string = "";
+  EmailError: string = "";
 
   Form: FormGroup = new FormGroup({
-    "email": new FormControl(this.LoginModel.email,[
+    "email": new FormControl(this.LoginModel.email, [
       Validators.required,
       Validators.email
     ]),
@@ -49,7 +50,8 @@ export class LoginComponent implements OnInit {
   isLoading = false;
 
   constructor(private auth: AuthService,
-      private router: Router) {
+    private router: Router)
+  {
   }
 
   ngOnInit()
@@ -58,16 +60,17 @@ export class LoginComponent implements OnInit {
 
   ValidatePhone()
   {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      if(this.Form && this.Form.controls)
+    return (control: AbstractControl): { [key: string]: any } | null =>
+    {
+      if (this.Form && this.Form.controls)
       {
-          const values = this.Form.getRawValue();
-          if(values.phone)
-          {
-            const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        const values = this.Form.getRawValue();
+        if (values.phone)
+        {
+          const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
-            return regex.test(values.phone) ? null : {'incorrect_value': {value: control.value}};
-          }
+          return regex.test(values.phone) ? null : { 'incorrect_value': { value: control.value } };
+        }
       }
       return null;
     };
@@ -75,31 +78,33 @@ export class LoginComponent implements OnInit {
 
   Login()
   {
-    for(const i in this.Form.controls)
+    for (const i in this.Form.controls)
     {
       this.Form.get(i).updateValueAndValidity();
     }
     this.Form.updateValueAndValidity();
     const valid = this.Form.valid;
 
-    if(valid)
+    if (valid)
     {
       const data = this.Form.getRawValue();
       this.auth.Login(data,
-        (val) => {
-          this.router.navigate(["/system"]);
+        (val) =>
+        {
+          this.router.navigate(["/auth", "select"]);
         },
-        (err) => {
-
-          if(err.status == 403)
+        (err) =>
+        {
+          if (err.status == 403)
           {
-            this.router.navigate(["/auth","confirm"]);
+            this.router.navigate(["/auth", "confirm"]);
           }
-          else{
+          else
+          {
             const not_found = [401, 422, 404, 403];
-            for(const i of not_found)
+            for (const i of not_found)
             {
-              if(i == err.status)
+              if (i == err.status)
               {
                 this.password.setErrors({
                   "wrong": true

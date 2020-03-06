@@ -6,15 +6,16 @@ import { LoginComponent } from './login/login.component';
 import { PasswordComponent } from './password/password.component';
 import { SignUpComponent } from './signup/signup.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { CompanySelectorComponent } from './company-selector/company-selector.component';
 
 const routes: Routes =
-[
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent},
-  { path: 'remind', component: PasswordComponent},
-  { path: 'signup', component: SignUpComponent},
-  { path: 'confirm', component: ConfirmComponent}
-];
+  [
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent },
+    { path: 'remind', component: PasswordComponent },
+    { path: 'signup', component: SignUpComponent },
+    { path: 'select', component: CompanySelectorComponent }
+  ];
 
 @NgModule({
   imports: [

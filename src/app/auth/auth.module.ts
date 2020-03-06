@@ -12,10 +12,12 @@ import { LoginModule } from './login/login.module';
 import { PasswordModule } from './password/password.module';
 import { SignupModule } from './signup/signup.module';
 import { ConfirmModule } from './confirm/confirm.module';
+import { CompanySelectorComponent } from './company-selector/company-selector.component';
 
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthComponent,
+    CompanySelectorComponent
   ],
   imports: [
     CommonModule,

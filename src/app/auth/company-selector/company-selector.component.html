@@ -1,0 +1,20 @@
+<section class="login-bg">
+  <div class="auth-block">
+    <p class="auth-block__title">Выберите компанию</p>
+
+    <form [formGroup]="companySelectorForm"
+          (ngSubmit)="SelectCompany()">
+
+      <select formControlName="companyId">
+        <option value="">Выберите компанию</option>
+        <option *ngFor="let company of Companies"
+                [ngValue]="company.id">{{company.name}}</option>
+      </select>
+
+      <div class="text-center">
+        <button class="button auth-block__button"
+                type="submit">Выбрать</button>
+      </div>
+    </form>
+  </div>
+</section>

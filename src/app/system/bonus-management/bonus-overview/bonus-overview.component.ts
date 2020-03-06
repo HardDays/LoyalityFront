@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BonusManagementService } from "../bonus-management.service"
+import { ClientModel } from 'src/app/core/models/client.model';
 
 @Component({
   selector: 'app-bonus-overview',
@@ -14,7 +15,7 @@ export class BonusOverviewComponent implements OnInit
   ngOnInit()
   {
     this.service.GetClients(
-      (data) =>
+      (data: ClientModel[]) =>
       {
         console.log(data)
       },
