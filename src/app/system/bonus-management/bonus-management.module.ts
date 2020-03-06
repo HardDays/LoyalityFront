@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { BonusManagementRoutingModule } from './bonus-management.routing';
 import { BonusManagementAccessGuard } from './bonus-management.guard';
 import { BonusOverviewComponent } from './bonus-overview/bonus-overview.component'
-import { BonusManagementService } from './bonus-management.service'
+import { BonusManagementService } from './bonus-management.service';
+import { BonusChargeComponent } from './bonus-charge/bonus-charge.component'
 
 
 @NgModule({
-  declarations: [BonusOverviewComponent],
+  declarations: [BonusOverviewComponent, BonusChargeComponent],
   imports: [
     CommonModule,
     HttpModule,

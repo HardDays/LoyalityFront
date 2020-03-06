@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener, ElementRef } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { Button } from 'protractor';
@@ -8,33 +8,45 @@ import { CompanyModel } from '../core/models/company.model';
 
 
 @Component({
-  selector: 'system-cmp',
-  templateUrl: './system.component.html'
+    selector: 'system-cmp',
+    templateUrl: './system.component.html'
 })
 export class SystemComponent implements OnInit
 {
     IsLoggedIn = false;
+    IsMenuShown: boolean = true;
     Me: LoginSuccessModel = new LoginSuccessModel();
     Company: CompanyModel = new CompanyModel();
     Initials = "";
     Hovered = false;
     UserTypeText = "";
-    constructor(private auth: AuthService)
+    constructor(private auth: AuthService, private router: Router)
     {
         this.IsLoggedIn = this.auth.IsLoggedIn;
         this.OnLoginChange();
         this.auth.onAuthChange$.subscribe(
-            (val) => {
+            (val) =>
+            {
                 this.OnLoginChange();
             }
         )
 
         this.auth.onCompanyChange$.subscribe(
-            (val) => {
+            (val) =>
+            {
 
                 this.Company = this.auth.CompanyData;
             }
         )
+
+        this.router.events.subscribe((event) =>
+        {
+            if (event instanceof NavigationEnd)
+            {
+                if (!this.IsMenuShown) this.ShowSystemNavigationMenu();
+                if (event.url.includes("bonus_management/edit/")) this.HideSystemNavigationMenu();
+            }
+        });
 
     }
 
@@ -68,14 +80,27 @@ export class SystemComponent implements OnInit
         this.GetUserTypeText();
     }
 
-    GetUserTypeText() {
-      this.UserTypeText = "";
-      if(this.Me.user_type === "operator") {
-        this.UserTypeText = "Кассир";
-      }
-      else if(this.Me.user_type === "client") {
-        this.UserTypeText = "Покупатель";
-      }
+    GetUserTypeText()
+    {
+        this.UserTypeText = "";
+        if (this.Me.user_type === "operator")
+        {
+            this.UserTypeText = "Кассир";
+        }
+        else if (this.Me.user_type === "client")
+        {
+            this.UserTypeText = "Покупатель";
+        }
+    }
+
+    HideSystemNavigationMenu()
+    {
+        this.IsMenuShown = false;
+    }
+
+    ShowSystemNavigationMenu()
+    {
+        this.IsMenuShown = true;
     }
 
 

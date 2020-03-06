@@ -1,7 +1,8 @@
 <section class="page">
 
     <!-- MENU -->
-    <nav *ngIf="Me.user_type == 'creator' || Me.user_type == 'client'" class="menu">
+    <nav *ngIf="IsMenuShown && (Me.user_type == 'creator' || Me.user_type == 'client')"
+         class="menu">
         <navigation-cmp></navigation-cmp>
     </nav>
     <div class="page__block">
@@ -9,14 +10,22 @@
         <!-- HEADER -->
 
         <div class="page__header">
-            <div class="page__profile" (mouseenter)="Hovered = true" (mouseleave)="Hovered = false" id="header-profile" *ngIf="IsLoggedIn">
+            <div class="page__profile"
+                 (mouseenter)="Hovered = true"
+                 (mouseleave)="Hovered = false"
+                 id="header-profile"
+                 *ngIf="IsLoggedIn">
                 <div class="page__ava">{{Initials}}</div>
                 <p class="page__name">
                     {{Me.last_name}} {{Me.first_name}}
-                    <span class="page__company" *ngIf="Company && Company.name">{{Company.name}}</span>
-                    <span class="page__company" *ngIf="UserTypeText">{{UserTypeText}}</span>
+                    <span class="page__company"
+                          *ngIf="Company && Company.name">{{Company.name}}</span>
+                    <span class="page__company"
+                          *ngIf="UserTypeText">{{UserTypeText}}</span>
                 </p>
-                <div class="page__profile-menu" id="header-profile-menu" [ngClass]="{'page__profile-menu--visible': Hovered}">
+                <div class="page__profile-menu"
+                     id="header-profile-menu"
+                     [ngClass]="{'page__profile-menu--visible': Hovered}">
                     <a routerLink="settings">Настройки</a>
                     <a (click)="Logout()">Выйти</a>
                 </div>

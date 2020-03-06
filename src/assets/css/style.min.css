@@ -260,6 +260,17 @@ div, span, p, header, footer, nav {
   padding: 76px 30px;
 }
 
+.modal__block--bonuses {
+  width: 434px;
+  height: 370px;
+  background: url("../img/receipt.png");
+  background-repeat: no-repeat;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 35px;
+}
+
+
 .modal__block--create .modal__close {
   top: 26px;
   right: 31px;
@@ -279,6 +290,19 @@ div, span, p, header, footer, nav {
   padding: 60px 0;
   margin: auto;
   width: 100%;
+}
+
+.modal__customer-content-bonuses-inside {
+  border: 0;
+  padding: 60px 0;
+  text-align: left!important;
+  width: 331px;
+  height: 307px;
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 32px;
 }
 
 .modal__delete-text {
@@ -1413,6 +1437,12 @@ div, span, p, header, footer, nav {
   width: 58px;
   text-align: center;
   margin: 0 14px;
+}
+
+.create-block__input--medium {
+  width: 245px;
+  text-align: center;
+  margin-left: 15px;
 }
 
 .create-block__input--date {
