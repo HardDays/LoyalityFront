@@ -2,7 +2,7 @@ import { EditClientComponent } from './edit/edit-client/edit-client.component';
 import { EditSearchComponent } from './edit/edit-search/edit-search.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientsAccessGuard } from './clients.guard';
 import { ClientsStartComponent } from './start/start.component';
@@ -17,24 +17,27 @@ import { CreateClientConfirmPhoneComponent } from './create/create-client-confir
 import { CreateClientFirstBuyComponent } from './create/create-client-first-buy/create-client-first-buy.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'start', pathMatch: 'full'},
-    { path: 'start', component: ClientsStartComponent, canActivate: [ClientsAccessGuard]},
-    { path: 'create', component: ClientsCreateComponent, canActivate: [ClientsAccessGuard],
-      children: [
-        { path: '', redirectTo: 'profile'},
-        { path: 'profile', component: CreateClientProfileComponent, canActivate: [ClientsAccessGuard]},
-        { path: 'confirm', component: CreateClientConfirmPhoneComponent, canActivate: [ClientsAccessGuard]},
-        { path: 'buy', component: CreateClientFirstBuyComponent, canActivate: [ClientsAccessGuard]}
-      ]
-    },
-    { path: 'edit', component: ClientsEditComponent, canActivate: [ClientsAccessGuard],
+  { path: '', redirectTo: 'start', pathMatch: 'full' },
+  { path: 'start', component: ClientsStartComponent, canActivate: [ClientsAccessGuard] },
+  {
+    path: 'create', component: ClientsCreateComponent, canActivate: [ClientsAccessGuard],
     children: [
-      { path: '', redirectTo: 'search'},
-      { path: 'search', component: EditSearchComponent, canActivate: [ClientsAccessGuard]},
-      { path: 'loyality', component: EditLoyalityComponent, canActivate: [ClientsAccessGuard]},
-      { path: 'paid', component: EditPaidComponent, canActivate: [ClientsAccessGuard]},
-      { path: 'client', component: EditClientComponent, canActivate: [ClientsAccessGuard]}
-    ]}
+      { path: '', redirectTo: 'profile' },
+      { path: 'profile', component: CreateClientProfileComponent, canActivate: [ClientsAccessGuard] },
+      { path: 'confirm', component: CreateClientConfirmPhoneComponent, canActivate: [ClientsAccessGuard] },
+      { path: 'buy', component: CreateClientFirstBuyComponent, canActivate: [ClientsAccessGuard] }
+    ]
+  },
+  {
+    path: 'edit', component: ClientsEditComponent, canActivate: [ClientsAccessGuard],
+    children: [
+      { path: '', redirectTo: 'search' },
+      { path: 'search', component: EditSearchComponent, canActivate: [ClientsAccessGuard] },
+      { path: 'loyality', component: EditLoyalityComponent, canActivate: [ClientsAccessGuard] },
+      { path: 'paid', component: EditPaidComponent, canActivate: [ClientsAccessGuard] },
+      { path: 'client', component: EditClientComponent, canActivate: [ClientsAccessGuard] }
+    ]
+  }
 ];
 
 @NgModule({

@@ -26,6 +26,6 @@ import { MyDatePickerModule } from 'mydatepicker';
     MakeReportRoutingModule,
     MyDatePickerModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class MakeReportModule {}
+export class MakeReportModule { }

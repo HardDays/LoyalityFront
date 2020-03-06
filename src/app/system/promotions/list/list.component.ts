@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IDictionary, IStringToAny } from 'src/app/core/interfaces/dictionary.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -16,52 +16,46 @@ import { PromotionModel } from 'src/app/core/models/promotion.model';
 })
 export class PromotionsListComponent implements OnInit {
 
-Promotions: PromotionModel[] = [];
-PromotionDelete: PromotionModel = new PromotionModel();
-ShowModal = false;
-DeleteResult = "";
-QueryString = "";
+  Promotions: PromotionModel[] = [];
+  PromotionDelete: PromotionModel = new PromotionModel();
+  ShowModal = false;
+  DeleteResult = "";
+  QueryString = "";
   constructor(
-      private auth: AuthService,
-      private router: Router,
-      private route: ActivatedRoute,
-      private service: PromotionsService)
-  {
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: PromotionsService) {
     this.service.onPromotionsChange$.subscribe((res) => {
-        if(res)
-        {
-            this.UpdatePromotions();
-        }
+      if (res) {
+        this.UpdatePromotions();
+      }
     })
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.service.RefreshPromotions();
   }
 
-  UpdatePromotions(q?:string)
-  {
+  UpdatePromotions(q?: string) {
     const promotions: PromotionModel[] = this.service.GetPromotions();
     const _q = q ? q.toLowerCase() : "";
-    this.Promotions = q ? promotions.filter((obj) => obj.name.toLowerCase().indexOf(_q) >=0 ) : promotions;
+    this.Promotions = q ? promotions.filter((obj) => obj.name.toLowerCase().indexOf(_q) >= 0) : promotions;
   }
 
-  DeletePromotion(Item: PromotionModel)
-  {
+  DeletePromotion(Item: PromotionModel) {
     this.ShowModal = false;
-      this.service.DeletePromotion(Item.id,
-          (res) => {
-            this.DeleteResult = "Акция  «" + Item.name + "» успешно удалена!";
-              this.service.RefreshPromotions();
-          },
-          (err) => {
-            this.DeleteResult = "Не получилось удалить акцию  «" + Item.name + "»!";
-          })
+    this.service.DeletePromotion(Item.id,
+      (res) => {
+        this.DeleteResult = "Акция  «" + Item.name + "» успешно удалена!";
+        this.service.RefreshPromotions();
+      },
+      (err) => {
+        this.DeleteResult = "Не получилось удалить акцию  «" + Item.name + "»!";
+      })
   }
 
-  DeletePromotionQA(Item: PromotionModel)
-  {
+  DeletePromotionQA(Item: PromotionModel) {
     this.PromotionDelete = Item;
     this.ShowModal = true;
   }

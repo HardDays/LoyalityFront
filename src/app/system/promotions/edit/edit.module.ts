@@ -22,6 +22,6 @@ import { MyDatePickerModule } from 'mydatepicker';
     PromotionEditRoutingModule,
     MyDatePickerModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class PromotionEditModule {}
+export class PromotionEditModule { }

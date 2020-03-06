@@ -5,11 +5,10 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'operators-cmp',
   templateUrl: './operators.component.html'
 })
-export class OperatorsComponent  implements OnInit{
+export class OperatorsComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService) {
 
   }
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
   }
 }

@@ -1,40 +1,63 @@
 <div class="page__content">
 
-    <div class="page__top">
-        <h1 class="page__title">Все магазины</h1>
-        <div class="page__search">
-            <input type="text" [ngModel]="QueryString" (ngModelChange)="UpdateStores($event)" name="search" placeholder="Поиск по магазинам">
-        </div>
+  <div class="page__top">
+    <h1 class="page__title">Все магазины</h1>
+    <div class="page__search">
+      <input type="text"
+             [ngModel]="QueryString"
+             (ngModelChange)="UpdateStores($event)"
+             name="search"
+             placeholder="Поиск по магазинам">
+    </div>
+  </div>
+
+  <div class="main-blocks"
+       id="shop-blocks"
+       [ngClass]="{'main-blocks--opened_item': CheckExpanded()}">
+    <div class="main-blocks__item main-blocks__item--create"
+         [routerLink]="['/system', 'my_stores', 'create']">
+      <img src="assets/img/plus.png"
+           alt="">
+      <span>Создать новый магазин</span>
     </div>
 
-    <div class="main-blocks" id="shop-blocks" [ngClass]="{'main-blocks--opened_item': CheckExpanded()}">
-        <div class="main-blocks__item main-blocks__item--create" [routerLink]="['/system', 'my_stores', 'create']" >
-            <img src="assets/img/plus.png" alt="">
-            <span>Создать новый магазин</span>
-        </div>
+    <ng-container *ngFor="let item of Stores">
+      <div StoreItem
+           [Item]="item"
+           (clickOutside)="OnClickOutsideStore($event)"
+           class="main-blocks__item main-blocks__item--shop"
+           [ngClass]="{'main-blocks__item--opened': Expanded[item.id]}">
+        <div class="main-blocks__item-absolute"
+             [ngClass]="{'main-blocks__item--opened main-blocks__item-absolute--active': Expanded[item.id]}">
+          <div class="main-blocks__with-buttons">
+            <p class="main-blocks__title main-blocks__title--shop">{{item.name}}</p>
 
-        <ng-container *ngFor="let item of Stores">
-            <div StoreItem [Item]="item" (clickOutside)="OnClickOutsideStore($event)" class="main-blocks__item main-blocks__item--shop" [ngClass]="{'main-blocks__item--opened': Expanded[item.id]}">
-                <div class="main-blocks__item-absolute" [ngClass]="{'main-blocks__item--opened main-blocks__item-absolute--active': Expanded[item.id]}">
-                    <div class="main-blocks__with-buttons">
-                        <p class="main-blocks__title main-blocks__title--shop">{{item.name}}</p>
+            <span class="main-blocks__button"
+                  [routerLink]="['/system', 'my_stores', 'edit', item.id]"><img src="assets/img/edit-icon.svg"
+                   alt=""></span>
+            <span class="main-blocks__button main-blocks__button--delete"
+                  (click)="DeleteStoreQA(item)"><img src="assets/img/delete-icon.svg"
+                   alt=""></span>
+          </div>
 
-                        <span class="main-blocks__button" [routerLink]="['/system', 'my_stores', 'edit', item.id]"><img src="assets/img/edit-icon.svg" alt="" ></span>
-                        <span class="main-blocks__button main-blocks__button--delete" (click)="DeleteStoreQA(item)"><img src="assets/img/delete-icon.svg" alt=""></span>
-                    </div>
+          <p class="main-blocks__description main-blocks__description--shop">{{GetStoreAddress(item)}}</p>
 
-                    <p class="main-blocks__description main-blocks__description--shop">{{GetStoreAddress(item)}}</p>
+          <ng-container *ngFor="let operator of Operators[item.id]; let i = index">
+            <div class="main-blocks__with-buttons"
+                 *ngIf="i < 3">
+              <p class="main-blocks__link main-blocks__link--shop_cashier">{{operator.last_name}}
+                {{operator.first_name}}</p>
 
-                    <ng-container *ngFor="let operator of Operators[item.id]; let i = index">
-                        <div class="main-blocks__with-buttons" *ngIf="i < 3">
-                            <p class="main-blocks__link main-blocks__link--shop_cashier">{{operator.last_name}} {{operator.first_name}}</p>
+              <span class="main-blocks__button"
+                    [routerLink]="['/system', 'my_cashiers', 'edit', operator.id]"><img src="assets/img/edit-icon.svg"
+                     alt=""></span>
+              <span class="main-blocks__button main-blocks__button--delete"
+                    (click)="DeleteOperatorQA(operator)"><img src="assets/img/delete-icon.svg"
+                     alt=""></span>
+            </div>
+          </ng-container>
 
-                            <span class="main-blocks__button" [routerLink]="['/system', 'my_cashiers', 'edit', operator.id]" ><img src="assets/img/edit-icon.svg" alt=""></span>
-                            <span class="main-blocks__button main-blocks__button--delete" (click)="DeleteOperatorQA(operator)"><img src="assets/img/delete-icon.svg" alt=""></span>
-                        </div>
-                    </ng-container>
-
-                    <!-- <div class="main-blocks__with-buttons" >
+          <!-- <div class="main-blocks__with-buttons" >
                         <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 1</p>
 
                         <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
@@ -47,19 +70,29 @@
                         <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
                         <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
                     </div> -->
-                    <span class="main-blocks__link main-blocks__link--more" *ngIf="Operators[item.id].length > 3"  [ngClass]="{'main-blocks__link--hidden': Expanded[item.id]}" (click)="ShowMore(item)">Ещё кассиры</span>
-                    <!-- <span class="main-blocks__link main-blocks__link--more" [ngClass]="{'main-blocks__link--hidden': Expanded[item.id]}" (click)="ShowMore(item)">Ещё кассиры</span> -->
+          <span class="main-blocks__link main-blocks__link--more"
+                *ngIf="Operators[item.id].length > 3"
+                [ngClass]="{'main-blocks__link--hidden': Expanded[item.id]}"
+                (click)="ShowMore(item)">Ещё кассиры</span>
+          <!-- <span class="main-blocks__link main-blocks__link--more" [ngClass]="{'main-blocks__link--hidden': Expanded[item.id]}" (click)="ShowMore(item)">Ещё кассиры</span> -->
 
-                    <div class="more-cashiers" [ngClass]="{'more-cashiers--visible': Expanded[item.id]}">
-                        <ng-container *ngFor="let operator of Operators[item.id]; let j = index">
-                            <div class="main-blocks__with-buttons" *ngIf="j > 2">
-                                <p class="main-blocks__link main-blocks__link--shop_cashier">{{operator.last_name}} {{operator.first_name}}</p>
+          <div class="more-cashiers"
+               [ngClass]="{'more-cashiers--visible': Expanded[item.id]}">
+            <ng-container *ngFor="let operator of Operators[item.id]; let j = index">
+              <div class="main-blocks__with-buttons"
+                   *ngIf="j > 2">
+                <p class="main-blocks__link main-blocks__link--shop_cashier">{{operator.last_name}}
+                  {{operator.first_name}}</p>
 
-                                <span class="main-blocks__button" [routerLink]="['/system', 'my_cashiers', 'edit', operator.id]"><img src="assets/img/edit-icon.svg" alt=""></span>
-                                <span class="main-blocks__button main-blocks__button--delete" (click)="DeleteOperatorQA(operator)"><img src="assets/img/delete-icon.svg" alt=""></span>
-                            </div>
-                        </ng-container>
-                        <!-- <div class="main-blocks__with-buttons" >
+                <span class="main-blocks__button"
+                      [routerLink]="['/system', 'my_cashiers', 'edit', operator.id]"><img src="assets/img/edit-icon.svg"
+                       alt=""></span>
+                <span class="main-blocks__button main-blocks__button--delete"
+                      (click)="DeleteOperatorQA(operator)"><img src="assets/img/delete-icon.svg"
+                       alt=""></span>
+              </div>
+            </ng-container>
+            <!-- <div class="main-blocks__with-buttons" >
                                 <p class="main-blocks__link main-blocks__link--shop_cashier">Кассир 1</p>
 
                                 <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
@@ -70,48 +103,65 @@
                                     <span class="main-blocks__button"><img src="assets/img/edit-icon.svg" alt=""></span>
                                     <span class="main-blocks__button main-blocks__button--delete"><img src="assets/img/delete-icon.svg" alt=""></span>
                                 </div> -->
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-    </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 
 </div>
-<div class="modal modal--full " [ngClass]="{'modal--visible': ShowModalStore}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ShowModalStore = false"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': ShowModalStore}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="ShowModalStore = false"></span>
 
-        <p class="modal__delete-text">Удалить магазин «{{StoreDelete.name}}»?</p>
+    <p class="modal__delete-text">Удалить магазин «{{StoreDelete.name}}»?</p>
 
-        <div class="modal__buttons">
-            <button class="button button--black modal__delete-button" (click)="DeleteStore(StoreDelete)">Удалить</button>
-            <button class="button modal__delete-button" (click)="ShowModalStore = false">Отмена</button>
-        </div>
+    <div class="modal__buttons">
+      <button class="button button--black modal__delete-button"
+              (click)="DeleteStore(StoreDelete)">Удалить</button>
+      <button class="button modal__delete-button"
+              (click)="ShowModalStore = false">Отмена</button>
     </div>
+  </div>
 </div>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': ShowModalOperator}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ShowModalOperator = false"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': ShowModalOperator}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="ShowModalOperator = false"></span>
 
-        <p class="modal__delete-text">Удалить кассира «{{OperatorDelete.first_name + " " + (OperatorDelete.second_name ? OperatorDelete.second_name + " " : "") + OperatorDelete.last_name}}»?</p>
+    <p class="modal__delete-text">Удалить кассира
+      «{{OperatorDelete.first_name + " " + (OperatorDelete.second_name ? OperatorDelete.second_name + " " : "") + OperatorDelete.last_name}}»?
+    </p>
 
-        <div class="modal__buttons">
-            <button class="button button--black modal__delete-button" (click)="DeleteOperator(OperatorDelete)">Удалить</button>
-            <button class="button modal__delete-button" (click)="ShowModalOperator = false">Отмена</button>
-        </div>
+    <div class="modal__buttons">
+      <button class="button button--black modal__delete-button"
+              (click)="DeleteOperator(OperatorDelete)">Удалить</button>
+      <button class="button modal__delete-button"
+              (click)="ShowModalOperator = false">Отмена</button>
     </div>
+  </div>
 </div>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': DeleteResult.length > 0}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="DeleteResult = ''"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': DeleteResult.length > 0}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="DeleteResult = ''"></span>
 
-        <p class="modal__delete-text">{{DeleteResult}}</p>
+    <p class="modal__delete-text">{{DeleteResult}}</p>
 
-        <div class="modal__buttons">
-            <!-- <button class="button button--black modal__delete-button" (click)="DeleteOperator(OperatorDelete)">Удалить</button> -->
-            <button style="margin: auto"  class="button modal__delete-button" (click)="DeleteResult = ''">Ок</button>
-        </div>
+    <div class="modal__buttons">
+      <!-- <button class="button button--black modal__delete-button" (click)="DeleteOperator(OperatorDelete)">Удалить</button> -->
+      <button style="margin: auto"
+              class="button modal__delete-button"
+              (click)="DeleteResult = ''">Ок</button>
     </div>
+  </div>
 </div>

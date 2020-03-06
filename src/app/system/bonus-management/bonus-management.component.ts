@@ -5,12 +5,9 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-bonus-management-cmp',
   templateUrl: './bonus-management.component.html'
 })
-export class BonusManagementComponent implements OnInit
-{
-  constructor(private auth: AuthService)
-  {
+export class BonusManagementComponent implements OnInit {
+  constructor(private auth: AuthService) {
   }
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
   }
 }

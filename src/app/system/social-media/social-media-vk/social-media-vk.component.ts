@@ -7,19 +7,15 @@ import { Router } from '@angular/router';
   templateUrl: './social-media-vk.component.html',
   styleUrls: []
 })
-export class SocialMediaVkComponent implements OnInit
-{
+export class SocialMediaVkComponent implements OnInit {
 
-  constructor(private _location: Location, private router: Router)
-  {
+  constructor(private _location: Location, private router: Router) {
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
   }
 
-  GoBack()
-  {
+  GoBack() {
     this._location.back();
   }
 }

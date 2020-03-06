@@ -37,6 +37,6 @@ import { ClientProfileRoutingModule } from './client-profile.routing';
     MyDatePickerModule,
     PipesModule
   ],
-  providers: [ ClientProfileAccessGuard, ClientProfileService]
+  providers: [ClientProfileAccessGuard, ClientProfileService]
 })
-export class ClientProfileModule {}
+export class ClientProfileModule { }

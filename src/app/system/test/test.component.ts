@@ -5,19 +5,17 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'test-cmp',
   templateUrl: './test.component.html'
 })
-export class TestComponent  implements OnInit{
+export class TestComponent implements OnInit {
 
   title = 'LoyalityFront';
 
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService) {
 
   }
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
   }
 
-  Logout()
-  {
+  Logout() {
     this.auth.Logout();
   }
 }

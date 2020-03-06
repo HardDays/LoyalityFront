@@ -20,6 +20,6 @@ import { PromotionsListComponent } from './list.component';
     ReactiveFormsModule,
     PromotionsListRoutingModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class PromotionsListModule {}
+export class PromotionsListModule { }

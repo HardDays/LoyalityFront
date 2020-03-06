@@ -20,6 +20,6 @@ import { LoyaltyListRoutingModule } from './list.routing';
     ReactiveFormsModule,
     LoyaltyListRoutingModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class LoyaltyListModule {}
+export class LoyaltyListModule { }

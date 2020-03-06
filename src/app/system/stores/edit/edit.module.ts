@@ -20,6 +20,6 @@ import { StoreEditRoutingModule } from './edit.routing';
     ReactiveFormsModule,
     StoreEditRoutingModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class StoreEditModule {}
+export class StoreEditModule { }

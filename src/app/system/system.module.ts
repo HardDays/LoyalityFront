@@ -31,6 +31,6 @@ import { CompanyModule } from './company/company.module';
     TextMaskModule,
     CompanyModule
   ],
-  providers: [ SystemAccessGuard]
+  providers: [SystemAccessGuard]
 })
-export class SystemModule {}
+export class SystemModule { }

@@ -1,78 +1,107 @@
 <div class="page__content">
 
-    <div class="page__top">
-        <h1 class="page__title">Кассиры</h1>
-        <div class="page__search">
-            <input type="text" [ngModel]="QueryString" (ngModelChange)="UpdateOperators($event)" placeholder="Поиск по кассирам">
-        </div>
+  <div class="page__top">
+    <h1 class="page__title">Кассиры</h1>
+    <div class="page__search">
+      <input type="text"
+             [ngModel]="QueryString"
+             (ngModelChange)="UpdateOperators($event)"
+             placeholder="Поиск по кассирам">
     </div>
+  </div>
 
-    <div class="main-blocks">
-        <div class="main-blocks__item main-blocks__item--create" [routerLink]="['/system','my_cashiers', 'create']">
-            <img src="assets/img/plus.png" alt="">
-            <span>Создать нового кассира</span>
-        </div>
-        <div class="main-blocks__item" *ngFor="let item of Operators">
-            <p class="main-blocks__title main-blocks__title--cashier">{{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</p>
-
-            <p class="main-blocks__description">
-                <!-- Название магазина<br> -->
-                E-mail: {{item.email}}
-                <ng-container *ngIf="!item.store_id">
-                    <br><span style="color: red">Нет магазина</span>
-                </ng-container>
-                <ng-container *ngIf="!item.user_type">
-                    <br><span style="color: red">Удален</span>
-                </ng-container>
-
-            </p>
-
-            <a [routerLink]="['/system','my_cashiers', 'edit', item.id]" class="main-blocks__link main-blocks__link--yellow main-blocks__link--edit">Редактировать</a>
-            <ng-container *ngIf="item.user_type">
-                <a (click)="DeleteQA(item)" class="main-blocks__link main-blocks__link--yellow main-blocks__link--delete main-blocks__link--delete_yellow">Удалить</a>
-            </ng-container>
-            <ng-container *ngIf="!item.user_type">
-                <a (click)="RepairQA(item)" class="main-blocks__link main-blocks__link--yellow main-blocks__link--reset">Восстановить</a>
-            </ng-container>
-            </div>
+  <div class="main-blocks">
+    <div class="main-blocks__item main-blocks__item--create"
+         [routerLink]="['/system','my_cashiers', 'create']">
+      <img src="assets/img/plus.png"
+           alt="">
+      <span>Создать нового кассира</span>
     </div>
+    <div class="main-blocks__item"
+         *ngFor="let item of Operators">
+      <p class="main-blocks__title main-blocks__title--cashier">
+        {{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</p>
+
+      <p class="main-blocks__description">
+        <!-- Название магазина<br> -->
+        E-mail: {{item.email}}
+        <ng-container *ngIf="!item.store_id">
+          <br><span style="color: red">Нет магазина</span>
+        </ng-container>
+        <ng-container *ngIf="!item.user_type">
+          <br><span style="color: red">Удален</span>
+        </ng-container>
+
+      </p>
+
+      <a [routerLink]="['/system','my_cashiers', 'edit', item.id]"
+         class="main-blocks__link main-blocks__link--yellow main-blocks__link--edit">Редактировать</a>
+      <ng-container *ngIf="item.user_type">
+        <a (click)="DeleteQA(item)"
+           class="main-blocks__link main-blocks__link--yellow main-blocks__link--delete main-blocks__link--delete_yellow">Удалить</a>
+      </ng-container>
+      <ng-container *ngIf="!item.user_type">
+        <a (click)="RepairQA(item)"
+           class="main-blocks__link main-blocks__link--yellow main-blocks__link--reset">Восстановить</a>
+      </ng-container>
+    </div>
+  </div>
 
 </div>
-<div class="modal modal--full " [ngClass]="{'modal--visible': ShowModal}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ShowModal = false"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': ShowModal}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="ShowModal = false"></span>
 
-        <p class="modal__delete-text">Удалить кассира «{{OperatorDelete.first_name + " " + (OperatorDelete.second_name ? OperatorDelete.second_name + " " : "") + OperatorDelete.last_name}}»?</p>
+    <p class="modal__delete-text">Удалить кассира
+      «{{OperatorDelete.first_name + " " + (OperatorDelete.second_name ? OperatorDelete.second_name + " " : "") + OperatorDelete.last_name}}»?
+    </p>
 
-        <div class="modal__buttons">
-            <button class="button button--black modal__delete-button" (click)="DeleteOperator(OperatorDelete)">Удалить</button>
-            <button class="button modal__delete-button" (click)="ShowModal = false">Отмена</button>
-        </div>
+    <div class="modal__buttons">
+      <button class="button button--black modal__delete-button"
+              (click)="DeleteOperator(OperatorDelete)">Удалить</button>
+      <button class="button modal__delete-button"
+              (click)="ShowModal = false">Отмена</button>
     </div>
+  </div>
 </div>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': ShowRepair}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ShowRepair = false"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': ShowRepair}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="ShowRepair = false"></span>
 
-        <p class="modal__delete-text">Восстановить кассира «{{OperatorDelete.first_name + " " + (OperatorDelete.second_name ? OperatorDelete.second_name + " " : "") + OperatorDelete.last_name}}»?</p>
+    <p class="modal__delete-text">Восстановить кассира
+      «{{OperatorDelete.first_name + " " + (OperatorDelete.second_name ? OperatorDelete.second_name + " " : "") + OperatorDelete.last_name}}»?
+    </p>
 
-        <div class="modal__buttons">
-            <button class="button button--black modal__delete-button" (click)="Repair(OperatorDelete)">Восстановить</button>
-            <button class="button modal__delete-button" (click)="ShowRepair = false">Отмена</button>
-        </div>
+    <div class="modal__buttons">
+      <button class="button button--black modal__delete-button"
+              (click)="Repair(OperatorDelete)">Восстановить</button>
+      <button class="button modal__delete-button"
+              (click)="ShowRepair = false">Отмена</button>
     </div>
+  </div>
 </div>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': DeleteResult.length > 0}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="DeleteResult = ''"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': DeleteResult.length > 0}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="DeleteResult = ''"></span>
 
-        <p class="modal__delete-text">{{DeleteResult}}</p>
+    <p class="modal__delete-text">{{DeleteResult}}</p>
 
-        <div class="modal__buttons">
-            <!-- <button class="button button--black modal__delete-button" (click)="DeleteOperator(OperatorDelete)">Удалить</button> -->
-            <button style="margin: auto"  class="button modal__delete-button" (click)="DeleteResult = ''">Ок</button>
-        </div>
+    <div class="modal__buttons">
+      <!-- <button class="button button--black modal__delete-button" (click)="DeleteOperator(OperatorDelete)">Удалить</button> -->
+      <button style="margin: auto"
+              class="button modal__delete-button"
+              (click)="DeleteResult = ''">Ок</button>
     </div>
+  </div>
 </div>

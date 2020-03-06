@@ -8,9 +8,9 @@ describe('ClientPreloaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientPreloaderComponent ]
+      declarations: [ClientPreloaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

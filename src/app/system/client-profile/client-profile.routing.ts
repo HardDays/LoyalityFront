@@ -3,16 +3,16 @@ import { ClientBonusesComponent } from './client-bonuses/client-bonuses.componen
 import { ClientDataComponent } from './client-data/client-data.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientProfileAccessGuard } from './client-profile.guard';
 
 
 const routes: Routes = [
-    { path: '', redirectTo: 'data', pathMatch: 'full'},
-    { path: 'data', component: ClientDataComponent, canActivate: [ClientProfileAccessGuard]},
-    { path: 'bonuses', component: ClientBonusesComponent, canActivate: [ClientProfileAccessGuard]},
-    { path: 'loyalty', component: ClientLoyaltyComponent, canActivate: [ClientProfileAccessGuard]}
+  { path: '', redirectTo: 'data', pathMatch: 'full' },
+  { path: 'data', component: ClientDataComponent, canActivate: [ClientProfileAccessGuard] },
+  { path: 'bonuses', component: ClientBonusesComponent, canActivate: [ClientProfileAccessGuard] },
+  { path: 'loyalty', component: ClientLoyaltyComponent, canActivate: [ClientProfileAccessGuard] }
 ];
 
 @NgModule({

@@ -5,13 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './social-media-telegram.component.html',
   styleUrls: []
 })
-export class SocialMediaTelegramComponent implements OnInit
-{
+export class SocialMediaTelegramComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit()
-  {
+  ngOnInit() {
   }
 
 }

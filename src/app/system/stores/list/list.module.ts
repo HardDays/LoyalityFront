@@ -22,6 +22,6 @@ import { StoreItemDirective } from './item/item.directive';
     ReactiveFormsModule,
     StoresListRoutingModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class StoresListModule {}
+export class StoresListModule { }

@@ -16,73 +16,63 @@ export class StoreCreateComponent implements OnInit {
   isLoading = false;
 
   Form: FormGroup = new FormGroup({
-    "name": new FormControl('',[
+    "name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    "country": new FormControl('',[
+    "country": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    "city": new FormControl('',[
+    "city": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    "street": new FormControl('',[
+    "street": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    "house": new FormControl('',[
+    "house": new FormControl('', [
       Validators.required,
       Validators.min(1),
       Validators.max(9999)
     ])
   });
 
-  get name()
-  {
+  get name() {
     return this.Form.get('name');
   }
-  get country()
-  {
+  get country() {
     return this.Form.get('country');
   }
-  get city()
-  {
+  get city() {
     return this.Form.get('city');
   }
-  get street()
-  {
+  get street() {
     return this.Form.get('street');
   }
-  get house()
-  {
+  get house() {
     return this.Form.get('house');
   }
 
   constructor(private _location: Location, private auth: AuthService, private router: Router,
-    private service: StoresService)
-  {
+    private service: StoresService) {
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
   }
 
-  GoBack()
-  {
-      this._location.back();
+  GoBack() {
+    this._location.back();
   }
 
-  Save()
-  {
+  Save() {
     this.Form.updateValueAndValidity();
-    for(const i in this.Form.controls)
-    {
+    for (const i in this.Form.controls) {
       this.Form.get(i).updateValueAndValidity();
       this.Form.get(i).markAsDirty();
       this.Form.get(i).markAsTouched();
@@ -90,14 +80,13 @@ export class StoreCreateComponent implements OnInit {
 
     const valid = this.Form.valid;
 
-    if(valid)
-    {
+    if (valid) {
       const data = this.Form.getRawValue();
-      this.service.CreateStore(data,(res) => {
-        this.router.navigate(["/system","my_stores"])
+      this.service.CreateStore(data, (res) => {
+        this.router.navigate(["/system", "my_stores"])
       },
-      (err) => {
-      })
+        (err) => {
+        })
     }
 
 

@@ -69,14 +69,14 @@ export class EditPaidComponent implements OnInit {
     //     //   curLoyalty.write_off_rule_points,
     //     //   curLoyalty.write_off_rule_percent
     //     // );
-        this.clientsService.GetLoyaltyPoints(
-          this.Client.id,
-          +this.Order.price,
-          (maxBonuses) => {
-            // console.log(`maxBonuses = `, maxBonuses);
-            this.Bonuses.Available = (+maxBonuses['points']) / 100;
-          }
-        );
+    this.clientsService.GetLoyaltyPoints(
+      this.Client.id,
+      +this.Order.price,
+      (maxBonuses) => {
+        // console.log(`maxBonuses = `, maxBonuses);
+        this.Bonuses.Available = (+maxBonuses['points']) / 100;
+      }
+    );
     //   }
     // );
   }
@@ -106,7 +106,7 @@ export class EditPaidComponent implements OnInit {
     console.log(write_off_rule, write_off_limited, write_off_min_price, write_off_rule_points, write_off_rule_percent);
     this.Bonuses.Available = 0;
     if (write_off_rule === 'write_off_convert') {
-      if (write_off_limited)  {
+      if (write_off_limited) {
         if (this.Order.price < write_off_min_price) {
           return;
         }
@@ -126,8 +126,8 @@ export class EditPaidComponent implements OnInit {
   }
 
   onWriteBonusesChange(val: number) {
-    if (+val != val) {this.WrireBonuses = 0; return;}
-    if (val < 0) {this.WrireBonuses = 0; return;}
+    if (+val != val) { this.WrireBonuses = 0; return; }
+    if (val < 0) { this.WrireBonuses = 0; return; }
 
     if (val > this.Bonuses.Available) {
       this.hasErrorBonuses = true;
@@ -188,7 +188,7 @@ export class EditPaidComponent implements OnInit {
     }
   }
 
-  checkNewUserInfo () {
+  checkNewUserInfo() {
     // this.clientsService.GetClient();
   }
 

@@ -1,177 +1,211 @@
 <div class="page__content page__content--create">
 
-  <app-client-preloader *ngIf="IsLoading" [IsLoading]="IsLoading"></app-client-preloader>
+  <app-client-preloader *ngIf="IsLoading"
+                        [IsLoading]="IsLoading"></app-client-preloader>
 
   <div class="page__top page__top--create">
-      <span class="page__back"><img (click)="GoBack()" src="./../../../../../assets/img/back.svg" alt=""></span>
-      <h1 class="page__title page__title--create">Создание нового покупателя</h1>
+    <span class="page__back"><img (click)="GoBack()"
+           src="./../../../../../assets/img/back.svg"
+           alt=""></span>
+    <h1 class="page__title page__title--create">Создание нового покупателя</h1>
   </div>
 
+  <form [formGroup]="Form"
+        (ngSubmit)="Save()"
+        class="create-block customer__block">
+    <p class="create-block__label create-block__label--bold">Введите данные покупателя</p>
 
-  <form [formGroup]="Form" (ngSubmit)="Save()" class="create-block customer__block">
-      <p class="create-block__label create-block__label--bold">Введите данные покупателя</p>
+    <p class="customer__label">Введите номер телефона покупателя</p>
+    <input type="text"
+           [textMask]="{mask: MaskPhoneRU, showMask: true}"
+           [(ngModel)]="Phone"
+           class="customer__input customer__input--big"
+           name="phone"
+           formControlName="phone">
 
-      <p class="customer__label">Введите номер телефона покупателя</p>
-      <input type="text" [textMask]="{mask: MaskPhoneRU, showMask: true}" [(ngModel)]="Phone" class="customer__input customer__input--big" name="phone" formControlName="phone">
+    <p class="auth-block__hint auth-block__hint--error">
+      <ng-container *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+        <span *ngIf="phone.errors['required']">Поле обязательно к заполнению.</span>
+        <span *ngIf="phone.errors['used']">Номер телефона занят</span>
+        <span *ngIf="phone.errors['incorrect']">Неверный номер телефона</span>
+      </ng-container>
+    </p>
 
-      <p class="auth-block__hint auth-block__hint--error">
-        <ng-container *ngIf="phone.invalid && (phone.dirty || phone.touched)">
-            <span *ngIf="phone.errors['required']">Поле обязательно к заполнению.</span>
-            <span *ngIf="phone.errors['used']">Номер телефона занят</span>
-            <span *ngIf="phone.errors['incorrect']">Неверный номер телефона</span>
-        </ng-container>
-      </p>
+    <p class="customer__label auth-block__hint auth-block__hint--error"
+       [ngStyle]="{'color': 'red'}">
+      <span *ngIf="ErrorText">{{ErrorText}}</span>
+    </p>
 
-      <p class="customer__label auth-block__hint auth-block__hint--error" [ngStyle]="{'color': 'red'}">
-          <span *ngIf="ErrorText">{{ErrorText}}</span>
-      </p>
+    <p class="create-block__label create-block__label--light">Фамилия</p>
+    <input type="text"
+           class="create-block__input create-block__input--full"
+           [ngClass]="{'auth-block__input--error': last_name.invalid && (last_name.dirty || last_name.touched)}"
+           autocomplete="null"
+           name="last_name"
+           formControlName="last_name">
+    <p class="auth-block__hint auth-block__hint--error">
+      <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+        <span *ngIf="last_name.errors['required']">Поле обязательно к заполнению.</span>
+      </ng-container>
+    </p>
 
-      <p class="create-block__label create-block__label--light">Фамилия</p>
-      <input type="text" class="create-block__input create-block__input--full"
-        [ngClass]="{'auth-block__input--error': last_name.invalid && (last_name.dirty || last_name.touched)}"
-        autocomplete="null"
-        name="last_name"
-        formControlName="last_name"
-      >
-      <p class="auth-block__hint auth-block__hint--error">
-          <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
-              <span *ngIf="last_name.errors['required']">Поле обязательно к заполнению.</span>
+    <p class="create-block__label create-block__label--light">Имя</p>
+    <input type="text"
+           class="create-block__input create-block__input--full"
+           [ngClass]="{'auth-block__input--error': first_name.invalid && (first_name.dirty || first_name.touched)}"
+           autocomplete="null"
+           name="first_name"
+           formControlName="first_name">
+    <p class="auth-block__hint auth-block__hint--error">
+      <ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+        <span *ngIf="first_name.errors['required']">Поле обязательно к заполнению.</span>
+      </ng-container>
+    </p>
+
+    <p class="create-block__label create-block__label--light">Отчество</p>
+    <input type="text"
+           class="create-block__input create-block__input--full"
+           [ngClass]="{'auth-block__input--error': second_name.invalid && (second_name.dirty || second_name.touched)}"
+           autocomplete="null"
+           name="second_name"
+           formControlName="second_name">
+
+    <p class="create-block__label create-block__label--light">Электронный адрес</p>
+    <input type="text"
+           class="create-block__input create-block__input--full"
+           [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
+           autocomplete="null"
+           name="email"
+           formControlName="email">
+    <p class="auth-block__hint auth-block__hint--error">
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span *ngIf="email.errors['required']">Поле обязательно к заполнению.</span>
+        <span *ngIf="email.errors['email']">Неверный формат.</span>
+        <span *ngIf="email.errors['incorrect']">Email занят.</span>
+      </ng-container>
+    </p>
+
+    <p class="create-block__label create-block__label--light">Номер карты</p>
+    <input type="text"
+           class="create-block__input create-block__input--full"
+           [ngClass]="{'auth-block__input--error': card_number.invalid && (card_number.dirty || card_number.touched)}"
+           autocomplete="null"
+           name="card_number"
+           formControlName="card_number">
+
+    <div class="customer__flex">
+      <div class="customer__part">
+        <p class="create-block__label create-block__label--light">Дата рождения</p>
+        <my-date-picker name="birth_day"
+                        [ngClass]="{'auth-block__input--error': birth_day.invalid && (birth_day.dirty || birth_day.touched)}"
+                        formControlName="birth_day"
+                        [options]="myDatePickerOptions"></my-date-picker>
+        <p class="auth-block__hint auth-block__hint--error"
+           [ngStyle]="{'width': '142px'}">
+          <ng-container *ngIf="birth_day.invalid && (birth_day.dirty || birth_day.touched)">
+            <span *ngIf="birth_day.errors['required']">Поле обязательно к заполнению.</span>
           </ng-container>
-      </p>
-
-      <p class="create-block__label create-block__label--light">Имя</p>
-      <input type="text" class="create-block__input create-block__input--full"
-        [ngClass]="{'auth-block__input--error': first_name.invalid && (first_name.dirty || first_name.touched)}"
-        autocomplete="null"
-        name="first_name"
-        formControlName="first_name"
-      >
-      <p class="auth-block__hint auth-block__hint--error">
-          <ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
-              <span *ngIf="first_name.errors['required']">Поле обязательно к заполнению.</span>
-          </ng-container>
-      </p>
-
-      <p class="create-block__label create-block__label--light">Отчество</p>
-      <input type="text" class="create-block__input create-block__input--full"
-        [ngClass]="{'auth-block__input--error': second_name.invalid && (second_name.dirty || second_name.touched)}"
-        autocomplete="null"
-        name="second_name"
-        formControlName="second_name"
-      >
-
-      <p class="create-block__label create-block__label--light">Электронный адрес</p>
-      <input type="text" class="create-block__input create-block__input--full"
-        [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
-        autocomplete="null"
-        name="email"
-        formControlName="email"
-      >
-      <p class="auth-block__hint auth-block__hint--error">
-          <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
-              <span *ngIf="email.errors['required']">Поле обязательно к заполнению.</span>
-              <span *ngIf="email.errors['email']">Неверный формат.</span>
-              <span *ngIf="email.errors['incorrect']">Email занят.</span>
-          </ng-container>
-      </p>
-
-      <p class="create-block__label create-block__label--light">Номер карты</p>
-      <input type="text" class="create-block__input create-block__input--full"
-        [ngClass]="{'auth-block__input--error': card_number.invalid && (card_number.dirty || card_number.touched)}"
-        autocomplete="null"
-        name="card_number"
-        formControlName="card_number"
-      >
-
-      <div class="customer__flex">
-          <div class="customer__part">
-              <p class="create-block__label create-block__label--light">Дата рождения</p>
-              <my-date-picker
-                name="birth_day"
-                [ngClass]="{'auth-block__input--error': birth_day.invalid && (birth_day.dirty || birth_day.touched)}"
-                formControlName="birth_day"
-                [options]="myDatePickerOptions"
-              ></my-date-picker>
-              <p class="auth-block__hint auth-block__hint--error" [ngStyle]="{'width': '142px'}">
-                  <ng-container *ngIf="birth_day.invalid && (birth_day.dirty || birth_day.touched)">
-                      <span *ngIf="birth_day.errors['required']">Поле обязательно к заполнению.</span>
-                  </ng-container>
-              </p>
-          </div>
-          <!-- <div class="customer__part">
+        </p>
+      </div>
+      <!-- <div class="customer__part">
               <p class="create-block__label create-block__label--light">Дата регистрации</p>
               <span class="create-block__date-input customer__date"><input type="text" class="create-block__input create-block__input--date"></span>
           </div> -->
-          <div class="customer__part">
-              <p class="create-block__label create-block__label--light">Пол</p>
+      <div class="customer__part">
+        <p class="create-block__label create-block__label--light">Пол</p>
 
-              <div class="auth-block__choice">
-                  <label class="radio">
-                      <input type="radio" class="radio__input" value="female" name="gender" formControlName="gender" checked>
-                      <div class="radio__text">Женский</div>
-                  </label>
-                  <label class="radio">
-                      <input type="radio" class="radio__input" value="male" formControlName="gender" name="gender">
-                      <div class="radio__text">Мужской</div>
-                  </label>
-              </div>
-          </div>
-          <div class="customer__part customer__part--bottom">
-              <label class="checkbox">
-                  <input (change)="Recommendation.isTrue = !Recommendation.isTrue" type="checkbox" class="checkbox__input">
-                  <div class="checkbox__text">По рекомендации</div>
-              </label>
-          </div>
+        <div class="auth-block__choice">
+          <label class="radio">
+            <input type="radio"
+                   class="radio__input"
+                   value="female"
+                   name="gender"
+                   formControlName="gender"
+                   checked>
+            <div class="radio__text">Женский</div>
+          </label>
+          <label class="radio">
+            <input type="radio"
+                   class="radio__input"
+                   value="male"
+                   formControlName="gender"
+                   name="gender">
+            <div class="radio__text">Мужской</div>
+          </label>
+        </div>
       </div>
+      <div class="customer__part customer__part--bottom">
+        <label class="checkbox">
+          <input (change)="Recommendation.isTrue = !Recommendation.isTrue"
+                 type="checkbox"
+                 class="checkbox__input">
+          <div class="checkbox__text">По рекомендации</div>
+        </label>
+      </div>
+    </div>
 
-      <ng-container *ngIf="Recommendation.isTrue">
-        <p class="create-block__label create-block__label--light">Номер телефона рекомендовавшего:</p>
-        <input [(ngModel)]="Recommendation.phone" (input)="changeRecommendationPhone($event.target.value)" [textMask]="{mask: MaskPhoneRU, showMask: true}" [ngModelOptions]="{standalone: true}" name="recommendation_phone" type="text" class="create-block__input create-block__input--full">
-        <p class="auth-block__hint auth-block__hint--error">
-          <span *ngIf="Recommendation.isPhoneCurrect" [ngStyle]="{'color': 'green'}">Номер телефона доступен</span>
-          <span *ngIf="!Recommendation.isPhoneCurrect">Номер телефона недоступен</span>
-        </p>
-      </ng-container>
+    <ng-container *ngIf="Recommendation.isTrue">
+      <p class="create-block__label create-block__label--light">Номер телефона рекомендовавшего:</p>
+      <input [(ngModel)]="Recommendation.phone"
+             (input)="changeRecommendationPhone($event.target.value)"
+             [textMask]="{mask: MaskPhoneRU, showMask: true}"
+             [ngModelOptions]="{standalone: true}"
+             name="recommendation_phone"
+             type="text"
+             class="create-block__input create-block__input--full">
+      <p class="auth-block__hint auth-block__hint--error">
+        <span *ngIf="Recommendation.isPhoneCurrect"
+              [ngStyle]="{'color': 'green'}">Номер телефона доступен</span>
+        <span *ngIf="!Recommendation.isPhoneCurrect">Номер телефона недоступен</span>
+      </p>
+    </ng-container>
 
-      <!-- <label class="checkbox">
+    <!-- <label class="checkbox">
           <input type="checkbox" class="checkbox__input" checked>
           <div class="checkbox__text">Отправить пароль от личного кабинета покупателя СМС-сообщением</div>
       </label> -->
 
-      <p *ngIf="SaveError" class="customer__label auth-block__hint auth-block__hint--error" [ngStyle]="{'color': 'red'}">
-        <span>{{SaveError}}</span>
-      </p>
+    <p *ngIf="SaveError"
+       class="customer__label auth-block__hint auth-block__hint--error"
+       [ngStyle]="{'color': 'red'}">
+      <span>{{SaveError}}</span>
+    </p>
 
-      <div class="text-center">
-          <p></p>
-          <button class="button create-block__button">Сохранить</button>
-      </div>
-
+    <div class="text-center">
+      <p></p>
+      <button class="button create-block__button">Сохранить</button>
+    </div>
 
   </form>
 
 </div>
 
-<div *ngIf="isShowSuccessModal" class="modal modal--visible">
+<div *ngIf="isShowSuccessModal"
+     class="modal modal--visible">
 
-<div class="modal__block modal__block--customer">
-    <span class="modal__close"><img (click)="onCloseSuccessModal()" src="./../../../../../assets/img/close.svg" alt=""></span>
+  <div class="modal__block modal__block--customer">
+    <span class="modal__close"><img (click)="onCloseSuccessModal()"
+           src="./../../../../../assets/img/close.svg"
+           alt=""></span>
 
     <div class="modal__customer-content">
-        <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>
+      <p class="customer__created-title">Покупатель успешно зарегистрирован!</p>
 
-        <p class="customer__created-text">Пароль от личного кабинета<br>отправлен на E-mail!</p>
+      <p class="customer__created-text">Пароль от личного кабинета<br>отправлен на E-mail!</p>
     </div>
+  </div>
 </div>
+
+<div *ngIf="ModalErrorLoyalty"
+     class="modal modal--visible">
+
+  <div class="modal__block modal__block--customer">
+    <span class="modal__close"><img [routerLink]="['/system', 'my_clients']"
+           src="./../../../../../assets/img/close.svg"
+           alt=""></span>
+
+    <div class="modal__customer-content">
+      <p class="customer__created-text">Отсутствует программа лояльности! Обратитесь к администратору.</p>
+    </div>
+  </div>
 </div>
-
-<div *ngIf="ModalErrorLoyalty" class="modal modal--visible">
-
-    <div class="modal__block modal__block--customer">
-        <span class="modal__close"><img [routerLink]="['/system', 'my_clients']" src="./../../../../../assets/img/close.svg" alt=""></span>
-
-        <div class="modal__customer-content">
-            <p class="customer__created-text">Отсутствует программа лояльности! Обратитесь к администратору.</p>
-        </div>
-    </div>
-    </div>

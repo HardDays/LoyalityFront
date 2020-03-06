@@ -40,10 +40,10 @@ export class CreateClientByUserComponent implements OnInit {
     // 'loyalty_program_id': new FormControl('', [
     //   // Validators.required
     // ]),
-    'gender': new FormControl('female',[
+    'gender': new FormControl('female', [
       Validators.required
     ]),
-    'birth_day': new FormControl('',[
+    'birth_day': new FormControl('', [
       Validators.required
     ])
   });
@@ -82,7 +82,7 @@ export class CreateClientByUserComponent implements OnInit {
     dateFormat: 'yyyy-mm-dd',
     showClearDateBtn: false,
     showTodayBtn: false,
-    dayLabels: {su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'},
+    dayLabels: { su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб' },
     monthLabels: { 1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек' },
     editableDateField: false,
     openSelectorOnInputClick: true
@@ -114,15 +114,14 @@ export class CreateClientByUserComponent implements OnInit {
   }
 
   GoBack() {
-      this._location.back();
+    this._location.back();
   }
   Save() {
     console.log(`Save Form`);
 
-    for(const i in this.Form.controls)
-    {
-        this.Form.controls[i].markAsDirty();
-        this.Form.controls[i].markAsTouched();
+    for (const i in this.Form.controls) {
+      this.Form.controls[i].markAsDirty();
+      this.Form.controls[i].markAsTouched();
     }
     const valid = this.Form.valid;
 
@@ -144,9 +143,9 @@ export class CreateClientByUserComponent implements OnInit {
           this.isShowSuccessModal = true;
         }
       },
-      (err) => {
-        console.log(err);
-      });
+        (err) => {
+          console.log(err);
+        });
     }
   }
 
@@ -181,8 +180,7 @@ export class CreateClientByUserComponent implements OnInit {
 
 
 
-  OnSelected(item)
-  {
+  OnSelected(item) {
     this.SelectedLoyality = item;
     // this.Form.controls.loyalty_program_id.setValue(this.SelectedLoyality.id);
     this.ShowSelect = false;

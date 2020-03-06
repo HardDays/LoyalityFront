@@ -22,6 +22,6 @@ import { ReportRoutingModule } from './report.routing';
     ReportRoutingModule,
     MyDatePickerModule
   ],
-  providers: [ DatePipe ]
+  providers: [DatePipe]
 })
-export class ReportModule {}
+export class ReportModule { }

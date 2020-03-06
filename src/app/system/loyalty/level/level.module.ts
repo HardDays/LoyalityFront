@@ -22,6 +22,6 @@ import { LoyaltyLevelRoutingModule } from './level.routing';
     LoyaltyLevelRoutingModule,
     MyDatePickerModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class LoyaltyLevelModule {}
+export class LoyaltyLevelModule { }

@@ -22,6 +22,6 @@ import { CompanyComponent } from './company.component';
     TextMaskModule
   ],
   exports: [CompanyComponent],
-  providers: [ ]
+  providers: []
 })
-export class CompanyModule {}
+export class CompanyModule { }

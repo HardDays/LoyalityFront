@@ -16,7 +16,7 @@ import { PromotionsService } from './promotions.service';
 
 @NgModule({
   declarations: [
-      PromotionsComponent
+    PromotionsComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +29,6 @@ import { PromotionsService } from './promotions.service';
     TextMaskModule,
     MyDatePickerModule
   ],
-  providers: [ PromotionsAccessGuard, PromotionsService, LoyaltyProgramsService]
+  providers: [PromotionsAccessGuard, PromotionsService, LoyaltyProgramsService]
 })
-export class PromotionsModule {}
+export class PromotionsModule { }

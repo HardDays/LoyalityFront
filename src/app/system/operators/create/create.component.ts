@@ -15,130 +15,113 @@ export class OperatorCreateComponent implements OnInit {
   SaveSuccess = false;
   Mode = 'create';
   isLoading = false;
-    Stores: StoreModel[] = [];
-    SelectedStore: StoreModel = null;
-    NoStore: StoreModel = new StoreModel();
+  Stores: StoreModel[] = [];
+  SelectedStore: StoreModel = null;
+  NoStore: StoreModel = new StoreModel();
 
-    ShowSelect = false;
+  ShowSelect = false;
   Form: FormGroup = new FormGroup({
-    "first_name": new FormControl('',[
+    "first_name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    "last_name": new FormControl('',[
+    "last_name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    "second_name": new FormControl('',[
+    "second_name": new FormControl('', [
       Validators.maxLength(30)
     ]),
-    "store_id": new FormControl('',[
+    "store_id": new FormControl('', [
       // Validators.required
     ]),
-    "email": new FormControl('',[
+    "email": new FormControl('', [
       Validators.required,
       Validators.email
     ])
   });
 
-  get first_name()
-  {
+  get first_name() {
     return this.Form.get('first_name');
   }
-  get last_name()
-  {
+  get last_name() {
     return this.Form.get('last_name');
   }
-  get second_name()
-  {
+  get second_name() {
     return this.Form.get('second_name');
   }
-  get store_id()
-  {
+  get store_id() {
     return this.Form.get('store_id');
   }
-  get email()
-  {
+  get email() {
     return this.Form.get('email');
   }
 
   constructor(private _location: Location, private auth: AuthService, private router: Router,
-    private service: OperatorsService)
-  {
+    private service: OperatorsService) {
     this.NoStore.name = "Нет магазина";
     this.SelectedStore = this.NoStore;
-      this.service.onStoresChange$.subscribe((val) => {
-        this.Stores = this.service.GetStores();
-      });
+    this.service.onStoresChange$.subscribe((val) => {
+      this.Stores = this.service.GetStores();
+    });
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.service.RefreshStores();
     // this.Stores = this.service.GetStores();
   }
 
-  GoBack()
-  {
-      this._location.back();
+  GoBack() {
+    this._location.back();
   }
 
-  Save()
-  {
-    for(const i in this.Form.controls)
-    {
-        this.Form.controls[i].markAsDirty();
-        this.Form.controls[i].markAsTouched();
-        this.Form.controls[i].updateValueAndValidity();
+  Save() {
+    for (const i in this.Form.controls) {
+      this.Form.controls[i].markAsDirty();
+      this.Form.controls[i].markAsTouched();
+      this.Form.controls[i].updateValueAndValidity();
     }
     const valid = this.Form.valid;
 
-    if(valid)
-    {
+    if (valid) {
       this.auth.onLoading.next(true);
       const data = this.Form.getRawValue();
-      this.service.CreateOperator(data,(res) => {
+      this.service.CreateOperator(data, (res) => {
         this.auth.onLoading.next(false);
         this.SaveSuccess = true;
       },
-      (err) => {
-        if(err.status == 422)
-        {
-          const body = JSON.parse(err._body);
-          for(const i in body)
-          {
-            if(this.Form.get(i))
-            {
-              let err = {};
-              err[body[i][0]] = true;
+        (err) => {
+          if (err.status == 422) {
+            const body = JSON.parse(err._body);
+            for (const i in body) {
+              if (this.Form.get(i)) {
+                let err = {};
+                err[body[i][0]] = true;
 
-              this.Form.get(i).setErrors(err);
+                this.Form.get(i).setErrors(err);
+              }
             }
           }
-        }
-        this.auth.onLoading.next(false);
-      })
+          this.auth.onLoading.next(false);
+        })
     }
   }
-  SuccessClicked()
-  {
+  SuccessClicked() {
     this.SaveSuccess = false;
-    this.router.navigate(["/system","my_cashiers"])
+    this.router.navigate(["/system", "my_cashiers"])
   }
 
 
-  OnSelected(item:StoreModel)
-  {
+  OnSelected(item: StoreModel) {
     this.SelectedStore = item;
     this.Form.controls.store_id.setValue(this.SelectedStore.id);
     this.ShowSelect = false;
   }
 
-  HideSelect($event)
-  {
-    if(this.ShowSelect)
+  HideSelect($event) {
+    if (this.ShowSelect)
       this.ShowSelect = false;
   }
 }

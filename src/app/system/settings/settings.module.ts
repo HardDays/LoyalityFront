@@ -20,6 +20,6 @@ import { SettingsComponent } from './settings.component';
     ReactiveFormsModule,
     SettingsRoutingModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class SettingsModule {}
+export class SettingsModule { }

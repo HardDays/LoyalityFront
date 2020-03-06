@@ -16,12 +16,12 @@ export class CreateClientProfileComponent implements OnInit {
 
   Form: FormGroup = new FormGroup({
     'phone': new FormControl('',
-    [
-      Validators.required,
-    ],
-    [
-      this.service.createValidatorPhone()
-    ]),
+      [
+        Validators.required,
+      ],
+      [
+        this.service.createValidatorPhone()
+      ]),
     'first_name': new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -47,10 +47,10 @@ export class CreateClientProfileComponent implements OnInit {
     // 'loyalty_program_id': new FormControl('', [
     //   // Validators.required
     // ]),
-    'gender': new FormControl('female',[
+    'gender': new FormControl('female', [
       Validators.required
     ]),
-    'birth_day': new FormControl('',[
+    'birth_day': new FormControl('', [
       Validators.required
     ])
   });
@@ -89,7 +89,7 @@ export class CreateClientProfileComponent implements OnInit {
     dateFormat: 'yyyy-mm-dd',
     showClearDateBtn: false,
     showTodayBtn: false,
-    dayLabels: {su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'},
+    dayLabels: { su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб' },
     monthLabels: { 1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек' },
     editableDateField: false,
     openSelectorOnInputClick: true
@@ -126,17 +126,16 @@ export class CreateClientProfileComponent implements OnInit {
   }
 
   GoBack() {
-      // this._location.back();
-      this.router.navigate(['/system', 'my_clients']);
+    // this._location.back();
+    this.router.navigate(['/system', 'my_clients']);
   }
 
   Save() {
     this.IsLoading = true;
 
-    for(const i in this.Form.controls)
-    {
-        this.Form.controls[i].markAsDirty();
-        this.Form.controls[i].markAsTouched();
+    for (const i in this.Form.controls) {
+      this.Form.controls[i].markAsDirty();
+      this.Form.controls[i].markAsTouched();
     }
 
     const valid = this.Form.valid;
@@ -161,21 +160,21 @@ export class CreateClientProfileComponent implements OnInit {
 
         // this.router.navigate(['/system', 'my_clients', 'create', 'confirm']);
       },
-      (err) => {
-        this.IsLoading = false;
-        const error = err.json();
-        if (error['loyalty_program'] && error['loyalty_program'].findIndex(x => x === 'must exist') > -1) {
-          this.ModalErrorLoyalty = true;
-        }
-        if (error['email'] && error['email'].findIndex(x => x === 'ALREADY_TAKEN') > -1 ) {
-          // this.SaveError = 'Email занят!';
-          this.email.setErrors({'incorrect': true});
-        }
-        else if (error['phone'] && error['phone'].findIndex(x => x === 'INVALID') > -1 ) {
-          // this.SaveError = 'Номер телефона невалидный!';
-          this.phone.setErrors({'incorrect': true});
-        }
-      });
+        (err) => {
+          this.IsLoading = false;
+          const error = err.json();
+          if (error['loyalty_program'] && error['loyalty_program'].findIndex(x => x === 'must exist') > -1) {
+            this.ModalErrorLoyalty = true;
+          }
+          if (error['email'] && error['email'].findIndex(x => x === 'ALREADY_TAKEN') > -1) {
+            // this.SaveError = 'Email занят!';
+            this.email.setErrors({ 'incorrect': true });
+          }
+          else if (error['phone'] && error['phone'].findIndex(x => x === 'INVALID') > -1) {
+            // this.SaveError = 'Номер телефона невалидный!';
+            this.phone.setErrors({ 'incorrect': true });
+          }
+        });
     } else {
       this.IsLoading = false;
     }

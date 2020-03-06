@@ -1,93 +1,115 @@
-<div class="report-make" [ngClass]="{'report-make--opened': State.opened}">
-    <div class="report-make__top" (click)="OnHeaderClick()">{{NameDics[State.type]}}</div>
-    <form [formGroup]="Form" (ngSubmit)="Save()">
-        <div class="report-make__content">
-            <div class="report-make__date-block">
-                <span class="report-make__date-label">За период с</span>
-                <span class="create-block__date-input report-make__date-input">
-                    <my-date-picker name="begin_date" [options]="myDatePickerOptions" formControlName="begin_date"
-                    ></my-date-picker>
-                </span>
-                <span class="report-make__date-label">по</span>
-                <span class="create-block__date-input report-make__date-input">
-                    <my-date-picker name="end_date" [options]="myDatePickerOptions" formControlName="end_date"
-                    ></my-date-picker>
-                </span>
-                <p class="auth-block__hint auth-block__hint--error">
-                    <ng-container *ngIf="Form.controls.end_date.invalid && (Form.controls.end_date.dirty || Form.controls.end_date.touched)">
-                        <span *ngIf="Form.controls.end_date.errors.wrong">Введите корректные данные.</span>
-                    </ng-container>
-                </p>
-            </div>
-            <div class="create-block__group">
-                <p class="report-make__label">Выберите программу лояльности</p>
+<div class="report-make"
+     [ngClass]="{'report-make--opened': State.opened}">
+  <div class="report-make__top"
+       (click)="OnHeaderClick()">{{NameDics[State.type]}}</div>
+  <form [formGroup]="Form"
+        (ngSubmit)="Save()">
+    <div class="report-make__content">
+      <div class="report-make__date-block">
+        <span class="report-make__date-label">За период с</span>
+        <span class="create-block__date-input report-make__date-input">
+          <my-date-picker name="begin_date"
+                          [options]="myDatePickerOptions"
+                          formControlName="begin_date"></my-date-picker>
+        </span>
+        <span class="report-make__date-label">по</span>
+        <span class="create-block__date-input report-make__date-input">
+          <my-date-picker name="end_date"
+                          [options]="myDatePickerOptions"
+                          formControlName="end_date"></my-date-picker>
+        </span>
+        <p class="auth-block__hint auth-block__hint--error">
+          <ng-container
+                        *ngIf="Form.controls.end_date.invalid && (Form.controls.end_date.dirty || Form.controls.end_date.touched)">
+            <span *ngIf="Form.controls.end_date.errors.wrong">Введите корректные данные.</span>
+          </ng-container>
+        </p>
+      </div>
+      <div class="create-block__group">
+        <p class="report-make__label">Выберите программу лояльности</p>
 
-                <!-- Add class "create-block__select--opened" to show select options list like below -->
-                <div SelectDir [SelectName]="'promotions'" (clickOutside)="OnClickOutside($event)"
-                    class="create-block__select"
-                    [ngClass]="{'create-block__select--opened': SelectsOpened.promotions}">
-                    <div class="create-block__select-value report-make__selected-values" (click)="SelectsOpened.promotions = !SelectsOpened.promotions">
-                        <ng-container *ngIf="!SelectedPromotions.length">Все программы лояльности</ng-container>
-                        <ng-container *ngFor="let item of SelectedPromotions">
-                            <div  class="report-make__option">{{item.name}}<span class="report-make__option-clear" (click)="UnselectPromotion(item)"></span></div>
-                        </ng-container>
+        <!-- Add class "create-block__select--opened" to show select options list like below -->
+        <div SelectDir
+             [SelectName]="'promotions'"
+             (clickOutside)="OnClickOutside($event)"
+             class="create-block__select"
+             [ngClass]="{'create-block__select--opened': SelectsOpened.promotions}">
+          <div class="create-block__select-value report-make__selected-values"
+               (click)="SelectsOpened.promotions = !SelectsOpened.promotions">
+            <ng-container *ngIf="!SelectedPromotions.length">Все программы лояльности</ng-container>
+            <ng-container *ngFor="let item of SelectedPromotions">
+              <div class="report-make__option">{{item.name}}<span class="report-make__option-clear"
+                      (click)="UnselectPromotion(item)"></span></div>
+            </ng-container>
 
-                    </div>
-                    <ul class="create-block__select-list">
-                        <ng-container *ngFor="let item of Promotions">
-                            <li (click)="SelectPromotion(item)">{{item.name}}</li>
-                        </ng-container>
-                    </ul>
-                </div>
-            </div>
-            <div class="create-block__group">
-                <p class="report-make__label">Выберите магазин:</p>
-
-                <!-- Add class "create-block__select--opened" to show select options list like below -->
-                <div SelectDir [SelectName]="'stores'" (clickOutside)="OnClickOutside($event)"
-                    class="create-block__select"
-                    [ngClass]="{'create-block__select--opened': SelectsOpened.stores}">
-                    <div class="create-block__select-value report-make__selected-values" (click)="SelectsOpened.stores = !SelectsOpened.stores">
-                        <ng-container *ngIf="!SelectedStores.length">Все магазины</ng-container>
-                        <ng-container *ngFor="let item of SelectedStores">
-                            <div  class="report-make__option">{{item.name}}<span class="report-make__option-clear" (click)="UnselectStore(item)"></span></div>
-                        </ng-container>
-
-                    </div>
-                    <ul class="create-block__select-list">
-                        <ng-container *ngFor="let item of Stores">
-                            <li (click)="SelectStore(item)">{{item.name}}</li>
-                        </ng-container>
-                    </ul>
-                </div>
-            </div>
-            <div class="create-block__group">
-                <p class="report-make__label">Выберите кассира:</p>
-
-                <!-- Add class "create-block__select--opened" to show select options list like below -->
-
-                <div SelectDir [SelectName]="'operators'" (clickOutside)="OnClickOutside($event)"
-                    class="create-block__select"
-                    [ngClass]="{'create-block__select--opened': SelectsOpened.operators}">
-                    <div class="create-block__select-value report-make__selected-values" (click)="SelectsOpened.operators = !SelectsOpened.operators">
-                        <ng-container *ngIf="!SelectedOperators.length">Все кассиры</ng-container>
-                        <ng-container *ngFor="let item of SelectedOperators">
-                            <div  class="report-make__option">{{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}<span class="report-make__option-clear" (click)="UnselectOperator(item)"></span></div>
-                        </ng-container>
-
-                    </div>
-                    <ul class="create-block__select-list">
-                        <ng-container *ngFor="let item of Operators">
-                            <li (click)="SelectOperator(item)">{{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</li>
-                        </ng-container>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <button type="submit" class="button create-block__button">СФОРМИРОВАТЬ ОТЧЁТ</button>
-            </div>
+          </div>
+          <ul class="create-block__select-list">
+            <ng-container *ngFor="let item of Promotions">
+              <li (click)="SelectPromotion(item)">{{item.name}}</li>
+            </ng-container>
+          </ul>
         </div>
-    </form>
+      </div>
+      <div class="create-block__group">
+        <p class="report-make__label">Выберите магазин:</p>
+
+        <!-- Add class "create-block__select--opened" to show select options list like below -->
+        <div SelectDir
+             [SelectName]="'stores'"
+             (clickOutside)="OnClickOutside($event)"
+             class="create-block__select"
+             [ngClass]="{'create-block__select--opened': SelectsOpened.stores}">
+          <div class="create-block__select-value report-make__selected-values"
+               (click)="SelectsOpened.stores = !SelectsOpened.stores">
+            <ng-container *ngIf="!SelectedStores.length">Все магазины</ng-container>
+            <ng-container *ngFor="let item of SelectedStores">
+              <div class="report-make__option">{{item.name}}<span class="report-make__option-clear"
+                      (click)="UnselectStore(item)"></span></div>
+            </ng-container>
+
+          </div>
+          <ul class="create-block__select-list">
+            <ng-container *ngFor="let item of Stores">
+              <li (click)="SelectStore(item)">{{item.name}}</li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <div class="create-block__group">
+        <p class="report-make__label">Выберите кассира:</p>
+
+        <!-- Add class "create-block__select--opened" to show select options list like below -->
+
+        <div SelectDir
+             [SelectName]="'operators'"
+             (clickOutside)="OnClickOutside($event)"
+             class="create-block__select"
+             [ngClass]="{'create-block__select--opened': SelectsOpened.operators}">
+          <div class="create-block__select-value report-make__selected-values"
+               (click)="SelectsOpened.operators = !SelectsOpened.operators">
+            <ng-container *ngIf="!SelectedOperators.length">Все кассиры</ng-container>
+            <ng-container *ngFor="let item of SelectedOperators">
+              <div class="report-make__option">
+                {{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}<span
+                      class="report-make__option-clear"
+                      (click)="UnselectOperator(item)"></span></div>
+            </ng-container>
+
+          </div>
+          <ul class="create-block__select-list">
+            <ng-container *ngFor="let item of Operators">
+              <li (click)="SelectOperator(item)">
+                {{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit"
+                class="button create-block__button">СФОРМИРОВАТЬ ОТЧЁТ</button>
+      </div>
+    </div>
+  </form>
 
 </div>

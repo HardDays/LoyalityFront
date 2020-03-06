@@ -7,37 +7,30 @@ import { Router } from '@angular/router';
   templateUrl: './bonus-charge.component.html',
   styleUrls: []
 })
-export class BonusChargeComponent implements OnInit
-{
+export class BonusChargeComponent implements OnInit {
 
   SuccessModalIsShown: boolean = false;
 
-  constructor(private _location: Location, private router: Router)
-  {
+  constructor(private _location: Location, private router: Router) {
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
   }
 
-  GoBack()
-  {
+  GoBack() {
     this._location.back();
   }
 
-  onCloseSuccessModal()
-  {
+  onCloseSuccessModal() {
     this.SuccessModalIsShown = false;
     this.router.navigate(['/system', 'bonus_management', 'overview']);
   }
 
-  AddBonuses()
-  {
+  AddBonuses() {
     this.SuccessModalIsShown = true;
   }
 
-  ChargeOffBonuses()
-  {
+  ChargeOffBonuses() {
     this.SuccessModalIsShown = true;
   }
 }

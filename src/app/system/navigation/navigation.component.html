@@ -1,9 +1,13 @@
 <!-- Add class "menu__link--active" for active link like below -->
 <ng-container *ngIf="Me.user_type == 'creator' || Me.user_type == 'client' ">
   <ng-container *ngFor="let item of MenuItems">
-      <a *ngIf="item.visible" [routerLink]="item.url" class="menu__link " [ngClass]="{'menu__link--active': item.url === CurrentPage}">
-          <span class="menu__icon"><img [src]="item.image" alt=""></span>
-          {{item.label}}
-      </a>
+    <a *ngIf="item.visible"
+       [routerLink]="item.url"
+       class="menu__link "
+       [ngClass]="{'menu__link--active': item.url === CurrentPage}">
+      <span class="menu__icon"><img [src]="item.image"
+             alt=""></span>
+      {{item.label}}
+    </a>
   </ng-container>
 </ng-container>

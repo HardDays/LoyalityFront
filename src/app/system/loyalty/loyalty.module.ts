@@ -14,7 +14,7 @@ import { LoyaltyService } from './loyalty.service';
 
 @NgModule({
   declarations: [
-      LoyaltyComponent
+    LoyaltyComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +27,6 @@ import { LoyaltyService } from './loyalty.service';
     TextMaskModule,
     MyDatePickerModule
   ],
-  providers: [ LoyaltyAccessGuard, LoyaltyService]
+  providers: [LoyaltyAccessGuard, LoyaltyService]
 })
-export class LoyaltyModule {}
+export class LoyaltyModule { }

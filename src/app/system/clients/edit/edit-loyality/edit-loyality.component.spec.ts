@@ -11,9 +11,9 @@ describe('EditLoyalityComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditLoyalityComponent ]
+      declarations: [EditLoyalityComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

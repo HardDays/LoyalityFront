@@ -25,6 +25,6 @@ import { OperatorsComponent } from './operators.component';
     TextMaskModule,
     OperatorsRoutingModule
   ],
-  providers: [ OperatorsAccessGuard, OperatorsService]
+  providers: [OperatorsAccessGuard, OperatorsService]
 })
-export class OperatorsModule {}
+export class OperatorsModule { }

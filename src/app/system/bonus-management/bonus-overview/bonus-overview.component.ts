@@ -7,20 +7,16 @@ import { ClientModel } from 'src/app/core/models/client.model';
   templateUrl: './bonus-overview.component.html',
   styleUrls: []
 })
-export class BonusOverviewComponent implements OnInit
-{
+export class BonusOverviewComponent implements OnInit {
 
   constructor(private service: BonusManagementService) { }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.service.GetClients(
-      (data: ClientModel[]) =>
-      {
+      (data: ClientModel[]) => {
         console.log(data)
       },
-      (err) =>
-      {
+      (err) => {
         console.error(err)
       })
   }

@@ -1,27 +1,33 @@
-
 <div class="create-block customer__block">
-    <p class="create-block__label create-block__label--light">Имя покупателя:
-      <span class="customer__name">{{Client.first_name}} {{Client.last_name}}</span>
-      <span class="customer__edit"><img [routerLink]="['../client']" src="./../../../../../assets/img/edit-icon.svg" alt=""></span>
-    </p>
-    <p class="customer__label">Введите сумму покупки</p>
-    <input type="text" [ngModel]="Price" (ngModelChange)="onPriceChanged($event)" class="customer__input customer__input--sum">
+  <p class="create-block__label create-block__label--light">Имя покупателя:
+    <span class="customer__name">{{Client.first_name}} {{Client.last_name}}</span>
+    <span class="customer__edit"><img [routerLink]="['../client']"
+           src="./../../../../../assets/img/edit-icon.svg"
+           alt=""></span>
+  </p>
+  <p class="customer__label">Введите сумму покупки</p>
+  <input type="text"
+         [ngModel]="Price"
+         (ngModelChange)="onPriceChanged($event)"
+         class="customer__input customer__input--sum">
 
-    <div class="create-block__select customer__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
-      <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedLoyality ? SelectedLoyality.name: ProgrammLoyaltyName}}</div>
-      <ul class="create-block__select-list">
-          <li (click)="OnSelected(null)">{{ProgrammLoyaltyName}}</li>
-          <ng-container *ngFor="let item of PromotionsProgramm">
-              <li
-                (click)="OnSelected(item)"
-                class="promotion-item"
-                [ngClass]="{'disabled': !item.enable}"
-              >
-                {{item.name}} ({{item.begin_date | date: 'yyyy.MM.dd'}} - {{item.end_date | date: 'yyyy.MM.dd'}})
-              </li>
-          </ng-container>
-      </ul>
-    </div>
+  <div class="create-block__select customer__select"
+       [ngClass]="{'create-block__select--opened': ShowSelect}">
+    <div class="create-block__select-value"
+         (click)="ShowSelect = !ShowSelect">{{SelectedLoyality ? SelectedLoyality.name: ProgrammLoyaltyName}}</div>
+    <ul class="create-block__select-list">
+      <li (click)="OnSelected(null)">{{ProgrammLoyaltyName}}</li>
+      <ng-container *ngFor="let item of PromotionsProgramm">
+        <li (click)="OnSelected(item)"
+            class="promotion-item"
+            [ngClass]="{'disabled': !item.enable}">
+          {{item.name}} ({{item.begin_date | date: 'yyyy.MM.dd'}} - {{item.end_date | date: 'yyyy.MM.dd'}})
+        </li>
+      </ng-container>
+    </ul>
+  </div>
 
-    <button [disabled]="isNextDisabled" [routerLink]="['../paid']" class="button customer__button">Далее</button>
+  <button [disabled]="isNextDisabled"
+          [routerLink]="['../paid']"
+          class="button customer__button">Далее</button>
 </div>

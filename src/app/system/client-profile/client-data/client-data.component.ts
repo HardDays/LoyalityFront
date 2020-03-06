@@ -42,7 +42,7 @@ export class ClientDataComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'gender': new FormControl('female',[
+    'gender': new FormControl('female', [
       Validators.required
     ]),
     'email': new FormControl('', [
@@ -80,7 +80,7 @@ export class ClientDataComponent implements OnInit {
     dateFormat: 'yyyy-mm-dd',
     showClearDateBtn: false,
     showTodayBtn: false,
-    dayLabels: {su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'},
+    dayLabels: { su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб' },
     monthLabels: { 1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек' },
     editableDateField: false,
     openSelectorOnInputClick: true
@@ -129,19 +129,18 @@ export class ClientDataComponent implements OnInit {
   }
 
   SaveProfile() {
-    for(const i in this.Form.controls)
-    {
-        this.Form.controls[i].markAsDirty();
-        this.Form.controls[i].markAsTouched();
+    for (const i in this.Form.controls) {
+      this.Form.controls[i].markAsDirty();
+      this.Form.controls[i].markAsTouched();
     }
     const valid = this.Form.valid;
     if (valid) {
       const data = this.Form.getRawValue();
       const date = data['birth_day']['date'];
-      data['birth_day'] = date['year']+'-'+date['month']+'-'+date['day'];
+      data['birth_day'] = date['year'] + '-' + date['month'] + '-' + date['day'];
 
       let profile = this.Profile;
-      for(let item in data) {
+      for (let item in data) {
         profile[item] = data[item];
       }
 
@@ -149,21 +148,20 @@ export class ClientDataComponent implements OnInit {
         this.profileService.ClientProfile = res;
         this.changeMode();
       },
-      (err) => {
-        console.log(err);
-      });
+        (err) => {
+          console.log(err);
+        });
     }
   }
 
-  GetDisableUntilData(date: Date)
-  {
-      const str = date.toISOString();
-      const arr = str.split("T")[0].split("-");
-      return {
-        year: Number.parseInt(arr[0]),
-        month: Number.parseInt(arr[1]),
-        day: Number.parseInt(arr[2])
-      };
+  GetDisableUntilData(date: Date) {
+    const str = date.toISOString();
+    const arr = str.split("T")[0].split("-");
+    return {
+      year: Number.parseInt(arr[0]),
+      month: Number.parseInt(arr[1]),
+      day: Number.parseInt(arr[2])
+    };
   }
 
 

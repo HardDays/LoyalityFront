@@ -81,7 +81,7 @@ export class EditLoyalityComponent implements OnInit {
     this.checkIsNextDisabled();
   }
 
-  checkIsNextDisabled () {
+  checkIsNextDisabled() {
     if (!this.Price || this.Price === 0) {
       this.isNextDisabled = true;
       return;

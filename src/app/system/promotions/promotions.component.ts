@@ -5,11 +5,9 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'promotions-cmp',
   templateUrl: './promotions.component.html'
 })
-export class PromotionsComponent  implements OnInit{
+export class PromotionsComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService) {
-
   }
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
   }
 }

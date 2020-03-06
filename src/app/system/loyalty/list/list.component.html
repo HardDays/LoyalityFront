@@ -1,69 +1,93 @@
 <!-- <section class="page__content-wrap"> -->
-    <div class="page__content page__content--levels">
+<div class="page__content page__content--levels">
 
-        <div class="page__top">
-            <h1 class="page__title">Уровни</h1>
-            <p [routerLink]="['/system','my_loyalty_program','edit']" class="create-block__label lk__title lk__title--programm" [ngStyle]="{'color':Loyalty.id ? 'inherit' : 'red'}">
-                {{Loyalty.id ? 'Программа лояльности: ' + Loyalty.name : 'Программа лояльности не существует'}}&nbsp;&nbsp;
-                <span class="main-blocks__button">
-                    <img src="assets/img/edit-icon.svg" alt="">
-                </span>
-            </p>
-        </div>
+  <div class="page__top">
+    <h1 class="page__title">Уровни</h1>
+    <p [routerLink]="['/system','my_loyalty_program','edit']"
+       class="create-block__label lk__title lk__title--programm"
+       [ngStyle]="{'color':Loyalty.id ? 'inherit' : 'red'}">
+      {{Loyalty.id ? 'Программа лояльности: ' + Loyalty.name : 'Программа лояльности не существует'}}&nbsp;&nbsp;
+      <span class="main-blocks__button">
+        <img src="assets/img/edit-icon.svg"
+             alt="">
+      </span>
+    </p>
+  </div>
 
-        <div class="main-blocks main-blocks--levels" >
-            <div class="main-blocks__item main-blocks__item--create" (click)="CreateNewLevel()">
-                <img src="assets/img/plus.png" alt="">
-                <span>Создать новый уровень</span>
-            </div>
-            <div class="main-blocks__item" *ngFor="let item of Levels">
-                <p class="main-blocks__title">{{item.name ? item.name : ('Уровень ' + item.id)}}</p>
-
-                <p class="main-blocks__pre-link">{{Loyalty.sum_type == 'one_buy' ? 'Разовая покупка' : 'Общая сумма покупок'}} от {{item.min_price / 100}} рублей</p>
-                <a [routerLink]="['/system','my_loyalty_program','level', item.id]" class="main-blocks__link main-blocks__link--edit_black">Редактировать</a>
-                <a class="main-blocks__link main-blocks__link--delete" (click)="LevelForDelete = item;ShowModal = true">Удалить</a>
-            </div>
-        </div>
-
+  <div class="main-blocks main-blocks--levels">
+    <div class="main-blocks__item main-blocks__item--create"
+         (click)="CreateNewLevel()">
+      <img src="assets/img/plus.png"
+           alt="">
+      <span>Создать новый уровень</span>
     </div>
+    <div class="main-blocks__item"
+         *ngFor="let item of Levels">
+      <p class="main-blocks__title">{{item.name ? item.name : ('Уровень ' + item.id)}}</p>
+
+      <p class="main-blocks__pre-link">{{Loyalty.sum_type == 'one_buy' ? 'Разовая покупка' : 'Общая сумма покупок'}} от
+        {{item.min_price / 100}} рублей</p>
+      <a [routerLink]="['/system','my_loyalty_program','level', item.id]"
+         class="main-blocks__link main-blocks__link--edit_black">Редактировать</a>
+      <a class="main-blocks__link main-blocks__link--delete"
+         (click)="LevelForDelete = item;ShowModal = true">Удалить</a>
+    </div>
+  </div>
+
+</div>
 <!-- </section> -->
 
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': ShowModal}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="ShowModal = false"></span>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': ShowModal}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ShowModal = false"></span>
+    <p class="modal__delete-text">Удалить уровень
+      «{{LevelForDelete.name ? LevelForDelete.name : ('Уровень ' + LevelForDelete.id)}}»?</p>
 
-        <p class="modal__delete-text">Удалить уровень «{{LevelForDelete.name ? LevelForDelete.name : ('Уровень ' + LevelForDelete.id)}}»?</p>
-
-        <div class="modal__buttons">
-            <button class="button button--black modal__delete-button" (click)="DeleteLevel()">Удалить</button>
-            <button class="button modal__delete-button" (click)="ShowModal = false">Отмена</button>
-        </div>
+    <div class="modal__buttons">
+      <button class="button button--black modal__delete-button"
+              (click)="DeleteLevel()">Удалить</button>
+      <button class="button modal__delete-button"
+              (click)="ShowModal = false">Отмена</button>
     </div>
+  </div>
 </div>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': ProgramDoesNotExists}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="ProgramDoesNotExists = false"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': ProgramDoesNotExists}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="ProgramDoesNotExists = false"></span>
 
-        <p class="modal__delete-text">Сначала создайте программу лояльности</p>
+    <p class="modal__delete-text">Сначала создайте программу лояльности</p>
 
-        <div class="modal__buttons">
-            <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
-            <button style="margin: auto" class="button modal__delete-button" (click)="ProgramDoesNotExists = false">ОК</button>
-        </div>
+    <div class="modal__buttons">
+      <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
+      <button style="margin: auto"
+              class="button modal__delete-button"
+              (click)="ProgramDoesNotExists = false">ОК</button>
     </div>
+  </div>
 </div>
 
-<div class="modal modal--full " [ngClass]="{'modal--visible': DeleteSuccess}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="DeleteSuccess = false"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': DeleteSuccess}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="DeleteSuccess = false"></span>
 
-        <p class="modal__delete-text">Уровень успешно удален!</p>
+    <p class="modal__delete-text">Уровень успешно удален!</p>
 
-        <div class="modal__buttons">
-            <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
-            <button style="margin: auto" class="button modal__delete-button" (click)="DeleteSuccess = false">ОК</button>
-        </div>
+    <div class="modal__buttons">
+      <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
+      <button style="margin: auto"
+              class="button modal__delete-button"
+              (click)="DeleteSuccess = false">ОК</button>
     </div>
+  </div>
 </div>

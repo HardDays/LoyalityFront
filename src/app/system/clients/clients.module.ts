@@ -58,6 +58,6 @@ import { ClientPreloaderComponent } from './client-preloader/client-preloader.co
     MyDatePickerModule,
     PipesModule
   ],
-  providers: [ ClientsAccessGuard, ClientsService, PromotionsService, LoyaltyProgramsService, LoyaltyService]
+  providers: [ClientsAccessGuard, ClientsService, PromotionsService, LoyaltyProgramsService, LoyaltyService]
 })
-export class ClientsModule {}
+export class ClientsModule { }

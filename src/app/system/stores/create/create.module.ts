@@ -20,6 +20,6 @@ import { StoreCreateRoutingModule } from './create.routing';
     ReactiveFormsModule,
     StoreCreateRoutingModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class StoreCreateModule {}
+export class StoreCreateModule { }

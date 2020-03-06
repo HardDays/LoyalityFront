@@ -25,7 +25,7 @@ export class CreateClientByPhoneComponent implements OnInit {
   }
 
   GoBack() {
-      this._location.back();
+    this._location.back();
   }
 
   clickNextStep() {
@@ -41,20 +41,20 @@ export class CreateClientByPhoneComponent implements OnInit {
     } else {
       this.service.CheckClientPhone(this.Phone,
         (res: boolean) => {
-            if (res) {
-              if (error && typeof(error) === 'function') {
-                error('Номер телефона уже зарегистрирован!');
-              }
-            } else {
-              if (success && typeof(success) === 'function') {
-                success();
-              }
+          if (res) {
+            if (error && typeof (error) === 'function') {
+              error('Номер телефона уже зарегистрирован!');
             }
+          } else {
+            if (success && typeof (success) === 'function') {
+              success();
+            }
+          }
         },
         (err) => {
-            if (error && typeof(error) === 'function') {
-              error();
-            }
+          if (error && typeof (error) === 'function') {
+            error();
+          }
         }
       );
     }

@@ -1,14 +1,12 @@
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from "@angular/router";
-import {Observable} from "rxjs";
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
+import { Observable } from "rxjs";
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable()
-export class ReportsAccessGuard implements CanActivate{
-    constructor(private auth: AuthService, private router: Router)
-    {}
-    canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
-    {
+export class ReportsAccessGuard implements CanActivate {
+  constructor(private auth: AuthService, private router: Router) { }
+  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     //     let isLoginned = this.auth.IsLoggedIn;
     //     let myRole = this.auth.LoginData.user_type;
 
@@ -21,6 +19,6 @@ export class ReportsAccessGuard implements CanActivate{
     //       this.router.navigate(["/auth"]);
     //       return false;
     //     }
-        return true;
-    }
+    return true;
+  }
 }

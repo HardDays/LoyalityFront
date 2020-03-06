@@ -4,13 +4,10 @@ import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable()
-export class BonusManagementAccessGuard implements CanActivate
-{
-  constructor(private auth: AuthService, private router: Router)
-  { }
+export class BonusManagementAccessGuard implements CanActivate {
+  constructor(private auth: AuthService, private router: Router) { }
 
-  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean
-  {
+  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     // if(router.data)
     // {
     //     if(router.data.auth)

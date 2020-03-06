@@ -6,12 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: []
 })
 
-export class SocialMediaComponent implements OnInit
-{
+export class SocialMediaComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit()
-  {
+  ngOnInit() {
   }
 }

@@ -11,9 +11,9 @@ describe('CreateClientFirstBuyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateClientFirstBuyComponent ]
+      declarations: [CreateClientFirstBuyComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

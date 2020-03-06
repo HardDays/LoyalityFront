@@ -1,177 +1,247 @@
 <div class="page__content page__content--create">
 
-    <div class="page__top page__top--create">
-        <span class="page__back"><img src="assets/img/back.svg" alt="" (click)="GoBack()"></span>
-        <h1 class="page__title page__title--create">{{Loyalty.id? 'Редактирование' : 'Создание'}} программы лояльности</h1>
-    </div>
+  <div class="page__top page__top--create">
+    <span class="page__back"><img src="assets/img/back.svg"
+           alt=""
+           (click)="GoBack()"></span>
+    <h1 class="page__title page__title--create">{{Loyalty.id? 'Редактирование' : 'Создание'}} программы лояльности</h1>
+  </div>
 
-    <div class="create-block">
-        <form [formGroup]="Form" (ngSubmit)="Save()">
-        <p class="create-block__label">Название программы лояльности</p>
-        <!-- <input type="text" class="create-block__input create-block__input--full"> -->
-        <input type="text" class="create-block__input create-block__input--full"
-            [ngClass]="{'create-block__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"
-            autocomplete="null"
-            formControlName="name"
-            placeholder="Введите название программы лояльности"
-            name="name"
-        >
-        <p class="auth-block__hint auth-block__hint--error">
-            <ng-container *ngIf="Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)">
-                <span *ngIf="Form.controls.name.errors.required">Поле обязательно к заполнению.</span>
-                <span *ngIf="Form.controls.name.errors.minlength">Минимальная длина 3 символа.</span>
-                <span *ngIf="Form.controls.name.errors.maxlength">Максимальная длина 30 символов.</span>
-            </ng-container>
-        </p>
+  <div class="create-block">
+    <form [formGroup]="Form"
+          (ngSubmit)="Save()">
+      <p class="create-block__label">Название программы лояльности</p>
+      <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+      <input type="text"
+             class="create-block__input create-block__input--full"
+             [ngClass]="{'create-block__input--error': Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)}"
+             autocomplete="null"
+             formControlName="name"
+             placeholder="Введите название программы лояльности"
+             name="name">
+      <p class="auth-block__hint auth-block__hint--error">
+        <ng-container *ngIf="Form.controls.name.invalid && (Form.controls.name.dirty || Form.controls.name.touched)">
+          <span *ngIf="Form.controls.name.errors.required">Поле обязательно к заполнению.</span>
+          <span *ngIf="Form.controls.name.errors.minlength">Минимальная длина 3 символа.</span>
+          <span *ngIf="Form.controls.name.errors.maxlength">Максимальная длина 30 символов.</span>
+        </ng-container>
+      </p>
 
-        <div class="create-block__group">
-            <p class="create-block__label">Правило активации уровня</p>
-            <label class="radio radio--create">
-                <input type="radio" class="radio__input" value='one_buy' name="sum_type" formControlName="sum_type">
-                <div class="radio__text">Разовая покупка от</div>
-            </label>
-            <label class="radio radio--create">
-                <input type="radio" class="radio__input" value='sum_buy' name="sum_type" formControlName="sum_type">
-                <div class="radio__text">Общая сумма покупок от</div>
-            </label>
-        </div>
+      <div class="create-block__group">
+        <p class="create-block__label">Правило активации уровня</p>
+        <label class="radio radio--create">
+          <input type="radio"
+                 class="radio__input"
+                 value='one_buy'
+                 name="sum_type"
+                 formControlName="sum_type">
+          <div class="radio__text">Разовая покупка от</div>
+        </label>
+        <label class="radio radio--create">
+          <input type="radio"
+                 class="radio__input"
+                 value='sum_buy'
+                 name="sum_type"
+                 formControlName="sum_type">
+          <div class="radio__text">Общая сумма покупок от</div>
+        </label>
+      </div>
 
-        <div class="create-block__group">
-            <p class="create-block__label">Дополнительные настройки</p>
+      <div class="create-block__group">
+        <p class="create-block__label">Дополнительные настройки</p>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="accrual_on_register" formControlName="accrual_on_register">
-                <div class="radio__text">
-                    Начислять
-                    <input type="text" formControlName="register_points" name="register_points" class="create-block__input create-block__input--small"
-                    [ngClass]="{'create-block__input--error': Form.controls.register_points.invalid && (Form.controls.register_points.dirty || Form.controls.register_points.touched)}"
-                    >
-                    бонусов при регистрации
-                </div>
-            </label>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="accrual_on_register"
+                 formControlName="accrual_on_register">
+          <div class="radio__text">
+            Начислять
+            <input type="text"
+                   formControlName="register_points"
+                   name="register_points"
+                   class="create-block__input create-block__input--small"
+                   [ngClass]="{'create-block__input--error': Form.controls.register_points.invalid && (Form.controls.register_points.dirty || Form.controls.register_points.touched)}">
+            бонусов при регистрации
+          </div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="accrual_on_first_buy" formControlName="accrual_on_first_buy">
-                <div class="radio__text">
-                    Начислять
-                    <input type="text" formControlName="first_buy_points" name="first_buy_points" class="create-block__input create-block__input--small"
-                    [ngClass]="{'create-block__input--error': Form.controls.first_buy_points.invalid && (Form.controls.first_buy_points.dirty || Form.controls.first_buy_points.touched)}"
-                    >
-                    бонусов при совершении первой покупки
-                </div>
-            </label>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="accrual_on_first_buy"
+                 formControlName="accrual_on_first_buy">
+          <div class="radio__text">
+            Начислять
+            <input type="text"
+                   formControlName="first_buy_points"
+                   name="first_buy_points"
+                   class="create-block__input create-block__input--small"
+                   [ngClass]="{'create-block__input--error': Form.controls.first_buy_points.invalid && (Form.controls.first_buy_points.dirty || Form.controls.first_buy_points.touched)}">
+            бонусов при совершении первой покупки
+          </div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="write_off_limited" formControlName="write_off_limited">
-                <div class="radio__text">
-                    Списывать бонусы, если минимальная сумма покупки составляет
-                    <input type="text" formControlName="write_off_min_price" name="write_off_min_price" class="create-block__input create-block__input--small"
-                    [ngClass]="{'create-block__input--error': Form.controls.write_off_min_price.invalid && (Form.controls.write_off_min_price.dirty || Form.controls.write_off_min_price.touched)}"
-                    >
-                    рублей
-                </div>
-            </label>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="write_off_limited"
+                 formControlName="write_off_limited">
+          <div class="radio__text">
+            Списывать бонусы, если минимальная сумма покупки составляет
+            <input type="text"
+                   formControlName="write_off_min_price"
+                   name="write_off_min_price"
+                   class="create-block__input create-block__input--small"
+                   [ngClass]="{'create-block__input--error': Form.controls.write_off_min_price.invalid && (Form.controls.write_off_min_price.dirty || Form.controls.write_off_min_price.touched)}">
+            рублей
+          </div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="accrual_on_recommend" formControlName="accrual_on_recommend">
-                <div class="radio__text">
-                    Начислять
-                    <input type="text" formControlName="recommend_registered_points" name="recommend_registered_points" class="create-block__input create-block__input--small"
-                    [ngClass]="{'create-block__input--error': Form.controls.recommend_registered_points.invalid && (Form.controls.recommend_registered_points.dirty || Form.controls.recommend_registered_points.touched)}"
-                    >
-                    бонусов пришедшему по рекомендации и
-                    <input type="text" formControlName="recommend_recommendator_points" name="recommend_recommendator_points" class="create-block__input create-block__input--small"
-                    [ngClass]="{'create-block__input--error': Form.controls.recommend_recommendator_points.invalid && (Form.controls.recommend_recommendator_points.dirty || Form.controls.recommend_recommendator_points.touched)}"
-                    >
-                    порекомендовавшему
-                </div>
-            </label>
-        </div>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="accrual_on_recommend"
+                 formControlName="accrual_on_recommend">
+          <div class="radio__text">
+            Начислять
+            <input type="text"
+                   formControlName="recommend_registered_points"
+                   name="recommend_registered_points"
+                   class="create-block__input create-block__input--small"
+                   [ngClass]="{'create-block__input--error': Form.controls.recommend_registered_points.invalid && (Form.controls.recommend_registered_points.dirty || Form.controls.recommend_registered_points.touched)}">
+            бонусов пришедшему по рекомендации и
+            <input type="text"
+                   formControlName="recommend_recommendator_points"
+                   name="recommend_recommendator_points"
+                   class="create-block__input create-block__input--small"
+                   [ngClass]="{'create-block__input--error': Form.controls.recommend_recommendator_points.invalid && (Form.controls.recommend_recommendator_points.dirty || Form.controls.recommend_recommendator_points.touched)}">
+            порекомендовавшему
+          </div>
+        </label>
+      </div>
 
-        <div class="create-block__group">
-            <p class="create-block__label">Округление бонусов</p>
-            <label class="radio radio--create">
-                <input type="radio" class="radio__input" value='no_rounding' name="rounding_rule" formControlName="rounding_rule">
-                <div class="radio__text">Не округлять</div>
-            </label>
+      <div class="create-block__group">
+        <p class="create-block__label">Округление бонусов</p>
+        <label class="radio radio--create">
+          <input type="radio"
+                 class="radio__input"
+                 value='no_rounding'
+                 name="rounding_rule"
+                 formControlName="rounding_rule">
+          <div class="radio__text">Не округлять</div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="radio" class="radio__input" value='rounding_math' name="rounding_rule" formControlName="rounding_rule">
-                <div class="radio__text">Математически</div>
-            </label>
+        <label class="radio radio--create">
+          <input type="radio"
+                 class="radio__input"
+                 value='rounding_math'
+                 name="rounding_rule"
+                 formControlName="rounding_rule">
+          <div class="radio__text">Математически</div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="radio" class="radio__input" value='rounding_small' name="rounding_rule" formControlName="rounding_rule">
-                <div class="radio__text">До целых в меньшую сторону</div>
-            </label>
+        <label class="radio radio--create">
+          <input type="radio"
+                 class="radio__input"
+                 value='rounding_small'
+                 name="rounding_rule"
+                 formControlName="rounding_rule">
+          <div class="radio__text">До целых в меньшую сторону</div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="radio" class="radio__input" value='rounding_big' name="rounding_rule" formControlName="rounding_rule">
-                <div class="radio__text">До целых в большую сторону</div>
-            </label>
-        </div>
+        <label class="radio radio--create">
+          <input type="radio"
+                 class="radio__input"
+                 value='rounding_big'
+                 name="rounding_rule"
+                 formControlName="rounding_rule">
+          <div class="radio__text">До целых в большую сторону</div>
+        </label>
+      </div>
 
-        <div class="create-block__group">
-            <p class="create-block__label">СМС-уведомления</p>
+      <div class="create-block__group">
+        <p class="create-block__label">СМС-уведомления</p>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="sms_on_register" formControlName="sms_on_register">
-                <div class="radio__text">
-                    Отправлять СМС проверку при регистрации в системе
-                </div>
-            </label>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="sms_on_register"
+                 formControlName="sms_on_register">
+          <div class="radio__text">
+            Отправлять СМС проверку при регистрации в системе
+          </div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="sms_on_points" formControlName="sms_on_points">
-                <div class="radio__text">
-                    Отправлять СМС о начислении бонусов
-                </div>
-            </label>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="sms_on_points"
+                 formControlName="sms_on_points">
+          <div class="radio__text">
+            Отправлять СМС о начислении бонусов
+          </div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="sms_on_write_off" formControlName="sms_on_write_off">
-                <div class="radio__text">
-                    Отправлять СМС о списании бонусов
-                </div>
-            </label>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="sms_on_write_off"
+                 formControlName="sms_on_write_off">
+          <div class="radio__text">
+            Отправлять СМС о списании бонусов
+          </div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="sms_on_burning" formControlName="sms_on_burning">
-                <div class="radio__text">
-                    Отправлять СМС за
-                    <input type="text" formControlName="sms_burning_days" name="sms_burning_days" class="create-block__input create-block__input--small"
-                    [ngClass]="{'create-block__input--error': Form.controls.sms_burning_days.invalid && (Form.controls.sms_burning_days.dirty || Form.controls.sms_burning_days.touched)}"
-                    >
-                    дней до сгорания
-                </div>
-            </label>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="sms_on_burning"
+                 formControlName="sms_on_burning">
+          <div class="radio__text">
+            Отправлять СМС за
+            <input type="text"
+                   formControlName="sms_burning_days"
+                   name="sms_burning_days"
+                   class="create-block__input create-block__input--small"
+                   [ngClass]="{'create-block__input--error': Form.controls.sms_burning_days.invalid && (Form.controls.sms_burning_days.dirty || Form.controls.sms_burning_days.touched)}">
+            дней до сгорания
+          </div>
+        </label>
 
-            <label class="radio radio--create">
-                <input type="checkbox" class="radio__input" name="sms_on_birthday" formControlName="sms_on_birthday">
-                <div class="radio__text">
-                    Отправлять СМС-поздравление с Днём Рождения
-                </div>
-            </label>
-        </div>
+        <label class="radio radio--create">
+          <input type="checkbox"
+                 class="radio__input"
+                 name="sms_on_birthday"
+                 formControlName="sms_on_birthday">
+          <div class="radio__text">
+            Отправлять СМС-поздравление с Днём Рождения
+          </div>
+        </label>
+      </div>
 
-
-
-        <div class="text-center">
-            <button type="submit" class="button create-block__button">Сохранить</button>
-        </div>
-        </form>
-    </div>
+      <div class="text-center">
+        <button type="submit"
+                class="button create-block__button">Сохранить</button>
+      </div>
+    </form>
+  </div>
 
 </div>
-<div class="modal modal--full " [ngClass]="{'modal--visible': ProgramSaved}">
-    <div class="modal__block modal__block--delete">
-        <span class="modal__close"><img src="assets/img/close.svg" alt="" (click)="GoBack()"></span>
+<div class="modal modal--full "
+     [ngClass]="{'modal--visible': ProgramSaved}">
+  <div class="modal__block modal__block--delete">
+    <span class="modal__close"><img src="assets/img/close.svg"
+           alt=""
+           (click)="GoBack()"></span>
 
-        <p class="modal__delete-text">Программа лояльности сохранена</p>
+    <p class="modal__delete-text">Программа лояльности сохранена</p>
 
-        <div class="modal__buttons">
-            <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
-            <button style="margin: auto" class="button modal__delete-button" (click)="GoBack()">ОК</button>
-        </div>
+    <div class="modal__buttons">
+      <!-- <button class="button button--black modal__delete-button">Удалить</button> -->
+      <button style="margin: auto"
+              class="button modal__delete-button"
+              (click)="GoBack()">ОК</button>
     </div>
+  </div>
 </div>

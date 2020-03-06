@@ -22,6 +22,6 @@ import { LoyaltyEditRoutingModule } from './edit.routing';
     LoyaltyEditRoutingModule,
     MyDatePickerModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class LoyaltyEditModule {}
+export class LoyaltyEditModule { }

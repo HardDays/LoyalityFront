@@ -10,34 +10,27 @@ import { MakeReportStateModel } from '../../../core/models/reports.model';
   selector: 'app-make-report-cmp',
   templateUrl: './make.component.html'
 })
-export class MakeReportComponent implements OnInit
-{
-    MakeReports: MakeReportStateModel[] = [
-        new MakeReportStateModel("general", true),
-        new MakeReportStateModel("clients", false),
-        new MakeReportStateModel("orders", false),
-        new MakeReportStateModel("sms", false)
-    ];
-    constructor(private auth: AuthService)
-    {
-    }
+export class MakeReportComponent implements OnInit {
+  MakeReports: MakeReportStateModel[] = [
+    new MakeReportStateModel("general", true),
+    new MakeReportStateModel("clients", false),
+    new MakeReportStateModel("orders", false),
+    new MakeReportStateModel("sms", false)
+  ];
+  constructor(private auth: AuthService) {
+  }
 
-    ngOnInit(): void
-    {
-    }
+  ngOnInit(): void {
+  }
 
-    ChangeReportState($event: MakeReportStateModel)
-    {
-        if($event.opened)
-        {
-            for(const i in this.MakeReports)
-            {
-                if(this.MakeReports[i].type != $event.type)
-                {
-                    this.MakeReports[i].opened = false;
-                }
-            }
+  ChangeReportState($event: MakeReportStateModel) {
+    if ($event.opened) {
+      for (const i in this.MakeReports) {
+        if (this.MakeReports[i].type != $event.type) {
+          this.MakeReports[i].opened = false;
         }
+      }
     }
+  }
 
 }

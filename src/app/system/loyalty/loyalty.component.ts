@@ -5,11 +5,10 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'loyalty-cmp',
   templateUrl: './loyalty.component.html'
 })
-export class LoyaltyComponent  implements OnInit{
+export class LoyaltyComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService) {
 
   }
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
   }
 }

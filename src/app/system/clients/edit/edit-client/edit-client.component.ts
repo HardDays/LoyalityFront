@@ -35,7 +35,7 @@ export class EditClientComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'gender': new FormControl('female',[
+    'gender': new FormControl('female', [
       Validators.required
     ]),
     'birth_day': new FormControl('', [
@@ -68,7 +68,7 @@ export class EditClientComponent implements OnInit {
     dateFormat: 'yyyy-mm-dd',
     showClearDateBtn: false,
     showTodayBtn: false,
-    dayLabels: {su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб'},
+    dayLabels: { su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб' },
     monthLabels: { 1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек' },
     editableDateField: false,
     openSelectorOnInputClick: true
@@ -91,22 +91,20 @@ export class EditClientComponent implements OnInit {
     this.Points = this.Client.points;
   }
 
-  GetDisableUntilData(date: Date)
-  {
-      const str = date.toISOString();
-      const arr = str.split("T")[0].split("-");
-      return {
-        year: Number.parseInt(arr[0]),
-        month: Number.parseInt(arr[1]),
-        day: Number.parseInt(arr[2])
-      };
+  GetDisableUntilData(date: Date) {
+    const str = date.toISOString();
+    const arr = str.split("T")[0].split("-");
+    return {
+      year: Number.parseInt(arr[0]),
+      month: Number.parseInt(arr[1]),
+      day: Number.parseInt(arr[2])
+    };
   }
 
   Save() {
-    for(const i in this.Form.controls)
-    {
-        this.Form.controls[i].markAsDirty();
-        this.Form.controls[i].markAsTouched();
+    for (const i in this.Form.controls) {
+      this.Form.controls[i].markAsDirty();
+      this.Form.controls[i].markAsTouched();
     }
     const valid = this.Form.valid;
     if (valid) {
@@ -115,15 +113,16 @@ export class EditClientComponent implements OnInit {
       data['id'] = this.clientsService.Client.id;
       data['birth_day'] = data['birth_day']['formatted'];
 
-      this.clientsService.UpdateClient(data, (res) => {
-        console.log(res);
-        this.clientsService.Client = res;
-        this.clientsService.Client.points = this.Points;
-        this._location.back();
-      },
-      (err) => {
-        console.log(err);
-      });
+      this.clientsService.UpdateClient(data,
+        (res) => {
+          console.log(res);
+          this.clientsService.Client = res;
+          this.clientsService.Client.points = this.Points;
+          this._location.back();
+        },
+        (err) => {
+          console.log(err);
+        });
     }
   }
 

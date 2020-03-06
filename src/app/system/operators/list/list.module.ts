@@ -20,6 +20,6 @@ import { OperatorsListRoutingModule } from './list.routing';
     ReactiveFormsModule,
     OperatorsListRoutingModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class OperatorsListModule {}
+export class OperatorsListModule { }

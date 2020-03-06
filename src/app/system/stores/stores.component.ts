@@ -5,10 +5,9 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'stores-cmp',
   templateUrl: './stores.component.html'
 })
-export class StoresComponent  implements OnInit{
+export class StoresComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService) {
   }
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
   }
 }

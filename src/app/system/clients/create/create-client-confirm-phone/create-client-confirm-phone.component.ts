@@ -58,7 +58,6 @@ export class CreateClientConfirmPhoneComponent implements OnInit {
   }
 
   GetCurrentLoyalty() {
-    console.log( this.authService.LoginData);
     this.IsLoading = true;
     this.loyaltyService.GetLoyalty(
       this.clientService.Client.loyalty_program_id,

@@ -10,20 +10,14 @@ import { ReportsService } from './reports.service';
   selector: 'app-reports-cmp',
   templateUrl: './reports.component.html'
 })
-export class ReportsComponent implements OnInit
-{
-    constructor(private auth: AuthService, private service: ReportsService)
-    {
+export class ReportsComponent implements OnInit {
+  constructor(private auth: AuthService, private service: ReportsService) {
 
-    }
+  }
 
-    ngOnInit(): void
-    {
-        this.service.RefreshOperators();
-        this.service.RefreshPromotions();
-        this.service.RefreshStores();
-    }
-
-
-
+  ngOnInit(): void {
+    this.service.RefreshOperators();
+    this.service.RefreshPromotions();
+    this.service.RefreshStores();
+  }
 }

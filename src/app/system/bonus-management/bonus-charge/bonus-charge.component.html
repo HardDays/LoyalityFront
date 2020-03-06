@@ -3,13 +3,13 @@
 
     <div class="page__top page__top--create">
       <span class="page__back"><img src="./../../../../../assets/img/back.svg"
-            (click)="GoBack()"></span>
+             (click)="GoBack()"></span>
       <h1 class="page__title page__title--customer_small">Информация о покупателе</h1>
     </div>
 
     <div class="create-block customer__block customer__block--small">
       <p class="create-block__label create-block__label--light customer__label">Количество бонусов:<input type="text"
-              class="create-block__input create-block__input--medium"></p>
+               class="create-block__input create-block__input--medium"></p>
 
       <div class="customer__flex-buttons">
         <button (click)="AddBonuses()"
@@ -21,10 +21,10 @@
   </div>
 
   <div *ngIf="SuccessModalIsShown"
-      class="modal modal--visible">
+       class="modal modal--visible">
     <div class="modal__block modal__block--bonuses">
       <span class="modal__close"><img (click)="onCloseSuccessModal()"
-            src="./../../../../../assets/img/close.svg"></span>
+             src="./../../../../../assets/img/close.svg"></span>
       <div class="modal__customer-content modal__customer-content-bonuses-inside">
         <p class="bonuses-text">Пользователь: ФИО</p>
         <p class="bonuses-text">Бонусов начислено:</p>

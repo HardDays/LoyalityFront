@@ -25,6 +25,6 @@ import { StoresService } from './stores.service';
     ReactiveFormsModule,
     TextMaskModule
   ],
-  providers: [ StoreAccessGuard, StoresService]
+  providers: [StoreAccessGuard, StoresService]
 })
-export class StoresModule {}
+export class StoresModule { }

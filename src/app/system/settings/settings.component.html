@@ -1,194 +1,212 @@
 <div class="page__content page__content--settings">
 
-    <h1 class="page__title">Настройки</h1>
+  <h1 class="page__title">Настройки</h1>
 
-    <div class="settings">
-        <div class="settings__block">
-            <form  [formGroup]="GeneralForm" (ngSubmit)="UpdateGeneral()">
-                <div class="settings__top">
-                    <p class="settings__name">Общие</p>
-                    <p *ngIf="GeneralFormError && GeneralForm.invalid" class="settings__hint settings__hint--error">Ошибка заполнения поля</p>
-                <p *ngIf="GeneralFormSuccess" class="settings__hint settings__hint--success">Изменения внесены</p>
-                </div>
-
-                <div class="settings__form">
-                    <p class="create-block__label create-block__label--light">Имя</p>
-
-                    <input type="text"
-                        class="create-block__input create-block__input--full"
-                        [ngClass]="{'create-block__input--error': GeneralForm.controls.first_name.invalid && (GeneralForm.controls.first_name.dirty || GeneralForm.controls.first_name.touched)}"
-                        autocomplete="null"
-                        formControlName="first_name"
-                        name="first_name"
-                        placeholder="Имя"
-                    >
-                    <p class="auth-block__hint auth-block__hint--error">
-                        <ng-container *ngIf="GeneralForm.controls.first_name.invalid && (GeneralForm.controls.first_name.dirty || GeneralForm.controls.first_name.touched)">
-                            <span *ngIf="GeneralForm.controls.first_name.errors.required">Поле обязательно к заполнению.</span>
-                            <span *ngIf="GeneralForm.controls.first_name.errors.minLength">Минимальная длина 3 символа.</span>
-                            <span *ngIf="GeneralForm.controls.first_name.errors.maxLength">Максимальная длина 50 символа.</span>
-                        </ng-container>
-                    </p>
-
-                    <p class="create-block__label create-block__label--light">Фамилия</p>
-                    <input type="text"
-                        class="create-block__input create-block__input--full"
-                        [ngClass]="{'create-block__input--error': GeneralForm.controls.last_name.invalid && (GeneralForm.controls.last_name.dirty || GeneralForm.controls.last_name.touched)}"
-                        autocomplete="null"
-                        formControlName="last_name"
-                        name="last_name"
-                        placeholder="Фамилия"
-                    >
-                    <p class="auth-block__hint auth-block__hint--error">
-                        <ng-container *ngIf="GeneralForm.controls.last_name.invalid && (GeneralForm.controls.last_name.dirty || GeneralForm.controls.last_name.touched)">
-                            <span *ngIf="GeneralForm.controls.last_name.errors.required">Поле обязательно к заполнению.</span>
-                            <span *ngIf="GeneralForm.controls.last_name.errors.minLength">Минимальная длина 3 символа.</span>
-                            <span *ngIf="GeneralForm.controls.last_name.errors.maxLength">Максимальная длина 50 символа.</span>
-                        </ng-container>
-                    </p>
-
-                    <p class="create-block__label create-block__label--light">Название компании</p>
-                    <input type="text"
-                        class="create-block__input create-block__input--full"
-                        [ngClass]="{'create-block__input--error': GeneralForm.controls.company_name.invalid && (GeneralForm.controls.company_name.dirty || GeneralForm.controls.company_name.touched)}"
-                        autocomplete="null"
-                        formControlName="company_name"
-                        name="company_name"
-                        placeholder="Название компании"
-                    >
-                    <p class="auth-block__hint auth-block__hint--error">
-                        <ng-container *ngIf="GeneralForm.controls.company_name.invalid && (GeneralForm.controls.company_name.dirty || GeneralForm.controls.company_name.touched)">
-                            <span *ngIf="GeneralForm.controls.company_name.errors.required">Поле обязательно к заполнению.</span>
-                            <span *ngIf="GeneralForm.controls.company_name.errors.minLength">Минимальная длина 3 символа.</span>
-                            <span *ngIf="GeneralForm.controls.company_name.errors.maxLength">Максимальная длина 50 символа.</span>
-                        </ng-container>
-                    </p>
-                </div>
-
-                <button class="button settings__button" type="submit">Сохранить</button>
-            </form>
+  <div class="settings">
+    <div class="settings__block">
+      <form [formGroup]="GeneralForm"
+            (ngSubmit)="UpdateGeneral()">
+        <div class="settings__top">
+          <p class="settings__name">Общие</p>
+          <p *ngIf="GeneralFormError && GeneralForm.invalid"
+             class="settings__hint settings__hint--error">Ошибка заполнения поля</p>
+          <p *ngIf="GeneralFormSuccess"
+             class="settings__hint settings__hint--success">Изменения внесены</p>
         </div>
-        <div class="settings__block">
-            <form  [formGroup]="EmailForm" (ngSubmit)="UpdateEmail()">
-            <div class="settings__top">
-                <p class="settings__name">E-mail</p>
-                <p *ngIf="EmailFormError && EmailForm.invalid" class="settings__hint settings__hint--error">Ошибка заполнения поля</p>
-                <p *ngIf="EmailFormSuccess" class="settings__hint settings__hint--success">Изменения внесены</p>
-            </div>
 
-            <div class="settings__form">
-                <p class="create-block__label create-block__label--light">Текущий E-mail</p>
+        <div class="settings__form">
+          <p class="create-block__label create-block__label--light">Имя</p>
 
-                <input type="text"
-                    class="create-block__input create-block__input--full"
-                    [ngClass]="{'create-block__input--error': EmailForm.controls.current_email.invalid && (EmailForm.controls.current_email.dirty || EmailForm.controls.current_email.touched)}"
-                    autocomplete="null"
-                    formControlName="current_email"
-                    name="current_email"
-                    placeholder="Текущий E-mail"
-                >
-                <p class="auth-block__hint auth-block__hint--error">
-                    <ng-container *ngIf="EmailForm.controls.current_email.invalid && (EmailForm.controls.current_email.dirty || EmailForm.controls.current_email.touched)">
-                        <span *ngIf="EmailForm.controls.current_email.errors.required">Поле обязательно к заполнению.</span>
-                        <span *ngIf="EmailForm.controls.current_email.errors.email">Введите корректный E-mail.</span>
-                        <span *ngIf="EmailForm.controls.current_email.errors.wrong">Неправильный E-mail.</span>
-                    </ng-container>
-                </p>
+          <input type="text"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': GeneralForm.controls.first_name.invalid && (GeneralForm.controls.first_name.dirty || GeneralForm.controls.first_name.touched)}"
+                 autocomplete="null"
+                 formControlName="first_name"
+                 name="first_name"
+                 placeholder="Имя">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="GeneralForm.controls.first_name.invalid && (GeneralForm.controls.first_name.dirty || GeneralForm.controls.first_name.touched)">
+              <span *ngIf="GeneralForm.controls.first_name.errors.required">Поле обязательно к заполнению.</span>
+              <span *ngIf="GeneralForm.controls.first_name.errors.minLength">Минимальная длина 3 символа.</span>
+              <span *ngIf="GeneralForm.controls.first_name.errors.maxLength">Максимальная длина 50 символа.</span>
+            </ng-container>
+          </p>
 
-                <p class="create-block__label create-block__label--light">Новый E-mail</p>
-                <input type="text"
-                    class="create-block__input create-block__input--full"
-                    [ngClass]="{'create-block__input--error': EmailForm.controls.email.invalid && (EmailForm.controls.email.dirty || EmailForm.controls.email.touched)}"
-                    autocomplete="null"
-                    formControlName="email"
-                    name="email"
-                    placeholder="Новый E-mail"
-                >
-                <p class="auth-block__hint auth-block__hint--error">
-                    <ng-container *ngIf="EmailForm.controls.email.invalid && (EmailForm.controls.email.dirty || EmailForm.controls.email.touched)">
-                        <span *ngIf="EmailForm.controls.email.errors.required">Поле обязательно к заполнению.</span>
-                        <span *ngIf="EmailForm.controls.email.errors.email">Введите корректный E-mail.</span>
-                        <span *ngIf="EmailForm.controls.email.errors.invalid">Неправильный E-mail.</span>
-                        <span *ngIf="EmailForm.controls.email.errors.already_taken">E-mail занят.</span>
-                        <span *ngIf="EmailForm.controls.email.errors.incorrect_new_email">Новый E-mail совпадает с текущим.</span>
-                    </ng-container>
-                </p>
-            </div>
+          <p class="create-block__label create-block__label--light">Фамилия</p>
+          <input type="text"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': GeneralForm.controls.last_name.invalid && (GeneralForm.controls.last_name.dirty || GeneralForm.controls.last_name.touched)}"
+                 autocomplete="null"
+                 formControlName="last_name"
+                 name="last_name"
+                 placeholder="Фамилия">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="GeneralForm.controls.last_name.invalid && (GeneralForm.controls.last_name.dirty || GeneralForm.controls.last_name.touched)">
+              <span *ngIf="GeneralForm.controls.last_name.errors.required">Поле обязательно к заполнению.</span>
+              <span *ngIf="GeneralForm.controls.last_name.errors.minLength">Минимальная длина 3 символа.</span>
+              <span *ngIf="GeneralForm.controls.last_name.errors.maxLength">Максимальная длина 50 символа.</span>
+            </ng-container>
+          </p>
 
-            <button class="button settings__button" type="submit">Сохранить</button>
-            </form>
+          <p class="create-block__label create-block__label--light">Название компании</p>
+          <input type="text"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': GeneralForm.controls.company_name.invalid && (GeneralForm.controls.company_name.dirty || GeneralForm.controls.company_name.touched)}"
+                 autocomplete="null"
+                 formControlName="company_name"
+                 name="company_name"
+                 placeholder="Название компании">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="GeneralForm.controls.company_name.invalid && (GeneralForm.controls.company_name.dirty || GeneralForm.controls.company_name.touched)">
+              <span *ngIf="GeneralForm.controls.company_name.errors.required">Поле обязательно к заполнению.</span>
+              <span *ngIf="GeneralForm.controls.company_name.errors.minLength">Минимальная длина 3 символа.</span>
+              <span *ngIf="GeneralForm.controls.company_name.errors.maxLength">Максимальная длина 50 символа.</span>
+            </ng-container>
+          </p>
         </div>
-        <div class="settings__block">
-            <form  [formGroup]="PasswordForm" (ngSubmit)="UpdatePassword()">
-                <div class="settings__top">
-                    <p class="settings__name">Пароль</p>
-                    <p *ngIf="PasswordFormError && PasswordForm.invalid" class="settings__hint settings__hint--error">Ошибка заполнения поля</p>
-                    <p *ngIf="PasswordFormSuccess" class="settings__hint settings__hint--success">Изменения внесены</p>
-                </div>
 
-                <div class="settings__form">
-                    <p class="create-block__label create-block__label--light">Текущий пароль</p>
-                    <!-- Add class "create-block__input--error" for input with error like below -->
-                    <!-- <input type="password" class="create-block__input create-block__input--full create-block__input--error"> -->
-
-                    <input type="password"
-                        class="create-block__input create-block__input--full"
-                        [ngClass]="{'create-block__input--error': PasswordForm.controls.current_password.invalid && (PasswordForm.controls.current_password.dirty || PasswordForm.controls.current_password.touched)}"
-                        autocomplete="null"
-                        formControlName="current_password"
-                        name="current_password"
-                        placeholder="Пароль"
-                    >
-                    <p class="auth-block__hint auth-block__hint--error">
-                        <ng-container *ngIf="PasswordForm.controls.current_password.invalid && (PasswordForm.controls.current_password.dirty || PasswordForm.controls.current_password.touched)">
-                            <span *ngIf="PasswordForm.controls.current_password.errors.required">Поле обязательно к заполнению.</span>
-                            <span *ngIf="PasswordForm.controls.current_password.errors.minlength">Минимальная длина пароля 7 символов.</span>
-                            <span *ngIf="PasswordForm.controls.current_password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
-                            <span *ngIf="PasswordForm.controls.current_password.errors.wrong">Неправильный пароль.</span>
-                        </ng-container>
-                    </p>
-
-                    <p class="create-block__label create-block__label--light">Новый пароль</p>
-                    <input type="password"
-                        class="create-block__input create-block__input--full"
-                        [ngClass]="{'create-block__input--error': PasswordForm.controls.password.invalid && (PasswordForm.controls.password.dirty || PasswordForm.controls.password.touched)}"
-                        autocomplete="null"
-                        formControlName="password"
-                        name="password"
-                        placeholder="Пароль"
-                    >
-                    <p class="auth-block__hint auth-block__hint--error">
-                        <ng-container *ngIf="PasswordForm.controls.password.invalid && (PasswordForm.controls.password.dirty || PasswordForm.controls.password.touched)">
-                            <span *ngIf="PasswordForm.controls.password.errors.required">Поле обязательно к заполнению.</span>
-                            <span *ngIf="PasswordForm.controls.password.errors.minlength">Минимальная длина пароля 7 символов.</span>
-                            <span *ngIf="PasswordForm.controls.password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
-                        </ng-container>
-                    </p>
-
-                    <p class="create-block__label create-block__label--light">Подтвердить новый пароль</p>
-                    <input type="password"
-                        class="create-block__input create-block__input--full"
-                        [ngClass]="{'create-block__input--error': PasswordForm.controls.password_confirmation.invalid && (PasswordForm.controls.password_confirmation.dirty || PasswordForm.controls.password_confirmation.touched)}"
-                        autocomplete="null"
-                        formControlName="password_confirmation"
-                        name="password_confirmation"
-                        placeholder="Пароль"
-                    >
-                    <p class="auth-block__hint auth-block__hint--error">
-                        <ng-container *ngIf="PasswordForm.controls.password_confirmation.invalid && (PasswordForm.controls.password_confirmation.dirty || PasswordForm.controls.password_confirmation.touched)">
-                            <span *ngIf="PasswordForm.controls.password_confirmation.errors.required">Поле обязательно к заполнению.</span>
-                            <span *ngIf="PasswordForm.controls.password_confirmation.errors.minlength">Минимальная длина пароля 7 символов.</span>
-                            <span *ngIf="PasswordForm.controls.password_confirmation.errors.maxlength">Максимальная длина пароля 50 символов.</span>
-                            <span *ngIf="PasswordForm.controls.password_confirmation.errors.wrong">Неправильный пароль.</span>
-                            <span *ngIf="PasswordForm.controls.password_confirmation.errors.not_match">Пароли не совпадают.</span>
-                        </ng-container>
-                    </p>
-                </div>
-
-                <button class="button settings__button" type="submit">Сохранить</button>
-            </form>
-
-        </div>
+        <button class="button settings__button"
+                type="submit">Сохранить</button>
+      </form>
     </div>
+    <div class="settings__block">
+      <form [formGroup]="EmailForm"
+            (ngSubmit)="UpdateEmail()">
+        <div class="settings__top">
+          <p class="settings__name">E-mail</p>
+          <p *ngIf="EmailFormError && EmailForm.invalid"
+             class="settings__hint settings__hint--error">Ошибка заполнения поля</p>
+          <p *ngIf="EmailFormSuccess"
+             class="settings__hint settings__hint--success">Изменения внесены</p>
+        </div>
+
+        <div class="settings__form">
+          <p class="create-block__label create-block__label--light">Текущий E-mail</p>
+
+          <input type="text"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': EmailForm.controls.current_email.invalid && (EmailForm.controls.current_email.dirty || EmailForm.controls.current_email.touched)}"
+                 autocomplete="null"
+                 formControlName="current_email"
+                 name="current_email"
+                 placeholder="Текущий E-mail">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="EmailForm.controls.current_email.invalid && (EmailForm.controls.current_email.dirty || EmailForm.controls.current_email.touched)">
+              <span *ngIf="EmailForm.controls.current_email.errors.required">Поле обязательно к заполнению.</span>
+              <span *ngIf="EmailForm.controls.current_email.errors.email">Введите корректный E-mail.</span>
+              <span *ngIf="EmailForm.controls.current_email.errors.wrong">Неправильный E-mail.</span>
+            </ng-container>
+          </p>
+
+          <p class="create-block__label create-block__label--light">Новый E-mail</p>
+          <input type="text"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': EmailForm.controls.email.invalid && (EmailForm.controls.email.dirty || EmailForm.controls.email.touched)}"
+                 autocomplete="null"
+                 formControlName="email"
+                 name="email"
+                 placeholder="Новый E-mail">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="EmailForm.controls.email.invalid && (EmailForm.controls.email.dirty || EmailForm.controls.email.touched)">
+              <span *ngIf="EmailForm.controls.email.errors.required">Поле обязательно к заполнению.</span>
+              <span *ngIf="EmailForm.controls.email.errors.email">Введите корректный E-mail.</span>
+              <span *ngIf="EmailForm.controls.email.errors.invalid">Неправильный E-mail.</span>
+              <span *ngIf="EmailForm.controls.email.errors.already_taken">E-mail занят.</span>
+              <span *ngIf="EmailForm.controls.email.errors.incorrect_new_email">Новый E-mail совпадает с текущим.</span>
+            </ng-container>
+          </p>
+        </div>
+
+        <button class="button settings__button"
+                type="submit">Сохранить</button>
+      </form>
+    </div>
+    <div class="settings__block">
+      <form [formGroup]="PasswordForm"
+            (ngSubmit)="UpdatePassword()">
+        <div class="settings__top">
+          <p class="settings__name">Пароль</p>
+          <p *ngIf="PasswordFormError && PasswordForm.invalid"
+             class="settings__hint settings__hint--error">Ошибка заполнения поля</p>
+          <p *ngIf="PasswordFormSuccess"
+             class="settings__hint settings__hint--success">Изменения внесены</p>
+        </div>
+
+        <div class="settings__form">
+          <p class="create-block__label create-block__label--light">Текущий пароль</p>
+          <!-- Add class "create-block__input--error" for input with error like below -->
+          <!-- <input type="password" class="create-block__input create-block__input--full create-block__input--error"> -->
+
+          <input type="password"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': PasswordForm.controls.current_password.invalid && (PasswordForm.controls.current_password.dirty || PasswordForm.controls.current_password.touched)}"
+                 autocomplete="null"
+                 formControlName="current_password"
+                 name="current_password"
+                 placeholder="Пароль">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="PasswordForm.controls.current_password.invalid && (PasswordForm.controls.current_password.dirty || PasswordForm.controls.current_password.touched)">
+              <span *ngIf="PasswordForm.controls.current_password.errors.required">Поле обязательно к заполнению.</span>
+              <span *ngIf="PasswordForm.controls.current_password.errors.minlength">Минимальная длина пароля 7
+                символов.</span>
+              <span *ngIf="PasswordForm.controls.current_password.errors.maxlength">Максимальная длина пароля 50
+                символов.</span>
+              <span *ngIf="PasswordForm.controls.current_password.errors.wrong">Неправильный пароль.</span>
+            </ng-container>
+          </p>
+
+          <p class="create-block__label create-block__label--light">Новый пароль</p>
+          <input type="password"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': PasswordForm.controls.password.invalid && (PasswordForm.controls.password.dirty || PasswordForm.controls.password.touched)}"
+                 autocomplete="null"
+                 formControlName="password"
+                 name="password"
+                 placeholder="Пароль">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="PasswordForm.controls.password.invalid && (PasswordForm.controls.password.dirty || PasswordForm.controls.password.touched)">
+              <span *ngIf="PasswordForm.controls.password.errors.required">Поле обязательно к заполнению.</span>
+              <span *ngIf="PasswordForm.controls.password.errors.minlength">Минимальная длина пароля 7 символов.</span>
+              <span *ngIf="PasswordForm.controls.password.errors.maxlength">Максимальная длина пароля 50
+                символов.</span>
+            </ng-container>
+          </p>
+
+          <p class="create-block__label create-block__label--light">Подтвердить новый пароль</p>
+          <input type="password"
+                 class="create-block__input create-block__input--full"
+                 [ngClass]="{'create-block__input--error': PasswordForm.controls.password_confirmation.invalid && (PasswordForm.controls.password_confirmation.dirty || PasswordForm.controls.password_confirmation.touched)}"
+                 autocomplete="null"
+                 formControlName="password_confirmation"
+                 name="password_confirmation"
+                 placeholder="Пароль">
+          <p class="auth-block__hint auth-block__hint--error">
+            <ng-container
+                          *ngIf="PasswordForm.controls.password_confirmation.invalid && (PasswordForm.controls.password_confirmation.dirty || PasswordForm.controls.password_confirmation.touched)">
+              <span *ngIf="PasswordForm.controls.password_confirmation.errors.required">Поле обязательно к
+                заполнению.</span>
+              <span *ngIf="PasswordForm.controls.password_confirmation.errors.minlength">Минимальная длина пароля 7
+                символов.</span>
+              <span *ngIf="PasswordForm.controls.password_confirmation.errors.maxlength">Максимальная длина пароля 50
+                символов.</span>
+              <span *ngIf="PasswordForm.controls.password_confirmation.errors.wrong">Неправильный пароль.</span>
+              <span *ngIf="PasswordForm.controls.password_confirmation.errors.not_match">Пароли не совпадают.</span>
+            </ng-container>
+          </p>
+        </div>
+
+        <button class="button settings__button"
+                type="submit">Сохранить</button>
+      </form>
+
+    </div>
+  </div>
 
 </div>

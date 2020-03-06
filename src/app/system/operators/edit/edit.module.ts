@@ -22,6 +22,6 @@ import { ClickDirectiveModule } from '../click.directive';
     OperatorEditRoutingModule,
     ClickDirectiveModule
   ],
-  providers: [ ]
+  providers: []
 })
-export class OperatorEditModule {}
+export class OperatorEditModule { }

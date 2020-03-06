@@ -11,9 +11,9 @@ describe('CreateClientByUserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateClientByUserComponent ]
+      declarations: [CreateClientByUserComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

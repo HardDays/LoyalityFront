@@ -15,7 +15,7 @@ import { ReportsAccessGuard } from './reports.guard';
 
 @NgModule({
   declarations: [
-      ReportsComponent
+    ReportsComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +28,7 @@ import { ReportsAccessGuard } from './reports.guard';
     TextMaskModule,
     MyDatePickerModule
   ],
-  providers: [ ReportsService, ReportsAccessGuard ],
+  providers: [ReportsService, ReportsAccessGuard],
   // bootstrap: [ Location ]
 })
-export class ReportsModule {}
+export class ReportsModule { }

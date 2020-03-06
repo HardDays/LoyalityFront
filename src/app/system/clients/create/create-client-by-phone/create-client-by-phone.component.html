@@ -1,20 +1,26 @@
-
-  <div class="page__content page__content--create">
+<div class="page__content page__content--create">
 
   <div class="page__top page__top--create">
-      <span class="page__back"><img (click)="GoBack()" src="./../../../../../assets/img/back.svg" alt=""></span>
-      <h1 class="page__title page__title--create">Создание нового покупателя</h1>
+    <span class="page__back"><img (click)="GoBack()"
+           src="./../../../../../assets/img/back.svg"
+           alt=""></span>
+    <h1 class="page__title page__title--create">Создание нового покупателя</h1>
   </div>
 
   <div class="create-block customer__block">
-      <p class="customer__label">Введите номер телефона покупателя</p>
-      <input type="text" [textMask]="{mask: MaskPhoneRU, showMask: true}" [(ngModel)]="Phone" class="customer__input customer__input--big">
-      <p class="customer__label auth-block__hint auth-block__hint--error" [ngStyle]="{'color': 'red'}">
-          <span *ngIf="ErrorText">{{ErrorText}}</span>
-      </p>
-      <div class="text-center">
-          <button (click)="clickNextStep()" class="button create-block__button">Продолжить</button>
-      </div>
+    <p class="customer__label">Введите номер телефона покупателя</p>
+    <input type="text"
+           [textMask]="{mask: MaskPhoneRU, showMask: true}"
+           [(ngModel)]="Phone"
+           class="customer__input customer__input--big">
+    <p class="customer__label auth-block__hint auth-block__hint--error"
+       [ngStyle]="{'color': 'red'}">
+      <span *ngIf="ErrorText">{{ErrorText}}</span>
+    </p>
+    <div class="text-center">
+      <button (click)="clickNextStep()"
+              class="button create-block__button">Продолжить</button>
+    </div>
   </div>
 
   <!-- <div class="create-block customer__block">

@@ -11,48 +11,41 @@ import { Router } from '@angular/router';
 export class CompanyComponent implements OnInit {
 
   Form: FormGroup = new FormGroup({
-    "name": new FormControl('',[
+    "name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ])
   });
 
-  get name()
-  {
+  get name() {
     return this.Form.get('name');
   }
 
-  constructor(private _location: Location, private auth: AuthService, private router: Router)
-  {
+  constructor(private _location: Location, private auth: AuthService, private router: Router) {
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
   }
 
-  GoBack()
-  {
-      this._location.back();
+  GoBack() {
+    this._location.back();
   }
 
-  Save()
-  {
-      for(const i in this.Form.controls)
-      {
-          this.Form.controls[i].markAsDirty();
-          this.Form.controls[i].markAsTouched();
-      }
+  Save() {
+    for (const i in this.Form.controls) {
+      this.Form.controls[i].markAsDirty();
+      this.Form.controls[i].markAsTouched();
+    }
     const valid = this.Form.valid;
 
-    if(valid)
-    {
+    if (valid) {
       const data = this.Form.getRawValue();
-      this.auth.CreateCompany(data,(res) => {
+      this.auth.CreateCompany(data, (res) => {
         this.router.navigate(["/system"])
       },
-      (err) => {
-      })
+        (err) => {
+        })
     }
   }
 

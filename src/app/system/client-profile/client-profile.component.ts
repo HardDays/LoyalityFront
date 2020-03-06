@@ -7,12 +7,10 @@ import { ClientProfileService } from './client-profile.service';
   selector: 'client-profile-cmp',
   templateUrl: './client-profile.component.html'
 })
-export class ClientProfileComponent  implements OnInit{
+export class ClientProfileComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService, private profileService: ClientProfileService) {
   }
-  ngOnInit(): void
-  {
 
-
+  ngOnInit(): void {
   }
 }

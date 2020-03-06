@@ -11,16 +11,14 @@ import { PromotionModel } from '../../core/models/promotion.model';
 @Injectable()
 export class LoyaltyProgramsService {
 
-    constructor(private http: HttpService, private auth:AuthService)
-    {}
+  constructor(private http: HttpService, private auth: AuthService) { }
 
-    GetLoyalty(Id, success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.GetData('/loyalty_programs/' + Id, ''),
-            success,
-            err => this.auth.ErrorHandler(err, fail)
-        );
-    }
+  GetLoyalty(Id, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.GetData('/loyalty_programs/' + Id, `company_id=${this.auth.LoginData.company_id}`),
+      success,
+      err => this.auth.ErrorHandler(err, fail)
+    );
+  }
 
 }

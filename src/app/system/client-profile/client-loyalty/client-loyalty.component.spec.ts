@@ -11,9 +11,9 @@ describe('ClientLoyaltyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientLoyaltyComponent ]
+      declarations: [ClientLoyaltyComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
