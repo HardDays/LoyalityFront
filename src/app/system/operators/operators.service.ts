@@ -69,7 +69,7 @@ export class OperatorsService {
 
   RefreshStores(success?: (data) => void, fail?: (err) => void) {
     this.http.CommonRequest(
-      () => this.http.GetData('/stores', ''),
+      () => this.http.GetData('/stores', `company_id=${this.auth.LoginData.company_id}`),
       (res: StoreModel[]) => {
         this.Stores = res;
         this.onStoresChange$.next(true);

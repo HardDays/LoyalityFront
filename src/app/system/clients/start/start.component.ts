@@ -30,7 +30,6 @@ export class ClientsStartComponent implements OnInit {
       this.HasStore = true;
     }
 
-    console.log(this.auth.LoginData);
     this.CheckOperatorType();
   }
 

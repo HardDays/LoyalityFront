@@ -45,7 +45,13 @@ export class CompanySelectorComponent implements OnInit {
 
     if (!this.companySelectorForm.valid) return false;
 
-    this.auth.LoginData.company_id = this.companySelectorForm.value.companyId;
+    const companyId = this.companySelectorForm.value.companyId;
+    this.auth.LoginData.company_id = companyId;
+
+    if (this.auth.LoginData.user_type == "operator") {
+      this.auth.LoginData.store_id = this.auth.LoginData.operator.find(o => o.company_id == companyId).store_id
+    }
+
     this.auth.InitSession(this.auth.LoginData);
     this.router.navigate(["/system"]);
   }

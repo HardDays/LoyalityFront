@@ -13,6 +13,7 @@ export class LoginSuccessModel {
     public user_types?: string[],
     public client?: any[],
     public operator?: any[],
-    public creator?: any[]
+    public creator?: any[],
+    public store_id?: string
   ) { }
 }

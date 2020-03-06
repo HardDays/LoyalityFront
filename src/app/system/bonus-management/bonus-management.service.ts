@@ -14,9 +14,8 @@ export class BonusManagementService {
 
   GetClients(success?: (data) => void, fail?: (err) => void) {
     this.auth.onLoading.next(true);
-    console.log(this.auth.LoginData)
     this.http.CommonRequest(
-      () => this.http.GetData('/clients'),
+      () => this.http.GetData('/clients', `company_id=${this.auth.LoginData.company_id}`),
       (res: ClientModel[]) => {
         if (success && typeof success == 'function') {
           this.auth.onLoading.next(false);
