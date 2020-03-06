@@ -51,7 +51,7 @@ export class ClientsService {
   CheckClientByPhone(phone: string, success?: (data) => void, fail?: (err) => void) {
     phone = phone.replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
     this.http.CommonRequest(
-      () => this.http.GetData('/clients', 'phone=' + phone),
+      () => this.http.GetData('/clients', `phone=${phone}`),
       (res: ClientModel[]) => {
         console.log(res);
         if (success && typeof success == 'function') {
@@ -70,7 +70,7 @@ export class ClientsService {
   CheckClientPhone(phone: string, success?: (data) => void, fail?: (err) => void) {
     phone = phone.replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
     this.http.CommonRequest(
-      () => this.http.GetData('/clients/phone', 'phone=' + phone),
+      () => this.http.GetData('/clients/phone', `phone=${phone}`),
       (res) => {
         if (success && typeof success == 'function') {
           success(res['status']);
@@ -95,7 +95,7 @@ export class ClientsService {
     searchString = arrParams.join('&');
     console.log(params, searchString);
     this.http.CommonRequest(
-      () => this.http.GetData('/clients', searchString),
+      () => this.http.GetData('/clients', `${searchString}`),
       (res: ClientModel[]) => {
         if (success && typeof success == 'function') {
           success(res);
@@ -158,7 +158,7 @@ export class ClientsService {
 
   searchPhone(phone: string) {
     phone = phone.replace(/ /g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/_/g, '');
-    return this.http.GetData('/clients/phone', 'phone=' + phone);
+    return this.http.GetData('/clients/phone', `phone=${phone}`);
   }
 
   createValidatorPhone() {

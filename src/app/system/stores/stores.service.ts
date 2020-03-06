@@ -19,7 +19,7 @@ export class StoresService {
   RefreshStores(success?: (data) => void, fail?: (err) => void) {
     this.auth.onLoading.next(true);
     this.http.CommonRequest(
-      () => this.http.GetData('/stores', `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/stores', ''),
       (res: StoreModel[]) => {
         this.Stores = res;
         this.onStoresChange$.next(true);
@@ -49,7 +49,7 @@ export class StoresService {
 
   GetOperators(StoreId, success?: (data) => void, fail?: (err) => void) {
     this.http.CommonRequest(
-      () => this.http.GetData(`/operators?store_id=${StoreId}&company_id=${this.auth.LoginData.company_id}`, ''),
+      () => this.http.GetData(`/operators?store_id=${StoreId}`, ''),
       success,
       err => this.auth.ErrorHandler(err, fail)
     );

@@ -19,7 +19,7 @@ export class PromotionsService {
   RefreshPromotions(success?: (data) => void, fail?: (err) => void) {
     this.auth.onLoading.next(true);
     this.http.CommonRequest(
-      () => this.http.GetData('/promotions', `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/promotions', ''),
       (res: PromotionModel[]) => {
         this.Promotions = res;
         this.onPromotionsChange$.next(true);

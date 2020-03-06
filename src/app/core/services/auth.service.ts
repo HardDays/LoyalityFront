@@ -93,6 +93,8 @@ export class AuthService {
   InitSession(data: LoginSuccessModel) {
     localStorage.setItem(this.login_field, JSON.stringify(data));
     this.http.BaseInitByToken(data.token);
+    if (!data.company_id) this.onAuthChange$.next(false);
+    this.http.AddCompanyId(data.company_id);
     this.LoginData = data;
     // console.log(data)
     // TODO: DELETE THIS LINE or LOGIN AS CLIENT
@@ -103,7 +105,7 @@ export class AuthService {
   GetCompanyInfo(success?: (data) => void, fail?: (err) => void) {
     this.onLoading.next(true);
     this.http.CommonRequest(
-      () => this.http.GetData('/companies', `company_id=${this.LoginData.company_id}`),
+      () => this.http.GetData('/companies', ''),
       (res: CompanyModel) => {
         if (res) {
           this.CompanyData = res;

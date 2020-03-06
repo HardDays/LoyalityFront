@@ -15,7 +15,7 @@ export class LoyaltyProgramsService {
 
   GetLoyalty(Id, success?: (data) => void, fail?: (err) => void) {
     this.http.CommonRequest(
-      () => this.http.GetData('/loyalty_programs/' + Id, `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/loyalty_programs/' + Id, ''),
       success,
       err => this.auth.ErrorHandler(err, fail)
     );

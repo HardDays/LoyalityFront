@@ -27,7 +27,7 @@ export class LoyaltyService {
   RefreshLoyalty(success?: (data) => void, fail?: (err) => void) {
     this.auth.onLoading.next(true);
     this.http.CommonRequest(
-      () => this.http.GetData('/loyalty_programs', `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/loyalty_programs', ''),
       (res: LoyaltyModel) => {
         this.LoyaltyProgram = res;
         // this.LoyaltyLevels = JSON.parse(JSON.stringify(this.LoyaltyProgram.loyalty_levels));
@@ -80,7 +80,7 @@ export class LoyaltyService {
 
   GetLevel(Id, success?: (data) => void, fail?: (err) => void) {
     this.http.CommonRequest(
-      () => this.http.GetData('/loyalty_levels/' + Id, `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/loyalty_levels/' + Id, ''),
       success,
       err => this.auth.ErrorHandler(err, fail)
     );

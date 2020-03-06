@@ -10,6 +10,7 @@ export class HttpService {
 
   serverUrl = 'http://34.90.57.126:3001/api/v1';
   // serverUrl = 'https://fathomless-earth-40434.herokuapp.com/api/v1';
+  CompanyId = '';
 
   public headers: Headers = new Headers([]);
   constructor(private http: Http) {
@@ -23,6 +24,10 @@ export class HttpService {
       }
       this.headers.append('Authorization', data);
     }
+  }
+
+  AddCompanyId(companyId) {
+    this.CompanyId = companyId;
   }
 
   DeleteAuthToken() {
@@ -74,34 +79,34 @@ export class HttpService {
   }
 
   GetData(method: string, params?: any) {
-    return this.http.get(this.serverUrl + method + `${params ? `?${params}` : ''}`, { headers: this.headers });
+    return this.http.get(this.serverUrl + method + '?' + params + `&company_id=${this.CompanyId}`, { headers: this.headers });
   }
 
   DeleteData(method: string) {
-    return this.http.delete(this.serverUrl + method, { headers: this.headers });
+    return this.DeleteDataWithBody(method, {});
   }
 
   DeleteDataWithBody(method: string, body: any) {
-    return this.http.delete(this.serverUrl + method, new RequestOptions({
+    return this.http.delete(this.serverUrl + method + `&company_id=${this.CompanyId}`, new RequestOptions({
       headers: this.headers,
-      body: body
+      body: { ...body, company_id: this.CompanyId }
     }));
   }
 
   DeleteDataWithParam(method: string, param: any) {
-    return this.http.delete(this.serverUrl + method + '?' + param, { headers: this.headers });
+    return this.http.delete(this.serverUrl + method + '?' + param + `&company_id=${this.CompanyId}`, { headers: this.headers });
   }
 
   PostData(method: string, data: any) {
-    return this.http.post(this.serverUrl + method, data, { headers: this.headers });
+    return this.http.post(this.serverUrl + method, { ...data, company_id: this.CompanyId }, { headers: this.headers });
   }
 
   PatchData(method: string, data: any) {
-    return this.http.patch(this.serverUrl + method, data, { headers: this.headers });
+    return this.http.patch(this.serverUrl + method, { ...data, company_id: this.CompanyId }, { headers: this.headers });
   }
 
   PutData(method: string, data: any) {
-    return this.http.put(this.serverUrl + method, data, { headers: this.headers });
+    return this.http.put(this.serverUrl + method, { ...data, company_id: this.CompanyId }, { headers: this.headers });
   }
 
   GetDataFromOtherUrl(url: string) {

@@ -26,7 +26,7 @@ export class ReportsService {
   RefreshPromotions(success?: (data) => void, fail?: (err) => void) {
     this.Promotions = [];
     this.http.CommonRequest(
-      () => this.http.GetData('/promotions', `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/promotions', ''),
       (res: PromotionModel[]) => {
         for (const item of res) {
 
@@ -46,7 +46,7 @@ export class ReportsService {
           }
         }
         this.http.CommonRequest(
-          () => this.http.GetData('/loyalty_programs', `company_id=${this.auth.LoginData.company_id}`),
+          () => this.http.GetData('/loyalty_programs', ''),
           (res: LoyaltyModel) => {
             if (res) {
               let model = {
@@ -90,7 +90,7 @@ export class ReportsService {
   RefreshStores(success?: (data) => void, fail?: (err) => void) {
     this.Stores = [];
     this.http.CommonRequest(
-      () => this.http.GetData('/stores', `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/stores', ''),
       (res: StoreModel[]) => {
         this.Stores = res;
         this.onStoresChange$.next(true);
@@ -112,7 +112,7 @@ export class ReportsService {
   RefreshOperators(success?: (data) => void, fail?: (err) => void) {
     this.Operators = [];
     this.http.CommonRequest(
-      () => this.http.GetData('/operators', `company_id=${this.auth.LoginData.company_id}`),
+      () => this.http.GetData('/operators', ''),
       (res: OperatorModel[]) => {
         this.Operators = res;
         this.onOperatorsChange$.next(true);
