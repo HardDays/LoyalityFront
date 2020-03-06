@@ -9,8 +9,8 @@ import { SocialMediaOverviewComponent } from './social-media-overview/social-med
 const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: 'overview', component: SocialMediaOverviewComponent, canActivate: [SocialMediaAccessGuard] },
-  { path: 'vk', component: SocialMediaTelegramComponent, canActivate: [SocialMediaAccessGuard] },
-  { path: 'telegram', component: SocialMediaVkComponent, canActivate: [SocialMediaAccessGuard] }
+  { path: 'vk', component: SocialMediaVkComponent, canActivate: [SocialMediaAccessGuard] },
+  { path: 'telegram', component: SocialMediaTelegramComponent, canActivate: [SocialMediaAccessGuard] }
 ];
 
 @NgModule({

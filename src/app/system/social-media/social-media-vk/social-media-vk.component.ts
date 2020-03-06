@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-social-media-vk',
@@ -8,10 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class SocialMediaVkComponent implements OnInit
 {
 
-  constructor() { }
+  constructor(private _location: Location, private router: Router)
+  {
+  }
 
   ngOnInit()
   {
   }
 
+  GoBack()
+  {
+    this._location.back();
+  }
 }

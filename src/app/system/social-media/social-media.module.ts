@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { SocialMediaRoutingModule } from './social-media.routing';
 import { SocialMediaVkComponent } from './social-media-vk/social-media-vk.component';
@@ -11,7 +12,8 @@ import { SocialMediaAccessGuard } from './social-media.guard';
   declarations: [SocialMediaVkComponent, SocialMediaTelegramComponent, SocialMediaOverviewComponent],
   imports: [
     CommonModule,
-    SocialMediaRoutingModule
+    SocialMediaRoutingModule,
+    RouterModule
   ],
   providers: [SocialMediaAccessGuard],
 })
