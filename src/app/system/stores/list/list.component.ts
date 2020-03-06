@@ -24,8 +24,8 @@ DeleteResult = '';
 OperatorDelete = new OperatorModel();
 StoreDelete = new StoreModel();
   constructor(
-      private auth: AuthService, 
-      private router: Router, 
+      private auth: AuthService,
+      private router: Router,
       private route: ActivatedRoute,
       private service: StoresService)
   {
@@ -94,7 +94,7 @@ StoreDelete = new StoreModel();
   DeleteStore(Item)
   {
     this.ShowModalStore = false;
-      this.service.DeleteStore(Item.id, 
+      this.service.DeleteStore(Item.id,
           (res) => {
               this.service.RefreshStores();
               this.DeleteResult = "Магазин «" + this.StoreDelete.name +"» успешно удален!";
@@ -132,18 +132,18 @@ StoreDelete = new StoreModel();
   DeleteOperator(Item: OperatorModel)
   {
     this.ShowModalOperator = false;
-    this.service.PutOperator(Item.id,{store_id: 0}, 
+    this.service.PutOperator(Item.id,{store_id: 0},
       (res) => {
           this.RefreshOperatorsByStoreId(Item.store_id);
-          this.DeleteResult = "Оператор «"+ 
-          this.OperatorDelete.first_name + " " + 
-          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+          this.DeleteResult = "Оператор «"+
+          this.OperatorDelete.first_name + " " +
+          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "» успешно удален!"
       },
       (err) => {
-        this.DeleteResult = "Не получилось удалить оператора «"+ 
-        this.OperatorDelete.first_name + " " + 
-        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+        this.DeleteResult = "Не получилось удалить оператора «"+
+        this.OperatorDelete.first_name + " " +
+        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
         this.OperatorDelete.last_name + "»!";
       }
     )
@@ -160,5 +160,5 @@ StoreDelete = new StoreModel();
     this.ShowModalOperator = true;
     this.OperatorDelete = item;
   }
-  
+
 }

@@ -14,7 +14,7 @@
                 <div class="settings__form">
                     <p class="create-block__label create-block__label--light">Имя</p>
 
-                    <input type="text" 
+                    <input type="text"
                         class="create-block__input create-block__input--full"
                         [ngClass]="{'create-block__input--error': GeneralForm.controls.first_name.invalid && (GeneralForm.controls.first_name.dirty || GeneralForm.controls.first_name.touched)}"
                         autocomplete="null"
@@ -31,7 +31,7 @@
                     </p>
 
                     <p class="create-block__label create-block__label--light">Фамилия</p>
-                    <input type="text" 
+                    <input type="text"
                         class="create-block__input create-block__input--full"
                         [ngClass]="{'create-block__input--error': GeneralForm.controls.last_name.invalid && (GeneralForm.controls.last_name.dirty || GeneralForm.controls.last_name.touched)}"
                         autocomplete="null"
@@ -48,7 +48,7 @@
                     </p>
 
                     <p class="create-block__label create-block__label--light">Название компании</p>
-                    <input type="text" 
+                    <input type="text"
                         class="create-block__input create-block__input--full"
                         [ngClass]="{'create-block__input--error': GeneralForm.controls.company_name.invalid && (GeneralForm.controls.company_name.dirty || GeneralForm.controls.company_name.touched)}"
                         autocomplete="null"
@@ -79,7 +79,7 @@
             <div class="settings__form">
                 <p class="create-block__label create-block__label--light">Текущий E-mail</p>
 
-                <input type="text" 
+                <input type="text"
                     class="create-block__input create-block__input--full"
                     [ngClass]="{'create-block__input--error': EmailForm.controls.current_email.invalid && (EmailForm.controls.current_email.dirty || EmailForm.controls.current_email.touched)}"
                     autocomplete="null"
@@ -96,7 +96,7 @@
                 </p>
 
                 <p class="create-block__label create-block__label--light">Новый E-mail</p>
-                <input type="text" 
+                <input type="text"
                     class="create-block__input create-block__input--full"
                     [ngClass]="{'create-block__input--error': EmailForm.controls.email.invalid && (EmailForm.controls.email.dirty || EmailForm.controls.email.touched)}"
                     autocomplete="null"
@@ -125,13 +125,13 @@
                     <p *ngIf="PasswordFormError && PasswordForm.invalid" class="settings__hint settings__hint--error">Ошибка заполнения поля</p>
                     <p *ngIf="PasswordFormSuccess" class="settings__hint settings__hint--success">Изменения внесены</p>
                 </div>
-    
+
                 <div class="settings__form">
                     <p class="create-block__label create-block__label--light">Текущий пароль</p>
                     <!-- Add class "create-block__input--error" for input with error like below -->
                     <!-- <input type="password" class="create-block__input create-block__input--full create-block__input--error"> -->
 
-                    <input type="password" 
+                    <input type="password"
                         class="create-block__input create-block__input--full"
                         [ngClass]="{'create-block__input--error': PasswordForm.controls.current_password.invalid && (PasswordForm.controls.current_password.dirty || PasswordForm.controls.current_password.touched)}"
                         autocomplete="null"
@@ -147,9 +147,9 @@
                             <span *ngIf="PasswordForm.controls.current_password.errors.wrong">Неправильный пароль.</span>
                         </ng-container>
                     </p>
-    
+
                     <p class="create-block__label create-block__label--light">Новый пароль</p>
-                    <input type="password" 
+                    <input type="password"
                         class="create-block__input create-block__input--full"
                         [ngClass]="{'create-block__input--error': PasswordForm.controls.password.invalid && (PasswordForm.controls.password.dirty || PasswordForm.controls.password.touched)}"
                         autocomplete="null"
@@ -164,9 +164,9 @@
                             <span *ngIf="PasswordForm.controls.password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
                         </ng-container>
                     </p>
-    
+
                     <p class="create-block__label create-block__label--light">Подтвердить новый пароль</p>
-                    <input type="password" 
+                    <input type="password"
                         class="create-block__input create-block__input--full"
                         [ngClass]="{'create-block__input--error': PasswordForm.controls.password_confirmation.invalid && (PasswordForm.controls.password_confirmation.dirty || PasswordForm.controls.password_confirmation.touched)}"
                         autocomplete="null"
@@ -184,10 +184,10 @@
                         </ng-container>
                     </p>
                 </div>
-    
+
                 <button class="button settings__button" type="submit">Сохранить</button>
             </form>
-            
+
         </div>
     </div>
 

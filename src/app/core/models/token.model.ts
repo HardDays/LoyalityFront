@@ -1,5 +1,5 @@
-export class TokenModel{
-    constructor(
-        public token?:string
-    ){}
+export class TokenModel {
+  constructor(
+    public token?: string
+  ) { }
 }

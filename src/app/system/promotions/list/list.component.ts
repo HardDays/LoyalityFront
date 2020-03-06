@@ -22,8 +22,8 @@ ShowModal = false;
 DeleteResult = "";
 QueryString = "";
   constructor(
-      private auth: AuthService, 
-      private router: Router, 
+      private auth: AuthService,
+      private router: Router,
       private route: ActivatedRoute,
       private service: PromotionsService)
   {
@@ -50,13 +50,13 @@ QueryString = "";
   DeletePromotion(Item: PromotionModel)
   {
     this.ShowModal = false;
-      this.service.DeletePromotion(Item.id, 
+      this.service.DeletePromotion(Item.id,
           (res) => {
-            this.DeleteResult = "Акция  «" + Item.name + "» успешно удалена!"; 
+            this.DeleteResult = "Акция  «" + Item.name + "» успешно удалена!";
               this.service.RefreshPromotions();
           },
           (err) => {
-            this.DeleteResult = "Не получилось удалить акцию  «" + Item.name + "»!"; 
+            this.DeleteResult = "Не получилось удалить акцию  «" + Item.name + "»!";
           })
   }
 

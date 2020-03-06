@@ -75,9 +75,9 @@
                         <input type="radio" class="radio__input" value='accrual_convert' name="accrual_rule" formControlName="accrual_rule">
                         <div class="radio__text create-block__radio-with-input">
                             За
-                            <input type="text" 
-                                formControlName="accrual_money"  
-                                name="accrual_money" 
+                            <input type="text"
+                                formControlName="accrual_money"
+                                name="accrual_money"
                                 class="create-block__input create-block__input--small"
                                 [ngClass]="{'create-block__input--error': Form.controls.accrual_money.invalid && (Form.controls.accrual_money.dirty || Form.controls.accrual_money.touched)}"
                             >
@@ -89,7 +89,7 @@
                         </div>
                     </label>
                 </div>
-        
+
                 <div class="create-block__group">
                     <p class="create-block__label">Правило сгорания бонусов</p>
                     <label class="radio radio--create">
@@ -107,7 +107,7 @@
                         </div>
                     </label>
                 </div>
-        
+
                 <div class="create-block__group">
                     <p class="create-block__label">Правило активации бонусов</p>
                     <label class="radio radio--create">
@@ -141,17 +141,17 @@
                                 [ngClass]="{'create-block__input--error': Form.controls.write_off_rule_percent.invalid && (Form.controls.write_off_rule_percent.dirty || Form.controls.write_off_rule_percent.touched)}"
                                 >
                             </span>
-                            
+
                             от суммы покупки если на счету не менее
                             <input type="text" formControlName="write_off_rule_points" name="write_off_rule_points" class="create-block__input create-block__input--small"
                             [ngClass]="{'create-block__input--error': Form.controls.write_off_rule_points.invalid && (Form.controls.write_off_rule_points.dirty || Form.controls.write_off_rule_points.touched)}"
                             >
-                            
+
                             бонусов
                         </div>
                     </label>
                 </div>
-        
+
                 <div class="create-block__group">
                     <p class="create-block__label">Правило предоставления скидки</p>
                     <label class="radio radio--create">
@@ -174,7 +174,7 @@
                         </div>
                     </label>
                 </div>
-        
+
                 <div class="create-block__group">
                     <p class="create-block__label">Округление бонусов</p>
                     <label class="radio radio--create">
@@ -194,7 +194,7 @@
                         <div class="radio__text">До целых в большую сторону</div>
                     </label>
                 </div>
-        
+
                 <div class="create-block__group">
                     <p class="create-block__label">Дополнительные настройки</p>
                     <label class="radio radio--create">
@@ -204,7 +204,7 @@
                     <label class="radio radio--create">
                         <input type="checkbox" class="radio__input" name="write_off_limited" formControlName="write_off_limited">
                         <div class="radio__text">
-                            Списывать бонусы, если минимальная сумма покупки составляет 
+                            Списывать бонусы, если минимальная сумма покупки составляет
                             <input type="text" formControlName="write_off_min_price" name="write_off_min_price" class="create-block__input create-block__input--small"
                             [ngClass]="{'create-block__input--error': Form.controls.write_off_min_price.invalid && (Form.controls.write_off_min_price.dirty || Form.controls.write_off_min_price.touched)}"
                             >
@@ -212,8 +212,8 @@
                         </div>
                     </label>
                 </div>
-        
-        
+
+
 
         <div class="text-center">
             <button type="submit" class="button create-block__button">Сохранить</button>

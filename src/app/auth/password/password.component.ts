@@ -7,37 +7,33 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
   templateUrl: './password.component.html',
   styleUrls: ['./password.component.css']
 })
-export class PasswordComponent implements OnInit 
-{
+export class PasswordComponent implements OnInit {
 
   IsSendSuccess = false;
   Form = new FormGroup({
-    "email" : new FormControl('', [
+    "email": new FormControl('', [
       Validators.required,
       Validators.email
     ])
   });
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
   }
 
-  get email()
-  {
+  get email() {
     return this.Form.get('email');
   }
 
-  ResetPw()
-  {
+  ResetPw() {
     const valid = this.Form.valid;
-    if(valid)
-    {
+    if (valid) {
       this.auth.RequestPassword(
         this.Form.getRawValue()['email'],
         (res) => {
           this.IsSendSuccess = true;
-        }, 
+        },
         (err) => {
           this.IsSendSuccess = true;
         }

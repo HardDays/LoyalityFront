@@ -7,9 +7,9 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class OperatorsComponent  implements OnInit{
   constructor(private cdr: ChangeDetectorRef, private auth: AuthService) {
-       
+
   }
-  ngOnInit(): void 
+  ngOnInit(): void
   {
   }
 }

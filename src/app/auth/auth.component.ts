@@ -10,9 +10,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class AuthComponent implements OnInit{
     constructor(private auth: AuthService, private cdr: ChangeDetectorRef) {
-        
+
     }
     ngOnInit() {
-        
+
     }
 }

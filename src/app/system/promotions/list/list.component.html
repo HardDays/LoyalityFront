@@ -15,7 +15,7 @@
         <div class="main-blocks__item" *ngFor="let item of Promotions">
             <p class="main-blocks__title">{{item.name}}</p>
             <a [routerLink]="['/system', 'my_promotions', 'edit', item.id]" routerLinkActive="router-link-active"  class="main-blocks__link main-blocks__link--edit">Редактировать</a>
-        
+
             <a (click)="DeletePromotionQA(item)" class="main-blocks__link main-blocks__link--delete">Удалить</a>
         </div>
         <!-- <div class="main-blocks__item">

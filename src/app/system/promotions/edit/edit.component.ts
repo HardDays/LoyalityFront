@@ -108,11 +108,11 @@ export class PromotionEditComponent implements OnInit {
 
                 if(data.write_off_rule_points)
                   data.write_off_rule_points = Math.round(data.write_off_rule_points / 100);
-          
+
 
                 if(data.accordance_points)
                   data.accordance_points = Math.round(data.accordance_points / 100);
-          
+
                 if(data.write_off_min_price)
                   data.write_off_min_price = Math.round(data.write_off_min_price / 100);
 
@@ -144,7 +144,7 @@ export class PromotionEditComponent implements OnInit {
     }
   }
 
-  
+
 
   GoBack()
   {
@@ -176,7 +176,7 @@ export class PromotionEditComponent implements OnInit {
         data.write_off_min_price = data.write_off_min_price * 100;
 
 
-      const error = (err) => { 
+      const error = (err) => {
         const body = err.body;
         for(var i in body)
         {
@@ -235,7 +235,7 @@ export class PromotionEditComponent implements OnInit {
     const remove_error = (property_name) => {
       if(this.Form.controls[property_name].hasError('wrong'))
       {
-        
+
         this.Form.controls[property_name].setErrors({
           'wrong': null
         });
@@ -255,14 +255,14 @@ export class PromotionEditComponent implements OnInit {
     const data = this.Form.getRawValue();
 
 
-    
+
     if(!data.begin_date.date || !data.end_date.date)
     {
       this.Form.controls.end_date.setErrors({
         'wrong': true
       });
       hasError = true;
-      
+
     }
     else{
       const date1 = new Date(this.IDateToISO(data.begin_date.date));
@@ -274,7 +274,7 @@ export class PromotionEditComponent implements OnInit {
         });
         hasError = true;
       }
-      
+
     }
     let scrollTo = 0;
 

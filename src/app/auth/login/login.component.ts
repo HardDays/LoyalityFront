@@ -9,8 +9,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit
-{
+export class LoginComponent implements OnInit {
 
   LoginModel: LoginModel = new LoginModel();
   PasswordError: string = "";
@@ -32,41 +31,32 @@ export class LoginComponent implements OnInit
     ])
   });
 
-  get email()
-  {
+  get email() {
     return this.Form.get('email');
   }
 
-  get phone()
-  {
+  get phone() {
     return this.Form.get('phone');
   }
 
-  get password()
-  {
+  get password() {
     return this.Form.get('password');
   }
 
   isLoading = false;
 
   constructor(private auth: AuthService,
-    private router: Router)
-  {
+    private router: Router) {
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
   }
 
-  ValidatePhone()
-  {
-    return (control: AbstractControl): { [key: string]: any } | null =>
-    {
-      if (this.Form && this.Form.controls)
-      {
+  ValidatePhone() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (this.Form && this.Form.controls) {
         const values = this.Form.getRawValue();
-        if (values.phone)
-        {
+        if (values.phone) {
           const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
           return regex.test(values.phone) ? null : { 'incorrect_value': { value: control.value } };
@@ -76,36 +66,27 @@ export class LoginComponent implements OnInit
     };
   }
 
-  Login()
-  {
-    for (const i in this.Form.controls)
-    {
+  Login() {
+    for (const i in this.Form.controls) {
       this.Form.get(i).updateValueAndValidity();
     }
     this.Form.updateValueAndValidity();
     const valid = this.Form.valid;
 
-    if (valid)
-    {
+    if (valid) {
       const data = this.Form.getRawValue();
       this.auth.Login(data,
-        (val) =>
-        {
+        (val) => {
           this.router.navigate(["/auth", "select"]);
         },
-        (err) =>
-        {
-          if (err.status == 403)
-          {
+        (err) => {
+          if (err.status == 403) {
             this.router.navigate(["/auth", "confirm"]);
           }
-          else
-          {
+          else {
             const not_found = [401, 422, 404, 403];
-            for (const i of not_found)
-            {
-              if (i == err.status)
-              {
+            for (const i of not_found) {
+              if (i == err.status) {
                 this.password.setErrors({
                   "wrong": true
                 });

@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  implements OnInit {
+export class AppComponent implements OnInit {
   IsLoggedIn = false;
   IsLoading = false;
   title = 'LoyalityFront';
@@ -17,25 +17,23 @@ export class AppComponent  implements OnInit {
     this.IsLoggedIn = this.auth.IsLoggedIn;
     // this.OnLoginChange();
     this.auth.onAuthChange$.subscribe(
-        (val) => {
-            this.IsLoggedIn = val;
-            // this.OnLoginChange();
-        }
+      (val) => {
+        this.IsLoggedIn = val;
+        // this.OnLoginChange();
+      }
     )
     this.auth.onLoading.subscribe(
       val => {
-        if(this.IsLoading != val)
-        {
+        if (this.IsLoading != val) {
           setTimeout(() => {
             this.IsLoading = val;
           }, 1);
         }
       }
     );
-    
+
   }
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     this.cdr.detectChanges();
   }
 

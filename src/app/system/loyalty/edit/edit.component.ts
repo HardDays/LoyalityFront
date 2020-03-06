@@ -159,11 +159,11 @@ export class LoyaltyEditComponent implements OnInit {
             data.recommend_recommendator_points *= 100;
             data.recommend_registered_points *= 100;
         }
-        this.service.SaveLoyalty(data, 
+        this.service.SaveLoyalty(data,
         (res) => {
             this.ProgramSaved = true;
         },
-        (err) => { 
+        (err) => {
             const body = err.body;
             for(var i in body)
             {
@@ -186,7 +186,7 @@ export class LoyaltyEditComponent implements OnInit {
     const remove_error = (property_name) => {
       if(this.Form.controls[property_name].hasError('wrong'))
       {
-        
+
         this.Form.controls[property_name].setErrors({
           'wrong': null
         });

@@ -18,9 +18,9 @@ import { PasswordComponent } from './password.component';
     RouterModule,
     ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     PasswordComponent
   ],
-  providers: [ ]
+  providers: []
 })
-export class PasswordModule {}
+export class PasswordModule { }

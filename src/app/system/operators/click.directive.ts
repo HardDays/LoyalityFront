@@ -4,7 +4,7 @@ import {Directive, HostListener, OnInit, Output, EventEmitter, ElementRef, NgMod
     selector: '[clickDirective]'
 })
 export class ClickDirective implements OnInit{
-     
+
     @Output() clickOutside = new EventEmitter<boolean>();
     @Output() clickInside = new EventEmitter<boolean>();
     constructor(private _elementRef : ElementRef){
@@ -22,7 +22,7 @@ export class ClickDirective implements OnInit{
             this.clickInside.emit(true);
         }
     }
-     
+
 }
 
 @NgModule({
@@ -30,7 +30,7 @@ export class ClickDirective implements OnInit{
         ClickDirective
     ],
     imports: [
-      
+
     ],
     exports:[
         ClickDirective

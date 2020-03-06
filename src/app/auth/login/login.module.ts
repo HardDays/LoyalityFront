@@ -18,9 +18,9 @@ import { LoginComponent } from './login.component';
     RouterModule,
     ReactiveFormsModule
   ],
-  exports:[
-      LoginComponent
+  exports: [
+    LoginComponent
   ],
-  providers: [ ]
+  providers: []
 })
-export class LoginModule {}
+export class LoginModule { }

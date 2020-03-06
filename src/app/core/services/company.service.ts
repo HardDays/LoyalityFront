@@ -9,25 +9,21 @@ import { AuthService } from './auth.service';
 
 
 @Injectable()
-export class CompanyService
-{
-    constructor(public http: HttpService, private router: Router, private auth: AuthService) 
-    {
-    }
+export class CompanyService {
+  constructor(public http: HttpService, private router: Router, private auth: AuthService) {
+  }
 
-    CreateCompany(data: any,  success?: (data) => void, fail?: (err) => void)
-    {
-        this.http.CommonRequest(
-            () => this.http.PostData('/companies', data),
-            (res) => {
-                if(success && typeof success == "function")
-                {
-                    success(res);
-                }
-            },
-            (err) => {
-                this.auth.ErrorHandler(err, fail);
-            }
-        );
-    }
+  CreateCompany(data: any, success?: (data) => void, fail?: (err) => void) {
+    this.http.CommonRequest(
+      () => this.http.PostData('/companies', data),
+      (res) => {
+        if (success && typeof success == "function") {
+          success(res);
+        }
+      },
+      (err) => {
+        this.auth.ErrorHandler(err, fail);
+      }
+    );
+  }
 }

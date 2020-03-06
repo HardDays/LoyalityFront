@@ -70,8 +70,8 @@ export class SettingsComponent implements OnInit {
         ])
     });
     constructor(
-        private auth: AuthService, 
-        private router: Router, 
+        private auth: AuthService,
+        private router: Router,
         private route: ActivatedRoute)
     {
         this.auth.onAuthChange$.subscribe((res) => {
@@ -163,7 +163,7 @@ export class SettingsComponent implements OnInit {
             return;
 
         const data = this.PasswordForm.getRawValue();
-        this.auth.UpdateProfile(data, 
+        this.auth.UpdateProfile(data,
             (res) => {
                 this.PasswordFormSuccess = true;
                 this.UpdatePasswordForm();
@@ -179,7 +179,7 @@ export class SettingsComponent implements OnInit {
                 }
             }
         )
-        
+
     }
 
     UpdateEmail()
@@ -196,7 +196,7 @@ export class SettingsComponent implements OnInit {
             return;
 
         const data = this.EmailForm.getRawValue();
-        this.auth.UpdateProfile(data, 
+        this.auth.UpdateProfile(data,
             (res) => {
                 this.EmailFormSuccess = true;
                 this.UpdateEmailForm();
@@ -223,7 +223,7 @@ export class SettingsComponent implements OnInit {
         )
 
         // ON SUCCESS BLOCK
-        
+
     }
 
     UpdateGeneral()
@@ -240,7 +240,7 @@ export class SettingsComponent implements OnInit {
             return;
 
         const data = this.GeneralForm.getRawValue();
-        this.auth.UpdateProfile(data, 
+        this.auth.UpdateProfile(data,
             (res) => {
                 this.auth.UpdateCompany({name : data.company_name},
                     (res) => {
@@ -255,6 +255,6 @@ export class SettingsComponent implements OnInit {
             },
             (err) => {}
         )
-        
+
     }
 }

@@ -15,7 +15,7 @@ export class OperatorCreateComponent implements OnInit {
   SaveSuccess = false;
   Mode = 'create';
   isLoading = false;
-    Stores: StoreModel[] = []; 
+    Stores: StoreModel[] = [];
     SelectedStore: StoreModel = null;
     NoStore: StoreModel = new StoreModel();
 

@@ -95,7 +95,7 @@ export class LoyaltyLevelComponent implements OnInit {
 
                 if(data.write_off_rule_points)
                   data.write_off_rule_points /= 100;
-      
+
                 if(data.accordance_points)
                   data.accordance_points /= 100;
 
@@ -121,7 +121,7 @@ export class LoyaltyLevelComponent implements OnInit {
     }
   }
 
-  
+
 
   GoBack()
   {
@@ -153,7 +153,7 @@ export class LoyaltyLevelComponent implements OnInit {
         data.accrual_points *= 100;
         data.accrual_money *= 100;
       }
-      
+
       if(data.write_off_rule != "write_off_convert")
       {
         data.write_off_rule_percent = null;
@@ -162,17 +162,17 @@ export class LoyaltyLevelComponent implements OnInit {
       else{
         data.write_off_rule_points *= 100;
       }
-    
+
       if(data.burning_rule != "burning_days")
       {
         data.burning_days = null;
       }
-    
+
       if(data.activation_rule != "activation_days")
       {
         data.activation_days = null;
       }
-    
+
       if(data.accordance_rule != "accordance_convert")
       {
         data.accordance_percent = null;
@@ -183,7 +183,7 @@ export class LoyaltyLevelComponent implements OnInit {
       }
 
 
-      const error = (err) => { 
+      const error = (err) => {
         const body = err.body;
         for(var i in body)
         {
@@ -223,7 +223,7 @@ export class LoyaltyLevelComponent implements OnInit {
     const remove_error = (property_name) => {
       if(this.Form.controls[property_name].hasError('wrong'))
       {
-        
+
         this.Form.controls[property_name].setErrors({
           'wrong': null
         });

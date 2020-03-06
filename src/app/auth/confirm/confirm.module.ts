@@ -18,9 +18,9 @@ import { ConfirmComponent } from './confirm.component';
     RouterModule,
     ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     ConfirmComponent
   ],
-  providers: [ ]
+  providers: []
 })
-export class ConfirmModule {}
+export class ConfirmModule { }

@@ -14,7 +14,7 @@ export class ReportsComponent implements OnInit
 {
     constructor(private auth: AuthService, private service: ReportsService)
     {
-        
+
     }
 
     ngOnInit(): void

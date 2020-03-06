@@ -13,7 +13,7 @@ import { CompanyService } from '../../core/services/company.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignUpComponent implements OnInit 
+export class SignUpComponent implements OnInit
 {
   FormData: CreatorModel = new CreatorModel();
   CompanyName: string = '';
@@ -56,12 +56,12 @@ export class SignUpComponent implements OnInit
     // ])
   });
 
-  constructor(private auth: AuthService,private router: Router, private company: CompanyService) 
+  constructor(private auth: AuthService,private router: Router, private company: CompanyService)
   {
-      
+
   }
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
     this.RegForm.reset();
   }
@@ -145,7 +145,7 @@ export class SignUpComponent implements OnInit
         this.FormData[i] = vals[i];
       }
 
-      
+
       this.auth.CreateCreator(this.FormData,
         (val) => {
           this.RegSuccess = true;

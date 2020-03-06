@@ -40,5 +40,3 @@ export class SocialMediaAccessGuard implements CanActivate
     return true;
   }
 }
-
-

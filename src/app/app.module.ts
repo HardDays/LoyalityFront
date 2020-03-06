@@ -9,7 +9,7 @@ import { AuthService } from './core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routing';
 import { CompanyService } from './core/services/company.service';
 

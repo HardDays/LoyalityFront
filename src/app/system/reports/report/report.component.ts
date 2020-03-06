@@ -92,11 +92,11 @@ export class ReportComponent implements OnInit
         clients: [],
         orders: []
     };
-    constructor(private _location: Location, 
-        private auth: AuthService, 
-        private router: Router, 
-        private route: ActivatedRoute, 
-        private service: ReportsService, 
+    constructor(private _location: Location,
+        private auth: AuthService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private service: ReportsService,
         private pipe: DatePipe)
     {
         this.route.params.subscribe(params=> {
@@ -186,7 +186,7 @@ export class ReportComponent implements OnInit
             params["end_date"] = this.ConvertDate(params["end_date"]);
         }
 
-        this.service.GetReport(this.Type, params, 
+        this.service.GetReport(this.Type, params,
             (res) => {
                 this.ParseData(res);
             },
@@ -240,7 +240,7 @@ export class ReportComponent implements OnInit
             else{
                 this.ArrayData = data;
             }
-            
+
         }
     }
 
@@ -345,7 +345,7 @@ export class ReportComponent implements OnInit
                 "key": "Метрика",
                 "value": "Занчение"
             })
-            
+
             for(const i of this.ReportFields[this.Type])
             {
                 arr.push({
@@ -408,7 +408,7 @@ export class ReportComponent implements OnInit
                     "birth_day": "Дата Рождения",
                     "gender": "Пол"
                 })
-                
+
                 for(const item of this.ArrayData)
                 {
                     arr.push({
@@ -424,7 +424,7 @@ export class ReportComponent implements OnInit
         }
         sheet.addRows(arr);
         workbook.xlsx.writeBuffer().then(data => {
-        const blob = new Blob([data], { type: blobType }); 
+        const blob = new Blob([data], { type: blobType });
             FileSaver.saveAs(blob, this.NameDics[this.Type] + ".xlsx");
         });
     }

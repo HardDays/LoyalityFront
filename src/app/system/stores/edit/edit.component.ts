@@ -89,7 +89,7 @@ export class StoreEditComponent implements OnInit {
 
     if(!vals || !vals.id || vals.id != this.Id)
     {
-      this.service.GetStore(this.Id, 
+      this.service.GetStore(this.Id,
         (res) => {
           this.InitAll(res);
         },
@@ -123,7 +123,7 @@ export class StoreEditComponent implements OnInit {
       this.Form.get(i).markAsDirty();
       this.Form.get(i).markAsTouched();
     }
-    
+
     const valid = this.Form.valid;
 
     if(valid)

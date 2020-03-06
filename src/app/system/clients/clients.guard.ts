@@ -9,7 +9,7 @@ export class ClientsAccessGuard implements CanActivate{
     {}
     canActivate(router:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean
     {
-      
+
         // if(router.data)
         // {
         //     if(router.data.auth)

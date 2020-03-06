@@ -2,12 +2,12 @@ import {Directive, HostListener, Input, HostBinding, OnInit, Output, EventEmitte
 import { StoreModel } from '../../../../core/models/store.model';
 import { StoresService } from '../../stores.service';
 import { OperatorModel } from 'src/app/core/models/operator.model';
- 
+
 @Directive({
     selector: '[StoreItem]'
 })
 export class StoreItemDirective implements OnInit{
-     
+
     @Input() Item: StoreModel;
     @Output() clickOutside = new EventEmitter<StoreModel>();
     Operators: OperatorModel[] = [];
@@ -23,5 +23,5 @@ export class StoreItemDirective implements OnInit{
             this.clickOutside.emit(this.Item);
         }
     }
-     
+
 }

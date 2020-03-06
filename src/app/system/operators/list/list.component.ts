@@ -21,8 +21,8 @@ QueryString = "";
 DeleteResult = '';
 ShowRepair = false;
   constructor(
-      private auth: AuthService, 
-      private router: Router, 
+      private auth: AuthService,
+      private router: Router,
       private route: ActivatedRoute,
       private service: OperatorsService)
   {
@@ -51,16 +51,16 @@ ShowRepair = false;
     this.ShowModal = false;
     this.service.PutOperator(Item.id,{operator_status: "deleted"},
       (res) => {
-        this.DeleteResult = "Оператор «"+ 
-        this.OperatorDelete.first_name + " " + 
-        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+        this.DeleteResult = "Оператор «"+
+        this.OperatorDelete.first_name + " " +
+        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
         this.OperatorDelete.last_name + "» успешно удален!"
         this.service.RefreshOperators();
     },
     (err) => {
-        this.DeleteResult = "Не получилось удалить оператора «"+ 
-          this.OperatorDelete.first_name + " " + 
-          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+        this.DeleteResult = "Не получилось удалить оператора «"+
+          this.OperatorDelete.first_name + " " +
+          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "»!";
     })
   }
@@ -70,16 +70,16 @@ ShowRepair = false;
     this.ShowRepair = false;
     this.service.PutOperator(Item.id,{operator_status: "active"},
       (res) => {
-        this.DeleteResult = "Оператор «"+ 
-        this.OperatorDelete.first_name + " " + 
-        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+        this.DeleteResult = "Оператор «"+
+        this.OperatorDelete.first_name + " " +
+        (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
         this.OperatorDelete.last_name + "» успешно восстановлен!"
         this.service.RefreshOperators();
     },
     (err) => {
-        this.DeleteResult = "Не получилось восстановить оператора «"+ 
-          this.OperatorDelete.first_name + " " + 
-          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") + 
+        this.DeleteResult = "Не получилось восстановить оператора «"+
+          this.OperatorDelete.first_name + " " +
+          (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "»!";
     })
   }

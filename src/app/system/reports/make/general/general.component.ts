@@ -79,7 +79,7 @@ export class MakeGeneralReportComponent implements OnInit
     SelectedOperators: OperatorModel[] = [];
 
     constructor(private auth: AuthService, private service: ReportsService, private router: Router)
-    {  
+    {
         this.service.onOperatorsChange$.subscribe(Val => {
             if(Val)
                 this.UpdateOperators();
@@ -94,7 +94,7 @@ export class MakeGeneralReportComponent implements OnInit
             if(Val)
                 this.UpdateStores();
         })
-        
+
     }
 
     ngOnInit(): void
@@ -187,7 +187,7 @@ export class MakeGeneralReportComponent implements OnInit
                 this.Form.controls[property_name].updateValueAndValidity();
             }
         }
-    
+
         for(const i in this.Form.controls)
         {
             this.Form.controls[i].markAsDirty();
@@ -195,10 +195,10 @@ export class MakeGeneralReportComponent implements OnInit
             remove_error(i);
             this.Form.controls[i].updateValueAndValidity();
         }
-    
+
         let hasError = false;
         const data = this.Form.getRawValue();
-    
+
         if(data.begin_date.epoc && data.end_date.epoc)
         {
             if(data.begin_date.epoc > data.end_date.epoc)

@@ -21,8 +21,8 @@ export class LoyaltyListComponent implements OnInit {
     LevelForDelete: LoyaltyLevelModel = new LoyaltyLevelModel();
 
   constructor(
-      private auth: AuthService, 
-      private router: Router, 
+      private auth: AuthService,
+      private router: Router,
       private route: ActivatedRoute,
       private service: LoyaltyService)
   {
@@ -52,7 +52,7 @@ export class LoyaltyListComponent implements OnInit {
   DeleteLevel()
   {
     this.ShowModal = false;
-    this.service.DeleteLevel(this.LevelForDelete.id, 
+    this.service.DeleteLevel(this.LevelForDelete.id,
         (res) => {
             this.DeleteSuccess = true;
             this.service.RefreshLoyalty();

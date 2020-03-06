@@ -10,7 +10,7 @@
                 </span>
             </p>
         </div>
-    
+
         <div class="main-blocks main-blocks--levels" >
             <div class="main-blocks__item main-blocks__item--create" (click)="CreateNewLevel()">
                 <img src="assets/img/plus.png" alt="">
@@ -18,13 +18,13 @@
             </div>
             <div class="main-blocks__item" *ngFor="let item of Levels">
                 <p class="main-blocks__title">{{item.name ? item.name : ('Уровень ' + item.id)}}</p>
-    
+
                 <p class="main-blocks__pre-link">{{Loyalty.sum_type == 'one_buy' ? 'Разовая покупка' : 'Общая сумма покупок'}} от {{item.min_price / 100}} рублей</p>
                 <a [routerLink]="['/system','my_loyalty_program','level', item.id]" class="main-blocks__link main-blocks__link--edit_black">Редактировать</a>
                 <a class="main-blocks__link main-blocks__link--delete" (click)="LevelForDelete = item;ShowModal = true">Удалить</a>
             </div>
         </div>
-    
+
     </div>
 <!-- </section> -->
 
@@ -67,6 +67,3 @@
         </div>
     </div>
 </div>
-
-
-

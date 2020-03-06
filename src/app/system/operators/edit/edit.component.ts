@@ -14,7 +14,7 @@ import { StoreModel } from 'src/app/core/models/store.model';
 export class OperatorEditComponent implements OnInit {
 
   isLoading = false;
-  Stores: StoreModel[] = []; 
+  Stores: StoreModel[] = [];
   SelectedStore: StoreModel = null;
   Id = 0;
 
@@ -98,7 +98,7 @@ export class OperatorEditComponent implements OnInit {
 
     // if(!vals || !vals.id || vals.id != this.Id)
     // {
-      this.service.GetOperator(this.Id, 
+      this.service.GetOperator(this.Id,
         (res) => {
           this.InitAll(res);
         },

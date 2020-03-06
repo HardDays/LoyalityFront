@@ -39,9 +39,9 @@
                         <span *ngIf="first_name.errors.maxlength">Максимальная длина 30 символов.</span>
                     </ng-container>
                 </p>
-    
-    
-                
+
+
+
                 <p class="create-block__label create-block__label--light">Отчество</p>
                 <!-- <input type="text" class="create-block__input create-block__input--full"> -->
                 <input type="text" class="create-block__input create-block__input--full"
@@ -69,7 +69,7 @@
                         <span *ngIf="email.errors.email">Введите корректный E-mail</span>
                     </ng-container>
                 </p>
-    
+
             <p class="create-block__label create-block__label--light">Выбрать магазин</p>
             <div clickDirective  (clickOutside)="HideSelect($event)" class="create-block__select" [ngClass]="{'create-block__select--opened': ShowSelect}">
                 <div class="create-block__select-value" (click)="ShowSelect = !ShowSelect">{{SelectedStore && SelectedStore.name ? SelectedStore.name: 'Магазин'}}</div>
@@ -93,12 +93,12 @@
                 </ng-container>
                 </select>
             </div> -->
-    
+
             <div class="text-center">
                 <button class="button create-block__button" type="submit">Сохранить изменения</button>
             </div>
         </form>
-        
+
     </div>
 
 </div>

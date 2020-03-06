@@ -11,11 +11,11 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 export class ConfirmComponent implements OnInit {
 
   LoginModel: LoginModel = new LoginModel();
-  PasswordError:string = "";
-  EmailError:string = "";
+  PasswordError: string = "";
+  EmailError: string = "";
 
   Form: FormGroup = new FormGroup({
-    "email": new FormControl(this.LoginModel.email,[
+    "email": new FormControl(this.LoginModel.email, [
       Validators.required,
       Validators.email
     ]),
@@ -24,36 +24,31 @@ export class ConfirmComponent implements OnInit {
     ])
   });
 
-  get email()
-  {
+  get email() {
     return this.Form.get('email');
   }
 
-  get code()
-  {
+  get code() {
     return this.Form.get('code');
   }
 
   isLoading = false;
 
   constructor(private auth: AuthService,
-      private router: Router) {
+    private router: Router) {
   }
 
-  ngOnInit()
-  {
-      const data = this.auth.Creator;
+  ngOnInit() {
+    const data = this.auth.Creator;
 
 
-      this.Form.patchValue(data);
+    this.Form.patchValue(data);
   }
 
-  Login()
-  {
+  Login() {
     const valid = this.Form.valid;
 
-    if(valid)
-    {
+    if (valid) {
       const data = this.Form.getRawValue();
       this.auth.Confirm(data,
         (val) => {
@@ -62,10 +57,8 @@ export class ConfirmComponent implements OnInit {
         },
         (err) => {
           const not_found = [401, 422, 404, 403];
-          for(const i of not_found)
-          {
-            if(i == err.status)
-            {
+          for (const i of not_found) {
+            if (i == err.status) {
               this.code.setErrors({
                 "wrong": true
               });

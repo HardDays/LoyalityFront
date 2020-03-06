@@ -35,6 +35,6 @@ import { CompanySelectorComponent } from './company-selector/company-selector.co
     // HttpClientModule,
   ],
   // exports: [AuthComponent],
-  providers: [ AuthAccessGuard]
+  providers: [AuthAccessGuard]
 })
-export class AuthModule {}
+export class AuthModule { }
