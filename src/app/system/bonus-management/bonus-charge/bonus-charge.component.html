@@ -8,13 +8,16 @@
     </div>
 
     <div class="create-block customer__block customer__block--small">
-      <p class="create-block__label create-block__label--light customer__label">Количество бонусов:<input type="text"
-               class="create-block__input create-block__input--medium"></p>
+      <p class="create-block__label create-block__label--light customer__label">Количество бонусов:<input type="number"
+               class="create-block__input create-block__input--medium"
+               (input)="SetPointsValue($event.target.value)"></p>
 
       <div class="customer__flex-buttons">
-        <button (click)="AddBonuses()"
+        <button [disabled]="!canSubmit"
+                (click)="AddBonuses()"
                 class="button customer__button">Начислить</button>
-        <button (click)="ChargeOffBonuses()"
+        <button [disabled]="!canSubmit"
+                (click)="ChargeOffBonuses()"
                 class="button customer__button button--black">Списать</button>
       </div>
     </div>
@@ -26,9 +29,9 @@
       <span class="modal__close"><img (click)="onCloseSuccessModal()"
              src="./../../../../../assets/img/close.svg"></span>
       <div class="modal__customer-content modal__customer-content-bonuses-inside">
-        <p class="bonuses-text">Пользователь: ФИО</p>
-        <p class="bonuses-text">Бонусов начислено:</p>
-        <p class="bonuses-text">Текущий баланс:</p>
+        <p class="bonuses-text">Пользователь: {{ClientSuccess.name}}</p>
+        <p class="bonuses-text">Бонусов начислено: {{Points}}</p>
+        <p class="bonuses-text">Текущий баланс: {{ClientSuccess.points}}</p>
       </div>
     </div>
   </div>

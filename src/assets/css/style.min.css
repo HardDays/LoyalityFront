@@ -2558,6 +2558,7 @@ div, span, p, header, footer, nav {
 }
 
 .search-id-button{
+  cursor: pointer;
   position: absolute;
   right: -70px;
   top: -1px;

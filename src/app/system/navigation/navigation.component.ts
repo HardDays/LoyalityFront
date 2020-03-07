@@ -105,7 +105,7 @@ export class NavigationComponent implements OnInit {
         url: MenuUrls.bonus_management,
         image: "assets/img/menu-bonuses.svg",
         label: "Начисление и списание бонусов",
-        visible: this.IsLoggedIn && this.Me.user_type === 'operator'
+        visible: this.IsLoggedIn && this.Me.user_type === 'creator'
       },
       {
         url: MenuUrls.social_media,

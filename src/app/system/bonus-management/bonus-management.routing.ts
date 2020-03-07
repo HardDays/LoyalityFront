@@ -8,7 +8,7 @@ import { BonusChargeComponent } from './bonus-charge/bonus-charge.component';
 const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: 'overview', component: BonusOverviewComponent, canActivate: [BonusManagementAccessGuard] },
-  { path: 'edit/:id', component: BonusChargeComponent, canActivate: [BonusManagementAccessGuard] }
+  { path: 'edit', component: BonusChargeComponent, canActivate: [BonusManagementAccessGuard] }
 ];
 
 @NgModule({

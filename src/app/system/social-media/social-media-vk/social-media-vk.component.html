@@ -15,8 +15,10 @@
 
       <div class="search-customer search-id">
         <input type="text"
+               disabled
                placeholder="https://vk.com/f639grp">
-        <button class="search-id-button">Копировать ссылку</button>
+        <button (click)="CopyLink()"
+                class="search-id-button">Копировать ссылку</button>
       </div>
 
       <div class="text-block-instructions">

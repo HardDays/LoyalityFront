@@ -17,9 +17,10 @@ export class BonusManagementService {
     this.http.CommonRequest(
       () => this.http.GetData('/clients', ''),
       (res: ClientModel[]) => {
+        const clients = this._parseClients(res);
         if (success && typeof success == 'function') {
           this.auth.onLoading.next(false);
-          success(res);
+          success(clients);
         }
       },
       (err) => {
@@ -29,5 +30,32 @@ export class BonusManagementService {
         }
       }
     );
+  }
+
+  AddPoints(data, success?: () => void, fail?: (err) => void) {
+    this.auth.onLoading.next(true);
+    this.http.CommonRequest(
+      () => this.http.PostData(`/clients/${data.clientId}/points`, { points: data.points }),
+      (res) => {
+        if (success && typeof success == 'function') {
+          this.auth.onLoading.next(false);
+          success();
+        }
+      },
+      (err) => {
+        if (fail && typeof fail == 'function') {
+          this.auth.onLoading.next(false);
+          fail(err);
+        }
+      }
+    );
+  }
+
+  _parseClients(data) {
+    if (Array.isArray(data)) {
+      return data.map(c => ({ ...c, ...c.client[0] }));
+    }
+
+    return []
   }
 }

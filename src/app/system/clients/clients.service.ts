@@ -53,10 +53,9 @@ export class ClientsService {
     this.http.CommonRequest(
       () => this.http.GetData('/clients', `phone=${phone}`),
       (res: ClientModel[]) => {
-        console.log(res);
         if (success && typeof success == 'function') {
           const countUsers = res.length;
-          success(countUsers > 0 ? true : false);
+          success(countUsers > 0);
         }
       },
       (err) => {
@@ -93,12 +92,12 @@ export class ClientsService {
       }
     }
     searchString = arrParams.join('&');
-    console.log(params, searchString);
     this.http.CommonRequest(
       () => this.http.GetData('/clients', `${searchString}`),
       (res: ClientModel[]) => {
+        const clients = this._parseClients(res);
         if (success && typeof success == 'function') {
-          success(res);
+          success(clients);
         }
       },
       (err) => {
@@ -107,6 +106,14 @@ export class ClientsService {
         }
       }
     );
+  }
+
+  _parseClients(data) {
+    if (Array.isArray(data)) {
+      return data.map(c => ({ ...c, ...c.client[0] }));
+    }
+
+    return []
   }
 
   CreateOrderForLoyalty(user_id: number, price: number, write_off_points = 0,

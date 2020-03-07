@@ -12,11 +12,12 @@ import { ClientsService } from '../clients.service';
 })
 export class ClientsEditComponent implements OnInit {
 
-  constructor(private _location: Location) {
+  constructor(private _location: Location, private _router: Router) {
   }
 
   GoBack() {
-    this._location.back();
+    // this._location.back();
+    this._router.navigate(["/system", "my_clients"])
   }
 
   ngOnInit() {

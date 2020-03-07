@@ -13,8 +13,7 @@ import { CompanyService } from '../../core/services/company.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignUpComponent implements OnInit
-{
+export class SignUpComponent implements OnInit {
   FormData: CreatorModel = new CreatorModel();
   CompanyName: string = '';
   ConfirmPassword: string = '';
@@ -25,12 +24,12 @@ export class SignUpComponent implements OnInit
       Validators.minLength(3),
       Validators.maxLength(50)
     ]),
-    "last_name": new FormControl(this.FormData.last_name,[
+    "last_name": new FormControl(this.FormData.last_name, [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50)
     ]),
-    "email": new FormControl(this.FormData.email,[
+    "email": new FormControl(this.FormData.email, [
       Validators.required,
       Validators.email
     ]),
@@ -56,73 +55,60 @@ export class SignUpComponent implements OnInit
     // ])
   });
 
-  constructor(private auth: AuthService,private router: Router, private company: CompanyService)
-  {
+  constructor(private auth: AuthService, private router: Router, private company: CompanyService) {
 
   }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
     this.RegForm.reset();
   }
 
-  MatchPasswords()
-  {
-      return (control: AbstractControl): {[key: string]: any} | null => {
-          if(this.RegForm && this.RegForm.controls)
-          {
-              const values = this.RegForm.getRawValue();
-              const forbidden = values.password != values.confirm_password;
-              return forbidden ?  {'not_match': {value: control.value}} : null;
-          }
-          return null;
-      };
-  }
-
-  ValidatePhone()
-  {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      if(this.RegForm && this.RegForm.controls)
-      {
-          const values = this.RegForm.getRawValue();
-          if(values.phone)
-          {
-            const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-
-            return regex.test(values.phone) ? null : {'incorrect_value': {value: control.value}};
-          }
+  MatchPasswords() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (this.RegForm && this.RegForm.controls) {
+        const values = this.RegForm.getRawValue();
+        const forbidden = values.password != values.confirm_password;
+        return forbidden ? { 'not_match': { value: control.value } } : null;
       }
       return null;
     };
   }
 
-  get first_name()
-  {
+  ValidatePhone() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (this.RegForm && this.RegForm.controls) {
+        const values = this.RegForm.getRawValue();
+        if (values.phone) {
+          const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+          return regex.test(values.phone) ? null : { 'incorrect_value': { value: control.value } };
+        }
+      }
+      return null;
+    };
+  }
+
+  get first_name() {
     return this.RegForm.get('first_name');
   }
 
-  get last_name()
-  {
+  get last_name() {
     return this.RegForm.get('last_name');
   }
 
-  get email()
-  {
+  get email() {
     return this.RegForm.get('email');
   }
 
-  get phone()
-  {
+  get phone() {
     return this.RegForm.get('phone');
   }
 
-  get password()
-  {
+  get password() {
     return this.RegForm.get('password');
   }
 
-  get confirm_password()
-  {
+  get confirm_password() {
     return this.RegForm.get('confirm_password');
   }
 
@@ -131,17 +117,14 @@ export class SignUpComponent implements OnInit
   //   return this.RegForm.get('cname');
   // }
 
-  Create()
-  {
+  Create() {
     this.RegForm.updateValueAndValidity();
     const valid = this.RegForm.valid;
     // const valid = true;
-    if(valid)
-    {
+    if (valid) {
       const vals = this.RegForm.getRawValue();
 
-      for(const i in this.FormData)
-      {
+      for (const i in this.FormData) {
         this.FormData[i] = vals[i];
       }
 
@@ -149,23 +132,18 @@ export class SignUpComponent implements OnInit
       this.auth.CreateCreator(this.FormData,
         (val) => {
           this.RegSuccess = true;
-          this.router.navigate(["/auth","confirm"]);
+          this.router.navigate(["/auth", "confirm"]);
           // this.company.CreateCompany({name: vals.cname});
         },
         (err) => {
-          if(err)
-          {
-            if(err.status == 422)
-            {
+          if (err) {
+            if (err.status == 422) {
               const body = err.body;
-              for(const i in body)
-              {
+              for (const i in body) {
                 const elem = this.RegForm.get(i);
-                if(elem)
-                {
+                if (elem) {
                   let errors: ValidationErrors = {};
-                  for(const j in body[i])
-                  {
+                  for (const j in body[i]) {
                     errors[body[i][j]] = true;
                   }
                   elem.setErrors(errors);
@@ -175,10 +153,8 @@ export class SignUpComponent implements OnInit
           }
         });
     }
-    else
-    {
-      for(const i in this.RegForm.controls)
-      {
+    else {
+      for (const i in this.RegForm.controls) {
         // this.Form.get(i).markAsDirty();
         this.RegForm.get(i).markAsDirty();
       }
