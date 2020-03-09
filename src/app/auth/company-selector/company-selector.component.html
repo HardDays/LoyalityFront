@@ -2,19 +2,24 @@
   <div class="auth-block">
     <p class="auth-block__title">Выберите компанию</p>
 
-    <form [formGroup]="companySelectorForm"
-          (ngSubmit)="SelectCompany()">
+    <div class="create-block__select customer__select"
+         [ngClass]="{'create-block__select--opened': ShowSelect}">
+      <div class="create-block__select-value"
+           (click)="ShowSelect = !ShowSelect">{{SelectedCompany ? SelectedCompany.name : 'Выберите компанию'}}</div>
+      <ul class="create-block__select-list">
+        <ng-container *ngFor="let company of Companies">
+          <li (click)="OnSelected(company)"
+              class="promotion-item">
+            {{company.name}}
+          </li>
+        </ng-container>
+      </ul>
+    </div>
 
-      <select formControlName="companyId">
-        <option value="">Выберите компанию</option>
-        <option *ngFor="let company of Companies"
-                [ngValue]="company.id">{{company.name}}</option>
-      </select>
-
-      <div class="text-center">
-        <button class="button auth-block__button"
-                type="submit">Выбрать</button>
-      </div>
-    </form>
+    <div class="text-center">
+      <button [disabled]="!SelectedCompany"
+              class="button auth-block__button"
+              (click)="SelectCompany()">Выбрать</button>
+    </div>
   </div>
 </section>

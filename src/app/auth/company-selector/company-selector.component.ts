@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyModel } from 'src/app/core/models/company.model';
-import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,13 +10,11 @@ import { Router } from '@angular/router';
 })
 export class CompanySelectorComponent implements OnInit {
 
-  private Companies: CompanyModel[] = [];
+  Companies: CompanyModel[] = [];
+  ShowSelect: boolean = false;
+  SelectedCompany: CompanyModel;
 
-  constructor(public fb: FormBuilder, private auth: AuthService, private router: Router) { }
-
-  companySelectorForm = this.fb.group({
-    companyId: ['', [Validators.required]]
-  })
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     const { client, operator, creator } = this.auth.LoginData;
@@ -42,12 +39,11 @@ export class CompanySelectorComponent implements OnInit {
   }
 
   SelectCompany() {
+    if (!this.SelectedCompany) return;
 
-    if (!this.companySelectorForm.valid) return false;
+    const companyId = +this.SelectedCompany.id;
 
-    const companyId = this.companySelectorForm.value.companyId;
     this.auth.LoginData.company_id = companyId;
-
     if (this.auth.LoginData.user_type == "operator") {
       this.auth.LoginData.store_id = this.auth.LoginData.operator.find(o => o.company_id == companyId).store_id
     }
@@ -56,4 +52,8 @@ export class CompanySelectorComponent implements OnInit {
     this.router.navigate(["/system"]);
   }
 
+  OnSelected(item) {
+    this.SelectedCompany = item;
+    this.ShowSelect = false;
+  }
 }
