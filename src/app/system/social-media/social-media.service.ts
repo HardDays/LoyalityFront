@@ -13,7 +13,6 @@ export class SocialMediaService {
     this.http.CommonRequest(
       () => this.http.PostData('/vk/groups', data),
       (res) => {
-        console.log(res)
         if (success && typeof success == "function") {
           success(res);
         }

@@ -8,45 +8,62 @@
     </div>
 
     <div class="create-block">
-      <p class="create-block__label">Введите id сообщества</p>
-      <input type="text"
-             placeholder=""
-             class="create-block__input create-block__input--full">
+      <form [formGroup]="CreateGroupForm"
+            (ngSubmit)="Create()">
 
-      <div class="search-customer search-id">
+        <p class="create-block__label">Введите id сообщества</p>
         <input type="text"
-               disabled
-               placeholder="https://vk.com/f639grp">
-        <button (click)="CopyLink()"
-                class="search-id-button">Копировать ссылку</button>
-      </div>
+               [ngClass]="{'create-block__input--error': group_id.invalid && (group_id.dirty || group_id.touched)}"
+               formControlName="group_id"
+               class="create-block__input create-block__input--full">
 
-      <div class="text-block-instructions">
-        <p>
-          1. Зайдите в настройки сообщества
+        <p class="auth-block__hint auth-block__hint--error">
+          <ng-container *ngIf="group_id.invalid && (group_id.dirty || group_id.touched)">
+            <span *ngIf="group_id.errors.required">Поле обязательно к заполнению.</span>
+          </ng-container>
         </p>
-        <p>
-          2. Выберите «Работа с API»
-        </p>
-        <p>
-          3. Выберите «Callback API»
-        </p>
-        <p>
-          4. Скопируйте ссылку ссылку полученую выше и вставте в сообществе в поле «Адрес»
-        </p>
-        <p>
-          5. Скопируйте в сообществе строку, которую должен вернуть сервер и введите его в поле ниже
-        </p>
-      </div>
 
-      <p class="create-block__label">Код</p>
-      <input type="text"
-             placeholder=""
-             class="create-block__input create-block__input--full">
+        <div class="search-customer search-id">
+          <input type="text"
+                 disabled
+                 placeholder="https://vk.com/f639grp">
+          <button (click)="CopyLink()"
+                  class="search-id-button">Копировать ссылку</button>
+        </div>
 
-      <div class="customer__flex-buttons">
-        <button class="button customer__button">Сохранить</button>
-      </div>
+        <div class="text-block-instructions">
+          <p>
+            1. Зайдите в настройки сообщества
+          </p>
+          <p>
+            2. Выберите «Работа с API»
+          </p>
+          <p>
+            3. Выберите «Callback API»
+          </p>
+          <p>
+            4. Скопируйте ссылку ссылку полученую выше и вставте в сообществе в поле «Адрес»
+          </p>
+          <p>
+            5. Скопируйте в сообществе строку, которую должен вернуть сервер и введите его в поле ниже
+          </p>
+        </div>
+
+        <p class="create-block__label">Код</p>
+        <input type="text"
+               [ngClass]="{'create-block__input--error': confirmation_code.invalid && (confirmation_code.dirty || confirmation_code.touched)}"
+               formControlName="confirmation_code"
+               class="create-block__input create-block__input--full">
+        <p class="auth-block__hint auth-block__hint--error">
+          <ng-container *ngIf="confirmation_code.invalid && (confirmation_code.dirty || confirmation_code.touched)">
+            <span *ngIf="confirmation_code.errors.required">Поле обязательно к заполнению.</span>
+          </ng-container>
+        </p>
+
+        <div class="customer__flex-buttons">
+          <button class="button customer__button">Сохранить</button>
+        </div>
+      </form>
     </div>
 
     <div class="create-block">
@@ -95,6 +112,17 @@
 
       <div class="customer__flex-buttons">
         <button class="button customer__button">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="ModalIsShown"
+       class="modal modal--visible">
+    <div class="modal__block modal__block--bonuses">
+      <span class="modal__close"><img (click)="onCloseModal()"
+             src="./../../../../../assets/img/close.svg"></span>
+      <div class="modal__customer-content modal__customer-content-bonuses-inside">
+        <p class="bonuses-text">Успешно сохранено</p>
       </div>
     </div>
   </div>

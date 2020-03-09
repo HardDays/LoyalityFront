@@ -8,14 +8,18 @@ import { SocialMediaTelegramComponent } from './social-media-telegram/social-med
 import { SocialMediaOverviewComponent } from './social-media-overview/social-media-overview.component';
 import { SocialMediaAccessGuard } from './social-media.guard';
 import { SocialMediaComponent } from './social-media.component';
+import { SocialMediaService } from './social-media.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SocialMediaComponent, SocialMediaVkComponent, SocialMediaTelegramComponent, SocialMediaOverviewComponent],
   imports: [
     CommonModule,
     SocialMediaRoutingModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [SocialMediaAccessGuard],
+  providers: [SocialMediaService, SocialMediaAccessGuard],
 })
 export class SocialMediaModule { }
