@@ -87,7 +87,7 @@ export class HttpService {
   }
 
   DeleteDataWithBody(method: string, body: any) {
-    return this.http.delete(this.serverUrl + method + `&company_id=${this.CompanyId}`, new RequestOptions({
+    return this.http.delete(this.serverUrl + method, new RequestOptions({
       headers: this.headers,
       body: { ...body, company_id: this.CompanyId }
     }));

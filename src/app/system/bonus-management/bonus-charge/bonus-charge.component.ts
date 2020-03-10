@@ -53,7 +53,8 @@ export class BonusChargeComponent implements OnInit {
       () => {
         this.ClientSuccess = {
           name: `${this.Client.first_name ? this.Client.first_name : ""} ${this.Client.last_name ? this.Client.last_name : ""} ${this.Client.second_name ? this.Client.second_name : ""}`,
-          points: Number(this.Client.points) + Number(this.Points),
+          currentPoints: Number(this.Client.points) + Number(this.Points),
+          diffPoints: `Бонусов начислено: ${this.Points}`
         }
         this.SuccessModalIsShown = true;
       },
@@ -63,6 +64,18 @@ export class BonusChargeComponent implements OnInit {
   }
 
   ChargeOffBonuses() {
-    // todo
+    this.service.RemovePoints(
+      { clientId: this.Client.id, points: +this.Points },
+      () => {
+        this.ClientSuccess = {
+          name: `${this.Client.first_name ? this.Client.first_name : ""} ${this.Client.last_name ? this.Client.last_name : ""} ${this.Client.second_name ? this.Client.second_name : ""}`,
+          currentPoints: Number(this.Client.points) - Number(this.Points) >= 0 ? Number(this.Client.points) - Number(this.Points) : 0,
+          diffPoints: `Бонусов списано: ${this.Points}`
+        }
+        this.SuccessModalIsShown = true;
+      },
+      (err) => {
+        console.error(err)
+      })
   }
 }
