@@ -26,8 +26,9 @@
         <div class="search-customer search-id">
           <input type="text"
                  disabled
-                 placeholder="https://vk.com/f639grp">
-          <button (click)="CopyLink()"
+                 style="text-overflow: ellipsis; width: 81%"
+                 placeholder="{{CallbackAPILink}}">
+          <button (click)="CopyLink($event)"
                   class="search-id-button">Копировать ссылку</button>
         </div>
 
@@ -60,59 +61,71 @@
           </ng-container>
         </p>
 
-        <div class="customer__flex-buttons">
+        <p style="margin-bottom: 16px;"></p>
+
+        <p class="create-block__label">Правило начисления бонусов</p>
+        <div class="create-block__group">
+          <label class="radio radio--create">
+            <input type="radio"
+                   formControlName="checked_radio_value"
+                   value="group_join_points"
+                   class="radio__input"
+                   checked>
+            <div class="radio__text create-block__radio-with-input">
+              Начислять <input type="text"
+                     formControlName="group_join_points"
+                     [attr.disabled]="checked_radio_value.value !== 'group_join_points' ? '' : null"
+                     [ngClass]="{'create-block__input--error': group_join_points.invalid && (group_join_points.dirty || group_join_points.touched)}"
+                     class="create-block__input create-block__input--small">бонусов за Подписку на сообщество
+            </div>
+          </label>
+          <label class="radio radio--create">
+            <input type="radio"
+                   formControlName="checked_radio_value"
+                   value="wall_like_points"
+                   class="radio__input">
+            <div class="radio__text create-block__radio-with-input">
+              Начислять <input type="text"
+                     formControlName="wall_like_points"
+                     [attr.disabled]="checked_radio_value.value !== 'wall_like_points' ? '' : null"
+                     [ngClass]="{'create-block__input--error': wall_like_points.invalid && (wall_like_points.dirty || wall_like_points.touched)}"
+                     class="create-block__input create-block__input--small"> бонусов за Лайки постов сообщества
+            </div>
+          </label>
+          <label class="radio radio--create">
+            <input type="radio"
+                   formControlName="checked_radio_value"
+                   value="wall_repost_points"
+                   class="radio__input">
+            <div class="radio__text create-block__radio-with-input">
+              Начислять <input type="text"
+                     formControlName="wall_repost_points"
+                     [attr.disabled]="checked_radio_value.value !== 'wall_repost_points' ? '' : null"
+                     [ngClass]="{'create-block__input--error': wall_repost_points.invalid && (wall_repost_points.dirty || wall_repost_points.touched)}"
+                     class="create-block__input create-block__input--small"> бонусов за Репосты постов в сообществе
+            </div>
+          </label>
+          <label class="radio radio--create">
+            <input type="radio"
+                   formControlName="checked_radio_value"
+                   value="wall_reply_points"
+                   class="radio__input">
+            <div class="radio__text create-block__radio-with-input">
+              Начислять <input type="text"
+                     formControlName="wall_reply_points"
+                     [attr.disabled]="checked_radio_value.value !== 'wall_reply_points' ? '' : null"
+                     [ngClass]="{'create-block__input--error': wall_reply_points.invalid && (wall_reply_points.dirty || wall_reply_points.touched)}"
+                     class="create-block__input create-block__input--small"> бонусов за Комментарии постов в сообществе
+            </div>
+          </label>
+        </div>
+
+        <p style="margin-bottom: 16px;"></p>
+
+        <div class="text-center">
           <button class="button customer__button">Сохранить</button>
         </div>
       </form>
-    </div>
-
-    <div class="create-block">
-      <p class="create-block__label">Правило начисления бонусов</p>
-      <div class="create-block__group">
-
-        <label class="radio radio--create">
-          <input type="radio"
-                 class="radio__input"
-                 name="programmBonusAdd"
-                 checked>
-          <div class="radio__text create-block__radio-with-input">
-            Начислять <input type="text"
-                   class="create-block__input create-block__input--small">бонусов за Подписку на сообщество
-          </div>
-        </label>
-        <label class="radio radio--create">
-          <input type="radio"
-                 class="radio__input"
-                 name="programmBonusAdd">
-          <div class="radio__text create-block__radio-with-input">
-            Начислять <input type="text"
-                   class="create-block__input create-block__input--small"> бонусов за Лайки постов сообщества
-          </div>
-        </label>
-        <label class="radio radio--create">
-          <input type="radio"
-                 class="radio__input"
-                 name="programmBonusAdd">
-          <div class="radio__text create-block__radio-with-input">
-            Начислять <input type="text"
-                   class="create-block__input create-block__input--small"> бонусов за Репосты постов в сообществе
-          </div>
-        </label>
-        <label class="radio radio--create">
-          <input type="radio"
-                 class="radio__input"
-                 name="programmBonusAdd">
-          <div class="radio__text create-block__radio-with-input">
-            Начислять <input type="text"
-                   class="create-block__input create-block__input--small"> бонусов за Комментарии постов в сообществе
-          </div>
-        </label>
-
-      </div>
-
-      <div class="customer__flex-buttons">
-        <button class="button customer__button">Сохранить</button>
-      </div>
     </div>
   </div>
 
@@ -122,7 +135,7 @@
       <span class="modal__close"><img (click)="onCloseModal()"
              src="./../../../../../assets/img/close.svg"></span>
       <div class="modal__customer-content modal__customer-content-bonuses-inside">
-        <p class="bonuses-text">Успешно сохранено</p>
+        <p class="bonuses-text text-center">Успешно сохранено</p>
       </div>
     </div>
   </div>
