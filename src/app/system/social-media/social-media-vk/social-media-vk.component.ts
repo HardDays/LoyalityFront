@@ -17,7 +17,6 @@ export class SocialMediaVkComponent implements OnInit {
   ModalIsShown: boolean = false;
   CallbackAPILink: string = "";
   CheckedRadioValue: string = "group_join_points"
-
   FormData: any = {
     confirmation_code: "",
     group_id: "",
@@ -27,11 +26,6 @@ export class SocialMediaVkComponent implements OnInit {
     wall_like_points: 0,
     wall_reply_points: 0
   };
-
-  // "group_join_points": 1000,
-  // "wall_repost_points": 1000,
-  // "wall_like_points": 1000,
-  // "wall_reply_points": 1000,
 
   CreateGroupForm: FormGroup = new FormGroup({
     "confirmation_code": new FormControl(this.FormData.confirmation_code, Validators.required),
