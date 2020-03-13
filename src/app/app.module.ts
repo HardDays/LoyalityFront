@@ -12,6 +12,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routing';
 import { CompanyService } from './core/services/company.service';
+import { AppConfigModule } from './app-config.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CompanyService } from './core/services/company.service';
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
-    TextMaskModule
+    TextMaskModule,
+    AppConfigModule
   ],
   providers: [
     AppAccessGuard,

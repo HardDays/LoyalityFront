@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Response, Headers, URLSearchParams } from '@angular/http';
 import { TokenModel } from '../models/token.model';
 import { Observable } from 'rxjs';
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
 
 declare var Buffer: any;
 @Injectable()
 export class HttpService {
 
-  serverUrl = 'http://34.90.57.126:3001/api/v1';
-  // serverUrl = 'https://fathomless-earth-40434.herokuapp.com/api/v1';
+  serverUrl: string = "";
   CompanyId = '';
 
   public headers: Headers = new Headers([]);
-  constructor(private http: Http) {
+  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) {
+    this.serverUrl = config.apiUrl;
     this.BaseHeadersInit();
   }
 
