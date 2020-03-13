@@ -28,19 +28,18 @@
         <ng-container *ngIf="!item.store_id">
           <br><span style="color: red">Нет магазина</span>
         </ng-container>
-        <ng-container *ngIf="!item.user_type">
+        <ng-container *ngIf="item.operator_status === 'deleted'">
           <br><span style="color: red">Удален</span>
         </ng-container>
 
       </p>
-
       <a [routerLink]="['/system','my_cashiers', 'edit', item.id]"
          class="main-blocks__link main-blocks__link--yellow main-blocks__link--edit">Редактировать</a>
-      <ng-container *ngIf="item.user_type">
+      <ng-container *ngIf="item.operator_status === 'active'">
         <a (click)="DeleteQA(item)"
            class="main-blocks__link main-blocks__link--yellow main-blocks__link--delete main-blocks__link--delete_yellow">Удалить</a>
       </ng-container>
-      <ng-container *ngIf="!item.user_type">
+      <ng-container *ngIf="item.operator_status === 'deleted'">
         <a (click)="RepairQA(item)"
            class="main-blocks__link main-blocks__link--yellow main-blocks__link--reset">Восстановить</a>
       </ng-container>

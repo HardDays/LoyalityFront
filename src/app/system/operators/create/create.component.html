@@ -71,6 +71,21 @@
           <span *ngIf="email.errors.ALREADY_TAKEN">E-mail занят</span>
         </ng-container>
       </p>
+      <p class="create-block__label create-block__label--light">Телефон кассира</p>
+      <!-- <input type="text" class="create-block__input create-block__input--full"> -->
+      <input type="text"
+             class="create-block__input create-block__input--full"
+             [ngClass]="{'auth-block__input--error': phone.invalid && (phone.dirty || phone.touched)}"
+             autocomplete="null"
+             formControlName="phone"
+             name="phone">
+      <p class="auth-block__hint auth-block__hint--error">
+        <ng-container *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+          <span *ngIf="phone.errors.required">Поле обязательно к заполнению.</span>
+          <span *ngIf="phone.errors.incorrect_value">Введите корректный номер телеофна.</span>
+          <span *ngIf="phone.errors.INVALID">Введите корректные данные.</span>
+        </ng-container>
+      </p>
       <p class="create-block__label create-block__label--light">Выбрать магазин</p>
       <div clickDirective
            (clickOutside)="HideSelect($event)"

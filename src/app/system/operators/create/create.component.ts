@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IDictionary } from '../../../core/interfaces/dictionary.interface';
 import { Router } from '@angular/router';
@@ -40,7 +40,11 @@ export class OperatorCreateComponent implements OnInit {
     "email": new FormControl('', [
       Validators.required,
       Validators.email
-    ])
+    ]),
+    "phone": new FormControl('', [
+      Validators.required,
+      this.ValidatePhone()
+    ]),
   });
 
   get first_name() {
@@ -57,6 +61,10 @@ export class OperatorCreateComponent implements OnInit {
   }
   get email() {
     return this.Form.get('email');
+  }
+
+  get phone() {
+    return this.Form.get('phone');
   }
 
   constructor(private _location: Location, private auth: AuthService, private router: Router,
@@ -123,5 +131,19 @@ export class OperatorCreateComponent implements OnInit {
   HideSelect($event) {
     if (this.ShowSelect)
       this.ShowSelect = false;
+  }
+
+  ValidatePhone() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (this.Form && this.Form.controls) {
+        const values = this.Form.getRawValue();
+        if (values.phone) {
+          const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+          return regex.test(values.phone) ? null : { 'incorrect_value': { value: control.value } };
+        }
+      }
+      return null;
+    };
   }
 }

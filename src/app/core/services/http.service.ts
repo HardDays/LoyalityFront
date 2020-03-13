@@ -79,7 +79,7 @@ export class HttpService {
   }
 
   GetData(method: string, params?: any) {
-    return this.http.get(this.serverUrl + method + '?' + params + `&company_id=${this.CompanyId}`, { headers: this.headers });
+    return this.http.get(this.serverUrl + method + '?' + `${params ? `${params}&company_id=${this.CompanyId}` : `company_id=${this.CompanyId}`}`, { headers: this.headers });
   }
 
   DeleteData(method: string) {

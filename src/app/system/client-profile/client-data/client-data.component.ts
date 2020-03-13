@@ -93,7 +93,7 @@ export class ClientDataComponent implements OnInit {
   ngOnInit() {
     this.authService.onAuthChange$.subscribe(
       (res) => {
-        if (res) {
+        if (res && this.authService.LoginData.user_type === "client") {
           this.profileService.ClientProfile = new ClientModel();
           this.GetProfile();
         }

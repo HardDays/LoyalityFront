@@ -13,6 +13,7 @@ export class OperatorModel {
     public gender?: string,
     public birth_day?: string,
     public store_id?: number,
-    public company_id?: number
+    public company_id?: number,
+    public operator?: any[]
   ) { }
 }

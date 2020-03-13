@@ -27,8 +27,6 @@ export class ClientLoyaltyComponent implements OnInit {
           this.profileService.ClientProfile = res;
           this.Client = this.profileService.ClientProfile;
           this.LoyaltyProgram = this.Client.loyalty_program;
-          console.log(`Client = `, this.Client);
-          console.log(`LoyaltyProgram = `, this.LoyaltyProgram);
         }
       );
     } else {

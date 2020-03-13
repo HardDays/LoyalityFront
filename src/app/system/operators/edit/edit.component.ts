@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { IDictionary } from 'src/app/core/interfaces/dictionary.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -41,7 +41,11 @@ export class OperatorEditComponent implements OnInit {
     "email": new FormControl('', [
       Validators.required,
       Validators.email
-    ])
+    ]),
+    "phone": new FormControl('', [
+      Validators.required,
+      this.ValidatePhone()
+    ]),
   });
   SaveSuccess: boolean = false;
   GetDataError = false;
@@ -62,6 +66,10 @@ export class OperatorEditComponent implements OnInit {
     return this.Form.get('email');
   }
 
+  get phone() {
+    return this.Form.get('phone');
+  }
+
   constructor(private _location: Location, private auth: AuthService, private router: Router, private route: ActivatedRoute,
     private service: OperatorsService) {
     // console.log("EDIT COMPONENT");
@@ -72,16 +80,17 @@ export class OperatorEditComponent implements OnInit {
         this.UpdateVals();
       }
     });
-    this.service.onStoresChange$.subscribe((val) => {
-      this.Stores = this.service.GetStores();
-      this.InitStore();
-    });
+
   }
 
   ngOnInit() {
     this.service.RefreshStores();
-    this.Stores = this.service.GetStores();
-    this.InitStore();
+    this.service.onStoresChange$.subscribe(val => {
+      if (val) {
+        this.Stores = this.service.GetStores();
+        this.InitStore();
+      }
+    });
   }
 
   UpdateVals() {
@@ -186,6 +195,20 @@ export class OperatorEditComponent implements OnInit {
   HideSelect($event) {
     if (this.ShowSelect)
       this.ShowSelect = false;
+  }
+
+  ValidatePhone() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (this.Form && this.Form.controls) {
+        const values = this.Form.getRawValue();
+        if (values.phone) {
+          const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+          return regex.test(values.phone) ? null : { 'incorrect_value': { value: control.value } };
+        }
+      }
+      return null;
+    };
   }
 
 }

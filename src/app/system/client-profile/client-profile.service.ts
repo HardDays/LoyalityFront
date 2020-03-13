@@ -21,10 +21,22 @@ export class ClientProfileService {
   }
 
   GetClientProfile(success?: (data) => void, fail?: (err) => void) {
+    this.auth.onLoading.next(true);
     this.http.CommonRequest(
       () => this.http.GetData('/clients/profile'),
-      success,
-      fail
+      (res) => {
+        const profile = { ...res, ...res.client[0] }
+        if (success && typeof success == 'function') {
+          this.auth.onLoading.next(false);
+          success(profile);
+        }
+      },
+      (err) => {
+        if (fail && typeof fail == 'function') {
+          this.auth.onLoading.next(false);
+          fail(err);
+        }
+      }
     );
   }
 

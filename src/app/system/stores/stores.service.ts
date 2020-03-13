@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/core/services/http.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { StoreModel } from '../../core/models/store.model';
+import { OperatorModel } from 'src/app/core/models/operator.model';
 
 
 @Injectable()
@@ -49,8 +50,14 @@ export class StoresService {
 
   GetOperators(StoreId, success?: (data) => void, fail?: (err) => void) {
     this.http.CommonRequest(
-      () => this.http.GetData(`/operators?store_id=${StoreId}`, ''),
-      success,
+      () => this.http.GetData(`/operators`, `store_id=${StoreId}`),
+      (res: OperatorModel[]) => {
+        const operators = res.map(op => ({ ...op, ...op.operator[0] }))
+        if (success && typeof success == "function") {
+          success(operators);
+        }
+        this.auth.onLoading.next(false);
+      },
       err => this.auth.ErrorHandler(err, fail)
     );
   }

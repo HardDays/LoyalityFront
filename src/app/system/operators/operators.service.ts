@@ -25,10 +25,11 @@ export class OperatorsService {
     this.http.CommonRequest(
       () => this.http.GetData('/operators', ''),
       (res: OperatorModel[]) => {
-        this.Operators = res;
+        const operators = res.map(op => ({ ...op, ...op.operator[0] }))
+        this.Operators = operators;
         this.onOperatorsChange$.next(true);
         if (success && typeof success == "function") {
-          success(res);
+          success(operators);
         }
         this.auth.onLoading.next(false);
       },
@@ -91,7 +92,12 @@ export class OperatorsService {
   GetOperator(Id, success?: (data) => void, fail?: (err) => void) {
     this.http.CommonRequest(
       () => this.http.GetData('/operators/' + Id, ''),
-      success,
+      (res: OperatorModel) => {
+        const operator = { ...res, ...res.operator[0] }
+        if (success && typeof success == "function") {
+          success(operator);
+        }
+      },
       err => this.auth.ErrorHandler(err, fail)
     );
   }
