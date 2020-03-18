@@ -1,5 +1,6 @@
 <section class="login-bg">
-  <div class="auth-block">
+  <div *ngIf="!ShouldCreateCompany; else createCompanyBlock"
+       class="auth-block">
     <p class="auth-block__title">Выберите компанию</p>
 
     <div class="create-block__select customer__select"
@@ -22,4 +23,10 @@
               (click)="SelectCompany()">Выбрать</button>
     </div>
   </div>
+
+  <ng-template #createCompanyBlock>
+    <div class="auth-block">
+      <app-company-cmp [showBackButton]="false"></app-company-cmp>
+    </div>
+  </ng-template>
 </section>

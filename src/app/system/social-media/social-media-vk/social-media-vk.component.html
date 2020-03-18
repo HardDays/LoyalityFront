@@ -66,54 +66,53 @@
         <p class="create-block__label">Правило начисления бонусов</p>
         <div class="create-block__group">
           <label class="radio radio--create">
-            <input type="radio"
-                   formControlName="checked_radio_value"
+            <input type="checkbox"
+                   (change)="onCheckChange($event)"
                    value="group_join_points"
-                   class="radio__input"
-                   checked>
+                   class="radio__input">
             <div class="radio__text create-block__radio-with-input">
               Начислять <input type="text"
                      formControlName="group_join_points"
-                     [attr.disabled]="checked_radio_value.value !== 'group_join_points' ? '' : null"
+                     [attr.disabled]="checked_values.value.includes('group_join_points') ? null : ''"
                      [ngClass]="{'create-block__input--error': group_join_points.invalid && (group_join_points.dirty || group_join_points.touched)}"
                      class="create-block__input create-block__input--small">бонусов за Подписку на сообщество
             </div>
           </label>
           <label class="radio radio--create">
-            <input type="radio"
-                   formControlName="checked_radio_value"
+            <input type="checkbox"
+                   (change)="onCheckChange($event)"
                    value="wall_like_points"
                    class="radio__input">
             <div class="radio__text create-block__radio-with-input">
               Начислять <input type="text"
                      formControlName="wall_like_points"
-                     [attr.disabled]="checked_radio_value.value !== 'wall_like_points' ? '' : null"
+                     [attr.disabled]="checked_values.value.includes('wall_like_points') ? null : ''"
                      [ngClass]="{'create-block__input--error': wall_like_points.invalid && (wall_like_points.dirty || wall_like_points.touched)}"
                      class="create-block__input create-block__input--small"> бонусов за Лайки постов сообщества
             </div>
           </label>
           <label class="radio radio--create">
-            <input type="radio"
-                   formControlName="checked_radio_value"
+            <input type="checkbox"
+                   (change)="onCheckChange($event)"
                    value="wall_repost_points"
                    class="radio__input">
             <div class="radio__text create-block__radio-with-input">
               Начислять <input type="text"
                      formControlName="wall_repost_points"
-                     [attr.disabled]="checked_radio_value.value !== 'wall_repost_points' ? '' : null"
+                     [attr.disabled]="checked_values.value.includes('wall_repost_points') ? null : ''"
                      [ngClass]="{'create-block__input--error': wall_repost_points.invalid && (wall_repost_points.dirty || wall_repost_points.touched)}"
                      class="create-block__input create-block__input--small"> бонусов за Репосты постов в сообществе
             </div>
           </label>
           <label class="radio radio--create">
-            <input type="radio"
-                   formControlName="checked_radio_value"
+            <input type="checkbox"
+                   (change)="onCheckChange($event)"
                    value="wall_reply_points"
                    class="radio__input">
             <div class="radio__text create-block__radio-with-input">
               Начислять <input type="text"
                      formControlName="wall_reply_points"
-                     [attr.disabled]="checked_radio_value.value !== 'wall_reply_points' ? '' : null"
+                     [attr.disabled]="checked_values.value.includes('wall_reply_points') ? null : ''"
                      [ngClass]="{'create-block__input--error': wall_reply_points.invalid && (wall_reply_points.dirty || wall_reply_points.touched)}"
                      class="create-block__input create-block__input--small"> бонусов за Комментарии постов в сообществе
             </div>

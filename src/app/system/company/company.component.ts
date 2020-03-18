@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -17,6 +17,9 @@ export class CompanyComponent implements OnInit {
       Validators.maxLength(30)
     ])
   });
+
+  @Input()
+  showBackButton: boolean = true;
 
   get name() {
     return this.Form.get('name');

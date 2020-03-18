@@ -13,6 +13,7 @@ export class CompanySelectorComponent implements OnInit {
   Companies: CompanyModel[] = [];
   ShowSelect: boolean = false;
   SelectedCompany: CompanyModel;
+  ShouldCreateCompany: boolean = false;
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -31,11 +32,15 @@ export class CompanySelectorComponent implements OnInit {
       return;
     }
 
-    if (creator.length > 0) {
+    if (creator.length > 0 && creator.every(c => c.company)) {
       this.auth.LoginData.user_type = "creator";
       this.Companies = creator.map(c => c.company);
       return;
     }
+
+    // means that user is creator and should follow the step of creating a company
+    this.auth.LoginData.user_type = "creator";
+    this.ShouldCreateCompany = true;
   }
 
   SelectCompany() {

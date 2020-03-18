@@ -113,4 +113,8 @@ export class HttpService {
   GetDataFromOtherUrl(url: string) {
     return this.http.get(url);
   }
+
+  PostDataWithouCompanyId(method: string, data: any) {
+    return this.http.post(this.serverUrl + method, data, { headers: this.headers });
+  }
 }

@@ -13,6 +13,7 @@ import { PasswordModule } from './password/password.module';
 import { SignupModule } from './signup/signup.module';
 import { ConfirmModule } from './confirm/confirm.module';
 import { CompanySelectorComponent } from './company-selector/company-selector.component';
+import { CompanyModule } from '../system/company/company.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CompanySelectorComponent } from './company-selector/company-selector.co
     LoginModule,
     PasswordModule,
     SignupModule,
-    ConfirmModule
+    ConfirmModule,
+    CompanyModule
     // HttpClientModule,
   ],
   // exports: [AuthComponent],

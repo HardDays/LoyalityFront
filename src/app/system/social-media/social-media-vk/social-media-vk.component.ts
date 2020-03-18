@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { SocialMediaService } from "../social-media.service"
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 const generateCallbackAPiVkLink = (companyId) => `https://fathomless-earth-40434.herokuapp.com/api/test/v1/vk/callback/${companyId}/`
@@ -20,7 +20,7 @@ export class SocialMediaVkComponent implements OnInit {
   FormData: any = {
     confirmation_code: "",
     group_id: "",
-    checked_radio_value: "group_join_points",
+    checked_values: [],
     group_join_points: 0,
     wall_repost_points: 0,
     wall_like_points: 0,
@@ -30,7 +30,7 @@ export class SocialMediaVkComponent implements OnInit {
   CreateGroupForm: FormGroup = new FormGroup({
     "confirmation_code": new FormControl(this.FormData.confirmation_code, Validators.required),
     "group_id": new FormControl(this.FormData.group_id, Validators.required),
-    "checked_radio_value": new FormControl(this.FormData.checked_radio_value),
+    "checked_values": new FormArray(this.FormData.checked_values),
     "group_join_points": new FormControl(this.FormData.group_join_points, Validators.pattern('[0-9\.\,]*')),
     "wall_repost_points": new FormControl(this.FormData.wall_repost_points, Validators.pattern('[0-9\.\,]*')),
     "wall_like_points": new FormControl(this.FormData.wall_like_points, Validators.pattern('[0-9\.\,]*')),
@@ -44,10 +44,10 @@ export class SocialMediaVkComponent implements OnInit {
     this.CallbackAPILink = generateCallbackAPiVkLink(this.auth.LoginData.company_id)
     this
       .CreateGroupForm
-      .controls['checked_radio_value']
+      .controls['checked_values']
       .valueChanges
-      .subscribe(value => {
-        formNumberValues.filter(key => key !== value).forEach(v => {
+      .subscribe((values: string[]) => {
+        formNumberValues.filter(key => !values.includes(key)).forEach(v => {
           this.CreateGroupForm.controls[v].setValue(0);
         })
       });
@@ -75,10 +75,21 @@ export class SocialMediaVkComponent implements OnInit {
   get confirmation_code() { return this.CreateGroupForm.get('confirmation_code'); }
   get group_id() { return this.CreateGroupForm.get('group_id'); }
   get group_join_points() { return this.CreateGroupForm.get('group_join_points'); }
-  get checked_radio_value() { return this.CreateGroupForm.get('checked_radio_value'); }
+  get checked_values() { return this.CreateGroupForm.get('checked_values'); }
   get wall_repost_points() { return this.CreateGroupForm.get('wall_repost_points'); }
   get wall_like_points() { return this.CreateGroupForm.get('wall_like_points'); }
   get wall_reply_points() { return this.CreateGroupForm.get('wall_reply_points'); }
+
+  onCheckChange(event) {
+    const formArray = this.CreateGroupForm.get('checked_values') as FormArray;
+    if (event.target.checked) {
+      formArray.push(new FormControl(event.target.value));
+    }
+    else {
+      const indexToRemove = formArray.controls.findIndex(ctrl => ctrl.value == event.target.value);
+      formArray.removeAt(indexToRemove);
+    }
+  }
 
   Create() {
     this.CreateGroupForm.updateValueAndValidity();

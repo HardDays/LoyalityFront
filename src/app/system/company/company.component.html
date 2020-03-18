@@ -1,7 +1,8 @@
 <div class="page__content page__content--create">
 
-  <div class="page__top page__top--create">
-    <span class="page__back"
+  <div [class]="showBackButton ? 'page__top page__top--create' : 'text-center customer__screen'">
+    <span *ngIf="showBackButton"
+          class="page__back"
           (click)="GoBack()"><img src="assets/img/back.svg"
            alt=""></span>
     <h1 class="page__title page__title--create">Создание компании</h1>

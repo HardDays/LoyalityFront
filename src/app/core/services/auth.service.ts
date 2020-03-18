@@ -169,16 +169,18 @@ export class AuthService {
   CreateCompany(data: any, success?: (data) => void, fail?: (err) => void) {
     this.onLoading.next(true);
     this.http.CommonRequest(
-      () => this.http.PostData('/companies', data),
+      () => this.http.PostDataWithouCompanyId('/companies', data),
       (res: CompanyModel) => {
         if (res) {
+          this.LoginData.company_id = res.id;
           this.CompanyData = res;
           localStorage.setItem(this.company_field, JSON.stringify(res));
           this.onCompanyChange$.next(true);
+          this.InitSession(this.LoginData);
+
           if (success && typeof success == "function") {
             success(res);
           }
-
         }
         else {
           this.onCompanyChange$.next(false);
