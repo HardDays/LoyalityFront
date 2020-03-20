@@ -18,7 +18,6 @@
     <p class="customer__label">Введите номер телефона покупателя</p>
     <input type="text"
            [textMask]="{mask: MaskPhoneRU, showMask: true}"
-           [(ngModel)]="Phone"
            class="customer__input customer__input--big"
            name="phone"
            formControlName="phone">
@@ -173,7 +172,8 @@
 
     <div class="text-center">
       <p></p>
-      <button class="button create-block__button">Сохранить</button>
+      <button type="submit"
+              class="button create-block__button">Сохранить</button>
     </div>
 
   </form>

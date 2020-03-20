@@ -99,10 +99,10 @@ export class SocialMediaVkComponent implements OnInit {
         {
           group_id: data.group_id,
           confirmation_code: data.confirmation_code,
-          group_join_points: Number(data.group_join_points),
-          wall_repost_points: Number(data.wall_repost_points),
-          wall_like_points: Number(data.wall_like_points),
-          wall_reply_points: Number(data.wall_reply_points),
+          group_join_points: Number(data.group_join_points) * 100,
+          wall_repost_points: Number(data.wall_repost_points) * 100,
+          wall_like_points: Number(data.wall_like_points) * 100,
+          wall_reply_points: Number(data.wall_reply_points) * 100,
         },
         () => {
           this.ModalIsShown = true;

@@ -49,11 +49,11 @@ export class BonusChargeComponent implements OnInit {
 
   AddBonuses() {
     this.service.AddPoints(
-      { clientId: this.Client.id, points: this.Points },
+      { clientId: this.Client.id, points: +this.Points * 100 },
       () => {
         this.ClientSuccess = {
           name: `${this.Client.first_name ? this.Client.first_name : ""} ${this.Client.last_name ? this.Client.last_name : ""} ${this.Client.second_name ? this.Client.second_name : ""}`,
-          currentPoints: Number(this.Client.points) + Number(this.Points),
+          currentPoints: (Number(this.Client.points) + Number(this.Points) * 100) / 100,
           diffPoints: `Бонусов начислено: ${this.Points}`
         }
         this.SuccessModalIsShown = true;
@@ -65,11 +65,11 @@ export class BonusChargeComponent implements OnInit {
 
   ChargeOffBonuses() {
     this.service.RemovePoints(
-      { clientId: this.Client.id, points: +this.Points },
+      { clientId: this.Client.id, points: +this.Points * 100 },
       () => {
         this.ClientSuccess = {
           name: `${this.Client.first_name ? this.Client.first_name : ""} ${this.Client.last_name ? this.Client.last_name : ""} ${this.Client.second_name ? this.Client.second_name : ""}`,
-          currentPoints: Number(this.Client.points) - Number(this.Points) >= 0 ? Number(this.Client.points) - Number(this.Points) : 0,
+          currentPoints: Number(this.Client.points) - Number(this.Points) >= 0 ? (Number(this.Client.points) - Number(this.Points) * 100) / 100 : 0,
           diffPoints: `Бонусов списано: ${this.Points}`
         }
         this.SuccessModalIsShown = true;

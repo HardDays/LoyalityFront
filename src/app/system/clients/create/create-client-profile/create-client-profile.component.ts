@@ -131,6 +131,8 @@ export class CreateClientProfileComponent implements OnInit {
   }
 
   Save() {
+    console.log("asdas", this.Form.getRawValue())
+
     this.IsLoading = true;
 
     for (const i in this.Form.controls) {
@@ -154,7 +156,7 @@ export class CreateClientProfileComponent implements OnInit {
 
       this.service.CreateClient(data, (res) => {
         console.log(`Success!`, res);
-        this.service.Client = res;
+        this.service.Client = { ...res, ...res.client[0] };
         this.IsLoading = false;
         this.isShowSuccessModal = true;
 
