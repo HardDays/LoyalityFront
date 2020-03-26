@@ -220,7 +220,7 @@ export class SettingsComponent implements OnInit {
     const data = this.GeneralForm.getRawValue();
     this.auth.UpdateProfile(data,
       (res) => {
-        console.log(res)
+        this.Me = this.auth.LoginData;
         // this.auth.UpdateCompany({ name: data.company_name },
         //   (res) => {
         //     this.GeneralFormSuccess = true;

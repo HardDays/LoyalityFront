@@ -8,10 +8,11 @@
       <p class="lk__text lk__text--small_margin"><strong>Активные бонусы на {{Today | date: 'dd.MM.yyyy'}}:</strong>
         {{Client.points / 100}}</p>
       <p *ngIf="LoyaltyProgram['accrual_on_recommend']"
-         class="lk__text">Условия акции приведи друга: {{LoyaltyProgram['recommend_recommendator_points']}}</p>
+         class="lk__text">Условия акции приведи друга: {{LoyaltyProgram['recommend_recommendator_points'] / 100}}</p>
       <!-- <p class="lk__text">Условия акции в честь дня рождения: </p> -->
       <p *ngIf="LoyaltyProgram['write_off_min_price']"
-         class="lk__text">Минимальная сумма покупки для списания бонусов: {{LoyaltyProgram['write_off_min_price']}}</p>
+         class="lk__text">Минимальная сумма покупки для списания бонусов:
+        {{LoyaltyProgram['write_off_min_price'] / 100}}</p>
 
       <hr>
 
@@ -35,7 +36,7 @@
         <p class="lk__text lk__text--small_margin">Правило списания бонусов: <span
                 *ngIf="item.write_off_rule=='no_write_off'">Не использовать для оплаты покупок</span><span
                 *ngIf="item.write_off_rule=='write_off_convert'">Оплачивать не более {{item.write_off_rule_percent}}% от
-            суммы покупки если на счету не менее {{item.write_off_rule_points}} бонусов</span></p>
+            суммы покупки если на счету не менее {{item.write_off_rule_points / 100}} бонусов</span></p>
 
         <p class="lk__text lk__text--small_margin">Правило предоставления скидки: <span
                 *ngIf="item.accordance_rule=='no_accordance'">Не предоставляется</span><span

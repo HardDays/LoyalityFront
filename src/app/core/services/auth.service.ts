@@ -233,13 +233,13 @@ export class AuthService {
       () => this.http.PutData('/creators/profile', data),
       (res: any) => {
         if (res) {
-          for (const i in res) {
-            if (res[i]) {
-              this.LoginData[i] = res[i];
-            }
+          const { user_type, company_id, token } = this.LoginData;
+          this.LoginData = JSON.parse(JSON.stringify({ ...res, ...res.client[0] }));
+          this.LoginData.user_type = user_type;
+          this.LoginData.company_id = company_id;
+          this.LoginData.token = token;
+          this.InitSession(this.LoginData);
 
-            this.InitSession(this.LoginData);
-          }
           if (success && typeof success == "function") {
             success(res);
           }

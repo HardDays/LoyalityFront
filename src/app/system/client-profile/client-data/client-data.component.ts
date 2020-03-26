@@ -38,17 +38,6 @@ export class ClientDataComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
-    'card_number': new FormControl('', [
-      Validators.minLength(3),
-      Validators.maxLength(30)
-    ]),
-    'gender': new FormControl('female', [
-      Validators.required
-    ]),
-    'email': new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]),
     'birth_day': new FormControl('', [
       Validators.required
     ])
@@ -63,17 +52,8 @@ export class ClientDataComponent implements OnInit {
   get second_name() {
     return this.Form.get('second_name');
   }
-  get card_number() {
-    return this.Form.get('card_number');
-  }
-  get gender() {
-    return this.Form.get('gender');
-  }
   get birth_day() {
     return this.Form.get('birth_day');
-  }
-  get email() {
-    return this.Form.get('email');
   }
 
   public myDatePickerOptions: IMyDpOptions = {
@@ -118,7 +98,7 @@ export class ClientDataComponent implements OnInit {
     if (!this.profileService.ClientProfile.id) {
       this.profileService.GetClientProfile(
         (res) => {
-          this.profileService.ClientProfile = res;
+          this.profileService.ClientProfile = { ...res, ...res.client[0] };
           this.Profile = this.profileService.ClientProfile;
         }
       );
@@ -130,24 +110,26 @@ export class ClientDataComponent implements OnInit {
 
   SaveProfile() {
     for (const i in this.Form.controls) {
-      this.Form.controls[i].markAsDirty();
-      this.Form.controls[i].markAsTouched();
+      this.Form.get(i).updateValueAndValidity();
     }
+
     const valid = this.Form.valid;
     if (valid) {
       const data = this.Form.getRawValue();
       const date = data['birth_day']['date'];
       data['birth_day'] = date['year'] + '-' + date['month'] + '-' + date['day'];
 
-      let profile = this.Profile;
-      for (let item in data) {
-        profile[item] = data[item];
-      }
+      this.profileService.UpdateClientProfile(
+        data,
+        (res) => {
+          this.authService.UpdateProfile(
+            data,
+            (res) => {
+              this.changeMode();
+            },
+            (err) => { })
 
-      this.profileService.UpdateClientProfile(profile, (res) => {
-        this.profileService.ClientProfile = res;
-        this.changeMode();
-      },
+        },
         (err) => {
           console.log(err);
         });
