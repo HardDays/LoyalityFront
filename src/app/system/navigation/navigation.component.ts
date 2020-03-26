@@ -108,12 +108,6 @@ export class NavigationComponent implements OnInit {
         visible: this.IsLoggedIn && this.Me.user_type === 'creator'
       },
       {
-        url: MenuUrls.social_media,
-        image: "assets/img/menu9.svg",
-        label: "Социальные сети",
-        visible: this.IsLoggedIn && this.Me.user_type === 'creator'
-      },
-      {
         url: MenuUrls.my_profile_data,
         image: "assets/img/menu-lk1.svg",
         label: "Мои данные",
@@ -130,7 +124,13 @@ export class NavigationComponent implements OnInit {
         image: "assets/img/menu-lk3.svg",
         label: "Программа лояльности",
         visible: this.IsLoggedIn && this.Me.user_type === 'client'
-      }
+      },
+      {
+        url: MenuUrls.social_media,
+        image: "assets/img/menu9.svg",
+        label: "Социальные сети",
+        visible: this.IsLoggedIn && ['creator', 'client'].includes(this.Me.user_type)
+      },
     ];
   }
 

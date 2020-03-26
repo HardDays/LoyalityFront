@@ -27,11 +27,11 @@ export class SettingsComponent implements OnInit {
       Validators.maxLength(50),
       Validators.minLength(3)
     ]),
-    "company_name": new FormControl("", [
-      Validators.required,
-      Validators.maxLength(50),
-      Validators.minLength(3)
-    ])
+    // "company_name": new FormControl("", [
+    //   Validators.required,
+    //   Validators.maxLength(50),
+    //   Validators.minLength(3)
+    // ])
   });
 
   EmailFormError = false;
@@ -79,11 +79,11 @@ export class SettingsComponent implements OnInit {
       }
     });
 
-    this.auth.onCompanyChange$.subscribe((res) => {
-      if (res) {
-        this.GeneralForm.get('company_name').setValue(this.auth.CompanyData.name);
-      }
-    })
+    // this.auth.onCompanyChange$.subscribe((res) => {
+    //   if (res) {
+    //     this.GeneralForm.get('company_name').setValue(this.auth.CompanyData.name);
+    //   }
+    // })
   }
 
   ngOnInit() {
@@ -111,7 +111,7 @@ export class SettingsComponent implements OnInit {
 
     this.GeneralForm.get('first_name').setValue(this.Me.first_name);
     this.GeneralForm.get('last_name').setValue(this.Me.last_name);
-    this.GeneralForm.get('company_name').setValue(this.auth.CompanyData.name);
+    // this.GeneralForm.get('company_name').setValue(this.auth.CompanyData.name);
   }
 
   MatchPasswords() {
@@ -220,16 +220,17 @@ export class SettingsComponent implements OnInit {
     const data = this.GeneralForm.getRawValue();
     this.auth.UpdateProfile(data,
       (res) => {
-        this.auth.UpdateCompany({ name: data.company_name },
-          (res) => {
-            this.GeneralFormSuccess = true;
-            this.UpdateGeneralForm();
-            setTimeout(() => {
-              this.GeneralFormSuccess = false;
-            }, 3000);
-          },
-          (err) => { }
-        );
+        console.log(res)
+        // this.auth.UpdateCompany({ name: data.company_name },
+        //   (res) => {
+        //     this.GeneralFormSuccess = true;
+        //     this.UpdateGeneralForm();
+        //     setTimeout(() => {
+        //       this.GeneralFormSuccess = false;
+        //     }, 3000);
+        //   },
+        //   (err) => { }
+        // );
       },
       (err) => { }
     )
