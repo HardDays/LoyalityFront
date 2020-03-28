@@ -31,8 +31,8 @@ export class SocialMediaService {
     );
   }
 
-  AuthorizeVK() {
-    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&display=page&redirect_uri=${window.location.origin}&scope=offline&response_type=token&v=5.103`
+  AuthorizeVK(success?: () => void) {
+    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&display=popup&redirect_uri=${window.location.origin}&scope=offline&response_type=token&v=5.103`
     const strWindowFeatures = 'toolbar=no, menubar=no, width=800, height=700, top=100, left=100';
 
     window.localStorage.setItem("vkAuth", "in_progress");
@@ -62,8 +62,10 @@ export class SocialMediaService {
           window.localStorage.removeItem("vkAuth");
 
           this.SetVKClient(
-            { acess_token: vk_access_token },
-            () => { },
+            { access_token: vk_access_token },
+            () => {
+              success();
+            },
             (err) => {
               alert("Ошибка авторизации в ВК");
               console.error(err)

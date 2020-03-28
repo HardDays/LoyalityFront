@@ -10,6 +10,8 @@ import { SocialMediaService } from '../social-media.service';
 })
 export class SocialMediaOverviewComponent implements OnInit {
 
+  ModalIsShown: boolean = false;
+
   constructor(private auth: AuthService, private router: Router, private socialMediaService: SocialMediaService) { }
 
   ngOnInit() {
@@ -24,7 +26,13 @@ export class SocialMediaOverviewComponent implements OnInit {
     }
 
     if (user_type === "client") {
-      this.socialMediaService.AuthorizeVK()
+      this.socialMediaService.AuthorizeVK(() => {
+        this.ModalIsShown = true;
+      })
     }
+  }
+
+  CloseModal() {
+    this.ModalIsShown = false;
   }
 }

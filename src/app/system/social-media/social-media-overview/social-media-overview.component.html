@@ -32,4 +32,14 @@
     </div>
 
   </div>
+  <div *ngIf="ModalIsShown"
+       class="modal modal--visible">
+    <div class="modal__block modal__block--bonuses">
+      <span class="modal__close"><img (click)="CloseModal()"
+             src="./../../../../../assets/img/close.svg"></span>
+      <div class="modal__customer-content modal__customer-content-bonuses-inside">
+        <p class="bonuses-text text-center">Успешно сохранено</p>
+      </div>
+    </div>
+  </div>
 </section>
