@@ -59,7 +59,9 @@ export class ReportComponent implements OnInit {
       "cards_count": "Количество карт с покупками",
       "clients_count": "Количество новых покупателей (зарегистрированных в указанный период)",
       "orders_count": "Количество покупок",
-      "written_off_points": "Всего бонусов списано"
+      "written_off_points": "Всего бонусов списано",
+      "vk_statistics": "Вконтакте (подписки, лайки, репосты, комментарии)",
+      "total_price": "Общая сумма покупок"
     },
     sms: {
       "total_count": "Всего СМС",
@@ -78,7 +80,9 @@ export class ReportComponent implements OnInit {
       "cards_count",
       "average_price",
       "accrued_points",
-      "written_off_points"
+      "written_off_points",
+      "vk_statistics",
+      "total_price"
     ],
     sms: [
       "total_count",
@@ -185,6 +189,8 @@ export class ReportComponent implements OnInit {
         result.accrued_points /= 100;
         result.average_price /= 100;
         result.written_off_points /= 100;
+        result.total_price /= 100;
+        result.vk_statistics = Number(data.vk_likes_count) + Number(data.vk_joined_count) + Number(data.vk_reposts_count) + Number(data.vk_comments_count);
       }
       this.TableData = result;
     }
@@ -302,7 +308,7 @@ export class ReportComponent implements OnInit {
       // let cols = ["Метрика", "Значение"]
       arr.push({
         "key": "Метрика",
-        "value": "Занчение"
+        "value": "Значение"
       })
 
       for (const i of this.ReportFields[this.Type]) {
