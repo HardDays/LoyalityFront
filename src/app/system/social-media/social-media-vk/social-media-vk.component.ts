@@ -5,7 +5,7 @@ import { SocialMediaService } from "../social-media.service"
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 
-const generateCallbackAPiVkLink = (companyId) => `https://fathomless-earth-40434.herokuapp.com/api/test/v1/vk/callback/${companyId}/`
+const generateCallbackAPiVkLink = (companyId) => `https://fathomless-earth-40434.herokuapp.com/test/api/v1/vk/callback/${companyId}/`
 const formNumberValues = ["group_join_points", "wall_repost_points", "wall_like_points", "wall_reply_points"]
 @Component({
   selector: 'app-social-media-vk',
@@ -16,7 +16,6 @@ export class SocialMediaVkComponent implements OnInit {
 
   ModalIsShown: boolean = false;
   CallbackAPILink: string = "";
-  CheckedRadioValue: string = "group_join_points"
   FormData: any = {
     confirmation_code: "",
     group_id: "",
