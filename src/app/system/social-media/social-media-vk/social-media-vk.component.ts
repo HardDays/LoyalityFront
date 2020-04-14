@@ -50,6 +50,27 @@ export class SocialMediaVkComponent implements OnInit {
           this.CreateGroupForm.controls[v].setValue(0);
         })
       });
+
+    this.socialMedialService.GetVKGroupInfo(
+      (data) => {
+        const FormCheckedValues = []
+        const SavedFormData = formNumberValues.reduce(
+          (acc, key) => {
+            const num = +data[key];
+            acc[key] = num > 0 ? num / 100 : 0;
+            if (acc[key] > 0) FormCheckedValues.push(key);
+            return acc;
+          },
+          {
+            confirmation_code: data.confirmation_code,
+            group_id: data.group_id
+          });
+
+        this.CreateGroupForm.patchValue(SavedFormData);
+
+        const formArray = this.CreateGroupForm.get('checked_values') as FormArray;
+        FormCheckedValues.forEach(k => formArray.push(new FormControl(k)));
+      })
   }
 
   GoBack() {

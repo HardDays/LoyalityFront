@@ -90,4 +90,20 @@ export class SocialMediaService {
     );
   }
 
+  GetVKGroupInfo(success?: (data) => void) {
+    this.auth.onLoading.next(true);
+    this.http.CommonRequest(
+      () => this.http.GetData('/vk/groups'),
+      (res) => {
+        if (success && typeof success == "function") {
+          success(res);
+        }
+        this.auth.onLoading.next(false);
+      },
+      (err) => {
+        this.auth.onLoading.next(false);
+      }
+    );
+  }
+
 }

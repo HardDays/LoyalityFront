@@ -67,6 +67,7 @@
         <div class="create-block__group">
           <label class="radio radio--create">
             <input type="checkbox"
+                   [checked]="checked_values.value.includes('group_join_points')"
                    (change)="onCheckChange($event)"
                    value="group_join_points"
                    class="radio__input">
@@ -80,6 +81,7 @@
           </label>
           <label class="radio radio--create">
             <input type="checkbox"
+                   [checked]="checked_values.value.includes('wall_like_points')"
                    (change)="onCheckChange($event)"
                    value="wall_like_points"
                    class="radio__input">
@@ -93,6 +95,7 @@
           </label>
           <label class="radio radio--create">
             <input type="checkbox"
+                   [checked]="checked_values.value.includes('wall_repost_points')"
                    (change)="onCheckChange($event)"
                    value="wall_repost_points"
                    class="radio__input">
@@ -106,6 +109,7 @@
           </label>
           <label class="radio radio--create">
             <input type="checkbox"
+                   [checked]="checked_values.value.includes('wall_reply_points')"
                    (change)="onCheckChange($event)"
                    value="wall_reply_points"
                    class="radio__input">
