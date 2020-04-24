@@ -14,10 +14,10 @@ export class SocialMediaService {
   constructor(private http: HttpService, private auth: AuthService, @Inject(APP_CONFIG) private config: AppConfig) {
   }
 
-  CreateVkGroup(data, success?: (data) => void, fail?: (err) => void) {
+  UpdateVkGroup(isCreated, data, success?: (data) => void, fail?: (err) => void) {
     this.auth.onLoading.next(true);
     this.http.CommonRequest(
-      () => this.http.PostData('/vk/groups', data),
+      () => isCreated ? this.http.PutData('/vk/groups', data) : this.http.PostData('/vk/groups', data),
       (res) => {
         if (success && typeof success == "function") {
           success(res);

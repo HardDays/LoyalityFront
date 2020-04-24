@@ -41,16 +41,6 @@ export class SocialMediaVkComponent implements OnInit {
   }
 
   ngOnInit() {
-    this
-      .CreateGroupForm
-      .controls['checked_values']
-      .valueChanges
-      .subscribe((values: string[]) => {
-        formNumberValues.filter(key => !values.includes(key)).forEach(v => {
-          this.CreateGroupForm.controls[v].setValue(0);
-        })
-      });
-
     this.socialMedialService.GetVKGroupInfo(
       (data) => {
         const FormCheckedValues = []
@@ -72,8 +62,21 @@ export class SocialMediaVkComponent implements OnInit {
         FormCheckedValues.forEach(k => formArray.push(new FormControl(k)));
 
         this.GroupIsCreated = true;
-        this.CallbackAPILink = generateCallbackAPiVkLink(this.auth.LoginData.company_id, data.callback_code)
+        this.CallbackAPILink = generateCallbackAPiVkLink(this.auth.LoginData.company_id, data.callback_code);
+        this._subscribeToRulesValueChanges();
       })
+  }
+
+  _subscribeToRulesValueChanges() {
+    this
+      .CreateGroupForm
+      .controls['checked_values']
+      .valueChanges
+      .subscribe((values: string[]) => {
+        formNumberValues.filter(key => !values.includes(key)).forEach(v => {
+          this.CreateGroupForm.controls[v].setValue(0);
+        })
+      });
   }
 
   GoBack() {
@@ -118,7 +121,8 @@ export class SocialMediaVkComponent implements OnInit {
     this.CreateGroupForm.updateValueAndValidity();
     if (this.CreateGroupForm.valid) {
       const data = this.CreateGroupForm.getRawValue();
-      this.socialMedialService.CreateVkGroup(
+      this.socialMedialService.UpdateVkGroup(
+        this.GroupIsCreated,
         {
           group_id: data.group_id,
           confirmation_code: data.confirmation_code,
@@ -139,7 +143,6 @@ export class SocialMediaVkComponent implements OnInit {
       for (const i in this.CreateGroupForm.controls) {
         this.CreateGroupForm.get(i).markAsDirty();
       }
-
     }
   }
 
