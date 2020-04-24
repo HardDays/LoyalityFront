@@ -5,7 +5,7 @@ import { SocialMediaService } from "../social-media.service"
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 
-const generateCallbackAPiVkLink = (companyId) => `https://fathomless-earth-40434.herokuapp.com/test/api/v1/vk/callback/${companyId}/`
+const generateCallbackAPiVkLink = (companyId, callbackCode) => `https://fathomless-earth-40434.herokuapp.com/test/api/v1/vk/callback/${companyId}/${callbackCode}`
 const formNumberValues = ["group_join_points", "wall_repost_points", "wall_like_points", "wall_reply_points"]
 @Component({
   selector: 'app-social-media-vk',
@@ -14,6 +14,7 @@ const formNumberValues = ["group_join_points", "wall_repost_points", "wall_like_
 })
 export class SocialMediaVkComponent implements OnInit {
 
+  GroupIsCreated: boolean = false;
   ModalIsShown: boolean = false;
   CallbackAPILink: string = "";
   FormData: any = {
@@ -40,7 +41,6 @@ export class SocialMediaVkComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.CallbackAPILink = generateCallbackAPiVkLink(this.auth.LoginData.company_id)
     this
       .CreateGroupForm
       .controls['checked_values']
@@ -70,6 +70,9 @@ export class SocialMediaVkComponent implements OnInit {
 
         const formArray = this.CreateGroupForm.get('checked_values') as FormArray;
         FormCheckedValues.forEach(k => formArray.push(new FormControl(k)));
+
+        this.GroupIsCreated = true;
+        this.CallbackAPILink = generateCallbackAPiVkLink(this.auth.LoginData.company_id, data.callback_code)
       })
   }
 
@@ -142,6 +145,6 @@ export class SocialMediaVkComponent implements OnInit {
 
   onCloseModal() {
     this.ModalIsShown = false;
-    this.router.navigate(['/system', 'social_media'])
+    window.location.reload();
   }
 }
