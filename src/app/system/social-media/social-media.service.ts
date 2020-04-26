@@ -32,12 +32,12 @@ export class SocialMediaService {
   }
 
   AuthorizeVK(success?: () => void) {
-    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&display=popup&redirect_uri=${window.location.origin}/&scope=offline&response_type=token&v=5.103`
+    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&display=popup&redirect_uri=${window.location.origin}/&scope=offline&response_type=token&revoke=1&v=5.103`
     const strWindowFeatures = 'toolbar=no, menubar=no, width=800, height=700, top=100, left=100';
 
     window.localStorage.setItem("vkAuth", "in_progress");
     this.windowObjectReference = window.open(url, name, strWindowFeatures);
-    let loopCount = 10;
+    let loopCount = 100;
 
     this.intervalRef = window.setInterval(() => {
       if (loopCount-- < 0) {
@@ -54,12 +54,13 @@ export class SocialMediaService {
         let href: string;
         try { href = this.windowObjectReference.location.href; } catch (e) { }
         if (href) {
-          this.windowObjectReference.close();
           window.clearInterval(this.intervalRef);
 
           const vk_access_token = window.localStorage.getItem("vk_access_token");
           window.localStorage.removeItem("vk_access_token");
           window.localStorage.removeItem("vkAuth");
+
+          this.windowObjectReference.close();
 
           this.SetVKClient(
             { access_token: vk_access_token },
