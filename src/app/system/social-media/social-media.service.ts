@@ -32,7 +32,7 @@ export class SocialMediaService {
   }
 
   AuthorizeVK(success?: () => void) {
-    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&display=popup&redirect_uri=${window.location.origin}&scope=offline&response_type=token&v=5.103`
+    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&display=popup&redirect_uri=${window.location.origin}/&scope=offline&response_type=token&v=5.103`
     const strWindowFeatures = 'toolbar=no, menubar=no, width=800, height=700, top=100, left=100';
 
     window.localStorage.setItem("vkAuth", "in_progress");
