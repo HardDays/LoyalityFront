@@ -31,49 +31,53 @@ export class SocialMediaService {
     );
   }
 
-  AuthorizeVK(success?: () => void) {
-    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&display=popup&redirect_uri=${window.location.origin}/&scope=offline&response_type=token&revoke=1&v=5.103`
+  AuthorizeVK(success?: () => void, fail?: () => void) {
+    const url = `https://oauth.vk.com/authorize?client_id=${this.config.clientId}&redirect_uri=${window.location.origin}/&scope=offline&response_type=token&revoke=1&v=5.103`
     const strWindowFeatures = 'toolbar=no, menubar=no, width=800, height=700, top=100, left=100';
 
-    window.localStorage.setItem("vkAuth", "in_progress");
+    // window.localStorage.setItem("vkAuth", "in_progress");
     this.windowObjectReference = window.open(url, name, strWindowFeatures);
-    let loopCount = 100;
-
     this.intervalRef = window.setInterval(() => {
-      if (loopCount-- < 0) {
-        window.localStorage.removeItem("vkAuth");
+
+      let href: string;
+      try {
+        href = this.windowObjectReference.location.href;
+      } catch (e) { };
+
+      if (href && href !== "about:blank") {
         window.clearInterval(this.intervalRef);
+
+        const getUrlParameterByName = (name, url) => {
+          name = name.replace(/[\[\]]/g, "\\$&");
+          let regex = new RegExp("[?&#]" + name + "(=([^&#]*)|&|#|$)");
+          let results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return "";
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        const vk_access_token = getUrlParameterByName("access_token", href);
+        const vk_error = getUrlParameterByName("error", href);
+        console.log(vk_error)
+
         this.windowObjectReference.close();
-      } else {
-        if (this.windowObjectReference.closed) {
-          window.localStorage.removeItem("vkAuth");
-          window.clearInterval(this.intervalRef);
+
+        if (!vk_access_token || vk_error === "access_denied") {
+          fail();
           return;
         }
 
-        let href: string;
-        try { href = this.windowObjectReference.location.href; } catch (e) { }
-        if (href) {
-          window.clearInterval(this.intervalRef);
-
-          const vk_access_token = window.localStorage.getItem("vk_access_token");
-          window.localStorage.removeItem("vk_access_token");
-          window.localStorage.removeItem("vkAuth");
-
-          this.windowObjectReference.close();
-
-          this.SetVKClient(
-            { access_token: vk_access_token },
-            () => {
-              success();
-            },
-            (err) => {
-              alert("Ошибка авторизации в ВК");
-              console.error(err)
-            })
-        }
+        this.SetVKClient(
+          { access_token: vk_access_token },
+          () => {
+            success();
+          },
+          () => {
+            fail();
+          })
       }
-    }, 1000)
+
+    }, 500)
   }
 
   SetVKClient(data, success?: (data) => void, fail?: (err) => void) {

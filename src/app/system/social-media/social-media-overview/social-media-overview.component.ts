@@ -11,6 +11,7 @@ import { SocialMediaService } from '../social-media.service';
 export class SocialMediaOverviewComponent implements OnInit {
 
   ModalIsShown: boolean = false;
+  ModalMessage: string;
 
   constructor(private auth: AuthService, private router: Router, private socialMediaService: SocialMediaService) { }
 
@@ -26,13 +27,20 @@ export class SocialMediaOverviewComponent implements OnInit {
     }
 
     if (user_type === "client") {
-      this.socialMediaService.AuthorizeVK(() => {
-        this.ModalIsShown = true;
-      })
+      this.socialMediaService.AuthorizeVK(
+        () => {
+          this.ModalMessage = "Успешно сохранено";
+          this.ModalIsShown = true;
+        },
+        () => {
+          this.ModalMessage = "Произошла ошибка при авторизации. Попробуйте снова";
+          this.ModalIsShown = true;
+        })
     }
   }
 
   CloseModal() {
     this.ModalIsShown = false;
+    this.ModalMessage = ""
   }
 }
