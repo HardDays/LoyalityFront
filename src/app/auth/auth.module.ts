@@ -14,6 +14,7 @@ import { SignupModule } from './signup/signup.module';
 import { ConfirmModule } from './confirm/confirm.module';
 import { CompanySelectorComponent } from './company-selector/company-selector.component';
 import { CompanyModule } from '../system/company/company.module';
+import { AuthStateService } from "./auth-state.service"
 
 @NgModule({
   declarations: [
@@ -37,6 +38,6 @@ import { CompanyModule } from '../system/company/company.module';
     // HttpClientModule,
   ],
   // exports: [AuthComponent],
-  providers: [AuthAccessGuard]
+  providers: [AuthAccessGuard, AuthStateService]
 })
 export class AuthModule { }

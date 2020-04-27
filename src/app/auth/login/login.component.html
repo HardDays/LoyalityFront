@@ -39,7 +39,45 @@
           <span *ngIf="password.errors.wrong">Неправильный E-mail или пароль.</span>
         </ng-container>
       </p>
-      <!-- Add class "auth-block__input--error" for red border or "auth-block__input--correct" for green border -->
+
+      <p class="auth-block__choice">Выберите роль пользователя:</p>
+      <div class="auth-block__choice"
+           style="margin-top: 14px;">
+        <label class="radio">
+          <input type="radio"
+                 name="userType"
+                 formControlName="userType"
+                 class="radio__input"
+                 value="client"
+                 [checked]="userType.value === 'client'">
+          <div class="radio__text">Клиент</div>
+        </label>
+        <label class="radio">
+          <input type="radio"
+                 name="userType"
+                 formControlName="userType"
+                 class="radio__input"
+                 value="operator"
+                 [checked]="userType.value === 'operator'">
+          <div class="radio__text">Кассир</div>
+        </label>
+        <label class="radio">
+          <input type="radio"
+                 name="userType"
+                 formControlName="userType"
+                 class="radio__input"
+                 value="creator"
+                 [checked]="userType.value === 'creator'">
+          <div class="radio__text">Владелец</div>
+        </label>
+      </div>
+      <p style="padding: 12px 0 0 4px;"
+         class="auth-block__hint auth-block__hint--error">
+        <ng-container *ngIf="!UserTypeIsValid">
+          <span>Пользователя такого типа не существует</span>
+        </ng-container>
+      </p>
+
       <!-- <input type="text" class="auth-block__input" placeholder="E-mail"> -->
       <!-- Add class "auth-block__hint--error" for red text or "auth-block__hint--correct" for green text -->
       <!-- <p class="auth-block__hint auth-block__hint--error"></p> -->

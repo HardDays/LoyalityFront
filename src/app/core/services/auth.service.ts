@@ -42,7 +42,6 @@ export class AuthService {
     this.http.CommonRequest(
       () => this.http.PostData('/auth/login', data),
       (res: LoginSuccessModel) => {
-        this.InitSession(res);
         if (success && typeof success == "function") {
           success(res);
         }
