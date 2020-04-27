@@ -58,7 +58,6 @@ export class SocialMediaService {
 
         const vk_access_token = getUrlParameterByName("access_token", href);
         const vk_error = getUrlParameterByName("error", href);
-        console.log(vk_error)
 
         this.windowObjectReference.close();
 

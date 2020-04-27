@@ -33,6 +33,7 @@
     "ng-gapi": "0.0.73",
     "ng2-charts": "~2.2.5",
     "ngx-infinite-scroll": "^7.2.0",
+    "ngx-toastr": "^10.1.0",
     "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

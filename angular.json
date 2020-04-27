@@ -29,10 +29,10 @@
             "styles": [
               "src/styles.scss",
               "src/assets/css/style.min.css",
-              "src/assets/css/select-default-style.css"
+              "src/assets/css/select-default-style.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

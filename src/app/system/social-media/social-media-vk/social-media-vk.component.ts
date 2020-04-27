@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { SocialMediaService } from "../social-media.service"
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
+import { SocialMediaService } from "../social-media.service"
 import { AuthService } from 'src/app/core/services/auth.service';
 
 const generateCallbackAPiVkLink = (companyId, callbackCode) => `https://fathomless-earth-40434.herokuapp.com/test/api/v1/vk/callback/${companyId}/${callbackCode}`
@@ -37,7 +39,7 @@ export class SocialMediaVkComponent implements OnInit {
     "wall_reply_points": new FormControl(this.FormData.wall_reply_points, Validators.pattern('[0-9\.\,]*'))
   })
 
-  constructor(private _location: Location, private router: Router, private auth: AuthService, private socialMedialService: SocialMediaService) {
+  constructor(private _location: Location, private router: Router, private auth: AuthService, private socialMedialService: SocialMediaService, private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -96,6 +98,12 @@ export class SocialMediaVkComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+
+    this.toastr.info('Успешно скопировано', '', {
+      timeOut: 1500,
+      toastClass: 'custom-toast-info',
+      positionClass: 'toast-top-full-width'
+    });
   }
 
   get confirmation_code() { return this.CreateGroupForm.get('confirmation_code'); }
