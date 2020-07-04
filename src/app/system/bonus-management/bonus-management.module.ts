@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BonusManagementRoutingModule } from './bonus-management.routing';
 import { BonusManagementAccessGuard } from './bonus-management.guard';
@@ -11,6 +11,7 @@ import { BonusManagementService } from './bonus-management.service';
 import { BonusChargeComponent } from './bonus-charge/bonus-charge.component'
 import { BonusManagementComponent } from './bonus-management.component';
 import { BonusStateService } from './bonus-state.service';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   declarations: [BonusManagementComponent, BonusOverviewComponent, BonusChargeComponent],
@@ -20,7 +21,9 @@ import { BonusStateService } from './bonus-state.service';
     CommonModule,
     RouterModule,
     FormsModule,
-    BonusManagementRoutingModule
+    ReactiveFormsModule,
+    BonusManagementRoutingModule,
+    MyDatePickerModule
   ],
   providers: [BonusManagementService, BonusStateService, BonusManagementAccessGuard],
 })

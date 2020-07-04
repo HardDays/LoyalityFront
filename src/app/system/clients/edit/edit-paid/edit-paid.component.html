@@ -1,50 +1,42 @@
-<app-client-preloader *ngIf="IsLoading"
-                      [IsLoading]="IsLoading"></app-client-preloader>
+<app-client-preloader *ngIf="IsLoading" [IsLoading]="IsLoading"></app-client-preloader>
 
 <div class="create-block customer__block customer__block--small">
-  <p class="create-block__label create-block__label--light">Имя покупателя:
-    <span class="customer__name">{{Client.first_name}} {{Client.last_name}}</span>
-    <span class="customer__edit"><img [routerLink]="['../client']"
+    <p class="create-block__label create-block__label--light">Имя покупателя:
+        <span class="customer__name">{{Client.first_name}} {{Client.last_name}}</span>
+        <span class="customer__edit"><img [routerLink]="['../client']"
            src="./../../../../../assets/img/edit-icon.svg"
            alt=""></span>
-  </p>
-  <p class="create-block__label create-block__label--light customer__label">Всего бонусов на счету:
-    <span class="customer__name">{{Bonuses.All}}</span>
-  </p>
-  <p class="create-block__label create-block__label--light customer__label">Доступно к списанию:
-    <span class="customer__name">{{Bonuses.Available}}</span>
-  </p>
-  <p class="create-block__label create-block__label--light customer__label">Списать бонусов:
-    <input type="text"
-           [ngModel]="WrireBonuses"
-           (ngModelChange)="onWriteBonusesChange($event)"
-           class="create-block__input create-block__input--small">
-  </p>
-  <p class="create-block__label bonus-error-text"
-     *ngIf="hasErrorBonuses">Указанная сумма превышает доступную!</p>
+    </p>
+    <p class="create-block__label create-block__label--light customer__label">Всего бонусов на счету:
+        <span class="customer__name">{{Bonuses.All}}</span>
+    </p>
+    <p class="create-block__label create-block__label--light customer__label">Доступно к списанию:
+        <span class="customer__name">{{Bonuses.Available}}</span>
+    </p>
+    <p class="create-block__label create-block__label--light customer__label">Списать бонусов:
+        <input type="text" [ngModel]="WrireBonuses" (ngModelChange)="onWriteBonusesChange($event)" class="create-block__input create-block__input--small">
+    </p>
+    <p class="create-block__label bonus-error-text" *ngIf="hasErrorBonuses">Указанная сумма превышает доступную!</p>
 
-  <div class="customer__flex-buttons">
-    <button [disabled]="hasErrorBonuses || !WrireBonuses || WrireBonuses <= 0"
-            (click)="onClickWriteBonuses()"
-            class="button customer__button">Использовать бонусы</button>
-    <button (click)="onClickNotWriteBonuses()"
-            class="button customer__button button--black">Не использовать<br>бонусы</button>
-  </div>
+    <div class="customer__flex-buttons">
+        <button [disabled]="hasErrorBonuses || !WrireBonuses || WrireBonuses <= 0" (click)="onClickWriteBonuses()" class="button customer__button">Использовать бонусы</button>
+        <button (click)="onClickNotWriteBonuses()" class="button customer__button button--black">Не использовать<br>бонусы</button>
+    </div>
 </div>
 
-<div *ngIf="isModalOpened"
-     class="modal modal--visible">
-  <div class="modal__block modal__block--customer">
-    <span class="modal__close"><img (click)="closeSuccessModal()"
+<div *ngIf="isModalOpened" class="modal modal--visible">
+    <div class="modal__block modal__block--customer">
+        <span class="modal__close"><img (click)="closeSuccessModal()"
            src="./../../../../../assets/img/close.svg"
            alt=""></span>
 
-    <div class="modal__customer-content">
-      <p class="customer__check-text">Имя покупателя: {{Client.first_name}} {{Client.last_name}}</p>
-      <p class="customer__check-text">Общая сумма: {{Order.price}}</p>
-      <p class="customer__check-text">Оплата бонусами: {{WrireBonuses}}</p>
-      <p class="customer__check-text">ИТОГО к оплате, с учетом бонусов: {{Order.price - WrireBonuses}}</p>
-      <p class="customer__check-text">Остаток бонусов: {{Bonuses.All - WrireBonuses}}</p>
+        <div class="modal__customer-content">
+            <p class="customer__check-text">Имя покупателя: {{Client.first_name}} {{Client.last_name}}</p>
+            <p class="customer__check-text">Общая сумма: {{Order.price}}</p>
+            <p class="customer__check-text">Оплата бонусами: {{WrireBonuses}}</p>
+            <p class="customer__check-text">ИТОГО к оплате, с учетом бонусов: {{Order.price - WrireBonuses}}</p>
+            <p class="customer__check-text">Остаток бонусов: {{Bonuses.All - WrireBonuses}}</p>
+            <p class="customer__check-text">Бонусы за текущую покупку: {{order_bonus}}</p>
+        </div>
     </div>
-  </div>
 </div>

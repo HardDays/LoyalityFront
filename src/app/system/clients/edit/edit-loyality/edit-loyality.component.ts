@@ -55,6 +55,8 @@ export class EditLoyalityComponent implements OnInit {
 
     this.ls.RefreshLoyalty(
       (res) => {
+        console.log(res)
+
         this.ProgrammLoyaltyName = res['name'];
       }
     );

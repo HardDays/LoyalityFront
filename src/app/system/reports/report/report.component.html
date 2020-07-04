@@ -1,109 +1,83 @@
 <div class="page__content page__content--create">
 
-  <div class="page__top page__top--create">
-    <span class="page__back"
-          (click)="GoBack()"><img src="assets/img/back.svg"
+    <div class="page__top page__top--create">
+        <span class="page__back" (click)="GoBack()"><img src="assets/img/back.svg"
            alt=""></span>
-    <h1 class="page__title page__title--create">{{NameDics[Type]}}</h1>
-  </div>
-
-  <div class="report-make__block">
-    <p class="report-make__label report-make__label--small_margin"
-       *ngIf="MakeParams.begin_date || MakeParams.begin_date">За период
-      <ng-container *ngIf="MakeParams.begin_date">
-        с {{MakeParams.begin_date}}
-      </ng-container>
-      <ng-container *ngIf="MakeParams.begin_date">
-        по {{MakeParams.end_date}}
-      </ng-container>
-    </p>
-    <p class="report-make__label report-make__label--small_margin">Магазин: {{StoresString}}</p>
-    <p class="report-make__label report-make__label--small_margin">Кассир: {{OperatorsString}}</p>
-    <p class="report-make__label report-make__label--small_margin">Программа лояльности/Акции: {{PromotionsString}}</p>
-  </div>
-
-  <div class="report-make__table"
-       [ngStyle]="{'margin': Type=='orders' ? '17px 46px 0' : 'auto', 'width': Type=='orders' ? 'auto' : '739px'}"
-       [ngClass]="{'report-make__table--general': Type=='general' || Type=='sms', 'report-make__table--customers': Type=='clients', 'report-make__table--purchases':Type=='orders'}">
-    <div class="report-make__row report-make__row--head">
-      <ng-container *ngIf="Type=='general' || Type=='sms'">
-        <div class="report-make__cell">Метрика</div>
-        <div class="report-make__cell">Значение:</div>
-      </ng-container>
-      <ng-container *ngIf="Type=='clients'">
-        <div class="report-make__cell">ФИО</div>
-        <div class="report-make__cell">Телефон</div>
-        <div class="report-make__cell">№ Карты</div>
-        <div class="report-make__cell">Дата Рождения</div>
-        <div class="report-make__cell">Пол</div>
-      </ng-container>
-      <ng-container *ngIf="Type=='orders'">
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.date + '%'}">Дата покупки</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.normal_price + '%'}">Сумма покупки</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.write_off_points + '%'}">Бонусов списано для оплаты</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.final_price + '%'}">Сумма к оплате</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.loyalty + '%'}">Программа лояльности</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.customer + '%'}">ФИО покупателя</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.operator + '%'}">ФИО кассира</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.store + '%'}">Магазин</div>
-      </ng-container>
+        <h1 class="page__title page__title--create">{{NameDics[Type]}}</h1>
     </div>
-    <ng-container *ngIf="Type=='general' || Type=='sms'">
-      <div class="report-make__row"
-           *ngFor="let item of ReportFields[Type]">
-        <div class="report-make__cell">{{ReportsFieldsLabels[Type][item]}}</div>
-        <div class="report-make__cell">{{TableData[item]}}</div>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="Type=='clients'">
-      <div class="report-make__row"
-           *ngFor="let item of ArrayData; let i = index">
-        <div class="report-make__cell"
-             style="justify-content: start">{{i + 1}}
-          {{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</div>
-        <div class="report-make__cell">{{item.phone}}</div>
-        <div class="report-make__cell">{{item.card_number}}</div>
-        <div class="report-make__cell">
-          <ng-container *ngIf="item.birth_day">{{item.birth_day | date: 'd.MM.yyyy'}}</ng-container>
-        </div>
-        <div class="report-make__cell">{{item.gender == 'male' ? 'М' : 'Ж'}}</div>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="Type=='orders'">
-      <div class="report-make__row"
-           *ngFor="let item of ArrayData; let i = index">
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.date + '%'}">{{item.date}}</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.normal_price + '%'}">{{item.normal_price}}</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.write_off_points + '%'}">{{item.write_off_points}}</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.final_price + '%'}">{{item.final_price}}</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.loyalty + '%'}">{{item.loyalty}}</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.customer + '%'}">{{item.customer}}</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.operator + '%'}">{{item.operator}}</div>
-        <div class="report-make__cell"
-             [ngStyle]="{'width': ColumnsWidth.store + '%'}">{{item.store}}</div>
-      </div>
-    </ng-container>
-  </div>
 
-  <div class="text-center">
-    <button class="button create-block__button"
-            (click)="Download()">Скачать ОТЧЁТ в .exl</button>
-  </div>
+    <div class="report-make__block">
+        <p class="report-make__label report-make__label--small_margin" *ngIf="MakeParams.begin_date || MakeParams.begin_date">За период
+            <ng-container *ngIf="MakeParams.begin_date">
+                с {{MakeParams.begin_date}}
+            </ng-container>
+            <ng-container *ngIf="MakeParams.begin_date">
+                по {{MakeParams.end_date}}
+            </ng-container>
+        </p>
+        <p class="report-make__label report-make__label--small_margin">Магазин: {{StoresString}}</p>
+        <p class="report-make__label report-make__label--small_margin">Кассир: {{OperatorsString}}</p>
+        <p class="report-make__label report-make__label--small_margin">Программа лояльности/Акции: {{PromotionsString}}</p>
+    </div>
+
+    <div class="report-make__table" [ngStyle]="{'margin': Type=='orders' ? '17px 46px 0' : 'auto', 'width': Type=='orders' ? 'auto' : '739px'}" [ngClass]="{'report-make__table--general': Type=='general' || Type=='sms', 'report-make__table--customers': Type=='clients', 'report-make__table--purchases':Type=='orders'}">
+        <div class="report-make__row report-make__row--head">
+            <ng-container *ngIf="Type=='general' || Type=='sms'">
+                <div class="report-make__cell">Метрика</div>
+                <div class="report-make__cell">Значение:</div>
+            </ng-container>
+            <ng-container *ngIf="Type=='clients'">
+                <div class="report-make__cell">ФИО</div>
+                <div class="report-make__cell">Телефон</div>
+                <div class="report-make__cell">№ Карты</div>
+                <div class="report-make__cell">Дата Рождения</div>
+                <div class="report-make__cell">Пол</div>
+            </ng-container>
+            <ng-container *ngIf="Type=='orders'">
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.date + '%'}">Дата и время покупки</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.normal_price + '%'}">Сумма покупки</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.write_off_points + '%'}">Бонусов списано для оплаты</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.final_price + '%'}">Сумма к оплате</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.loyalty + '%'}">Программа лояльности</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.customer + '%'}">ФИО покупателя</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.operator + '%'}">ФИО кассира</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.store + '%'}">Магазин</div>
+            </ng-container>
+        </div>
+        <ng-container *ngIf="Type=='general' || Type=='sms'">
+            <div class="report-make__row" *ngFor="let item of ReportFields[Type]">
+                <div class="report-make__cell">{{ReportsFieldsLabels[Type][item]}}</div>
+                <div class="report-make__cell">{{TableData[item]}}</div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="Type=='clients'">
+            <div class="report-make__row" *ngFor="let item of ArrayData; let i = index">
+                <div class="report-make__cell" style="justify-content: start">{{i + 1}} {{item.first_name + " " + (item.second_name ? item.second_name + " " : "") + item.last_name}}</div>
+                <div class="report-make__cell">{{item.phone}}</div>
+                <div class="report-make__cell">{{item.client[0].card_number}}</div>
+                <div class="report-make__cell">
+                    <ng-container *ngIf="item.birth_day">{{item.birth_day | date: 'd.MM.yyyy'}}</ng-container>
+                </div>
+                <div class="report-make__cell">{{item.gender == 'male' ? 'М' : 'Ж'}}</div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="Type=='orders'">
+            <div class="report-make__row" *ngFor="let item of ArrayData; let i = index">
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.date + '%'}">{{item.date}}</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.normal_price + '%'}">{{item.normal_price}}</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.write_off_points + '%'}">{{item.write_off_points}}</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.final_price + '%'}">{{item.final_price}}</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.loyalty + '%'}">{{item.loyalty}}</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.customer + '%'}">{{item.customer}}</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.operator + '%'}">{{item.operator}}</div>
+                <div class="report-make__cell" [ngStyle]="{'width': ColumnsWidth.store + '%'}">{{item.store}}</div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="text-center">
+        <button class="button create-block__button" (click)="Download()">Скачать ОТЧЁТ в .exl</button>
+    </div>
 </div>
 
 <!-- </div> -->

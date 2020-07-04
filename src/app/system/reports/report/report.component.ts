@@ -176,6 +176,7 @@ export class ReportComponent implements OnInit {
     this.service.GetReport(this.Type, params,
       (res) => {
         this.ParseData(res);
+        console.log(res);
       },
       (err) => {
       }
@@ -199,7 +200,7 @@ export class ReportComponent implements OnInit {
         let result: any[] = [];
         for (const item of data) {
           let model = {
-            date: this.pipe.transform(item.created_at, "d.MM.yyyy"),
+            date: this.pipe.transform(item.created_at, "H:m d.MM.yyyy"),
             normal_price: item.price / 100,
             write_off_points: item.write_off_points ? item.write_off_points / 100 : 0,
             final_price: (item.price - (item.write_off_points ? item.write_off_points : 0)) / 100,

@@ -27,7 +27,7 @@ export class EditPaidComponent implements OnInit {
 
   IsLoading = false;
 
-
+  order_bonus=0;
   constructor(
     protected clientsService: ClientsService,
     private promotionsService: PromotionsService,
@@ -43,7 +43,7 @@ export class EditPaidComponent implements OnInit {
     console.log(`Order = `, this.Order);
 
     this.Bonuses.All = (+this.Client.points) / 100;
-
+    this.order_bonus=0;
     if (!this.Order.promotion_id) {
       this.getLoyalty();
     } else {
@@ -161,9 +161,20 @@ export class EditPaidComponent implements OnInit {
         +this.Order.price,
         +this.Order.write_off,
         (res) => {
-          this.checkNewUserInfo();
-          this.IsLoading = false;
-          this.isModalOpened = true;
+          this.clientsService.GetPromotionPoints(this.Client.id,this.Order.price,this.Order.promotion_id,
+            (res)=>{
+              this.order_bonus=res.points/100
+              this.IsLoading = false;
+              this.checkNewUserInfo();
+              this.isModalOpened = true;
+            },
+              (err)=>
+              {
+                this.IsLoading = false;
+                console.log(err);
+              }
+            )
+
         },
         (err) => {
           this.IsLoading = false;
@@ -176,9 +187,21 @@ export class EditPaidComponent implements OnInit {
         +this.Order.price,
         +this.Order.write_off,
         (res) => {
-          this.IsLoading = false;
-          this.checkNewUserInfo();
-          this.isModalOpened = true;
+
+          this.clientsService.GetPromotionPoints(this.Client.id,this.Order.price,this.Order.promotion_id,
+            (res)=>{
+              this.order_bonus=res.points/100
+              this.IsLoading = false;
+              this.checkNewUserInfo();
+              this.isModalOpened = true;
+            },
+              (err)=>
+              {
+                this.IsLoading = false;
+                console.log(err);
+              }
+            )
+
         },
         (err) => {
           this.IsLoading = false;

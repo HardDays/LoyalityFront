@@ -47,7 +47,6 @@ export class PromotionsService {
       err => this.auth.ErrorHandler(err, fail)
     );
   }
-
   DeletePromotion(Id, success?: (data) => void, fail?: (err) => void) {
     this.http.CommonRequest(
       () => this.http.DeleteData('/promotions/' + Id),
