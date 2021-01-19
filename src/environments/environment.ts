@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://34.90.57.126:3001/api/v1',
+  apiUrl: 'http://34.90.190.164:3000/api/v1',
   vkClientId: '7357954'
 };
 
