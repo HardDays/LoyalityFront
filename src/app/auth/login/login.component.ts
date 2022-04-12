@@ -108,7 +108,11 @@ export class LoginComponent implements OnInit {
   CheckUserRole(userData) {
     const userType = this.Form.get("userType").value;
 
-    if (userType === "creator" && userData.client.length === 0 && userData.operator.length === 0 && userData.creator.length === 0) {
+    if (userType === "creator" && 
+      (!userData.client || userData.client.length === 0) && 
+      (!userData.operator || userData.operator.length === 0) && 
+      (!userData.creator || userData.creator.length === 0)
+    ) {
       // means that user is creator and should follow the step of creating a company
       this.authStateService.AuthData = { ...userData, user_type: userType, shouldCreateCompany: true };
       return true;
