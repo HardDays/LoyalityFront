@@ -84,6 +84,10 @@ export class CreateClientProfileComponent implements OnInit {
     return this.Form.get('birth_day');
   }
 
+  currentDate:Date = new Date();
+  currentYear = this.currentDate.getFullYear() - 18;
+  currentDay: any = this.currentDate.getDate();
+  currentMonth: any = this.currentDate.getMonth() + 1;
 
 
   public myDatePickerOptions: IMyDpOptions = {
@@ -93,7 +97,8 @@ export class CreateClientProfileComponent implements OnInit {
     dayLabels: { su: 'Вс', mo: 'Пн', tu: 'Вт', we: 'Ср', th: 'Чт', fr: 'Пт', sa: 'Сб' },
     monthLabels: { 1: 'Янв', 2: 'Фев', 3: 'Мар', 4: 'Апр', 5: 'Май', 6: 'Июн', 7: 'Июл', 8: 'Авг', 9: 'Сен', 10: 'Окт', 11: 'Ноя', 12: 'Дек' },
     editableDateField: false,
-    openSelectorOnInputClick: true
+    openSelectorOnInputClick: true,
+    disableSince: {year: this.currentYear, month: this.currentMonth, day: this.currentDay}
   };
 
   MaskBirthDay = ValidatorService.MaskBirthDay();
@@ -123,7 +128,14 @@ export class CreateClientProfileComponent implements OnInit {
     private service: ClientsService) { }
 
   ngOnInit() {
-
+    let date = new Date();
+    date.setDate(date.getDate() - 1);
+    this.birth_day.setValue({date: {
+          year: date.getFullYear() - 18,
+          month: date.getMonth() + 1,
+          day: date.getDate()
+        }
+    });
   }
 
   GoBack() {
