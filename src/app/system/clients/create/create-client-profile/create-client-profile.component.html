@@ -45,6 +45,8 @@
     <p class="auth-block__hint auth-block__hint--error">
       <ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
         <span *ngIf="last_name.errors['required']">Поле обязательно к заполнению.</span>
+        <span *ngIf="last_name.errors['minlength']">Минимальная длина фамилии 3 символа.</span>
+        <span *ngIf="last_name.errors['maxlength']">Максимальная длина фамилии 30 символов.</span>
       </ng-container>
     </p>
 
@@ -58,6 +60,8 @@
     <p class="auth-block__hint auth-block__hint--error">
       <ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
         <span *ngIf="first_name.errors['required']">Поле обязательно к заполнению.</span>
+        <span *ngIf="first_name.errors['minlength']">Минимальная длина имени 3 символа.</span>
+        <span *ngIf="first_name.errors['maxlength']">Максимальная длина имени 30 символов.</span>
       </ng-container>
     </p>
 
@@ -68,6 +72,13 @@
            autocomplete="null"
            name="second_name"
            formControlName="second_name">
+
+    <p class="auth-block__hint auth-block__hint--error">
+      <ng-container *ngIf="second_name.invalid && (second_name.dirty || second_name.touched)">
+        <span *ngIf="second_name.errors['minlength']">Минимальная длина отчества 6 символов.</span>
+        <span *ngIf="second_name.errors['maxlength']">Максимальная длина отчества 30 символов.</span>
+      </ng-container>
+    </p>
 
     <p class="create-block__label create-block__label--light">Электронный адрес</p>
     <input type="text"
@@ -91,6 +102,14 @@
            autocomplete="null"
            name="card_number"
            formControlName="card_number">
+    <p class="auth-block__hint auth-block__hint--error">
+      <ng-container *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)">
+        <span *ngIf="card_number.errors['required']">Поле обязательно к заполнению.</span>
+        <span *ngIf="card_number.errors['minlength']">Минимальная длина номера карты 3 символов.</span>
+        <span *ngIf="card_number.errors['maxlength']">Максимальная длина номера карты 30 символов.</span>
+      </ng-container>
+    </p>
+    
 
     <div class="customer__flex">
       <div class="customer__part">

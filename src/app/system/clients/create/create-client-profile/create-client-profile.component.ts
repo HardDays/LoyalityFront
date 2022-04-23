@@ -33,7 +33,7 @@ export class CreateClientProfileComponent implements OnInit {
       Validators.maxLength(30)
     ]),
     'second_name': new FormControl('', [
-      Validators.minLength(3),
+      Validators.minLength(6),
       Validators.maxLength(30)
     ]),
     'email': new FormControl('', [
@@ -41,6 +41,7 @@ export class CreateClientProfileComponent implements OnInit {
       Validators.email
     ]),
     'card_number': new FormControl('', [
+      Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30)
     ]),
