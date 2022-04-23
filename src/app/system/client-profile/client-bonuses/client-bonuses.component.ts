@@ -24,7 +24,6 @@ export class ClientBonusesComponent implements OnInit {
     this.profileService.GetClientOrders(
       (res) => {
         this.Bonuses = res;
-        console.log(`Bonuses = `, this.Bonuses);
       },
       (err) => {
 

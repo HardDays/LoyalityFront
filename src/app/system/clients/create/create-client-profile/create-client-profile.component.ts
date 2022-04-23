@@ -109,7 +109,7 @@ export class CreateClientProfileComponent implements OnInit {
   Phone = '';
   ErrorText = '';
 
-  MaskPhoneRU = ValidatorService.MaskPhoneRU();
+  MaskPhoneRU = ValidatorService.MaskPhoneRUwithout7();
 
   ModalErrorLoyalty = false;
   SaveError = '';
