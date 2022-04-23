@@ -144,6 +144,13 @@ export class PromotionEditComponent implements OnInit {
   Save() {
     const validate = this.ValidateForm();
     if (validate && this.Form.valid) {
+
+      if(this.SaveSuccess)
+      {
+        this.NavigateToPromotions();
+        return;
+      }
+
       let data = this.Form.getRawValue();
       data.begin_date = this.IDateToISO(data.begin_date.date);
       data.end_date = this.IDateToISO(data.end_date.date);
