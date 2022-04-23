@@ -954,6 +954,10 @@ div, span, p, header, footer, nav {
   margin-bottom: 31px;
 }
 
+.auth-block__title--line_height {
+  line-height: 28px;
+}
+
 .auth-block__title--reg {
   margin-bottom: 40px;
 }
