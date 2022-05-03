@@ -25,6 +25,7 @@
           <span *ngIf="last_name.errors.required">Поле обязательно к заполнению.</span>
           <span *ngIf="last_name.errors.minlength">Минимальная длина 3 символа.</span>
           <span *ngIf="last_name.errors.maxlength">Максимальная длина 30 символов.</span>
+          <span *ngIf="last_name.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
       <p class="create-block__label create-block__label--light">Имя</p>
@@ -40,6 +41,7 @@
           <span *ngIf="first_name.errors.required">Поле обязательно к заполнению.</span>
           <span *ngIf="first_name.errors.minlength">Минимальная длина 3 символа.</span>
           <span *ngIf="first_name.errors.maxlength">Максимальная длина 30 символов.</span>
+          <span *ngIf="first_name.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
 

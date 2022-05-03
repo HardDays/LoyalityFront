@@ -8,6 +8,7 @@ import { StoreModel } from 'src/app/core/models/store.model';
 import { PromotionsService } from '../promotions.service';
 import { IMyDpOptions, IMyDate } from 'mydatepicker';
 import { PromotionModel } from 'src/app/core/models/promotion.model';
+import { ValidatorService } from 'src/app/core/services/validator.service';
 
 @Component({
   selector: 'app-orimotion-edit-cmp',
@@ -41,7 +42,8 @@ export class PromotionEditComponent implements OnInit {
     "name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "begin_date": new FormControl('', [
       Validators.required
@@ -219,7 +221,7 @@ export class PromotionEditComponent implements OnInit {
   }
 
   ValidateForm() {
-    // return true;
+    this.Form.controls.name.setValue(this.Form.controls.name.value.trim());
     const remove_error = (property_name) => {
       if (this.Form.controls[property_name].hasError('wrong')) {
 

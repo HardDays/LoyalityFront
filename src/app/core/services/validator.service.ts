@@ -1,4 +1,4 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export class ValidatorService {
   public static ValidatePhone(Val) {
@@ -21,4 +21,17 @@ export class ValidatorService {
   public static MaskBirthDay() {
     return [/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/];
   }
+
+  public static StringNotEmpty(control: AbstractControl): ValidationErrors | null
+  {
+    if(control && control.value)
+    {
+      if(typeof control.value === "string")
+      {
+        return control.value.trim() ? null : {'empty': {value: control.value}};
+      }
+    }
+    return null;
+  }
+
 }

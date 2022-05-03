@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OperatorsService } from '../operators.service';
 import { StoreModel } from 'src/app/core/models/store.model';
+import { ValidatorService } from 'src/app/core/services/validator.service';
 
 @Component({
   selector: 'app-operator-edit-cmp',
@@ -25,12 +26,14 @@ export class OperatorEditComponent implements OnInit {
     "first_name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "last_name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "second_name": new FormControl('', [
       Validators.maxLength(30)
@@ -143,6 +146,9 @@ export class OperatorEditComponent implements OnInit {
   }
 
   Save() {
+    this.Form.controls.first_name.setValue(this.Form.controls.first_name.value.trim());
+    this.Form.controls.last_name.setValue(this.Form.controls.last_name.value.trim());
+    this.Form.controls.second_name.setValue(this.Form.controls.second_name.value.trim());
     for (const i in this.Form.controls) {
       this.Form.controls[i].markAsDirty();
       this.Form.controls[i].markAsTouched();

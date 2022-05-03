@@ -8,6 +8,7 @@ import { IMyDpOptions, IMyDate } from 'mydatepicker';
 import { PromotionModel } from 'src/app/core/models/promotion.model';
 import { LoyaltyService } from '../loyalty.service';
 import { LoyaltyModel } from '../../../core/models/loyalty.model';
+import { ValidatorService } from '../../../core/services/validator.service';
 
 @Component({
   selector: 'app-loyalty-edit-cmp',
@@ -27,7 +28,8 @@ export class LoyaltyEditComponent implements OnInit {
     "name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "sum_type": new FormControl('one_buy', [
       Validators.required
@@ -162,6 +164,7 @@ export class LoyaltyEditComponent implements OnInit {
   }
 
   ValidateForm() {
+    this.Form.controls.name.setValue(this.Form.controls.name.value.trim());
     // return true;
     const remove_error = (property_name) => {
       if (this.Form.controls[property_name].hasError('wrong')) {

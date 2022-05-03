@@ -24,6 +24,7 @@
           <span *ngIf="Form.controls.name.errors.required">Поле обязательно к заполнению.</span>
           <span *ngIf="Form.controls.name.errors.minlength">Минимальная длина 3 символа.</span>
           <span *ngIf="Form.controls.name.errors.maxlength">Максимальная длина 30 символов.</span>
+          <span *ngIf="Form.controls.name.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
 

@@ -8,6 +8,7 @@ import { IMyDpOptions, IMyDate } from 'mydatepicker';
 import { PromotionModel } from 'src/app/core/models/promotion.model';
 import { LoyaltyService } from '../loyalty.service';
 import { LoyaltyLevelModel } from '../../../core/models/loyalty.model';
+import { ValidatorService } from 'src/app/core/services/validator.service';
 
 @Component({
   selector: 'app-loyalty-level-cmp',
@@ -27,7 +28,8 @@ export class LoyaltyLevelComponent implements OnInit {
     "name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "min_price": new FormControl("", [
       Validators.required,
@@ -175,7 +177,6 @@ export class LoyaltyLevelComponent implements OnInit {
         window.scrollTo(0, 0);
       };
       const success = (res) => {
-        console.log(res);
         this.LevelSaved = true;
       };
       if (this.Id == 'new') {
@@ -196,7 +197,7 @@ export class LoyaltyLevelComponent implements OnInit {
 
 
   ValidateForm() {
-    // return true;
+    this.Form.controls.name.setValue(this.Form.controls.name.value.trim());
     const remove_error = (property_name) => {
       if (this.Form.controls[property_name].hasError('wrong')) {
 
