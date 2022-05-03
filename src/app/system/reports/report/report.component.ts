@@ -176,7 +176,6 @@ export class ReportComponent implements OnInit {
     this.service.GetReport(this.Type, params,
       (res) => {
         this.ParseData(res);
-        console.log(res);
       },
       (err) => {
       }

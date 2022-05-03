@@ -5,6 +5,7 @@ import { IDictionary } from 'src/app/core/interfaces/dictionary.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StoresService } from '../stores.service';
+import { ValidatorService } from 'src/app/core/services/validator.service';
 
 @Component({
   selector: 'app-store-edit-cmp',
@@ -18,27 +19,32 @@ export class StoreEditComponent implements OnInit {
     "name": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "country": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "city": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "street": new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(30)
+      Validators.maxLength(30),
+      ValidatorService.StringNotEmpty
     ]),
     "house": new FormControl('', [
       Validators.required,
       Validators.min(1),
-      Validators.max(9999)
+      Validators.max(9999),
+      ValidatorService.StringNotEmpty
     ])
   });
 
@@ -102,6 +108,7 @@ export class StoreEditComponent implements OnInit {
   Save() {
     this.Form.updateValueAndValidity();
     for (const i in this.Form.controls) {
+      this.Form.get(i).setValue(this.Form.get(i).value.trim());
       this.Form.get(i).updateValueAndValidity();
       this.Form.get(i).markAsDirty();
       this.Form.get(i).markAsTouched();

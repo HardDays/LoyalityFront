@@ -24,6 +24,7 @@
           <span *ngIf="name.errors.minlength">Минимальная длина 3 символа.</span>
           <span *ngIf="name.errors.maxlength">Максимальная длина 30 символов.</span>
           <span *ngIf="name.errors.ALREADY_TAKEN">Название занято.</span>
+          <span *ngIf="name.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
 
@@ -39,6 +40,7 @@
           <span *ngIf="country.errors.required">Поле обязательно к заполнению.</span>
           <span *ngIf="country.errors.minlength">Минимальная длина 3 символа.</span>
           <span *ngIf="country.errors.maxlength">Максимальная длина 30 символов.</span>
+          <span *ngIf="country.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
 
@@ -54,6 +56,7 @@
           <span *ngIf="city.errors.required">Поле обязательно к заполнению.</span>
           <span *ngIf="city.errors.minlength">Минимальная длина 3 символа.</span>
           <span *ngIf="city.errors.maxlength">Максимальная длина 30 символов.</span>
+          <span *ngIf="city.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
 
@@ -69,6 +72,7 @@
           <span *ngIf="street.errors.required">Поле обязательно к заполнению.</span>
           <span *ngIf="street.errors.minlength">Минимальная длина 3 символа.</span>
           <span *ngIf="street.errors.maxlength">Максимальная длина 30 символов.</span>
+          <span *ngIf="street.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
 
@@ -84,6 +88,7 @@
           <span *ngIf="house.errors.required">Поле обязательно к заполнению.</span>
           <span *ngIf="house.errors.min">Минимальное значение 1.</span>
           <span *ngIf="house.errors.max">Максимальное значение 9999.</span>
+          <span *ngIf="house.errors.empty">Поле не может быть пустым.</span>
         </ng-container>
       </p>
 
