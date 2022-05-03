@@ -1395,6 +1395,10 @@ div, span, p, header, footer, nav {
   margin-top: 11px;
 }
 
+.create-block__label--lh{
+  line-height: 16px;
+}
+
 .create-block__input {
   border: 1px solid #616161;
   border-radius: 4px;
