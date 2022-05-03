@@ -115,10 +115,10 @@ export class PromotionEditComponent implements OnInit {
 
           this.Form.patchValue(data);
           this.Form.controls.begin_date.setValue({
-            date: this.GetDisableUntilData(new Date(res.begin_date))
+            date: this.GetDateObj(new Date(res.begin_date))
           });
           this.Form.controls.end_date.setValue({
-            date: this.GetDisableUntilData(new Date(res.end_date))
+            date: this.GetDateObj(new Date(res.end_date))
           });
         },
         (err) => {
@@ -182,16 +182,15 @@ export class PromotionEditComponent implements OnInit {
         }
         window.scrollTo(0, 0);
       };
+
       if (this.Id == 'new') {
         this.service.CreatePromotion(data, (res) => {
           this.SaveSuccess = true;
-          // this.NavigateToPromotions();
         }, error);
       }
       else {
         this.service.PutPromotion(this.Id, data, (res) => {
           this.SaveSuccess = true;
-          // this.NavigateToPromotions();
         }, error);
       }
     }
@@ -216,8 +215,26 @@ export class PromotionEditComponent implements OnInit {
     };
   }
 
+  GetDateObj(date: Date)
+  {
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate()
+    };
+  }
+
   IDateToISO(obj) {
-    return obj.year + "-" + obj.month + "-" + obj.day;
+    let arr = [obj.year];
+
+    const f = (val) => {
+      const v = val < 10 ? ("0" + val) : val;
+
+      arr.push(v);
+    };
+    f(obj.month);
+    f(obj.day);
+    return arr.join("-");
   }
 
   ValidateForm() {
