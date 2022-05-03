@@ -51,7 +51,7 @@ export class BonusChargeComponent implements OnInit {
   }
 
   CheckCanSubmit() {
-    this.canSubmit = this.Points > 0 && Boolean(this.Client.id);
+    this.canSubmit = this.Points > 0 && this.Points <= 999999 && Boolean(this.Client.id);
   }
 
   SetPointsValue(value) {

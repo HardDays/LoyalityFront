@@ -8,7 +8,10 @@
         </div>
 
         <div class="create-block customer__block customer__block--small">
-            <p class="create-block__label create-block__label--light customer__label">Количество бонусов:<input type="number" class="create-block__input create-block__input--medium" (input)="SetPointsValue($event.target.value)"></p>
+            <p class="create-block__label create-block__label--light customer__label">
+                Количество бонусов:
+                <input type="number" class="create-block__input create-block__input--medium" (input)="SetPointsValue($event.target.value)">
+            </p>
 
             <div class="customer__flex-buttons">
                 <button [disabled]="!canSubmit" (click)="Nachislenie=true" class="button customer__button">Начислить</button>
