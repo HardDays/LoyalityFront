@@ -14,7 +14,8 @@ const routes: Routes =
     { path: 'login', component: LoginComponent },
     { path: 'remind', component: PasswordComponent },
     { path: 'signup', component: SignUpComponent },
-    { path: 'select', component: CompanySelectorComponent }
+    { path: 'select', component: CompanySelectorComponent },
+    { path: 'confirm', component: ConfirmComponent}
   ];
 
 @NgModule({

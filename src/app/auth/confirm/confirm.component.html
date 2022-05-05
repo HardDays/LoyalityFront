@@ -2,7 +2,10 @@
   <div class="auth-block">
     <!-- <span class="auth-block__close auth-block__close--big_top"></span> -->
 
-    <p class="auth-block__title">Подтвердите E-mail</p>
+    <span class="auth-block__close" routerLink="../login"></span>
+
+    <p class="auth-block__title auth-block__title--reset auth-block__title--line_height">Код для подтверждения E-mail отправлен на почту</p>
+    <p class="auth-block__text">Пожалуйста, проверьте свой почтовый ящик</p>
 
     <form [formGroup]="Form"
           (ngSubmit)="Login()">

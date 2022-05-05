@@ -52,7 +52,6 @@ export class ConfirmComponent implements OnInit {
       const data = this.Form.getRawValue();
       this.auth.Confirm(data,
         (val) => {
-
           this.router.navigate(["/system"]);
         },
         (err) => {
