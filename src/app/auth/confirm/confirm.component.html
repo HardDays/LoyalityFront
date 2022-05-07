@@ -4,64 +4,48 @@
 
     <span class="auth-block__close" routerLink="../login"></span>
 
-    <p class="auth-block__title auth-block__title--reset auth-block__title--line_height">Код для подтверждения E-mail отправлен на почту</p>
-    <p class="auth-block__text">Пожалуйста, проверьте свой почтовый ящик</p>
+    <p class="auth-block__title auth-block__title--reset auth-block__title--line_height">{{IsSuccess ? 'Аккаунт успешно активирован!' : 'Код для подтверждения E-mail отправлен на почту'}}</p>
+    <p *ngIf="!IsSuccess" class="auth-block__text">Пожалуйста, проверьте свой почтовый ящик</p>
 
     <form [formGroup]="Form"
           (ngSubmit)="Login()">
 
-      <input type="text"
-             class="auth-block__input"
-             [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
-             autocomplete="null"
-             formControlName="email"
-             name="email"
-             placeholder="E-mail">
-      <p class="auth-block__hint auth-block__hint--error">
-        <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
-          <span *ngIf="email.errors.required">Поле обязательно к заполнению.</span>
-          <span *ngIf="email.errors.ALREADY_TAKEN">E-mail занят.</span>
-          <span *ngIf="email.errors.INVALID || email.errors.email">Введите корректный E-mail.</span>
-        </ng-container>
-      </p>
+      <ng-container *ngIf="!IsSuccess">
+        <input type="text"
+          class="auth-block__input"
+          [ngClass]="{'auth-block__input--error': email.invalid && (email.dirty || email.touched)}"
+          autocomplete="null"
+          formControlName="email"
+          name="email"
+          placeholder="E-mail">
+        <p class="auth-block__hint auth-block__hint--error">
+          <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+            <span *ngIf="email.errors.required">Поле обязательно к заполнению.</span>
+            <span *ngIf="email.errors.ALREADY_TAKEN">E-mail занят.</span>
+            <span *ngIf="email.errors.INVALID || email.errors.email">Введите корректный E-mail.</span>
+          </ng-container>
+        </p>
 
-      <input type="text"
-             class="auth-block__input"
-             [ngClass]="{'auth-block__input--error': code.invalid && (code.dirty || code.touched)}"
-             autocomplete="null"
-             formControlName="code"
-             name="code"
-             placeholder="Код">
-      <p class="auth-block__hint auth-block__hint--error">
-        <ng-container *ngIf="code.invalid && (code.dirty || code.touched)">
-          <span *ngIf="code.errors.required">Поле обязательно к заполнению.</span>
-          <span *ngIf="code.errors.wrong">Неправильный код подтверждения.</span>
-        </ng-container>
-      </p>
-      <!-- Add class "auth-block__input--error" for red border or "auth-block__input--correct" for green border -->
-      <!-- <input type="text" class="auth-block__input" placeholder="E-mail"> -->
-      <!-- Add class "auth-block__hint--error" for red text or "auth-block__hint--correct" for green text -->
-      <!-- <p class="auth-block__hint auth-block__hint--error"></p> -->
-
-      <!-- Add class "auth-block__input--error" for red border or "auth-block__input--correct" for green border -->
-      <!-- <input type="text" class="auth-block__input" placeholder="Пароль"> -->
-      <!-- Add class "auth-block__hint--error" for red text or "auth-block__hint--correct" for green text -->
-      <!-- <p class="auth-block__hint auth-block__hint--error"></p> -->
-
-      <!-- <div class="auth-block__choice">
-            <label class="radio">
-                <input type="radio" class="radio__input" name="userType">
-                <div class="radio__text">Владелец</div>
-            </label>
-            <label class="radio">
-                <input type="radio" class="radio__input" name="userType">
-                <div class="radio__text">Кассир</div>
-            </label>
-            </div> -->
+        <input type="text"
+                class="auth-block__input"
+                [ngClass]="{'auth-block__input--error': code.invalid && (code.dirty || code.touched)}"
+                autocomplete="null"
+                formControlName="code"
+                name="code"
+                placeholder="Код">
+        <p class="auth-block__hint auth-block__hint--error">
+          <ng-container *ngIf="code.invalid && (code.dirty || code.touched)">
+            <span *ngIf="code.errors.required">Поле обязательно к заполнению.</span>
+            <span *ngIf="code.errors.wrong">Неправильный код подтверждения.</span>
+          </ng-container>
+        </p>
+      </ng-container>
+      
+      
 
       <div class="text-center">
         <button class="button auth-block__button"
-                type="submit">Подтвердить</button>
+                type="submit">{{IsSuccess ? 'Ок' : 'Подтвердить'}}</button>
       </div>
     </form>
   </div>

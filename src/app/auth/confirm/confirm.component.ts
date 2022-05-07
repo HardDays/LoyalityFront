@@ -14,6 +14,8 @@ export class ConfirmComponent implements OnInit {
   PasswordError: string = "";
   EmailError: string = "";
 
+  IsSuccess = false;
+
   Form: FormGroup = new FormGroup({
     "email": new FormControl(this.LoginModel.email, [
       Validators.required,
@@ -46,13 +48,19 @@ export class ConfirmComponent implements OnInit {
   }
 
   Login() {
+    if(this.IsSuccess)
+    {
+      this.router.navigate(["/system"]);
+      return;
+    }
     const valid = this.Form.valid;
 
     if (valid) {
       const data = this.Form.getRawValue();
       this.auth.Confirm(data,
         (val) => {
-          this.router.navigate(["/system"]);
+          this.IsSuccess = true;
+          
         },
         (err) => {
           const not_found = [401, 422, 404, 403];
