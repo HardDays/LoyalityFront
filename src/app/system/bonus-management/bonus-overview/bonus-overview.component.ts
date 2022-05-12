@@ -50,6 +50,10 @@ export class BonusOverviewComponent implements OnInit {
         if (c.phone) {
           res = res || c.phone.includes(this.userSearchData);
         }
+        if(c.card_number)
+        {
+          res = res || c.card_number.includes(this.userSearchData)
+        }
 
         return res;
       })
