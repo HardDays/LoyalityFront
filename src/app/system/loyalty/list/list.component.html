@@ -26,7 +26,7 @@
       <p class="main-blocks__title">{{item.name ? item.name : ('Уровень ' + item.id)}}</p>
 
       <p class="main-blocks__pre-link">{{Loyalty.sum_type == 'one_buy' ? 'Разовая покупка' : 'Общая сумма покупок'}} от
-        {{item.min_price / 100}} рубл{{(((item.min_price / 100) % 10 == 1) && ((item.min_price / 100) > 20 || (item.min_price / 100) < 10)) ? 'я' : 'ей'}}</p>
+        {{item.min_price / 100}} рубл{{(((item.min_price / 100) % 10 == 1) && ((item.min_price / 100) % 100 > 20 || (item.min_price / 100) % 100 < 10)) ? 'я' : 'ей'}}</p>
       <a [routerLink]="['/system','my_loyalty_program','level', item.id]"
          class="main-blocks__link main-blocks__link--edit_black">Редактировать</a>
       <a class="main-blocks__link main-blocks__link--delete"
