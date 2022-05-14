@@ -74,6 +74,8 @@ export class LoginComponent implements OnInit {
 
   Login() {
     for (const i in this.Form.controls) {
+      this.Form.get(i).markAsDirty();
+      this.Form.get(i).markAsTouched();
       this.Form.get(i).updateValueAndValidity();
     }
     this.Form.updateValueAndValidity();
