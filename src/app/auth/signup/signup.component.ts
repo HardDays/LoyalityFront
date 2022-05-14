@@ -39,12 +39,12 @@ export class SignUpComponent implements OnInit {
     ]),
     "password": new FormControl(this.FormData.password, [
       Validators.required,
-      Validators.minLength(10),
+      Validators.minLength(7),
       Validators.maxLength(50)
     ]),
     "confirm_password": new FormControl(this.ConfirmPassword, [
       Validators.required,
-      Validators.minLength(10),
+      Validators.minLength(7),
       Validators.maxLength(50),
       this.MatchPasswords()
     ])//,

@@ -116,7 +116,7 @@
       <p class="auth-block__hint auth-block__hint--error">
         <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
           <span *ngIf="password.errors.required">Поле обязательно к заполнению.</span>
-          <span *ngIf="password.errors.minlength">Минимальная длина пароля 10 символов.</span>
+          <span *ngIf="password.errors.minlength">Минимальная длина пароля 7 символов.</span>
           <span *ngIf="password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
         </ng-container>
       </p>
@@ -131,7 +131,7 @@
       <p class="auth-block__hint auth-block__hint--error">
         <ng-container *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)">
           <span *ngIf="confirm_password.errors.required">Поле обязательно к заполнению.</span>
-          <span *ngIf="confirm_password.errors.minlength">Минимальная длина пароля 10 символов.</span>
+          <span *ngIf="confirm_password.errors.minlength">Минимальная длина пароля 7 символов.</span>
           <span *ngIf="confirm_password.errors.maxlength">Максимальная длина пароля 50 символов.</span>
           <span *ngIf="confirm_password.errors.not_match">Пароли не совпадают.</span>
         </ng-container>
