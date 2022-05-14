@@ -47,14 +47,14 @@ export class OperatorsListComponent implements OnInit {
     this.ShowModal = false;
     this.service.PutOperator(Item.id, { operator_status: "deleted" },
       (res) => {
-        this.DeleteResult = "Оператор «" +
+        this.DeleteResult = "Кассир «" +
           this.OperatorDelete.first_name + " " +
           (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "» успешно удален!"
         this.service.RefreshOperators();
       },
       (err) => {
-        this.DeleteResult = "Не получилось удалить оператора «" +
+        this.DeleteResult = "Не получилось удалить кассираа «" +
           this.OperatorDelete.first_name + " " +
           (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "»!";
@@ -65,14 +65,14 @@ export class OperatorsListComponent implements OnInit {
     this.ShowRepair = false;
     this.service.PutOperator(Item.id, { operator_status: "active" },
       (res) => {
-        this.DeleteResult = "Оператор «" +
+        this.DeleteResult = "Кассир «" +
           this.OperatorDelete.first_name + " " +
           (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "» успешно восстановлен!"
         this.service.RefreshOperators();
       },
       (err) => {
-        this.DeleteResult = "Не получилось восстановить оператора «" +
+        this.DeleteResult = "Не получилось восстановить кассира «" +
           this.OperatorDelete.first_name + " " +
           (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "»!";

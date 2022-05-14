@@ -116,13 +116,13 @@ export class StoreListComponent implements OnInit {
     this.service.PutOperator(Item.id, { store_id: 0 },
       (res) => {
         this.RefreshOperatorsByStoreId(Item.store_id);
-        this.DeleteResult = "Оператор «" +
+        this.DeleteResult = "Кассир «" +
           this.OperatorDelete.first_name + " " +
           (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "» успешно удален!"
       },
       (err) => {
-        this.DeleteResult = "Не получилось удалить оператора «" +
+        this.DeleteResult = "Не получилось удалить кассира «" +
           this.OperatorDelete.first_name + " " +
           (this.OperatorDelete.second_name ? this.OperatorDelete.second_name + " " : "") +
           this.OperatorDelete.last_name + "»!";
