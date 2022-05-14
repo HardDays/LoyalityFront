@@ -36,7 +36,11 @@
         <div *ngIf="Profile.loyalty_program_id"
              class="lk__data">
           <p class="lk__field">Программа лояльности</p>
-          <p class="lk__value">{{Profile.loyalty_program_id}}</p>
+          <p class="lk__value">{{Profile.loyalty_program && Profile.loyalty_program.name ? Profile.loyalty_program.name : Profile.loyalty_program_id}}</p>
+        </div>
+        <div *ngIf="CurrentLevelName" class="lk__data">
+          <p class="lk__field">Уровень программы лояльности</p>
+          <p class="lk__value">{{CurrentLevelName}}</p>
         </div>
         <div *ngIf="Profile.card_number"
              class="lk__data">
@@ -118,10 +122,14 @@
           </div>
         </div>
         <div class="lk__half">
-          <div *ngIf="Profile.loyalty_program_id"
-               class="lk__data">
+            <div *ngIf="Profile.loyalty_program_id"
+              class="lk__data">
             <p class="lk__field">Программа лояльности</p>
-            <p class="lk__value">{{Profile.loyalty_program_id}}</p>
+            <p class="lk__value">{{Profile.loyalty_program && Profile.loyalty_program.name ? Profile.loyalty_program.name : Profile.loyalty_program_id}}</p>
+          </div>
+          <div *ngIf="CurrentLevelName" class="lk__data">
+            <p class="lk__field">Уровень программы лояльности</p>
+            <p class="lk__value">{{CurrentLevelName}}</p>
           </div>
           <div class="lk__data">
             <p class="lk__field">Номер карты</p>

@@ -68,6 +68,8 @@ export class ClientDataComponent implements OnInit {
 
   MaskBirthDay = ValidatorService.MaskBirthDay();
 
+  CurrentLevelName = "";
+
   constructor(private profileService: ClientProfileService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -100,6 +102,7 @@ export class ClientDataComponent implements OnInit {
         (res) => {
           this.profileService.ClientProfile = { ...res, ...res.client[0] };
           this.Profile = this.profileService.ClientProfile;
+          this.DetectCurrentLevelName()
         }
       );
     } else {
@@ -144,6 +147,30 @@ export class ClientDataComponent implements OnInit {
       month: Number.parseInt(arr[1]),
       day: Number.parseInt(arr[2])
     };
+  }
+
+  DetectCurrentLevelName()
+  {
+    let last_lvl = null;
+    const points = this.Profile.points ? this.Profile.points : 0;
+
+    let levels = this.Profile.loyalty_program  && this.Profile.loyalty_program.loyalty_levels ? this.Profile.loyalty_program.loyalty_levels : [];
+
+    levels.forEach(Val => {
+      if(!last_lvl)
+      {
+        last_lvl = Val;
+      }
+      if(last_lvl.min_price <= Val.min_price && points >= Val.min_price)
+      {
+        last_lvl = Val;
+      }
+    });
+
+    if(last_lvl && last_lvl.name)
+    {
+      this.CurrentLevelName = last_lvl.name;
+    }
   }
 
 
