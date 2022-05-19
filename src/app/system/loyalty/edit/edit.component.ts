@@ -50,14 +50,14 @@ export class LoyaltyEditComponent implements OnInit {
 
     "rounding_rule": new FormControl('no_rounding'),
 
-    "sms_on_register": new FormControl(false),
-    "sms_on_points": new FormControl(false),
-    "sms_on_write_off": new FormControl(false),
+    // "sms_on_register": new FormControl(false),
+    // "sms_on_points": new FormControl(false),
+    // "sms_on_write_off": new FormControl(false),
 
-    "sms_on_burning": new FormControl(false),
-    "sms_burning_days": new FormControl(null),
+    // "sms_on_burning": new FormControl(false),
+    // "sms_burning_days": new FormControl(null),
 
-    "sms_on_birthday": new FormControl(false)
+    // "sms_on_birthday": new FormControl(false)
   });
 
 
@@ -214,9 +214,9 @@ export class LoyaltyEditComponent implements OnInit {
       ferror("recommend_registered_points", 0, 100000000);
     }
 
-    if (data.sms_on_burning) {
-      ferror("sms_burning_days", 1, 365);
-    }
+    // if (data.sms_on_burning) {
+    //   ferror("sms_burning_days", 1, 365);
+    // }
 
     this.Form.updateValueAndValidity();
     if (hasError)
