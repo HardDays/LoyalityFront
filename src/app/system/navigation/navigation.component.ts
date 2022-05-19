@@ -125,12 +125,12 @@ export class NavigationComponent implements OnInit {
         label: "Программа лояльности",
         visible: this.IsLoggedIn && this.Me.user_type === 'client'
       },
-      {
-        url: MenuUrls.social_media,
-        image: "assets/img/menu9.svg",
-        label: "Социальные сети",
-        visible: this.IsLoggedIn && ['creator', 'client'].includes(this.Me.user_type)
-      },
+      // {
+      //   url: MenuUrls.social_media,
+      //   image: "assets/img/menu9.svg",
+      //   label: "Социальные сети",
+      //   visible: this.IsLoggedIn && ['creator', 'client'].includes(this.Me.user_type)
+      // },
     ];
   }
 
