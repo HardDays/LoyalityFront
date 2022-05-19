@@ -17,8 +17,7 @@
            style="cursor: pointer;"
            (click)="NavigateWithData(client)"
            class="main-blocks__item">
-        <p class="main-blocks__title">{{client.first_name ? client.first_name : ""}}
-          {{client.last_name ? client.last_name : ""}} {{client.second_name ? client.second_name : ""}}</p>
+        <p class="main-blocks__title">{{client.full_name ? client.full_name : ""}}</p>
         <span class="main-blocks__link main-blocks__link--left">Всего бонусов на счету: {{client.points / 100}}</span>
         <span class="main-blocks__link main-blocks__link--left">Номер карты: {{client.card_number}}</span>
         <span class="main-blocks__link main-blocks__link--left">Номер телефона: {{client.phone}}</span>
