@@ -264,10 +264,25 @@ export class AuthService {
     this.http.CommonRequest(
       () => this.http.PostData('/auth/password/request', { email }),
       (res) => {
-        if (res) {
-          if (success && typeof success == "function") {
-            success(res);
-          }
+        if (success && typeof success == "function") {
+          success(res);
+        }
+        this.onLoading.next(false);
+      },
+      (err) => {
+        this.ErrorHandler(err, fail);
+        this.onLoading.next(false);
+      }
+    );
+  }
+
+  UpdatePassword(data: any, success?: (data) => void, fail?: (err) => void) {
+    this.onLoading.next(true);
+    this.http.CommonRequest(
+      () => this.http.PostData('/auth/password/update', data),
+      (res) => {
+        if (success && typeof success == "function") {
+          success(res);
         }
         this.onLoading.next(false);
       },
